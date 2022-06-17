@@ -1,0 +1,42 @@
+class Trip {
+  final String from,
+      to,
+      tripId,
+      kilometer,
+      distance,
+      price,
+      driverName,
+      phoneNumber,
+      email,
+      vechicleNumber,
+      createAt,
+      itemName,
+      rider,
+      rating,
+      departureTime,
+      paymentMethod,
+      arrivalTime,
+      status;
+  final int id;
+
+  Trip(
+      {required this.from,
+      required this.to,
+      required this.tripId,
+      required this.kilometer,
+      required this.distance,
+      required this.price,
+      required this.arrivalTime,
+      required this.driverName,
+      required this.phoneNumber,
+      required this.email,
+      required this.vechicleNumber,
+      required this.createAt,
+      required this.status,
+      required this.id,
+      required this.departureTime,
+      required this.itemName,
+      required this.paymentMethod,
+      required this.rating,
+      required this.rider});
+}
