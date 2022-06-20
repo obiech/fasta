@@ -27,9 +27,10 @@ class UserModel extends User {
             phoneNumber: phoneNumber,
             id: id);
   factory UserModel.fromJson(Map<String, dynamic> json) {
-    json = json['user'];
+    json = json['data'];
     return UserModel(
-      fullName: json['profile']['fullname'],
+      fullName:
+          json['profile']['firstName'] + ' ' + json['profile']['lastName'],
       email: json['email'],
       state: json['profile']['state'],
       city: json['profile']['city'],

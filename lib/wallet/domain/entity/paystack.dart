@@ -1,7 +1,7 @@
-class Transaction {
+class PayStack {
   final String reference, accessCode, authorizationUrl;
 
-  Transaction(
+  PayStack(
       {required this.reference,
       required this.accessCode,
       required this.authorizationUrl});

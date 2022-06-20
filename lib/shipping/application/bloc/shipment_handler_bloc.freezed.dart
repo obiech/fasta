@@ -53,6 +53,25 @@ class _$ShipmentHandlerEventTearOff {
       status: status,
     );
   }
+
+  _AcceptCompletedDelivery acceptCompletedDelivery(String deliveryId) {
+    return _AcceptCompletedDelivery(
+      deliveryId,
+    );
+  }
+
+  _RateDelivery rateDelivery(RateDeliveryArg arg) {
+    return _RateDelivery(
+      arg,
+    );
+  }
+
+  _TipDelivery tipDelivery(String deliveryId, String amount) {
+    return _TipDelivery(
+      deliveryId,
+      amount,
+    );
+  }
 }
 
 /// @nodoc
@@ -68,6 +87,9 @@ mixin _$ShipmentHandlerEvent {
     required TResult Function(String email) getAllDeliveries,
     required TResult Function(String email) getAllShipment,
     required TResult Function(String id, String status) updateTripStatus,
+    required TResult Function(String deliveryId) acceptCompletedDelivery,
+    required TResult Function(RateDeliveryArg arg) rateDelivery,
+    required TResult Function(String deliveryId, String amount) tipDelivery,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
@@ -78,6 +100,9 @@ mixin _$ShipmentHandlerEvent {
     TResult Function(String email)? getAllDeliveries,
     TResult Function(String email)? getAllShipment,
     TResult Function(String id, String status)? updateTripStatus,
+    TResult Function(String deliveryId)? acceptCompletedDelivery,
+    TResult Function(RateDeliveryArg arg)? rateDelivery,
+    TResult Function(String deliveryId, String amount)? tipDelivery,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
@@ -88,6 +113,9 @@ mixin _$ShipmentHandlerEvent {
     TResult Function(String email)? getAllDeliveries,
     TResult Function(String email)? getAllShipment,
     TResult Function(String id, String status)? updateTripStatus,
+    TResult Function(String deliveryId)? acceptCompletedDelivery,
+    TResult Function(RateDeliveryArg arg)? rateDelivery,
+    TResult Function(String deliveryId, String amount)? tipDelivery,
     required TResult orElse(),
   }) =>
       throw _privateConstructorUsedError;
@@ -99,6 +127,10 @@ mixin _$ShipmentHandlerEvent {
     required TResult Function(_GetAllDeliveries value) getAllDeliveries,
     required TResult Function(_GetAllShipment value) getAllShipment,
     required TResult Function(_UpdateTripStatus value) updateTripStatus,
+    required TResult Function(_AcceptCompletedDelivery value)
+        acceptCompletedDelivery,
+    required TResult Function(_RateDelivery value) rateDelivery,
+    required TResult Function(_TipDelivery value) tipDelivery,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
@@ -109,6 +141,9 @@ mixin _$ShipmentHandlerEvent {
     TResult Function(_GetAllDeliveries value)? getAllDeliveries,
     TResult Function(_GetAllShipment value)? getAllShipment,
     TResult Function(_UpdateTripStatus value)? updateTripStatus,
+    TResult Function(_AcceptCompletedDelivery value)? acceptCompletedDelivery,
+    TResult Function(_RateDelivery value)? rateDelivery,
+    TResult Function(_TipDelivery value)? tipDelivery,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
@@ -119,6 +154,9 @@ mixin _$ShipmentHandlerEvent {
     TResult Function(_GetAllDeliveries value)? getAllDeliveries,
     TResult Function(_GetAllShipment value)? getAllShipment,
     TResult Function(_UpdateTripStatus value)? updateTripStatus,
+    TResult Function(_AcceptCompletedDelivery value)? acceptCompletedDelivery,
+    TResult Function(_RateDelivery value)? rateDelivery,
+    TResult Function(_TipDelivery value)? tipDelivery,
     required TResult orElse(),
   }) =>
       throw _privateConstructorUsedError;
@@ -186,6 +224,9 @@ class _$_Started implements _Started {
     required TResult Function(String email) getAllDeliveries,
     required TResult Function(String email) getAllShipment,
     required TResult Function(String id, String status) updateTripStatus,
+    required TResult Function(String deliveryId) acceptCompletedDelivery,
+    required TResult Function(RateDeliveryArg arg) rateDelivery,
+    required TResult Function(String deliveryId, String amount) tipDelivery,
   }) {
     return started();
   }
@@ -199,6 +240,9 @@ class _$_Started implements _Started {
     TResult Function(String email)? getAllDeliveries,
     TResult Function(String email)? getAllShipment,
     TResult Function(String id, String status)? updateTripStatus,
+    TResult Function(String deliveryId)? acceptCompletedDelivery,
+    TResult Function(RateDeliveryArg arg)? rateDelivery,
+    TResult Function(String deliveryId, String amount)? tipDelivery,
   }) {
     return started?.call();
   }
@@ -212,6 +256,9 @@ class _$_Started implements _Started {
     TResult Function(String email)? getAllDeliveries,
     TResult Function(String email)? getAllShipment,
     TResult Function(String id, String status)? updateTripStatus,
+    TResult Function(String deliveryId)? acceptCompletedDelivery,
+    TResult Function(RateDeliveryArg arg)? rateDelivery,
+    TResult Function(String deliveryId, String amount)? tipDelivery,
     required TResult orElse(),
   }) {
     if (started != null) {
@@ -229,6 +276,10 @@ class _$_Started implements _Started {
     required TResult Function(_GetAllDeliveries value) getAllDeliveries,
     required TResult Function(_GetAllShipment value) getAllShipment,
     required TResult Function(_UpdateTripStatus value) updateTripStatus,
+    required TResult Function(_AcceptCompletedDelivery value)
+        acceptCompletedDelivery,
+    required TResult Function(_RateDelivery value) rateDelivery,
+    required TResult Function(_TipDelivery value) tipDelivery,
   }) {
     return started(this);
   }
@@ -242,6 +293,9 @@ class _$_Started implements _Started {
     TResult Function(_GetAllDeliveries value)? getAllDeliveries,
     TResult Function(_GetAllShipment value)? getAllShipment,
     TResult Function(_UpdateTripStatus value)? updateTripStatus,
+    TResult Function(_AcceptCompletedDelivery value)? acceptCompletedDelivery,
+    TResult Function(_RateDelivery value)? rateDelivery,
+    TResult Function(_TipDelivery value)? tipDelivery,
   }) {
     return started?.call(this);
   }
@@ -255,6 +309,9 @@ class _$_Started implements _Started {
     TResult Function(_GetAllDeliveries value)? getAllDeliveries,
     TResult Function(_GetAllShipment value)? getAllShipment,
     TResult Function(_UpdateTripStatus value)? updateTripStatus,
+    TResult Function(_AcceptCompletedDelivery value)? acceptCompletedDelivery,
+    TResult Function(_RateDelivery value)? rateDelivery,
+    TResult Function(_TipDelivery value)? tipDelivery,
     required TResult orElse(),
   }) {
     if (started != null) {
@@ -339,6 +396,9 @@ class _$_CreateShipment implements _CreateShipment {
     required TResult Function(String email) getAllDeliveries,
     required TResult Function(String email) getAllShipment,
     required TResult Function(String id, String status) updateTripStatus,
+    required TResult Function(String deliveryId) acceptCompletedDelivery,
+    required TResult Function(RateDeliveryArg arg) rateDelivery,
+    required TResult Function(String deliveryId, String amount) tipDelivery,
   }) {
     return createShipment(arg);
   }
@@ -352,6 +412,9 @@ class _$_CreateShipment implements _CreateShipment {
     TResult Function(String email)? getAllDeliveries,
     TResult Function(String email)? getAllShipment,
     TResult Function(String id, String status)? updateTripStatus,
+    TResult Function(String deliveryId)? acceptCompletedDelivery,
+    TResult Function(RateDeliveryArg arg)? rateDelivery,
+    TResult Function(String deliveryId, String amount)? tipDelivery,
   }) {
     return createShipment?.call(arg);
   }
@@ -365,6 +428,9 @@ class _$_CreateShipment implements _CreateShipment {
     TResult Function(String email)? getAllDeliveries,
     TResult Function(String email)? getAllShipment,
     TResult Function(String id, String status)? updateTripStatus,
+    TResult Function(String deliveryId)? acceptCompletedDelivery,
+    TResult Function(RateDeliveryArg arg)? rateDelivery,
+    TResult Function(String deliveryId, String amount)? tipDelivery,
     required TResult orElse(),
   }) {
     if (createShipment != null) {
@@ -382,6 +448,10 @@ class _$_CreateShipment implements _CreateShipment {
     required TResult Function(_GetAllDeliveries value) getAllDeliveries,
     required TResult Function(_GetAllShipment value) getAllShipment,
     required TResult Function(_UpdateTripStatus value) updateTripStatus,
+    required TResult Function(_AcceptCompletedDelivery value)
+        acceptCompletedDelivery,
+    required TResult Function(_RateDelivery value) rateDelivery,
+    required TResult Function(_TipDelivery value) tipDelivery,
   }) {
     return createShipment(this);
   }
@@ -395,6 +465,9 @@ class _$_CreateShipment implements _CreateShipment {
     TResult Function(_GetAllDeliveries value)? getAllDeliveries,
     TResult Function(_GetAllShipment value)? getAllShipment,
     TResult Function(_UpdateTripStatus value)? updateTripStatus,
+    TResult Function(_AcceptCompletedDelivery value)? acceptCompletedDelivery,
+    TResult Function(_RateDelivery value)? rateDelivery,
+    TResult Function(_TipDelivery value)? tipDelivery,
   }) {
     return createShipment?.call(this);
   }
@@ -408,6 +481,9 @@ class _$_CreateShipment implements _CreateShipment {
     TResult Function(_GetAllDeliveries value)? getAllDeliveries,
     TResult Function(_GetAllShipment value)? getAllShipment,
     TResult Function(_UpdateTripStatus value)? updateTripStatus,
+    TResult Function(_AcceptCompletedDelivery value)? acceptCompletedDelivery,
+    TResult Function(_RateDelivery value)? rateDelivery,
+    TResult Function(_TipDelivery value)? tipDelivery,
     required TResult orElse(),
   }) {
     if (createShipment != null) {
@@ -498,6 +574,9 @@ class _$_CreateTrip implements _CreateTrip {
     required TResult Function(String email) getAllDeliveries,
     required TResult Function(String email) getAllShipment,
     required TResult Function(String id, String status) updateTripStatus,
+    required TResult Function(String deliveryId) acceptCompletedDelivery,
+    required TResult Function(RateDeliveryArg arg) rateDelivery,
+    required TResult Function(String deliveryId, String amount) tipDelivery,
   }) {
     return createTrip(arg);
   }
@@ -511,6 +590,9 @@ class _$_CreateTrip implements _CreateTrip {
     TResult Function(String email)? getAllDeliveries,
     TResult Function(String email)? getAllShipment,
     TResult Function(String id, String status)? updateTripStatus,
+    TResult Function(String deliveryId)? acceptCompletedDelivery,
+    TResult Function(RateDeliveryArg arg)? rateDelivery,
+    TResult Function(String deliveryId, String amount)? tipDelivery,
   }) {
     return createTrip?.call(arg);
   }
@@ -524,6 +606,9 @@ class _$_CreateTrip implements _CreateTrip {
     TResult Function(String email)? getAllDeliveries,
     TResult Function(String email)? getAllShipment,
     TResult Function(String id, String status)? updateTripStatus,
+    TResult Function(String deliveryId)? acceptCompletedDelivery,
+    TResult Function(RateDeliveryArg arg)? rateDelivery,
+    TResult Function(String deliveryId, String amount)? tipDelivery,
     required TResult orElse(),
   }) {
     if (createTrip != null) {
@@ -541,6 +626,10 @@ class _$_CreateTrip implements _CreateTrip {
     required TResult Function(_GetAllDeliveries value) getAllDeliveries,
     required TResult Function(_GetAllShipment value) getAllShipment,
     required TResult Function(_UpdateTripStatus value) updateTripStatus,
+    required TResult Function(_AcceptCompletedDelivery value)
+        acceptCompletedDelivery,
+    required TResult Function(_RateDelivery value) rateDelivery,
+    required TResult Function(_TipDelivery value) tipDelivery,
   }) {
     return createTrip(this);
   }
@@ -554,6 +643,9 @@ class _$_CreateTrip implements _CreateTrip {
     TResult Function(_GetAllDeliveries value)? getAllDeliveries,
     TResult Function(_GetAllShipment value)? getAllShipment,
     TResult Function(_UpdateTripStatus value)? updateTripStatus,
+    TResult Function(_AcceptCompletedDelivery value)? acceptCompletedDelivery,
+    TResult Function(_RateDelivery value)? rateDelivery,
+    TResult Function(_TipDelivery value)? tipDelivery,
   }) {
     return createTrip?.call(this);
   }
@@ -567,6 +659,9 @@ class _$_CreateTrip implements _CreateTrip {
     TResult Function(_GetAllDeliveries value)? getAllDeliveries,
     TResult Function(_GetAllShipment value)? getAllShipment,
     TResult Function(_UpdateTripStatus value)? updateTripStatus,
+    TResult Function(_AcceptCompletedDelivery value)? acceptCompletedDelivery,
+    TResult Function(_RateDelivery value)? rateDelivery,
+    TResult Function(_TipDelivery value)? tipDelivery,
     required TResult orElse(),
   }) {
     if (createTrip != null) {
@@ -656,6 +751,9 @@ class _$_GetAllDeliveries implements _GetAllDeliveries {
     required TResult Function(String email) getAllDeliveries,
     required TResult Function(String email) getAllShipment,
     required TResult Function(String id, String status) updateTripStatus,
+    required TResult Function(String deliveryId) acceptCompletedDelivery,
+    required TResult Function(RateDeliveryArg arg) rateDelivery,
+    required TResult Function(String deliveryId, String amount) tipDelivery,
   }) {
     return getAllDeliveries(email);
   }
@@ -669,6 +767,9 @@ class _$_GetAllDeliveries implements _GetAllDeliveries {
     TResult Function(String email)? getAllDeliveries,
     TResult Function(String email)? getAllShipment,
     TResult Function(String id, String status)? updateTripStatus,
+    TResult Function(String deliveryId)? acceptCompletedDelivery,
+    TResult Function(RateDeliveryArg arg)? rateDelivery,
+    TResult Function(String deliveryId, String amount)? tipDelivery,
   }) {
     return getAllDeliveries?.call(email);
   }
@@ -682,6 +783,9 @@ class _$_GetAllDeliveries implements _GetAllDeliveries {
     TResult Function(String email)? getAllDeliveries,
     TResult Function(String email)? getAllShipment,
     TResult Function(String id, String status)? updateTripStatus,
+    TResult Function(String deliveryId)? acceptCompletedDelivery,
+    TResult Function(RateDeliveryArg arg)? rateDelivery,
+    TResult Function(String deliveryId, String amount)? tipDelivery,
     required TResult orElse(),
   }) {
     if (getAllDeliveries != null) {
@@ -699,6 +803,10 @@ class _$_GetAllDeliveries implements _GetAllDeliveries {
     required TResult Function(_GetAllDeliveries value) getAllDeliveries,
     required TResult Function(_GetAllShipment value) getAllShipment,
     required TResult Function(_UpdateTripStatus value) updateTripStatus,
+    required TResult Function(_AcceptCompletedDelivery value)
+        acceptCompletedDelivery,
+    required TResult Function(_RateDelivery value) rateDelivery,
+    required TResult Function(_TipDelivery value) tipDelivery,
   }) {
     return getAllDeliveries(this);
   }
@@ -712,6 +820,9 @@ class _$_GetAllDeliveries implements _GetAllDeliveries {
     TResult Function(_GetAllDeliveries value)? getAllDeliveries,
     TResult Function(_GetAllShipment value)? getAllShipment,
     TResult Function(_UpdateTripStatus value)? updateTripStatus,
+    TResult Function(_AcceptCompletedDelivery value)? acceptCompletedDelivery,
+    TResult Function(_RateDelivery value)? rateDelivery,
+    TResult Function(_TipDelivery value)? tipDelivery,
   }) {
     return getAllDeliveries?.call(this);
   }
@@ -725,6 +836,9 @@ class _$_GetAllDeliveries implements _GetAllDeliveries {
     TResult Function(_GetAllDeliveries value)? getAllDeliveries,
     TResult Function(_GetAllShipment value)? getAllShipment,
     TResult Function(_UpdateTripStatus value)? updateTripStatus,
+    TResult Function(_AcceptCompletedDelivery value)? acceptCompletedDelivery,
+    TResult Function(_RateDelivery value)? rateDelivery,
+    TResult Function(_TipDelivery value)? tipDelivery,
     required TResult orElse(),
   }) {
     if (getAllDeliveries != null) {
@@ -815,6 +929,9 @@ class _$_GetAllShipment implements _GetAllShipment {
     required TResult Function(String email) getAllDeliveries,
     required TResult Function(String email) getAllShipment,
     required TResult Function(String id, String status) updateTripStatus,
+    required TResult Function(String deliveryId) acceptCompletedDelivery,
+    required TResult Function(RateDeliveryArg arg) rateDelivery,
+    required TResult Function(String deliveryId, String amount) tipDelivery,
   }) {
     return getAllShipment(email);
   }
@@ -828,6 +945,9 @@ class _$_GetAllShipment implements _GetAllShipment {
     TResult Function(String email)? getAllDeliveries,
     TResult Function(String email)? getAllShipment,
     TResult Function(String id, String status)? updateTripStatus,
+    TResult Function(String deliveryId)? acceptCompletedDelivery,
+    TResult Function(RateDeliveryArg arg)? rateDelivery,
+    TResult Function(String deliveryId, String amount)? tipDelivery,
   }) {
     return getAllShipment?.call(email);
   }
@@ -841,6 +961,9 @@ class _$_GetAllShipment implements _GetAllShipment {
     TResult Function(String email)? getAllDeliveries,
     TResult Function(String email)? getAllShipment,
     TResult Function(String id, String status)? updateTripStatus,
+    TResult Function(String deliveryId)? acceptCompletedDelivery,
+    TResult Function(RateDeliveryArg arg)? rateDelivery,
+    TResult Function(String deliveryId, String amount)? tipDelivery,
     required TResult orElse(),
   }) {
     if (getAllShipment != null) {
@@ -858,6 +981,10 @@ class _$_GetAllShipment implements _GetAllShipment {
     required TResult Function(_GetAllDeliveries value) getAllDeliveries,
     required TResult Function(_GetAllShipment value) getAllShipment,
     required TResult Function(_UpdateTripStatus value) updateTripStatus,
+    required TResult Function(_AcceptCompletedDelivery value)
+        acceptCompletedDelivery,
+    required TResult Function(_RateDelivery value) rateDelivery,
+    required TResult Function(_TipDelivery value) tipDelivery,
   }) {
     return getAllShipment(this);
   }
@@ -871,6 +998,9 @@ class _$_GetAllShipment implements _GetAllShipment {
     TResult Function(_GetAllDeliveries value)? getAllDeliveries,
     TResult Function(_GetAllShipment value)? getAllShipment,
     TResult Function(_UpdateTripStatus value)? updateTripStatus,
+    TResult Function(_AcceptCompletedDelivery value)? acceptCompletedDelivery,
+    TResult Function(_RateDelivery value)? rateDelivery,
+    TResult Function(_TipDelivery value)? tipDelivery,
   }) {
     return getAllShipment?.call(this);
   }
@@ -884,6 +1014,9 @@ class _$_GetAllShipment implements _GetAllShipment {
     TResult Function(_GetAllDeliveries value)? getAllDeliveries,
     TResult Function(_GetAllShipment value)? getAllShipment,
     TResult Function(_UpdateTripStatus value)? updateTripStatus,
+    TResult Function(_AcceptCompletedDelivery value)? acceptCompletedDelivery,
+    TResult Function(_RateDelivery value)? rateDelivery,
+    TResult Function(_TipDelivery value)? tipDelivery,
     required TResult orElse(),
   }) {
     if (getAllShipment != null) {
@@ -983,6 +1116,9 @@ class _$_UpdateTripStatus implements _UpdateTripStatus {
     required TResult Function(String email) getAllDeliveries,
     required TResult Function(String email) getAllShipment,
     required TResult Function(String id, String status) updateTripStatus,
+    required TResult Function(String deliveryId) acceptCompletedDelivery,
+    required TResult Function(RateDeliveryArg arg) rateDelivery,
+    required TResult Function(String deliveryId, String amount) tipDelivery,
   }) {
     return updateTripStatus(id, status);
   }
@@ -996,6 +1132,9 @@ class _$_UpdateTripStatus implements _UpdateTripStatus {
     TResult Function(String email)? getAllDeliveries,
     TResult Function(String email)? getAllShipment,
     TResult Function(String id, String status)? updateTripStatus,
+    TResult Function(String deliveryId)? acceptCompletedDelivery,
+    TResult Function(RateDeliveryArg arg)? rateDelivery,
+    TResult Function(String deliveryId, String amount)? tipDelivery,
   }) {
     return updateTripStatus?.call(id, status);
   }
@@ -1009,6 +1148,9 @@ class _$_UpdateTripStatus implements _UpdateTripStatus {
     TResult Function(String email)? getAllDeliveries,
     TResult Function(String email)? getAllShipment,
     TResult Function(String id, String status)? updateTripStatus,
+    TResult Function(String deliveryId)? acceptCompletedDelivery,
+    TResult Function(RateDeliveryArg arg)? rateDelivery,
+    TResult Function(String deliveryId, String amount)? tipDelivery,
     required TResult orElse(),
   }) {
     if (updateTripStatus != null) {
@@ -1026,6 +1168,10 @@ class _$_UpdateTripStatus implements _UpdateTripStatus {
     required TResult Function(_GetAllDeliveries value) getAllDeliveries,
     required TResult Function(_GetAllShipment value) getAllShipment,
     required TResult Function(_UpdateTripStatus value) updateTripStatus,
+    required TResult Function(_AcceptCompletedDelivery value)
+        acceptCompletedDelivery,
+    required TResult Function(_RateDelivery value) rateDelivery,
+    required TResult Function(_TipDelivery value) tipDelivery,
   }) {
     return updateTripStatus(this);
   }
@@ -1039,6 +1185,9 @@ class _$_UpdateTripStatus implements _UpdateTripStatus {
     TResult Function(_GetAllDeliveries value)? getAllDeliveries,
     TResult Function(_GetAllShipment value)? getAllShipment,
     TResult Function(_UpdateTripStatus value)? updateTripStatus,
+    TResult Function(_AcceptCompletedDelivery value)? acceptCompletedDelivery,
+    TResult Function(_RateDelivery value)? rateDelivery,
+    TResult Function(_TipDelivery value)? tipDelivery,
   }) {
     return updateTripStatus?.call(this);
   }
@@ -1052,6 +1201,9 @@ class _$_UpdateTripStatus implements _UpdateTripStatus {
     TResult Function(_GetAllDeliveries value)? getAllDeliveries,
     TResult Function(_GetAllShipment value)? getAllShipment,
     TResult Function(_UpdateTripStatus value)? updateTripStatus,
+    TResult Function(_AcceptCompletedDelivery value)? acceptCompletedDelivery,
+    TResult Function(_RateDelivery value)? rateDelivery,
+    TResult Function(_TipDelivery value)? tipDelivery,
     required TResult orElse(),
   }) {
     if (updateTripStatus != null) {
@@ -1069,6 +1221,553 @@ abstract class _UpdateTripStatus implements ShipmentHandlerEvent {
   String get status;
   @JsonKey(ignore: true)
   _$UpdateTripStatusCopyWith<_UpdateTripStatus> get copyWith =>
+      throw _privateConstructorUsedError;
+}
+
+/// @nodoc
+abstract class _$AcceptCompletedDeliveryCopyWith<$Res> {
+  factory _$AcceptCompletedDeliveryCopyWith(_AcceptCompletedDelivery value,
+          $Res Function(_AcceptCompletedDelivery) then) =
+      __$AcceptCompletedDeliveryCopyWithImpl<$Res>;
+  $Res call({String deliveryId});
+}
+
+/// @nodoc
+class __$AcceptCompletedDeliveryCopyWithImpl<$Res>
+    extends _$ShipmentHandlerEventCopyWithImpl<$Res>
+    implements _$AcceptCompletedDeliveryCopyWith<$Res> {
+  __$AcceptCompletedDeliveryCopyWithImpl(_AcceptCompletedDelivery _value,
+      $Res Function(_AcceptCompletedDelivery) _then)
+      : super(_value, (v) => _then(v as _AcceptCompletedDelivery));
+
+  @override
+  _AcceptCompletedDelivery get _value =>
+      super._value as _AcceptCompletedDelivery;
+
+  @override
+  $Res call({
+    Object? deliveryId = freezed,
+  }) {
+    return _then(_AcceptCompletedDelivery(
+      deliveryId == freezed
+          ? _value.deliveryId
+          : deliveryId // ignore: cast_nullable_to_non_nullable
+              as String,
+    ));
+  }
+}
+
+/// @nodoc
+
+class _$_AcceptCompletedDelivery implements _AcceptCompletedDelivery {
+  const _$_AcceptCompletedDelivery(this.deliveryId);
+
+  @override
+  final String deliveryId;
+
+  @override
+  String toString() {
+    return 'ShipmentHandlerEvent.acceptCompletedDelivery(deliveryId: $deliveryId)';
+  }
+
+  @override
+  bool operator ==(dynamic other) {
+    return identical(this, other) ||
+        (other.runtimeType == runtimeType &&
+            other is _AcceptCompletedDelivery &&
+            const DeepCollectionEquality()
+                .equals(other.deliveryId, deliveryId));
+  }
+
+  @override
+  int get hashCode =>
+      Object.hash(runtimeType, const DeepCollectionEquality().hash(deliveryId));
+
+  @JsonKey(ignore: true)
+  @override
+  _$AcceptCompletedDeliveryCopyWith<_AcceptCompletedDelivery> get copyWith =>
+      __$AcceptCompletedDeliveryCopyWithImpl<_AcceptCompletedDelivery>(
+          this, _$identity);
+
+  @override
+  @optionalTypeArgs
+  TResult when<TResult extends Object?>({
+    required TResult Function() started,
+    required TResult Function(CreateShipmentArg arg) createShipment,
+    required TResult Function(CreateTripArg arg) createTrip,
+    required TResult Function(String email) getAllDeliveries,
+    required TResult Function(String email) getAllShipment,
+    required TResult Function(String id, String status) updateTripStatus,
+    required TResult Function(String deliveryId) acceptCompletedDelivery,
+    required TResult Function(RateDeliveryArg arg) rateDelivery,
+    required TResult Function(String deliveryId, String amount) tipDelivery,
+  }) {
+    return acceptCompletedDelivery(deliveryId);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? whenOrNull<TResult extends Object?>({
+    TResult Function()? started,
+    TResult Function(CreateShipmentArg arg)? createShipment,
+    TResult Function(CreateTripArg arg)? createTrip,
+    TResult Function(String email)? getAllDeliveries,
+    TResult Function(String email)? getAllShipment,
+    TResult Function(String id, String status)? updateTripStatus,
+    TResult Function(String deliveryId)? acceptCompletedDelivery,
+    TResult Function(RateDeliveryArg arg)? rateDelivery,
+    TResult Function(String deliveryId, String amount)? tipDelivery,
+  }) {
+    return acceptCompletedDelivery?.call(deliveryId);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeWhen<TResult extends Object?>({
+    TResult Function()? started,
+    TResult Function(CreateShipmentArg arg)? createShipment,
+    TResult Function(CreateTripArg arg)? createTrip,
+    TResult Function(String email)? getAllDeliveries,
+    TResult Function(String email)? getAllShipment,
+    TResult Function(String id, String status)? updateTripStatus,
+    TResult Function(String deliveryId)? acceptCompletedDelivery,
+    TResult Function(RateDeliveryArg arg)? rateDelivery,
+    TResult Function(String deliveryId, String amount)? tipDelivery,
+    required TResult orElse(),
+  }) {
+    if (acceptCompletedDelivery != null) {
+      return acceptCompletedDelivery(deliveryId);
+    }
+    return orElse();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult map<TResult extends Object?>({
+    required TResult Function(_Started value) started,
+    required TResult Function(_CreateShipment value) createShipment,
+    required TResult Function(_CreateTrip value) createTrip,
+    required TResult Function(_GetAllDeliveries value) getAllDeliveries,
+    required TResult Function(_GetAllShipment value) getAllShipment,
+    required TResult Function(_UpdateTripStatus value) updateTripStatus,
+    required TResult Function(_AcceptCompletedDelivery value)
+        acceptCompletedDelivery,
+    required TResult Function(_RateDelivery value) rateDelivery,
+    required TResult Function(_TipDelivery value) tipDelivery,
+  }) {
+    return acceptCompletedDelivery(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? mapOrNull<TResult extends Object?>({
+    TResult Function(_Started value)? started,
+    TResult Function(_CreateShipment value)? createShipment,
+    TResult Function(_CreateTrip value)? createTrip,
+    TResult Function(_GetAllDeliveries value)? getAllDeliveries,
+    TResult Function(_GetAllShipment value)? getAllShipment,
+    TResult Function(_UpdateTripStatus value)? updateTripStatus,
+    TResult Function(_AcceptCompletedDelivery value)? acceptCompletedDelivery,
+    TResult Function(_RateDelivery value)? rateDelivery,
+    TResult Function(_TipDelivery value)? tipDelivery,
+  }) {
+    return acceptCompletedDelivery?.call(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeMap<TResult extends Object?>({
+    TResult Function(_Started value)? started,
+    TResult Function(_CreateShipment value)? createShipment,
+    TResult Function(_CreateTrip value)? createTrip,
+    TResult Function(_GetAllDeliveries value)? getAllDeliveries,
+    TResult Function(_GetAllShipment value)? getAllShipment,
+    TResult Function(_UpdateTripStatus value)? updateTripStatus,
+    TResult Function(_AcceptCompletedDelivery value)? acceptCompletedDelivery,
+    TResult Function(_RateDelivery value)? rateDelivery,
+    TResult Function(_TipDelivery value)? tipDelivery,
+    required TResult orElse(),
+  }) {
+    if (acceptCompletedDelivery != null) {
+      return acceptCompletedDelivery(this);
+    }
+    return orElse();
+  }
+}
+
+abstract class _AcceptCompletedDelivery implements ShipmentHandlerEvent {
+  const factory _AcceptCompletedDelivery(String deliveryId) =
+      _$_AcceptCompletedDelivery;
+
+  String get deliveryId;
+  @JsonKey(ignore: true)
+  _$AcceptCompletedDeliveryCopyWith<_AcceptCompletedDelivery> get copyWith =>
+      throw _privateConstructorUsedError;
+}
+
+/// @nodoc
+abstract class _$RateDeliveryCopyWith<$Res> {
+  factory _$RateDeliveryCopyWith(
+          _RateDelivery value, $Res Function(_RateDelivery) then) =
+      __$RateDeliveryCopyWithImpl<$Res>;
+  $Res call({RateDeliveryArg arg});
+}
+
+/// @nodoc
+class __$RateDeliveryCopyWithImpl<$Res>
+    extends _$ShipmentHandlerEventCopyWithImpl<$Res>
+    implements _$RateDeliveryCopyWith<$Res> {
+  __$RateDeliveryCopyWithImpl(
+      _RateDelivery _value, $Res Function(_RateDelivery) _then)
+      : super(_value, (v) => _then(v as _RateDelivery));
+
+  @override
+  _RateDelivery get _value => super._value as _RateDelivery;
+
+  @override
+  $Res call({
+    Object? arg = freezed,
+  }) {
+    return _then(_RateDelivery(
+      arg == freezed
+          ? _value.arg
+          : arg // ignore: cast_nullable_to_non_nullable
+              as RateDeliveryArg,
+    ));
+  }
+}
+
+/// @nodoc
+
+class _$_RateDelivery implements _RateDelivery {
+  const _$_RateDelivery(this.arg);
+
+  @override
+  final RateDeliveryArg arg;
+
+  @override
+  String toString() {
+    return 'ShipmentHandlerEvent.rateDelivery(arg: $arg)';
+  }
+
+  @override
+  bool operator ==(dynamic other) {
+    return identical(this, other) ||
+        (other.runtimeType == runtimeType &&
+            other is _RateDelivery &&
+            const DeepCollectionEquality().equals(other.arg, arg));
+  }
+
+  @override
+  int get hashCode =>
+      Object.hash(runtimeType, const DeepCollectionEquality().hash(arg));
+
+  @JsonKey(ignore: true)
+  @override
+  _$RateDeliveryCopyWith<_RateDelivery> get copyWith =>
+      __$RateDeliveryCopyWithImpl<_RateDelivery>(this, _$identity);
+
+  @override
+  @optionalTypeArgs
+  TResult when<TResult extends Object?>({
+    required TResult Function() started,
+    required TResult Function(CreateShipmentArg arg) createShipment,
+    required TResult Function(CreateTripArg arg) createTrip,
+    required TResult Function(String email) getAllDeliveries,
+    required TResult Function(String email) getAllShipment,
+    required TResult Function(String id, String status) updateTripStatus,
+    required TResult Function(String deliveryId) acceptCompletedDelivery,
+    required TResult Function(RateDeliveryArg arg) rateDelivery,
+    required TResult Function(String deliveryId, String amount) tipDelivery,
+  }) {
+    return rateDelivery(arg);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? whenOrNull<TResult extends Object?>({
+    TResult Function()? started,
+    TResult Function(CreateShipmentArg arg)? createShipment,
+    TResult Function(CreateTripArg arg)? createTrip,
+    TResult Function(String email)? getAllDeliveries,
+    TResult Function(String email)? getAllShipment,
+    TResult Function(String id, String status)? updateTripStatus,
+    TResult Function(String deliveryId)? acceptCompletedDelivery,
+    TResult Function(RateDeliveryArg arg)? rateDelivery,
+    TResult Function(String deliveryId, String amount)? tipDelivery,
+  }) {
+    return rateDelivery?.call(arg);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeWhen<TResult extends Object?>({
+    TResult Function()? started,
+    TResult Function(CreateShipmentArg arg)? createShipment,
+    TResult Function(CreateTripArg arg)? createTrip,
+    TResult Function(String email)? getAllDeliveries,
+    TResult Function(String email)? getAllShipment,
+    TResult Function(String id, String status)? updateTripStatus,
+    TResult Function(String deliveryId)? acceptCompletedDelivery,
+    TResult Function(RateDeliveryArg arg)? rateDelivery,
+    TResult Function(String deliveryId, String amount)? tipDelivery,
+    required TResult orElse(),
+  }) {
+    if (rateDelivery != null) {
+      return rateDelivery(arg);
+    }
+    return orElse();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult map<TResult extends Object?>({
+    required TResult Function(_Started value) started,
+    required TResult Function(_CreateShipment value) createShipment,
+    required TResult Function(_CreateTrip value) createTrip,
+    required TResult Function(_GetAllDeliveries value) getAllDeliveries,
+    required TResult Function(_GetAllShipment value) getAllShipment,
+    required TResult Function(_UpdateTripStatus value) updateTripStatus,
+    required TResult Function(_AcceptCompletedDelivery value)
+        acceptCompletedDelivery,
+    required TResult Function(_RateDelivery value) rateDelivery,
+    required TResult Function(_TipDelivery value) tipDelivery,
+  }) {
+    return rateDelivery(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? mapOrNull<TResult extends Object?>({
+    TResult Function(_Started value)? started,
+    TResult Function(_CreateShipment value)? createShipment,
+    TResult Function(_CreateTrip value)? createTrip,
+    TResult Function(_GetAllDeliveries value)? getAllDeliveries,
+    TResult Function(_GetAllShipment value)? getAllShipment,
+    TResult Function(_UpdateTripStatus value)? updateTripStatus,
+    TResult Function(_AcceptCompletedDelivery value)? acceptCompletedDelivery,
+    TResult Function(_RateDelivery value)? rateDelivery,
+    TResult Function(_TipDelivery value)? tipDelivery,
+  }) {
+    return rateDelivery?.call(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeMap<TResult extends Object?>({
+    TResult Function(_Started value)? started,
+    TResult Function(_CreateShipment value)? createShipment,
+    TResult Function(_CreateTrip value)? createTrip,
+    TResult Function(_GetAllDeliveries value)? getAllDeliveries,
+    TResult Function(_GetAllShipment value)? getAllShipment,
+    TResult Function(_UpdateTripStatus value)? updateTripStatus,
+    TResult Function(_AcceptCompletedDelivery value)? acceptCompletedDelivery,
+    TResult Function(_RateDelivery value)? rateDelivery,
+    TResult Function(_TipDelivery value)? tipDelivery,
+    required TResult orElse(),
+  }) {
+    if (rateDelivery != null) {
+      return rateDelivery(this);
+    }
+    return orElse();
+  }
+}
+
+abstract class _RateDelivery implements ShipmentHandlerEvent {
+  const factory _RateDelivery(RateDeliveryArg arg) = _$_RateDelivery;
+
+  RateDeliveryArg get arg;
+  @JsonKey(ignore: true)
+  _$RateDeliveryCopyWith<_RateDelivery> get copyWith =>
+      throw _privateConstructorUsedError;
+}
+
+/// @nodoc
+abstract class _$TipDeliveryCopyWith<$Res> {
+  factory _$TipDeliveryCopyWith(
+          _TipDelivery value, $Res Function(_TipDelivery) then) =
+      __$TipDeliveryCopyWithImpl<$Res>;
+  $Res call({String deliveryId, String amount});
+}
+
+/// @nodoc
+class __$TipDeliveryCopyWithImpl<$Res>
+    extends _$ShipmentHandlerEventCopyWithImpl<$Res>
+    implements _$TipDeliveryCopyWith<$Res> {
+  __$TipDeliveryCopyWithImpl(
+      _TipDelivery _value, $Res Function(_TipDelivery) _then)
+      : super(_value, (v) => _then(v as _TipDelivery));
+
+  @override
+  _TipDelivery get _value => super._value as _TipDelivery;
+
+  @override
+  $Res call({
+    Object? deliveryId = freezed,
+    Object? amount = freezed,
+  }) {
+    return _then(_TipDelivery(
+      deliveryId == freezed
+          ? _value.deliveryId
+          : deliveryId // ignore: cast_nullable_to_non_nullable
+              as String,
+      amount == freezed
+          ? _value.amount
+          : amount // ignore: cast_nullable_to_non_nullable
+              as String,
+    ));
+  }
+}
+
+/// @nodoc
+
+class _$_TipDelivery implements _TipDelivery {
+  const _$_TipDelivery(this.deliveryId, this.amount);
+
+  @override
+  final String deliveryId;
+  @override
+  final String amount;
+
+  @override
+  String toString() {
+    return 'ShipmentHandlerEvent.tipDelivery(deliveryId: $deliveryId, amount: $amount)';
+  }
+
+  @override
+  bool operator ==(dynamic other) {
+    return identical(this, other) ||
+        (other.runtimeType == runtimeType &&
+            other is _TipDelivery &&
+            const DeepCollectionEquality()
+                .equals(other.deliveryId, deliveryId) &&
+            const DeepCollectionEquality().equals(other.amount, amount));
+  }
+
+  @override
+  int get hashCode => Object.hash(
+      runtimeType,
+      const DeepCollectionEquality().hash(deliveryId),
+      const DeepCollectionEquality().hash(amount));
+
+  @JsonKey(ignore: true)
+  @override
+  _$TipDeliveryCopyWith<_TipDelivery> get copyWith =>
+      __$TipDeliveryCopyWithImpl<_TipDelivery>(this, _$identity);
+
+  @override
+  @optionalTypeArgs
+  TResult when<TResult extends Object?>({
+    required TResult Function() started,
+    required TResult Function(CreateShipmentArg arg) createShipment,
+    required TResult Function(CreateTripArg arg) createTrip,
+    required TResult Function(String email) getAllDeliveries,
+    required TResult Function(String email) getAllShipment,
+    required TResult Function(String id, String status) updateTripStatus,
+    required TResult Function(String deliveryId) acceptCompletedDelivery,
+    required TResult Function(RateDeliveryArg arg) rateDelivery,
+    required TResult Function(String deliveryId, String amount) tipDelivery,
+  }) {
+    return tipDelivery(deliveryId, amount);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? whenOrNull<TResult extends Object?>({
+    TResult Function()? started,
+    TResult Function(CreateShipmentArg arg)? createShipment,
+    TResult Function(CreateTripArg arg)? createTrip,
+    TResult Function(String email)? getAllDeliveries,
+    TResult Function(String email)? getAllShipment,
+    TResult Function(String id, String status)? updateTripStatus,
+    TResult Function(String deliveryId)? acceptCompletedDelivery,
+    TResult Function(RateDeliveryArg arg)? rateDelivery,
+    TResult Function(String deliveryId, String amount)? tipDelivery,
+  }) {
+    return tipDelivery?.call(deliveryId, amount);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeWhen<TResult extends Object?>({
+    TResult Function()? started,
+    TResult Function(CreateShipmentArg arg)? createShipment,
+    TResult Function(CreateTripArg arg)? createTrip,
+    TResult Function(String email)? getAllDeliveries,
+    TResult Function(String email)? getAllShipment,
+    TResult Function(String id, String status)? updateTripStatus,
+    TResult Function(String deliveryId)? acceptCompletedDelivery,
+    TResult Function(RateDeliveryArg arg)? rateDelivery,
+    TResult Function(String deliveryId, String amount)? tipDelivery,
+    required TResult orElse(),
+  }) {
+    if (tipDelivery != null) {
+      return tipDelivery(deliveryId, amount);
+    }
+    return orElse();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult map<TResult extends Object?>({
+    required TResult Function(_Started value) started,
+    required TResult Function(_CreateShipment value) createShipment,
+    required TResult Function(_CreateTrip value) createTrip,
+    required TResult Function(_GetAllDeliveries value) getAllDeliveries,
+    required TResult Function(_GetAllShipment value) getAllShipment,
+    required TResult Function(_UpdateTripStatus value) updateTripStatus,
+    required TResult Function(_AcceptCompletedDelivery value)
+        acceptCompletedDelivery,
+    required TResult Function(_RateDelivery value) rateDelivery,
+    required TResult Function(_TipDelivery value) tipDelivery,
+  }) {
+    return tipDelivery(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? mapOrNull<TResult extends Object?>({
+    TResult Function(_Started value)? started,
+    TResult Function(_CreateShipment value)? createShipment,
+    TResult Function(_CreateTrip value)? createTrip,
+    TResult Function(_GetAllDeliveries value)? getAllDeliveries,
+    TResult Function(_GetAllShipment value)? getAllShipment,
+    TResult Function(_UpdateTripStatus value)? updateTripStatus,
+    TResult Function(_AcceptCompletedDelivery value)? acceptCompletedDelivery,
+    TResult Function(_RateDelivery value)? rateDelivery,
+    TResult Function(_TipDelivery value)? tipDelivery,
+  }) {
+    return tipDelivery?.call(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeMap<TResult extends Object?>({
+    TResult Function(_Started value)? started,
+    TResult Function(_CreateShipment value)? createShipment,
+    TResult Function(_CreateTrip value)? createTrip,
+    TResult Function(_GetAllDeliveries value)? getAllDeliveries,
+    TResult Function(_GetAllShipment value)? getAllShipment,
+    TResult Function(_UpdateTripStatus value)? updateTripStatus,
+    TResult Function(_AcceptCompletedDelivery value)? acceptCompletedDelivery,
+    TResult Function(_RateDelivery value)? rateDelivery,
+    TResult Function(_TipDelivery value)? tipDelivery,
+    required TResult orElse(),
+  }) {
+    if (tipDelivery != null) {
+      return tipDelivery(this);
+    }
+    return orElse();
+  }
+}
+
+abstract class _TipDelivery implements ShipmentHandlerEvent {
+  const factory _TipDelivery(String deliveryId, String amount) = _$_TipDelivery;
+
+  String get deliveryId;
+  String get amount;
+  @JsonKey(ignore: true)
+  _$TipDeliveryCopyWith<_TipDelivery> get copyWith =>
       throw _privateConstructorUsedError;
 }
 

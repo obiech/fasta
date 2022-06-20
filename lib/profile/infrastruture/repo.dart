@@ -1,3 +1,6 @@
+import 'dart:developer';
+import 'dart:typed_data';
+
 import 'package:dio/dio.dart';
 import 'package:fasta/api_client/domain.dart';
 import 'package:fasta/core/endpoints.dart';
@@ -34,11 +37,13 @@ class ProfileDataImpl implements ProfileData {
   }
 
   @override
-  Future<Either<AppError, User>> updateProfileAvater(FormData avater) async {
+  Future<Either<AppError, Unit>> updateProfileAvater(Uint8List avater) async {
     try {
-      final res = await _client
-          .post(Endpoints.profile.getProfile, body: {'image': avater});
-      return Right(UserModel.fromJson(res.data));
+      final file = await MultipartFile.fromBytes(avater).finalize();
+      final image = FormData.fromMap({'image': file});
+      log(file.first.toString());
+      await _client.post(Endpoints.profile.uploadUserPhoto, body: image);
+      return const Right(unit);
     } catch (e) {
       return Left(AppError(e.toString()));
     }

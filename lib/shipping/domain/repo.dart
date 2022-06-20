@@ -14,4 +14,8 @@ abstract class ShipmentData {
   ErrorOr<Unit> createTrip({required CreateTripArg arg});
   ErrorOr<List<Trip>> getAllDeliveries({required String email});
   ErrorOr<Unit> updateTripStatus({required String id, required String status});
+  ErrorOr<Unit> acceptCompletedDelivery(String deliveryId);
+  ErrorOr<Unit> rateDelivery(RateDeliveryArg arg);
+  ErrorOr<Unit> tipDelivery(String deliveryId, String amount);
+
 }

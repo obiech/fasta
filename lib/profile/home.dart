@@ -1,6 +1,7 @@
 import 'package:fasta/auth/bloc/auth_bloc.dart';
 import 'package:fasta/colors/colors.dart';
 import 'package:fasta/nav/bottom_nav_bar.dart';
+import 'package:fasta/profile/application/bloc/profile_bloc.dart';
 import 'package:fasta/profile/edit.dart';
 import 'package:fasta/profile/support.dart';
 import 'package:fasta/profile/widgets/feature_builder.dart';
@@ -19,6 +20,12 @@ class ProfileView extends StatefulWidget {
 }
 
 class _ProfileViewState extends State<ProfileView> {
+  @override
+  void initState() {
+    super.initState();
+    context.read<ProfileBloc>().add(const ProfileEvent.getProfile());
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -39,7 +46,7 @@ class _ProfileViewState extends State<ProfileView> {
       body: SingleChildScrollView(
         padding: EdgeInsets.symmetric(horizontal: 23.w),
         physics: const BouncingScrollPhysics(),
-        child: BlocBuilder<AuthBloc, AuthState>(
+        child: BlocBuilder<ProfileBloc, ProfileState>(
           builder: (context, state) {
             return Column(
               children: [

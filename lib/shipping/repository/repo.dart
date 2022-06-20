@@ -25,4 +25,10 @@ class ShipmentRepository {
   ErrorOr<Unit> updateTripStatus(
           {required String id, required String status}) =>
       _repo.updateTripStatus(id: id, status: status);
+
+  ErrorOr<Unit> acceptCompletedDelivery(String deliveryId) =>
+      _repo.acceptCompletedDelivery(deliveryId);
+  ErrorOr<Unit> rateDelivery(RateDeliveryArg arg) => _repo.rateDelivery(arg);
+  ErrorOr<Unit> tipDelivery(String deliveryId, String amount) =>
+      _repo.tipDelivery(deliveryId, amount);
 }

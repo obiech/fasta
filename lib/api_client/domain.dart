@@ -3,7 +3,10 @@ import 'package:flutter/cupertino.dart';
 
 abstract class ApiClient<T> {
   Future<T> patch(String endpoint, {Map<String, dynamic>? body});
-  Future<T> post(String endpoint, {Map<String, dynamic>? body});
+  Future<T> post(
+    String endpoint, {
+    dynamic body,
+  });
   Future<T> put(String endpoint, {Map<String, dynamic>? body});
   Future<T> get(String endpoint);
   @visibleForTesting

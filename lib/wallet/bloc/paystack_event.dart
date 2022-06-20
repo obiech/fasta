@@ -3,7 +3,19 @@ part of 'paystack_bloc.dart';
 @freezed
 class PaystackEvent with _$PaystackEvent {
   const factory PaystackEvent.started() = _Started;
-  const factory PaystackEvent.initialize(
-      {required String email, required String amount}) = _Initialize;
-  const factory PaystackEvent.verify({required String reference}) = _Verify;
+  const factory PaystackEvent.balance() = _Balance;
+  const factory PaystackEvent.getDepositLink(String amount) = _GetDepositLink;
+  const factory PaystackEvent.allTransactions(TransactionArg arg) =
+      _AllTransactions;
+  const factory PaystackEvent.transactionDetail(String transactionId) =
+      _TransactionDetail;
+  const factory PaystackEvent.getDepositTransaction(TransactionArg arg) =
+      _GetDepositTransaction;
+  const factory PaystackEvent.getWithdrawTransaction(TransactionArg arg) =
+      _GetWithdrawTransaction;
+
+  const factory PaystackEvent.getAllEarnings(TransactionArg arg) =
+      _GetAllEarnings;
+  const factory PaystackEvent.getTotalEarnings(String period) =
+      _GetTotalEarnings;
 }

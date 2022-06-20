@@ -1,5 +1,3 @@
-import 'dart:developer';
-
 import 'package:cloudinary_public/cloudinary_public.dart';
 import 'package:dartz/dartz.dart';
 import 'package:fasta/api_client/domain.dart';
@@ -84,7 +82,42 @@ class ShipmentDataImpl implements ShipmentData {
     try {
       await _client.put(Endpoints.shipment.updateTripStatus,
           body: {'id': id, 'status': status});
-      return Right(unit);
+      return const Right(unit);
+    } catch (e) {
+      return Left(AppError(e.toString()));
+    }
+  }
+
+  @override
+  ErrorOr<Unit> acceptCompletedDelivery(String deliveryId) async {
+    try {
+      await _client.put(Endpoints.delivery.acceptCompletedDelivery(deliveryId));
+      return const Right(unit);
+    } catch (e) {
+      return Left(AppError(e.toString()));
+    }
+  }
+
+  @override
+  ErrorOr<Unit> rateDelivery(RateDeliveryArg arg) async {
+    try {
+      await _client.put(Endpoints.delivery.rateDelivery(arg.deliveryId), body: {
+        'rating': arg.rating,
+        'comment': arg.comment,
+      });
+      return const Right(unit);
+    } catch (e) {
+      return Left(AppError(e.toString()));
+    }
+  }
+
+  @override
+  ErrorOr<Unit> tipDelivery(String deliveryId, String amount) async {
+    try {
+      await _client.put(Endpoints.delivery.tipDriver(deliveryId), body: {
+        'amount': amount,
+      });
+      return const Right(unit);
     } catch (e) {
       return Left(AppError(e.toString()));
     }

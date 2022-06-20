@@ -5,13 +5,14 @@ import 'dart:io';
 import 'package:dio/dio.dart';
 // Project imports:
 import 'package:fasta/api_client/domain.dart';
+import 'package:fasta/core/server_address.dart';
 import 'package:fasta/errrors/app_exceptions.dart';
 
 class CustomInterceptor extends Interceptor {
   @override
   void onRequest(RequestOptions options, RequestInterceptorHandler handler) {
-    // options.headers[HttpHeaders.authorizationHeader] = 'Bearer ' +
-    //     'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6ImpfcWFzaW0wMDFAYW9sLmNvbSIsImlkIjoxLCJpYXQiOjE2NTI3ODg1OTIsImV4cCI6MTY1Mjc5MjE5Mn0.yUWvymyEiaPcBG-3vl847y0v2MvwKOLshARZLyFmj-g';
+    options.headers[HttpHeaders.authorizationHeader] =
+        'Bearer ' + const ServerAddress().token;
 
     return super.onRequest(options, handler);
   }
@@ -37,7 +38,7 @@ class DioClient extends ApiClient<Response> {
   }
 
   @override
-  Future<Response> post(String endpoint, {Map<String, dynamic>? body}) async {
+  Future<Response> post(String endpoint, {dynamic body}) async {
     Response response = await _plugin.post(endpoint, data: body);
     return responseOrError(response);
   }

@@ -85,7 +85,7 @@ class Fasta extends StatelessWidget {
           create: (context) => AuthRepository(AuthImpl(_plugin)),
         ),
         RepositoryProvider(
-          create: (context) => WalletRepository(WalletDataImpl()),
+          create: (context) => WalletRepository(WalletDataImpl(_plugin)),
         ),
         RepositoryProvider(
           create: (context) => ShipmentRepository(ShipmentDataImpl(_plugin)),
@@ -110,7 +110,10 @@ class Fasta extends StatelessWidget {
                 ShipmentHandlerBloc(context.read<ShipmentRepository>()),
           ),
           BlocProvider(
-            create: (context) => ProfileBloc(context.read<ProfileRepository>()),
+            create: (context) => ProfileBloc(context.read<ProfileRepository>())
+              ..add(
+                const ProfileEvent.getProfile(),
+              ),
           ),
           BlocProvider(
             create: (context) => WalletCubit(),

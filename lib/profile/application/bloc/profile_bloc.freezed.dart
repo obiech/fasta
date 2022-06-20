@@ -32,7 +32,7 @@ class _$ProfileEventTearOff {
     return const _GetProfile();
   }
 
-  _UpdateProfileAvater updateProfileAvater(FormData avater) {
+  _UpdateProfileAvater updateProfileAvater(Uint8List avater) {
     return _UpdateProfileAvater(
       avater,
     );
@@ -49,7 +49,7 @@ mixin _$ProfileEvent {
     required TResult Function() started,
     required TResult Function(ProfileArg arg) updateProfile,
     required TResult Function() getProfile,
-    required TResult Function(FormData avater) updateProfileAvater,
+    required TResult Function(Uint8List avater) updateProfileAvater,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
@@ -57,7 +57,7 @@ mixin _$ProfileEvent {
     TResult Function()? started,
     TResult Function(ProfileArg arg)? updateProfile,
     TResult Function()? getProfile,
-    TResult Function(FormData avater)? updateProfileAvater,
+    TResult Function(Uint8List avater)? updateProfileAvater,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
@@ -65,7 +65,7 @@ mixin _$ProfileEvent {
     TResult Function()? started,
     TResult Function(ProfileArg arg)? updateProfile,
     TResult Function()? getProfile,
-    TResult Function(FormData avater)? updateProfileAvater,
+    TResult Function(Uint8List avater)? updateProfileAvater,
     required TResult orElse(),
   }) =>
       throw _privateConstructorUsedError;
@@ -153,7 +153,7 @@ class _$_Started implements _Started {
     required TResult Function() started,
     required TResult Function(ProfileArg arg) updateProfile,
     required TResult Function() getProfile,
-    required TResult Function(FormData avater) updateProfileAvater,
+    required TResult Function(Uint8List avater) updateProfileAvater,
   }) {
     return started();
   }
@@ -164,7 +164,7 @@ class _$_Started implements _Started {
     TResult Function()? started,
     TResult Function(ProfileArg arg)? updateProfile,
     TResult Function()? getProfile,
-    TResult Function(FormData avater)? updateProfileAvater,
+    TResult Function(Uint8List avater)? updateProfileAvater,
   }) {
     return started?.call();
   }
@@ -175,7 +175,7 @@ class _$_Started implements _Started {
     TResult Function()? started,
     TResult Function(ProfileArg arg)? updateProfile,
     TResult Function()? getProfile,
-    TResult Function(FormData avater)? updateProfileAvater,
+    TResult Function(Uint8List avater)? updateProfileAvater,
     required TResult orElse(),
   }) {
     if (started != null) {
@@ -294,7 +294,7 @@ class _$_UpdateProfile implements _UpdateProfile {
     required TResult Function() started,
     required TResult Function(ProfileArg arg) updateProfile,
     required TResult Function() getProfile,
-    required TResult Function(FormData avater) updateProfileAvater,
+    required TResult Function(Uint8List avater) updateProfileAvater,
   }) {
     return updateProfile(arg);
   }
@@ -305,7 +305,7 @@ class _$_UpdateProfile implements _UpdateProfile {
     TResult Function()? started,
     TResult Function(ProfileArg arg)? updateProfile,
     TResult Function()? getProfile,
-    TResult Function(FormData avater)? updateProfileAvater,
+    TResult Function(Uint8List avater)? updateProfileAvater,
   }) {
     return updateProfile?.call(arg);
   }
@@ -316,7 +316,7 @@ class _$_UpdateProfile implements _UpdateProfile {
     TResult Function()? started,
     TResult Function(ProfileArg arg)? updateProfile,
     TResult Function()? getProfile,
-    TResult Function(FormData avater)? updateProfileAvater,
+    TResult Function(Uint8List avater)? updateProfileAvater,
     required TResult orElse(),
   }) {
     if (updateProfile != null) {
@@ -415,7 +415,7 @@ class _$_GetProfile implements _GetProfile {
     required TResult Function() started,
     required TResult Function(ProfileArg arg) updateProfile,
     required TResult Function() getProfile,
-    required TResult Function(FormData avater) updateProfileAvater,
+    required TResult Function(Uint8List avater) updateProfileAvater,
   }) {
     return getProfile();
   }
@@ -426,7 +426,7 @@ class _$_GetProfile implements _GetProfile {
     TResult Function()? started,
     TResult Function(ProfileArg arg)? updateProfile,
     TResult Function()? getProfile,
-    TResult Function(FormData avater)? updateProfileAvater,
+    TResult Function(Uint8List avater)? updateProfileAvater,
   }) {
     return getProfile?.call();
   }
@@ -437,7 +437,7 @@ class _$_GetProfile implements _GetProfile {
     TResult Function()? started,
     TResult Function(ProfileArg arg)? updateProfile,
     TResult Function()? getProfile,
-    TResult Function(FormData avater)? updateProfileAvater,
+    TResult Function(Uint8List avater)? updateProfileAvater,
     required TResult orElse(),
   }) {
     if (getProfile != null) {
@@ -493,7 +493,7 @@ abstract class _$UpdateProfileAvaterCopyWith<$Res> {
   factory _$UpdateProfileAvaterCopyWith(_UpdateProfileAvater value,
           $Res Function(_UpdateProfileAvater) then) =
       __$UpdateProfileAvaterCopyWithImpl<$Res>;
-  $Res call({FormData avater});
+  $Res call({Uint8List avater});
 }
 
 /// @nodoc
@@ -515,7 +515,7 @@ class __$UpdateProfileAvaterCopyWithImpl<$Res>
       avater == freezed
           ? _value.avater
           : avater // ignore: cast_nullable_to_non_nullable
-              as FormData,
+              as Uint8List,
     ));
   }
 }
@@ -526,7 +526,7 @@ class _$_UpdateProfileAvater implements _UpdateProfileAvater {
   const _$_UpdateProfileAvater(this.avater);
 
   @override
-  final FormData avater;
+  final Uint8List avater;
 
   @override
   String toString() {
@@ -557,7 +557,7 @@ class _$_UpdateProfileAvater implements _UpdateProfileAvater {
     required TResult Function() started,
     required TResult Function(ProfileArg arg) updateProfile,
     required TResult Function() getProfile,
-    required TResult Function(FormData avater) updateProfileAvater,
+    required TResult Function(Uint8List avater) updateProfileAvater,
   }) {
     return updateProfileAvater(avater);
   }
@@ -568,7 +568,7 @@ class _$_UpdateProfileAvater implements _UpdateProfileAvater {
     TResult Function()? started,
     TResult Function(ProfileArg arg)? updateProfile,
     TResult Function()? getProfile,
-    TResult Function(FormData avater)? updateProfileAvater,
+    TResult Function(Uint8List avater)? updateProfileAvater,
   }) {
     return updateProfileAvater?.call(avater);
   }
@@ -579,7 +579,7 @@ class _$_UpdateProfileAvater implements _UpdateProfileAvater {
     TResult Function()? started,
     TResult Function(ProfileArg arg)? updateProfile,
     TResult Function()? getProfile,
-    TResult Function(FormData avater)? updateProfileAvater,
+    TResult Function(Uint8List avater)? updateProfileAvater,
     required TResult orElse(),
   }) {
     if (updateProfileAvater != null) {
@@ -627,9 +627,9 @@ class _$_UpdateProfileAvater implements _UpdateProfileAvater {
 }
 
 abstract class _UpdateProfileAvater implements ProfileEvent {
-  const factory _UpdateProfileAvater(FormData avater) = _$_UpdateProfileAvater;
+  const factory _UpdateProfileAvater(Uint8List avater) = _$_UpdateProfileAvater;
 
-  FormData get avater;
+  Uint8List get avater;
   @JsonKey(ignore: true)
   _$UpdateProfileAvaterCopyWith<_UpdateProfileAvater> get copyWith =>
       throw _privateConstructorUsedError;

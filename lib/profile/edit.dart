@@ -1,5 +1,9 @@
+import 'dart:io';
+import 'dart:typed_data';
+
 import 'package:fasta/auth/bloc/auth_bloc.dart';
 import 'package:fasta/colors/colors.dart';
+import 'package:fasta/core/app_state.dart';
 import 'package:fasta/global_widgets/rounded_loading_button/button_mixin.dart';
 import 'package:fasta/global_widgets/rounded_loading_button/custom_button.dart';
 import 'package:fasta/profile/repository/args.dart';
@@ -8,6 +12,7 @@ import 'package:fasta/typography/text_styles.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:fasta/profile/application/bloc/profile_bloc.dart';
+import 'package:images_picker/images_picker.dart';
 
 class EditProfileView extends StatefulWidget {
   static const String route = '/EditProfileView';
@@ -20,9 +25,26 @@ class EditProfileView extends StatefulWidget {
 class _EditProfileViewState extends State<EditProfileView>
     with RoundedLoadingButtonMixin {
   final TextEditingController fullName = TextEditingController();
-  final TextEditingController email = TextEditingController();
   final TextEditingController password = TextEditingController();
-  final TextEditingController phoneNumber = TextEditingController();
+  final TextEditingController country = TextEditingController();
+  final TextEditingController city = TextEditingController();
+  final TextEditingController stateController = TextEditingController();
+  Uint8List? bytes;
+  ImageProvider? itemImage;
+
+  Future pickImage() async {
+    List<Media>? res = await ImagesPicker.pick(
+      pickType: PickType.image,
+    );
+    if (res != null) {
+      // itemPath = res.first.thumbPath;
+      // itemImage = null;
+      bytes = File(res.first.thumbPath!).readAsBytesSync();
+      itemImage = MemoryImage(bytes!);
+      setState(() {});
+    }
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -43,13 +65,32 @@ class _EditProfileViewState extends State<EditProfileView>
       body: SingleChildScrollView(
         padding: EdgeInsets.symmetric(horizontal: 23.w),
         physics: const BouncingScrollPhysics(),
-        child: BlocBuilder<AuthBloc, AuthState>(
+        child: BlocConsumer<ProfileBloc, ProfileState>(
+          buildWhen: (previous, current) => current.status != AppState.loading,
+          listener: (context, state) async {
+            if (state.status == AppState.loading) {
+              btnController.start();
+            } else if (state.status == AppState.failed) {
+              await buttonerror();
+            } else if (state.status == AppState.success) {
+              await buttonsucces();
+            }
+          },
           builder: (context, state) {
             return Column(
               children: [
-                CircleAvatar(
+                GestureDetector(
+                  onTap: () async {
+                    await pickImage();
+                  },
+                  child: CircleAvatar(
                     radius: 62.h,
-                    backgroundImage: Image.asset('assets/young.png').image),
+                    backgroundColor: FastaColors.ligthOrange2,
+                    backgroundImage: (itemImage == null)
+                        ? Image.asset('assets/2.png').image
+                        : itemImage as ImageProvider,
+                  ),
+                ),
                 SizedBox(
                   height: 12.8.h,
                 ),
@@ -96,7 +137,7 @@ class _EditProfileViewState extends State<EditProfileView>
                         child: Padding(
                             padding: const EdgeInsets.only(left: 15, right: 15),
                             child: TextFormField(
-                                controller: email
+                                controller: fullName
                                   ..text = state.user?.fullName ?? '',
                                 decoration: const InputDecoration(
                                   border: InputBorder.none,
@@ -106,7 +147,7 @@ class _EditProfileViewState extends State<EditProfileView>
                     height: 15.h,
                   ),
                   Text(
-                    "Email",
+                    "City",
                     style: FastaTextStyle.hardLabel2,
                   ),
                   SizedBox(
@@ -124,8 +165,7 @@ class _EditProfileViewState extends State<EditProfileView>
                         child: Padding(
                             padding: const EdgeInsets.only(left: 15, right: 15),
                             child: TextFormField(
-                                controller: email
-                                  ..text = state.user?.email ?? '',
+                                controller: city..text = state.user?.city ?? '',
                                 decoration: const InputDecoration(
                                   border: InputBorder.none,
                                 )))),
@@ -134,7 +174,7 @@ class _EditProfileViewState extends State<EditProfileView>
                     height: 15.h,
                   ),
                   Text(
-                    "Password",
+                    "State",
                     style: FastaTextStyle.hardLabel2,
                   ),
                   SizedBox(
@@ -152,12 +192,9 @@ class _EditProfileViewState extends State<EditProfileView>
                         child: Padding(
                             padding: const EdgeInsets.only(left: 15, right: 15),
                             child: TextFormField(
-                                obscureText: true,
-                                controller: password..text = '',
-                                decoration: InputDecoration(
-                                  suffixIcon: IconButton(
-                                      onPressed: () {},
-                                      icon: const Icon(Icons.remove_red_eye)),
+                                controller: stateController
+                                  ..text = state.user?.state ?? '',
+                                decoration: const InputDecoration(
                                   border: InputBorder.none,
                                 )))),
                   ),
@@ -165,55 +202,28 @@ class _EditProfileViewState extends State<EditProfileView>
                     height: 15.h,
                   ),
                   Text(
-                    "Phone Number",
+                    "Country",
                     style: FastaTextStyle.hardLabel2,
                   ),
                   SizedBox(
                     height: 9.h,
                   ),
-                  Row(
-                    children: <Widget>[
-                      Padding(
-                        padding: const EdgeInsets.only(top: 5),
-                        child: Container(
-                            width: 70.w,
-                            height: 45.h,
-                            decoration: BoxDecoration(
-                              color: ColorPalette.grey2,
-                              borderRadius: BorderRadius.circular(13.0),
-                            ),
-                            child: Padding(
-                                padding:
-                                    EdgeInsets.only(left: 15.w, right: 15.w),
-                                child: TextFormField(
-                                    controller:
-                                        TextEditingController(text: '+234'),
-                                    decoration: const InputDecoration(
-                                      border: InputBorder.none,
-                                      labelText: "+234",
-                                    )))),
-                      ),
-                      const Spacer(),
-                      Padding(
-                        padding: const EdgeInsets.only(top: 5),
-                        child: Container(
-                            width: 230.w,
-                            height: 45.h,
-                            decoration: BoxDecoration(
-                              color: ColorPalette.grey2,
-                              borderRadius: BorderRadius.circular(13.0.h),
-                            ),
-                            child: Padding(
-                                padding:
-                                    EdgeInsets.only(left: 15.h, right: 15.h),
-                                child: TextFormField(
-                                    controller: phoneNumber
-                                      ..text = state.user?.phoneNumber ?? '',
-                                    decoration: const InputDecoration(
-                                      border: InputBorder.none,
-                                    )))),
-                      ),
-                    ],
+                  Padding(
+                    padding: const EdgeInsets.only(top: 5),
+                    child: Container(
+                        width: 330.w,
+                        height: 45.h,
+                        decoration: BoxDecoration(
+                          color: ColorPalette.grey2,
+                          borderRadius: BorderRadius.circular(13.0),
+                        ),
+                        child: Padding(
+                            padding: const EdgeInsets.only(left: 15, right: 15),
+                            child: TextFormField(
+                                controller: country,
+                                decoration: const InputDecoration(
+                                  border: InputBorder.none,
+                                )))),
                   ),
                 ]),
                 SizedBox(
@@ -222,19 +232,20 @@ class _EditProfileViewState extends State<EditProfileView>
                 CustomButton(
                     controller: btnController,
                     onPressed: () {
-                      // if (phoneNumber.text.isNotEmpty &&
-                      //     password.text.isNotEmpty &&
-                      //     email.text.isNotEmpty &&
-                      //     fullName.text.isNotEmpty) {
                       context
                           .read<ProfileBloc>()
                           .add(ProfileEvent.updateProfile(
                               arg: ProfileArg(
                             fullName: fullName.text,
-                            phoneNumber: phoneNumber.text,
-                            email: email.text,
+                            city: city.text,
+                            state: stateController.text,
+                            country: country.text,
                           )));
-                      // }
+                      if (bytes != null) {
+                        context
+                            .read<ProfileBloc>()
+                            .add(ProfileEvent.updateProfileAvater(bytes!));
+                      }
                     }),
                 SizedBox(
                   height: 70.h,

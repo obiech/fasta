@@ -19,6 +19,9 @@ class ShipmentHandlerBloc
     on<_GetAllShipment>(_onGetAllShipment);
     on<_GetAllDeliveries>(_onGetAllDeliveries);
     on<_CreateTrip>(_onCreateTrip);
+    on<_AcceptCompletedDelivery>(_onAcceptCompletedDelivery);
+    on<_RateDelivery>(_onRateDelivery);
+    on<_TipDelivery>(_onTipDelivery);
   }
 
   _onCreateTrip(_CreateTrip event, Emitter<ShipmentHandlerState> emit) async {
@@ -72,5 +75,39 @@ class ShipmentHandlerBloc
         (l) => emit(state.copyWith(
             status: AppState.failed, errorMessage: l.errorMessage)),
         (r) => emit(state.copyWith(status: AppState.success, address: r)));
+  }
+
+  _onAcceptCompletedDelivery(_AcceptCompletedDelivery event,
+      Emitter<ShipmentHandlerState> emit) async {
+    emit(state.copyWith(status: AppState.loading));
+
+    final res = await repo.acceptCompletedDelivery(event.deliveryId);
+    res.fold(
+        (l) => emit(state.copyWith(
+            status: AppState.failed, errorMessage: l.errorMessage)),
+        (r) => emit(state.copyWith(
+              status: AppState.success,
+            )));
+  }
+
+  _onRateDelivery(
+      _RateDelivery event, Emitter<ShipmentHandlerState> emit) async {
+    emit(state.copyWith(status: AppState.loading));
+
+    final res = await repo.rateDelivery(event.arg);
+    res.fold(
+        (l) => emit(state.copyWith(
+            status: AppState.failed, errorMessage: l.errorMessage)),
+        (r) => emit(state.copyWith(status: AppState.success)));
+  }
+
+  _onTipDelivery(_TipDelivery event, Emitter<ShipmentHandlerState> emit) async {
+    emit(state.copyWith(status: AppState.loading));
+
+    final res = await repo.tipDelivery(event.deliveryId, event.amount);
+    res.fold(
+        (l) => emit(state.copyWith(
+            status: AppState.failed, errorMessage: l.errorMessage)),
+        (r) => emit(state.copyWith(status: AppState.success)));
   }
 }

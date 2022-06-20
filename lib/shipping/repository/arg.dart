@@ -202,3 +202,13 @@ class CreateTripArg {
     };
   }
 }
+
+class RateDeliveryArg {
+  final String deliveryId, rating, comment;
+
+  RateDeliveryArg({
+    required this.deliveryId,
+    required this.rating,
+    required this.comment,
+  });
+}

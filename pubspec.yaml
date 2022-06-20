@@ -26,6 +26,7 @@ dependencies:
   google_maps_flutter: ^2.1.4
   geocoding: ^2.0.4
   geolocator: ^8.2.1
+  pin_code_text_field: ^1.8.0
   timelines: ^0.1.0
   flutter_polyline_points: ^1.0.0
   flutter_contacts: ^1.1.4

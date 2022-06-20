@@ -3,6 +3,7 @@ import 'package:fasta/global_widgets/app_bars/app_bar_with_Avater.dart';
 import 'package:fasta/profile/home.dart';
 import 'package:fasta/theming/size_config.dart';
 import 'package:fasta/typography/text_styles.dart';
+import 'package:fasta/wallet/bloc/paystack_bloc.dart';
 import 'package:fasta/wallet/cubit/wallet_cubit.dart';
 import 'package:fasta/wallet/dialogs/fund.dart';
 import 'package:fasta/wallet/dialogs/withdraw.dart';
@@ -51,10 +52,10 @@ class _WalletViewState extends State<WalletView> {
                       'Total Balance',
                       style: FastaTextStyle.softSubtitle,
                     ),
-                    BlocBuilder<WalletCubit, WalletState>(
+                    BlocBuilder<PaystackBloc, PaystackState>(
                       builder: (context, state) {
                         return Text(
-                          'NGN ${state.amount}.00',
+                          'NGN ${state.balance?.amount ?? 0}.00',
                           style: FastaTextStyle.headline6,
                         );
                       },
@@ -115,22 +116,23 @@ class _WalletViewState extends State<WalletView> {
             SizedBox(
               height: 28.h,
             ),
-            BlocBuilder<WalletCubit, WalletState>(
+            BlocBuilder<PaystackBloc, PaystackState>(
               builder: (context, state) {
-                if (state.histroy.isEmpty) {
+                if (state.allTransaction?.isEmpty ?? [].isEmpty) {
                   return const Center(
                     child: Text('No Histroy Yet'),
                   );
                 }
                 return Column(
-                  children: List.generate(state.histroy.length, (index) {
+                  children:
+                      List.generate(state.allTransaction?.length ?? 0, (index) {
                     return NotificationMessage(
                       icon: CircleAvatar(
                           radius: 6.h,
                           backgroundImage:
                               Image.asset('assets/Ellipse.png').image),
                       content: Text(
-                        state.histroy[index],
+                        state.allTransaction![index].amount,
                         style: FastaTextStyle.subtitle3,
                       ),
                       timeRecieved: GestureDetector(

@@ -208,11 +208,8 @@ class _SigninScreenState extends State<SigninScreen>
                             Navigator.pushNamedAndRemoveUntil(
                                 context, BottomNavBar.route, (route) => false);
                           } else if (state.appState == AppState.failed) {
-                            // await buttonerror();
-                            // Notify.error(context, state.error.errorMessage);
-                            await buttonsucces();
-                            Navigator.pushNamedAndRemoveUntil(
-                                context, BottomNavBar.route, (route) => false);
+                            await buttonerror();
+                            Notify.error(context, state.error.errorMessage);
                           }
                         },
                         child: CustomButton(

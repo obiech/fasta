@@ -1,15 +1,14 @@
 class ProfileArg {
-  final String? fullName, email, state, city, phoneNumber;
-  const ProfileArg(
-      {this.fullName, this.email, this.state, this.city, this.phoneNumber});
+  final String? fullName, state, city, country;
+  const ProfileArg({this.fullName, this.state, this.city, this.country});
 
   Map<String, dynamic> toMap() {
     return {
-      'fullname': fullName,
-      'email': email,
+      'firstName': fullName?.split(' ')[0],
+      'lastName': fullName?.split(' ')[1],
       'state': state,
       'city': city,
-      'phone_num': phoneNumber
+      'country': country
     };
   }
 }

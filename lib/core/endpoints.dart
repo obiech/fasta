@@ -1,8 +1,14 @@
 import 'package:fasta/core/server_address.dart';
+import 'package:fasta/wallet/repository/args.dart';
 
 String get relevantPayStack => const ServerAddress().relevantPayStack;
 
 String get relevant => const ServerAddress().relevant;
+
+String optionalParams(TransactionArg arg) =>
+    '?page=${arg.page}\$order=${arg.order}'
+    '\$status=${arg.status}\$limit=${arg.limit}\$startDate=${arg.startDate}'
+    '\$endDate=${arg.endDate}';
 
 class Endpoints {
   static _PayStack get paystack => _PayStack();
@@ -13,6 +19,9 @@ class Endpoints {
   static _Password get password => _Password();
   static _PhoneNumber get phoneNumber => _PhoneNumber();
   static _DriverAuth get driverAuth => _DriverAuth();
+  static _Wallet get wallet => _Wallet();
+  static _Delivery get delivery => _Delivery();
+  static _DriverDelivery get driverDelivery => _DriverDelivery();
 }
 
 class _PayStack {
@@ -45,7 +54,7 @@ class _Shipment {
 class _Profile {
   String get getProfile => relevant + 'user';
   String get updateProfile => relevant + 'user/profile';
-  String get uploadUserPhotot => relevant + 'user/profile/avatar';
+  String get uploadUserPhoto => relevant + 'user/profile/avatar';
 }
 
 class _User {
@@ -76,5 +85,48 @@ class _DriverAuth {
   String get updateLicenceInfo => relevant + 'driver/licence-info';
   String get updateDriverVehicle => relevant + 'driver/vehicle';
   String get uploadVehicleImages => relevant + 'driver/vehicle/images';
-  String get deleteVehicleImage => relevant + 'driver/vehicle/images/:imagesId';
+  String deleteVehicleImage(String imageID) =>
+      relevant + 'driver/vehicle/images/:$imageID';
+}
+
+class _Wallet {
+  String get userBalance => relevant + 'wallet/balance';
+  String get getDepositLink => relevant + 'wallet/deposit-link';
+  String get verifyPaystackLink => relevant + 'transaction/paystack/callback';
+  String allTransactions(TransactionArg arg) =>
+      relevant + 'wallet/transactions${optionalParams(arg)}';
+
+  String getATransaction(String transactionID) =>
+      relevant + 'wallet/transaction/:$transactionID';
+
+  String getDepositTransactions(TransactionArg arg) =>
+      relevant + 'wallet/transactions/deposit${optionalParams(arg)}';
+
+  String getWithdrawalTransactions(TransactionArg arg) =>
+      relevant + 'wallet/transactions/withdrawal${optionalParams(arg)}';
+
+  String getAllEarnings(TransactionArg arg) =>
+      relevant + 'wallet/earnings${optionalParams(arg)}';
+
+  String get getTotalEarnings => relevant + 'wallet/earnings/total';
+}
+
+class _Delivery {
+  String get createDelivery => relevant + 'delivery';
+  String acceptCompletedDelivery(String deliveryId) =>
+      relevant + 'delivery/:$deliveryId/accept-finish';
+  String rateDelivery(String deliveryId) =>
+      relevant + 'delivery/:$deliveryId/rate';
+  String tipDriver(String deliveryId) => relevant + 'delivery/:$deliveryId/tip';
+}
+
+class _DriverDelivery {
+  String get pendingDelivery =>
+      relevant + 'delivery/delivery-invitations/pending';
+  String acceptDelivery(String deliveryInvitationId) =>
+      relevant + 'delivery/delivery-invitations/:$deliveryInvitationId/accept';
+  String rejectDelivery(String deliveryInvitationId) =>
+      relevant + 'delivery/delivery-invitations/:$deliveryInvitationId/reject';
+  String finishDelivery(String deliveryId) =>
+      relevant + 'delivery/:$deliveryId/driver-finish';
 }

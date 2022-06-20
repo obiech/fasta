@@ -56,7 +56,7 @@ Future<void> fundDialog(
                         Navigator.pushReplacement(context,
                             MaterialPageRoute(builder: (context) {
                           return PayStackPaymentView(
-                            url: state.transaction!.authorizationUrl,
+                            url: state.payStack!.authorizationUrl,
                             creditAmount: int.parse(controller.text.trim()),
                           );
                         }));
@@ -72,9 +72,7 @@ Future<void> fundDialog(
                       onTap: () {
                         if (controller.text.isNotEmpty) {
                           context.read<PaystackBloc>().add(
-                              PaystackEvent.initialize(
-                                  email: 'emma1obiechina@gmail.com',
-                                  amount: controller.text));
+                              PaystackEvent.getDepositLink(controller.text));
                         } else {
                           Notify.error(context, 'Enter Amount');
                         }

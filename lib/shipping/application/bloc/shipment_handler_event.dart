@@ -14,4 +14,11 @@ class ShipmentHandlerEvent with _$ShipmentHandlerEvent {
       _GetAllShipment;
   const factory ShipmentHandlerEvent.updateTripStatus(
       {required String id, required String status}) = _UpdateTripStatus;
+
+  const factory ShipmentHandlerEvent.acceptCompletedDelivery(
+      String deliveryId) = _AcceptCompletedDelivery;
+  const factory ShipmentHandlerEvent.rateDelivery(RateDeliveryArg arg) =
+      _RateDelivery;
+  const factory ShipmentHandlerEvent.tipDelivery(
+      String deliveryId, String amount) = _TipDelivery;
 }

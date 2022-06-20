@@ -3,10 +3,17 @@ part of 'paystack_bloc.dart';
 @freezed
 class PaystackState with _$PaystackState {
   const factory PaystackState({
-    PayStackError? error,
-    Transaction? transaction,
+    AppError? error,
+    PayStack? payStack,
     required AppState appState,
+    List<Transaction> allTransaction,
+    Transaction? transactionDetail,
+    Transaction? balance,
+    required String totalEarning,
   }) = _PaystackState;
-  factory PaystackState.initial() =>
-      const PaystackState(appState: AppState.waiting);
+  factory PaystackState.initial() => const PaystackState(
+        appState: AppState.waiting,
+        totalEarning: '0',
+        allTransaction: [],
+      );
 }

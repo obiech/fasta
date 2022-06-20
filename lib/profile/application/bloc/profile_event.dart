@@ -6,5 +6,6 @@ class ProfileEvent with _$ProfileEvent {
   const factory ProfileEvent.updateProfile({required ProfileArg arg}) =
       _UpdateProfile;
   const factory ProfileEvent.getProfile() = _GetProfile;
-  const factory ProfileEvent.updateProfileAvater(FormData avater) = _UpdateProfileAvater;
+  const factory ProfileEvent.updateProfileAvater(Uint8List avater) =
+      _UpdateProfileAvater;
 }

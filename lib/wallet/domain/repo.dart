@@ -1,11 +1,19 @@
 import 'package:dartz/dartz.dart';
+import 'package:fasta/typedef.dart/typedefs.dart';
 import 'package:fasta/wallet/domain/entity/error.dart';
-import 'package:fasta/wallet/domain/entity/transaction.dart';
+import 'package:fasta/wallet/domain/entity/paystack.dart';
+import 'package:fasta/wallet/domain/entity/transcation.dart';
+import 'package:fasta/wallet/repository/args.dart';
 
 abstract class WalletData {
-  Future<Either<PayStackError, Transaction>> initilize(
-      {required String email, required String amount});
+  ErrorOr<Unit> verifyTransaction({required String reference});
 
-  Future<Either<PayStackError,  Unit>> verifyTransaction(
-      {required String reference});
+  ErrorOr<Transaction> balance();
+  ErrorOr<PayStack> getDepositLink(String amount);
+  ErrorOr<List<Transaction>> allTransactions(TransactionArg arg);
+  ErrorOr<Transaction> transactionDetail(String transactionId);
+  ErrorOr<List<Transaction>> getDepositTransaction(TransactionArg arg);
+  ErrorOr<List<Transaction>> getWithdrawTransaction(TransactionArg arg);
+  ErrorOr<List<Transaction>> getAllEarnings(TransactionArg arg);
+  ErrorOr<String> getTotalEarnings(String period);
 }

@@ -1,19 +1,32 @@
 import 'package:dartz/dartz.dart';
 import 'package:fasta/typedef.dart/typedefs.dart';
 import 'package:fasta/wallet/domain/entity/error.dart';
-import 'package:fasta/wallet/domain/entity/transaction.dart';
+import 'package:fasta/wallet/domain/entity/paystack.dart';
+import 'package:fasta/wallet/domain/entity/transcation.dart';
 import 'package:fasta/wallet/domain/repo.dart';
+import 'package:fasta/wallet/repository/args.dart';
 
 class WalletRepository {
   final WalletData _repo;
 
   WalletRepository(this._repo);
 
-  Future<Either<PayStackError, Transaction>> initilize(
-          {required String email, required String amount}) =>
-      _repo.initilize(email: email, amount: amount);
-
-  Future<Either<PayStackError, Unit>> verifyTransaction(
-          {required String reference}) =>
+  ErrorOr<Unit> verifyTransaction({required String reference}) =>
       _repo.verifyTransaction(reference: reference);
+
+  ErrorOr<Transaction> balance() => _repo.balance();
+  ErrorOr<PayStack> getDepositLink(String amount) =>
+      _repo.getDepositLink(amount);
+  ErrorOr<List<Transaction>> allTransactions(TransactionArg arg) =>
+      _repo.allTransactions(arg);
+  ErrorOr<Transaction> transactionDetail(String transactionId) =>
+      _repo.transactionDetail(transactionId);
+  ErrorOr<List<Transaction>> getDepositTransaction(TransactionArg arg) =>
+      _repo.getDepositTransaction(arg);
+  ErrorOr<List<Transaction>> getWithdrawTransaction(TransactionArg arg) =>
+      _repo.getWithdrawTransaction(arg);
+  ErrorOr<List<Transaction>> getAllEarnings(TransactionArg arg) =>
+      _repo.getAllEarnings(arg);
+  ErrorOr<String> getTotalEarnings(String period) =>
+      _repo.getTotalEarnings(period);
 }
