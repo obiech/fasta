@@ -7,6 +7,7 @@ import 'package:fasta/wallet/bloc/paystack_bloc.dart';
 import 'package:fasta/wallet/cubit/wallet_cubit.dart';
 import 'package:fasta/wallet/dialogs/fund.dart';
 import 'package:fasta/wallet/dialogs/withdraw.dart';
+import 'package:fasta/wallet/repository/args.dart';
 import 'package:fasta/wallet/widgets/notification.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -22,6 +23,21 @@ class WalletView extends StatefulWidget {
 class _WalletViewState extends State<WalletView> {
   final TextEditingController _fundController = TextEditingController();
   final TextEditingController _withdrawController = TextEditingController();
+
+  @override
+  void initState() {
+    super.initState();
+    context.read<PaystackBloc>().add(PaystackEvent.allTransactions(
+        TransactionArg(
+            endDate: '2023-10-10',
+            page: '1',
+            limit: '10',
+            order: 'desc',
+            status: '',
+            type: '',
+            startDate: '')));
+    context.read<PaystackBloc>().add(PaystackEvent.balance());
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -124,8 +140,7 @@ class _WalletViewState extends State<WalletView> {
                   );
                 }
                 return Column(
-                  children:
-                      List.generate(state.allTransaction?.length ?? 0, (index) {
+                  children: List.generate(state.allTransaction.length, (index) {
                     return NotificationMessage(
                       icon: CircleAvatar(
                           radius: 6.h,

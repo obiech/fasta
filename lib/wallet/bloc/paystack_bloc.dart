@@ -24,6 +24,7 @@ class PaystackBloc extends Bloc<PaystackEvent, PaystackState> {
     on<_GetAllEarnings>(_onGetAllEarnings);
     on<_GetTotalEarnings>(_onGetTotalEarnings);
   }
+  
   void _onBalance(_Balance event, Emitter<PaystackState> emit) async {
     emit(state.copyWith(appState: AppState.loading));
     final res = await _repo.balance();

@@ -17,7 +17,12 @@ import 'package:fasta/profile/home.dart';
 import 'package:fasta/profile/infrastruture/repo.dart';
 import 'package:fasta/profile/repository/repo.dart';
 import 'package:fasta/profile/support.dart';
+import 'package:fasta/profile/verify_email.dart';
+import 'package:fasta/rider_app/auth/bloc/auth_rider_bloc.dart';
+import 'package:fasta/rider_app/auth/infrastruture/repo.dart';
+import 'package:fasta/rider_app/auth/repository/repo.dart';
 import 'package:fasta/rider_app/auth/view/add_photo.dart';
+import 'package:fasta/rider_app/auth/view/sign_in_screen.dart';
 import 'package:fasta/rider_app/auth/view/sign_up_confirmation.dart';
 import 'package:fasta/rider_app/auth/view/sign_up_personal_info.dart';
 import 'package:fasta/rider_app/auth/view/sign_up_vehicle_type.dart';
@@ -85,6 +90,9 @@ class Fasta extends StatelessWidget {
           create: (context) => AuthRepository(AuthImpl(_plugin)),
         ),
         RepositoryProvider(
+          create: (context) => AuthRiderRepository(AuthRiderImpl(_plugin)),
+        ),
+        RepositoryProvider(
           create: (context) => WalletRepository(WalletDataImpl(_plugin)),
         ),
         RepositoryProvider(
@@ -98,6 +106,9 @@ class Fasta extends StatelessWidget {
         providers: [
           BlocProvider(
             create: (context) => ShipmentBloc(),
+          ),
+          BlocProvider(
+            create: (context) => AuthRiderBloc(context.read<AuthRiderRepository>()),
           ),
           BlocProvider(
             create: (context) => AuthBloc(context.read<AuthRepository>()),
@@ -159,7 +170,9 @@ class Fasta extends StatelessWidget {
               AddPhotoRiderView.route: (_) => const AddPhotoRiderView(),
               BottomNavBarRider.route: (_) => const BottomNavBarRider(),
               DashBoardViewRider.route: (_) => const DashBoardViewRider(),
-              OrdersViewRider.route: (_) => const OrdersViewRider()
+              OrdersViewRider.route: (_) => const OrdersViewRider(),
+              SigninScreenRider.route:(_)=> const SigninScreenRider(),
+              VerifyEmail.route:(_)=> const VerifyEmail(),
             },
             home: const Responsive(
                 designHeight: 812, designWidth: 375, child: Splash())),

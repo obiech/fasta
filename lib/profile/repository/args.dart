@@ -12,3 +12,14 @@ class ProfileArg {
     };
   }
 }
+
+class VerifyEmailArg {
+  final String otpId;
+  final String otpCode;
+  final String userId;
+  const VerifyEmailArg(this.otpCode, this.otpId, this.userId);
+
+  Map<String, dynamic> toMap() {
+    return {'otpId': otpId, 'otpCode': otpCode};
+  }
+}

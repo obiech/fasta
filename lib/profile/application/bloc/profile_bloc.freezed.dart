@@ -37,6 +37,18 @@ class _$ProfileEventTearOff {
       avater,
     );
   }
+
+  _VerifyEmail verifyEmail(VerifyEmailArg arg) {
+    return _VerifyEmail(
+      arg,
+    );
+  }
+
+  _ResendEmailOtp resendEmailOtp(String email) {
+    return _ResendEmailOtp(
+      email,
+    );
+  }
 }
 
 /// @nodoc
@@ -50,6 +62,8 @@ mixin _$ProfileEvent {
     required TResult Function(ProfileArg arg) updateProfile,
     required TResult Function() getProfile,
     required TResult Function(Uint8List avater) updateProfileAvater,
+    required TResult Function(VerifyEmailArg arg) verifyEmail,
+    required TResult Function(String email) resendEmailOtp,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
@@ -58,6 +72,8 @@ mixin _$ProfileEvent {
     TResult Function(ProfileArg arg)? updateProfile,
     TResult Function()? getProfile,
     TResult Function(Uint8List avater)? updateProfileAvater,
+    TResult Function(VerifyEmailArg arg)? verifyEmail,
+    TResult Function(String email)? resendEmailOtp,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
@@ -66,6 +82,8 @@ mixin _$ProfileEvent {
     TResult Function(ProfileArg arg)? updateProfile,
     TResult Function()? getProfile,
     TResult Function(Uint8List avater)? updateProfileAvater,
+    TResult Function(VerifyEmailArg arg)? verifyEmail,
+    TResult Function(String email)? resendEmailOtp,
     required TResult orElse(),
   }) =>
       throw _privateConstructorUsedError;
@@ -75,6 +93,8 @@ mixin _$ProfileEvent {
     required TResult Function(_UpdateProfile value) updateProfile,
     required TResult Function(_GetProfile value) getProfile,
     required TResult Function(_UpdateProfileAvater value) updateProfileAvater,
+    required TResult Function(_VerifyEmail value) verifyEmail,
+    required TResult Function(_ResendEmailOtp value) resendEmailOtp,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
@@ -83,6 +103,8 @@ mixin _$ProfileEvent {
     TResult Function(_UpdateProfile value)? updateProfile,
     TResult Function(_GetProfile value)? getProfile,
     TResult Function(_UpdateProfileAvater value)? updateProfileAvater,
+    TResult Function(_VerifyEmail value)? verifyEmail,
+    TResult Function(_ResendEmailOtp value)? resendEmailOtp,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
@@ -91,6 +113,8 @@ mixin _$ProfileEvent {
     TResult Function(_UpdateProfile value)? updateProfile,
     TResult Function(_GetProfile value)? getProfile,
     TResult Function(_UpdateProfileAvater value)? updateProfileAvater,
+    TResult Function(_VerifyEmail value)? verifyEmail,
+    TResult Function(_ResendEmailOtp value)? resendEmailOtp,
     required TResult orElse(),
   }) =>
       throw _privateConstructorUsedError;
@@ -154,6 +178,8 @@ class _$_Started implements _Started {
     required TResult Function(ProfileArg arg) updateProfile,
     required TResult Function() getProfile,
     required TResult Function(Uint8List avater) updateProfileAvater,
+    required TResult Function(VerifyEmailArg arg) verifyEmail,
+    required TResult Function(String email) resendEmailOtp,
   }) {
     return started();
   }
@@ -165,6 +191,8 @@ class _$_Started implements _Started {
     TResult Function(ProfileArg arg)? updateProfile,
     TResult Function()? getProfile,
     TResult Function(Uint8List avater)? updateProfileAvater,
+    TResult Function(VerifyEmailArg arg)? verifyEmail,
+    TResult Function(String email)? resendEmailOtp,
   }) {
     return started?.call();
   }
@@ -176,6 +204,8 @@ class _$_Started implements _Started {
     TResult Function(ProfileArg arg)? updateProfile,
     TResult Function()? getProfile,
     TResult Function(Uint8List avater)? updateProfileAvater,
+    TResult Function(VerifyEmailArg arg)? verifyEmail,
+    TResult Function(String email)? resendEmailOtp,
     required TResult orElse(),
   }) {
     if (started != null) {
@@ -191,6 +221,8 @@ class _$_Started implements _Started {
     required TResult Function(_UpdateProfile value) updateProfile,
     required TResult Function(_GetProfile value) getProfile,
     required TResult Function(_UpdateProfileAvater value) updateProfileAvater,
+    required TResult Function(_VerifyEmail value) verifyEmail,
+    required TResult Function(_ResendEmailOtp value) resendEmailOtp,
   }) {
     return started(this);
   }
@@ -202,6 +234,8 @@ class _$_Started implements _Started {
     TResult Function(_UpdateProfile value)? updateProfile,
     TResult Function(_GetProfile value)? getProfile,
     TResult Function(_UpdateProfileAvater value)? updateProfileAvater,
+    TResult Function(_VerifyEmail value)? verifyEmail,
+    TResult Function(_ResendEmailOtp value)? resendEmailOtp,
   }) {
     return started?.call(this);
   }
@@ -213,6 +247,8 @@ class _$_Started implements _Started {
     TResult Function(_UpdateProfile value)? updateProfile,
     TResult Function(_GetProfile value)? getProfile,
     TResult Function(_UpdateProfileAvater value)? updateProfileAvater,
+    TResult Function(_VerifyEmail value)? verifyEmail,
+    TResult Function(_ResendEmailOtp value)? resendEmailOtp,
     required TResult orElse(),
   }) {
     if (started != null) {
@@ -295,6 +331,8 @@ class _$_UpdateProfile implements _UpdateProfile {
     required TResult Function(ProfileArg arg) updateProfile,
     required TResult Function() getProfile,
     required TResult Function(Uint8List avater) updateProfileAvater,
+    required TResult Function(VerifyEmailArg arg) verifyEmail,
+    required TResult Function(String email) resendEmailOtp,
   }) {
     return updateProfile(arg);
   }
@@ -306,6 +344,8 @@ class _$_UpdateProfile implements _UpdateProfile {
     TResult Function(ProfileArg arg)? updateProfile,
     TResult Function()? getProfile,
     TResult Function(Uint8List avater)? updateProfileAvater,
+    TResult Function(VerifyEmailArg arg)? verifyEmail,
+    TResult Function(String email)? resendEmailOtp,
   }) {
     return updateProfile?.call(arg);
   }
@@ -317,6 +357,8 @@ class _$_UpdateProfile implements _UpdateProfile {
     TResult Function(ProfileArg arg)? updateProfile,
     TResult Function()? getProfile,
     TResult Function(Uint8List avater)? updateProfileAvater,
+    TResult Function(VerifyEmailArg arg)? verifyEmail,
+    TResult Function(String email)? resendEmailOtp,
     required TResult orElse(),
   }) {
     if (updateProfile != null) {
@@ -332,6 +374,8 @@ class _$_UpdateProfile implements _UpdateProfile {
     required TResult Function(_UpdateProfile value) updateProfile,
     required TResult Function(_GetProfile value) getProfile,
     required TResult Function(_UpdateProfileAvater value) updateProfileAvater,
+    required TResult Function(_VerifyEmail value) verifyEmail,
+    required TResult Function(_ResendEmailOtp value) resendEmailOtp,
   }) {
     return updateProfile(this);
   }
@@ -343,6 +387,8 @@ class _$_UpdateProfile implements _UpdateProfile {
     TResult Function(_UpdateProfile value)? updateProfile,
     TResult Function(_GetProfile value)? getProfile,
     TResult Function(_UpdateProfileAvater value)? updateProfileAvater,
+    TResult Function(_VerifyEmail value)? verifyEmail,
+    TResult Function(_ResendEmailOtp value)? resendEmailOtp,
   }) {
     return updateProfile?.call(this);
   }
@@ -354,6 +400,8 @@ class _$_UpdateProfile implements _UpdateProfile {
     TResult Function(_UpdateProfile value)? updateProfile,
     TResult Function(_GetProfile value)? getProfile,
     TResult Function(_UpdateProfileAvater value)? updateProfileAvater,
+    TResult Function(_VerifyEmail value)? verifyEmail,
+    TResult Function(_ResendEmailOtp value)? resendEmailOtp,
     required TResult orElse(),
   }) {
     if (updateProfile != null) {
@@ -416,6 +464,8 @@ class _$_GetProfile implements _GetProfile {
     required TResult Function(ProfileArg arg) updateProfile,
     required TResult Function() getProfile,
     required TResult Function(Uint8List avater) updateProfileAvater,
+    required TResult Function(VerifyEmailArg arg) verifyEmail,
+    required TResult Function(String email) resendEmailOtp,
   }) {
     return getProfile();
   }
@@ -427,6 +477,8 @@ class _$_GetProfile implements _GetProfile {
     TResult Function(ProfileArg arg)? updateProfile,
     TResult Function()? getProfile,
     TResult Function(Uint8List avater)? updateProfileAvater,
+    TResult Function(VerifyEmailArg arg)? verifyEmail,
+    TResult Function(String email)? resendEmailOtp,
   }) {
     return getProfile?.call();
   }
@@ -438,6 +490,8 @@ class _$_GetProfile implements _GetProfile {
     TResult Function(ProfileArg arg)? updateProfile,
     TResult Function()? getProfile,
     TResult Function(Uint8List avater)? updateProfileAvater,
+    TResult Function(VerifyEmailArg arg)? verifyEmail,
+    TResult Function(String email)? resendEmailOtp,
     required TResult orElse(),
   }) {
     if (getProfile != null) {
@@ -453,6 +507,8 @@ class _$_GetProfile implements _GetProfile {
     required TResult Function(_UpdateProfile value) updateProfile,
     required TResult Function(_GetProfile value) getProfile,
     required TResult Function(_UpdateProfileAvater value) updateProfileAvater,
+    required TResult Function(_VerifyEmail value) verifyEmail,
+    required TResult Function(_ResendEmailOtp value) resendEmailOtp,
   }) {
     return getProfile(this);
   }
@@ -464,6 +520,8 @@ class _$_GetProfile implements _GetProfile {
     TResult Function(_UpdateProfile value)? updateProfile,
     TResult Function(_GetProfile value)? getProfile,
     TResult Function(_UpdateProfileAvater value)? updateProfileAvater,
+    TResult Function(_VerifyEmail value)? verifyEmail,
+    TResult Function(_ResendEmailOtp value)? resendEmailOtp,
   }) {
     return getProfile?.call(this);
   }
@@ -475,6 +533,8 @@ class _$_GetProfile implements _GetProfile {
     TResult Function(_UpdateProfile value)? updateProfile,
     TResult Function(_GetProfile value)? getProfile,
     TResult Function(_UpdateProfileAvater value)? updateProfileAvater,
+    TResult Function(_VerifyEmail value)? verifyEmail,
+    TResult Function(_ResendEmailOtp value)? resendEmailOtp,
     required TResult orElse(),
   }) {
     if (getProfile != null) {
@@ -558,6 +618,8 @@ class _$_UpdateProfileAvater implements _UpdateProfileAvater {
     required TResult Function(ProfileArg arg) updateProfile,
     required TResult Function() getProfile,
     required TResult Function(Uint8List avater) updateProfileAvater,
+    required TResult Function(VerifyEmailArg arg) verifyEmail,
+    required TResult Function(String email) resendEmailOtp,
   }) {
     return updateProfileAvater(avater);
   }
@@ -569,6 +631,8 @@ class _$_UpdateProfileAvater implements _UpdateProfileAvater {
     TResult Function(ProfileArg arg)? updateProfile,
     TResult Function()? getProfile,
     TResult Function(Uint8List avater)? updateProfileAvater,
+    TResult Function(VerifyEmailArg arg)? verifyEmail,
+    TResult Function(String email)? resendEmailOtp,
   }) {
     return updateProfileAvater?.call(avater);
   }
@@ -580,6 +644,8 @@ class _$_UpdateProfileAvater implements _UpdateProfileAvater {
     TResult Function(ProfileArg arg)? updateProfile,
     TResult Function()? getProfile,
     TResult Function(Uint8List avater)? updateProfileAvater,
+    TResult Function(VerifyEmailArg arg)? verifyEmail,
+    TResult Function(String email)? resendEmailOtp,
     required TResult orElse(),
   }) {
     if (updateProfileAvater != null) {
@@ -595,6 +661,8 @@ class _$_UpdateProfileAvater implements _UpdateProfileAvater {
     required TResult Function(_UpdateProfile value) updateProfile,
     required TResult Function(_GetProfile value) getProfile,
     required TResult Function(_UpdateProfileAvater value) updateProfileAvater,
+    required TResult Function(_VerifyEmail value) verifyEmail,
+    required TResult Function(_ResendEmailOtp value) resendEmailOtp,
   }) {
     return updateProfileAvater(this);
   }
@@ -606,6 +674,8 @@ class _$_UpdateProfileAvater implements _UpdateProfileAvater {
     TResult Function(_UpdateProfile value)? updateProfile,
     TResult Function(_GetProfile value)? getProfile,
     TResult Function(_UpdateProfileAvater value)? updateProfileAvater,
+    TResult Function(_VerifyEmail value)? verifyEmail,
+    TResult Function(_ResendEmailOtp value)? resendEmailOtp,
   }) {
     return updateProfileAvater?.call(this);
   }
@@ -617,6 +687,8 @@ class _$_UpdateProfileAvater implements _UpdateProfileAvater {
     TResult Function(_UpdateProfile value)? updateProfile,
     TResult Function(_GetProfile value)? getProfile,
     TResult Function(_UpdateProfileAvater value)? updateProfileAvater,
+    TResult Function(_VerifyEmail value)? verifyEmail,
+    TResult Function(_ResendEmailOtp value)? resendEmailOtp,
     required TResult orElse(),
   }) {
     if (updateProfileAvater != null) {
@@ -636,14 +708,333 @@ abstract class _UpdateProfileAvater implements ProfileEvent {
 }
 
 /// @nodoc
+abstract class _$VerifyEmailCopyWith<$Res> {
+  factory _$VerifyEmailCopyWith(
+          _VerifyEmail value, $Res Function(_VerifyEmail) then) =
+      __$VerifyEmailCopyWithImpl<$Res>;
+  $Res call({VerifyEmailArg arg});
+}
+
+/// @nodoc
+class __$VerifyEmailCopyWithImpl<$Res> extends _$ProfileEventCopyWithImpl<$Res>
+    implements _$VerifyEmailCopyWith<$Res> {
+  __$VerifyEmailCopyWithImpl(
+      _VerifyEmail _value, $Res Function(_VerifyEmail) _then)
+      : super(_value, (v) => _then(v as _VerifyEmail));
+
+  @override
+  _VerifyEmail get _value => super._value as _VerifyEmail;
+
+  @override
+  $Res call({
+    Object? arg = freezed,
+  }) {
+    return _then(_VerifyEmail(
+      arg == freezed
+          ? _value.arg
+          : arg // ignore: cast_nullable_to_non_nullable
+              as VerifyEmailArg,
+    ));
+  }
+}
+
+/// @nodoc
+
+class _$_VerifyEmail implements _VerifyEmail {
+  const _$_VerifyEmail(this.arg);
+
+  @override
+  final VerifyEmailArg arg;
+
+  @override
+  String toString() {
+    return 'ProfileEvent.verifyEmail(arg: $arg)';
+  }
+
+  @override
+  bool operator ==(dynamic other) {
+    return identical(this, other) ||
+        (other.runtimeType == runtimeType &&
+            other is _VerifyEmail &&
+            const DeepCollectionEquality().equals(other.arg, arg));
+  }
+
+  @override
+  int get hashCode =>
+      Object.hash(runtimeType, const DeepCollectionEquality().hash(arg));
+
+  @JsonKey(ignore: true)
+  @override
+  _$VerifyEmailCopyWith<_VerifyEmail> get copyWith =>
+      __$VerifyEmailCopyWithImpl<_VerifyEmail>(this, _$identity);
+
+  @override
+  @optionalTypeArgs
+  TResult when<TResult extends Object?>({
+    required TResult Function() started,
+    required TResult Function(ProfileArg arg) updateProfile,
+    required TResult Function() getProfile,
+    required TResult Function(Uint8List avater) updateProfileAvater,
+    required TResult Function(VerifyEmailArg arg) verifyEmail,
+    required TResult Function(String email) resendEmailOtp,
+  }) {
+    return verifyEmail(arg);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? whenOrNull<TResult extends Object?>({
+    TResult Function()? started,
+    TResult Function(ProfileArg arg)? updateProfile,
+    TResult Function()? getProfile,
+    TResult Function(Uint8List avater)? updateProfileAvater,
+    TResult Function(VerifyEmailArg arg)? verifyEmail,
+    TResult Function(String email)? resendEmailOtp,
+  }) {
+    return verifyEmail?.call(arg);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeWhen<TResult extends Object?>({
+    TResult Function()? started,
+    TResult Function(ProfileArg arg)? updateProfile,
+    TResult Function()? getProfile,
+    TResult Function(Uint8List avater)? updateProfileAvater,
+    TResult Function(VerifyEmailArg arg)? verifyEmail,
+    TResult Function(String email)? resendEmailOtp,
+    required TResult orElse(),
+  }) {
+    if (verifyEmail != null) {
+      return verifyEmail(arg);
+    }
+    return orElse();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult map<TResult extends Object?>({
+    required TResult Function(_Started value) started,
+    required TResult Function(_UpdateProfile value) updateProfile,
+    required TResult Function(_GetProfile value) getProfile,
+    required TResult Function(_UpdateProfileAvater value) updateProfileAvater,
+    required TResult Function(_VerifyEmail value) verifyEmail,
+    required TResult Function(_ResendEmailOtp value) resendEmailOtp,
+  }) {
+    return verifyEmail(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? mapOrNull<TResult extends Object?>({
+    TResult Function(_Started value)? started,
+    TResult Function(_UpdateProfile value)? updateProfile,
+    TResult Function(_GetProfile value)? getProfile,
+    TResult Function(_UpdateProfileAvater value)? updateProfileAvater,
+    TResult Function(_VerifyEmail value)? verifyEmail,
+    TResult Function(_ResendEmailOtp value)? resendEmailOtp,
+  }) {
+    return verifyEmail?.call(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeMap<TResult extends Object?>({
+    TResult Function(_Started value)? started,
+    TResult Function(_UpdateProfile value)? updateProfile,
+    TResult Function(_GetProfile value)? getProfile,
+    TResult Function(_UpdateProfileAvater value)? updateProfileAvater,
+    TResult Function(_VerifyEmail value)? verifyEmail,
+    TResult Function(_ResendEmailOtp value)? resendEmailOtp,
+    required TResult orElse(),
+  }) {
+    if (verifyEmail != null) {
+      return verifyEmail(this);
+    }
+    return orElse();
+  }
+}
+
+abstract class _VerifyEmail implements ProfileEvent {
+  const factory _VerifyEmail(VerifyEmailArg arg) = _$_VerifyEmail;
+
+  VerifyEmailArg get arg;
+  @JsonKey(ignore: true)
+  _$VerifyEmailCopyWith<_VerifyEmail> get copyWith =>
+      throw _privateConstructorUsedError;
+}
+
+/// @nodoc
+abstract class _$ResendEmailOtpCopyWith<$Res> {
+  factory _$ResendEmailOtpCopyWith(
+          _ResendEmailOtp value, $Res Function(_ResendEmailOtp) then) =
+      __$ResendEmailOtpCopyWithImpl<$Res>;
+  $Res call({String email});
+}
+
+/// @nodoc
+class __$ResendEmailOtpCopyWithImpl<$Res>
+    extends _$ProfileEventCopyWithImpl<$Res>
+    implements _$ResendEmailOtpCopyWith<$Res> {
+  __$ResendEmailOtpCopyWithImpl(
+      _ResendEmailOtp _value, $Res Function(_ResendEmailOtp) _then)
+      : super(_value, (v) => _then(v as _ResendEmailOtp));
+
+  @override
+  _ResendEmailOtp get _value => super._value as _ResendEmailOtp;
+
+  @override
+  $Res call({
+    Object? email = freezed,
+  }) {
+    return _then(_ResendEmailOtp(
+      email == freezed
+          ? _value.email
+          : email // ignore: cast_nullable_to_non_nullable
+              as String,
+    ));
+  }
+}
+
+/// @nodoc
+
+class _$_ResendEmailOtp implements _ResendEmailOtp {
+  const _$_ResendEmailOtp(this.email);
+
+  @override
+  final String email;
+
+  @override
+  String toString() {
+    return 'ProfileEvent.resendEmailOtp(email: $email)';
+  }
+
+  @override
+  bool operator ==(dynamic other) {
+    return identical(this, other) ||
+        (other.runtimeType == runtimeType &&
+            other is _ResendEmailOtp &&
+            const DeepCollectionEquality().equals(other.email, email));
+  }
+
+  @override
+  int get hashCode =>
+      Object.hash(runtimeType, const DeepCollectionEquality().hash(email));
+
+  @JsonKey(ignore: true)
+  @override
+  _$ResendEmailOtpCopyWith<_ResendEmailOtp> get copyWith =>
+      __$ResendEmailOtpCopyWithImpl<_ResendEmailOtp>(this, _$identity);
+
+  @override
+  @optionalTypeArgs
+  TResult when<TResult extends Object?>({
+    required TResult Function() started,
+    required TResult Function(ProfileArg arg) updateProfile,
+    required TResult Function() getProfile,
+    required TResult Function(Uint8List avater) updateProfileAvater,
+    required TResult Function(VerifyEmailArg arg) verifyEmail,
+    required TResult Function(String email) resendEmailOtp,
+  }) {
+    return resendEmailOtp(email);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? whenOrNull<TResult extends Object?>({
+    TResult Function()? started,
+    TResult Function(ProfileArg arg)? updateProfile,
+    TResult Function()? getProfile,
+    TResult Function(Uint8List avater)? updateProfileAvater,
+    TResult Function(VerifyEmailArg arg)? verifyEmail,
+    TResult Function(String email)? resendEmailOtp,
+  }) {
+    return resendEmailOtp?.call(email);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeWhen<TResult extends Object?>({
+    TResult Function()? started,
+    TResult Function(ProfileArg arg)? updateProfile,
+    TResult Function()? getProfile,
+    TResult Function(Uint8List avater)? updateProfileAvater,
+    TResult Function(VerifyEmailArg arg)? verifyEmail,
+    TResult Function(String email)? resendEmailOtp,
+    required TResult orElse(),
+  }) {
+    if (resendEmailOtp != null) {
+      return resendEmailOtp(email);
+    }
+    return orElse();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult map<TResult extends Object?>({
+    required TResult Function(_Started value) started,
+    required TResult Function(_UpdateProfile value) updateProfile,
+    required TResult Function(_GetProfile value) getProfile,
+    required TResult Function(_UpdateProfileAvater value) updateProfileAvater,
+    required TResult Function(_VerifyEmail value) verifyEmail,
+    required TResult Function(_ResendEmailOtp value) resendEmailOtp,
+  }) {
+    return resendEmailOtp(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? mapOrNull<TResult extends Object?>({
+    TResult Function(_Started value)? started,
+    TResult Function(_UpdateProfile value)? updateProfile,
+    TResult Function(_GetProfile value)? getProfile,
+    TResult Function(_UpdateProfileAvater value)? updateProfileAvater,
+    TResult Function(_VerifyEmail value)? verifyEmail,
+    TResult Function(_ResendEmailOtp value)? resendEmailOtp,
+  }) {
+    return resendEmailOtp?.call(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeMap<TResult extends Object?>({
+    TResult Function(_Started value)? started,
+    TResult Function(_UpdateProfile value)? updateProfile,
+    TResult Function(_GetProfile value)? getProfile,
+    TResult Function(_UpdateProfileAvater value)? updateProfileAvater,
+    TResult Function(_VerifyEmail value)? verifyEmail,
+    TResult Function(_ResendEmailOtp value)? resendEmailOtp,
+    required TResult orElse(),
+  }) {
+    if (resendEmailOtp != null) {
+      return resendEmailOtp(this);
+    }
+    return orElse();
+  }
+}
+
+abstract class _ResendEmailOtp implements ProfileEvent {
+  const factory _ResendEmailOtp(String email) = _$_ResendEmailOtp;
+
+  String get email;
+  @JsonKey(ignore: true)
+  _$ResendEmailOtpCopyWith<_ResendEmailOtp> get copyWith =>
+      throw _privateConstructorUsedError;
+}
+
+/// @nodoc
 class _$ProfileStateTearOff {
   const _$ProfileStateTearOff();
 
   _ProfileState call(
-      {required AppState status, User? user, required String errorMessage}) {
+      {required AppState status,
+      User? user,
+      String? otpId,
+      required String errorMessage}) {
     return _ProfileState(
       status: status,
       user: user,
+      otpId: otpId,
       errorMessage: errorMessage,
     );
   }
@@ -656,6 +1047,7 @@ const $ProfileState = _$ProfileStateTearOff();
 mixin _$ProfileState {
   AppState get status => throw _privateConstructorUsedError;
   User? get user => throw _privateConstructorUsedError;
+  String? get otpId => throw _privateConstructorUsedError;
   String get errorMessage => throw _privateConstructorUsedError;
 
   @JsonKey(ignore: true)
@@ -668,7 +1060,7 @@ abstract class $ProfileStateCopyWith<$Res> {
   factory $ProfileStateCopyWith(
           ProfileState value, $Res Function(ProfileState) then) =
       _$ProfileStateCopyWithImpl<$Res>;
-  $Res call({AppState status, User? user, String errorMessage});
+  $Res call({AppState status, User? user, String? otpId, String errorMessage});
 }
 
 /// @nodoc
@@ -683,6 +1075,7 @@ class _$ProfileStateCopyWithImpl<$Res> implements $ProfileStateCopyWith<$Res> {
   $Res call({
     Object? status = freezed,
     Object? user = freezed,
+    Object? otpId = freezed,
     Object? errorMessage = freezed,
   }) {
     return _then(_value.copyWith(
@@ -694,6 +1087,10 @@ class _$ProfileStateCopyWithImpl<$Res> implements $ProfileStateCopyWith<$Res> {
           ? _value.user
           : user // ignore: cast_nullable_to_non_nullable
               as User?,
+      otpId: otpId == freezed
+          ? _value.otpId
+          : otpId // ignore: cast_nullable_to_non_nullable
+              as String?,
       errorMessage: errorMessage == freezed
           ? _value.errorMessage
           : errorMessage // ignore: cast_nullable_to_non_nullable
@@ -709,7 +1106,7 @@ abstract class _$ProfileStateCopyWith<$Res>
           _ProfileState value, $Res Function(_ProfileState) then) =
       __$ProfileStateCopyWithImpl<$Res>;
   @override
-  $Res call({AppState status, User? user, String errorMessage});
+  $Res call({AppState status, User? user, String? otpId, String errorMessage});
 }
 
 /// @nodoc
@@ -726,6 +1123,7 @@ class __$ProfileStateCopyWithImpl<$Res> extends _$ProfileStateCopyWithImpl<$Res>
   $Res call({
     Object? status = freezed,
     Object? user = freezed,
+    Object? otpId = freezed,
     Object? errorMessage = freezed,
   }) {
     return _then(_ProfileState(
@@ -737,6 +1135,10 @@ class __$ProfileStateCopyWithImpl<$Res> extends _$ProfileStateCopyWithImpl<$Res>
           ? _value.user
           : user // ignore: cast_nullable_to_non_nullable
               as User?,
+      otpId: otpId == freezed
+          ? _value.otpId
+          : otpId // ignore: cast_nullable_to_non_nullable
+              as String?,
       errorMessage: errorMessage == freezed
           ? _value.errorMessage
           : errorMessage // ignore: cast_nullable_to_non_nullable
@@ -749,18 +1151,23 @@ class __$ProfileStateCopyWithImpl<$Res> extends _$ProfileStateCopyWithImpl<$Res>
 
 class _$_ProfileState implements _ProfileState {
   _$_ProfileState(
-      {required this.status, this.user, required this.errorMessage});
+      {required this.status,
+      this.user,
+      this.otpId,
+      required this.errorMessage});
 
   @override
   final AppState status;
   @override
   final User? user;
   @override
+  final String? otpId;
+  @override
   final String errorMessage;
 
   @override
   String toString() {
-    return 'ProfileState(status: $status, user: $user, errorMessage: $errorMessage)';
+    return 'ProfileState(status: $status, user: $user, otpId: $otpId, errorMessage: $errorMessage)';
   }
 
   @override
@@ -770,6 +1177,7 @@ class _$_ProfileState implements _ProfileState {
             other is _ProfileState &&
             const DeepCollectionEquality().equals(other.status, status) &&
             const DeepCollectionEquality().equals(other.user, user) &&
+            const DeepCollectionEquality().equals(other.otpId, otpId) &&
             const DeepCollectionEquality()
                 .equals(other.errorMessage, errorMessage));
   }
@@ -779,6 +1187,7 @@ class _$_ProfileState implements _ProfileState {
       runtimeType,
       const DeepCollectionEquality().hash(status),
       const DeepCollectionEquality().hash(user),
+      const DeepCollectionEquality().hash(otpId),
       const DeepCollectionEquality().hash(errorMessage));
 
   @JsonKey(ignore: true)
@@ -791,12 +1200,15 @@ abstract class _ProfileState implements ProfileState {
   factory _ProfileState(
       {required AppState status,
       User? user,
+      String? otpId,
       required String errorMessage}) = _$_ProfileState;
 
   @override
   AppState get status;
   @override
   User? get user;
+  @override
+  String? get otpId;
   @override
   String get errorMessage;
   @override

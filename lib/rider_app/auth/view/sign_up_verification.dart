@@ -1,19 +1,23 @@
 import 'dart:io';
 
 import 'package:fasta/colors/colors.dart';
+import 'package:fasta/core/app_state.dart';
 import 'package:fasta/global_widgets/cards/elevated_card_responsive.dart';
+import 'package:fasta/global_widgets/notifications/notify.dart';
 import 'package:fasta/global_widgets/rounded_loading_button/button_mixin.dart';
 import 'package:fasta/global_widgets/rounded_loading_button/custom_button.dart';
 import 'package:fasta/global_widgets/scaffolds/custom_scaffold.dart';
 import 'package:fasta/global_widgets/text_fields/custom_text_field.dart';
 import 'package:fasta/global_widgets/text_fields/with_suffix.dart';
 import 'package:fasta/global_widgets/text_fields/with_title.dart';
+import 'package:fasta/rider_app/auth/bloc/auth_rider_bloc.dart';
 import 'package:fasta/rider_app/auth/view/sign_up_confirmation.dart';
 import 'package:fasta/rider_app/auth/view/sign_up_vehicle_type.dart';
 import 'package:fasta/theming/size_config.dart';
 import 'package:fasta/typography/font_weights.dart';
 import 'package:fasta/typography/text_styles.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:images_picker/images_picker.dart';
 
 class VerificationRiderView extends StatefulWidget {
@@ -126,13 +130,30 @@ class _VerificationRiderViewState extends State<VerificationRiderView>
           SizedBox(
             height: 45.h,
           ),
-          CustomButton(
-              controller: btnController,
-              onPressed: () async{
+          BlocListener<AuthRiderBloc, AuthRiderState>(
+            listener: (context, state) async {
+              if (state.status == AppState.loading) {
                 btnController.start();
-                await Future.delayed(Duration(seconds: 5));
-                 Navigator.pushNamed(context, ConfirmationRiderView.route);
-              }),
+              } else if (state.status == AppState.failed) {
+                await buttonerror();
+                Notify.error(context, state.error);
+              } else if (state.status == AppState.success) {
+                await buttonsucces();
+                Notify.success(context, 'Successful');
+                Navigator.pushNamed(context, ConfirmationRiderView.route);
+              }
+            },
+            child: CustomButton(
+                controller: btnController,
+                onPressed: () {
+                  context
+                      .read<AuthRiderBloc>()
+                      .add(AuthRiderEvent.updateLicenceInfo(
+                        expireDate: expiryController.text,
+                        licenceNumber: licenceNumberController.text,
+                      ));
+                }),
+          ),
           SizedBox(
             height: 26.h,
           ),

@@ -18,6 +18,8 @@ class ProfileBloc extends Bloc<ProfileEvent, ProfileState> {
     on<_UpdateProfile>(_onUpdate);
     on<_GetProfile>(_onGetProfile);
     on<_UpdateProfileAvater>(_onUpdateProfileAvater);
+    on<_VerifyEmail>(_onVerifyEmail);
+    on<_ResendEmailOtp>(_onResendEmailOtp);
   }
 
   _onUpdate(_UpdateProfile event, Emitter<ProfileState> emit) async {
@@ -42,6 +44,30 @@ class ProfileBloc extends Bloc<ProfileEvent, ProfileState> {
         (l) => emit(state.copyWith(status: AppState.failed)),
         (r) => emit(state.copyWith(
               status: AppState.success,
+            )));
+  }
+
+  void _onVerifyEmail(_VerifyEmail event, Emitter<ProfileState> emit) async {
+    emit(state.copyWith(status: AppState.loading));
+    final res = await repo.verifyEmail(event.arg);
+
+    res.fold(
+        (l) => emit(state.copyWith(
+            status: AppState.failed, errorMessage: l.errorMessage)),
+        (r) => emit(state.copyWith(
+              status: AppState.success,
+            )));
+  }
+    void _onResendEmailOtp(_ResendEmailOtp event, Emitter<ProfileState> emit) async {
+    emit(state.copyWith(status: AppState.loading));
+    final res = await repo.resendEmailOtp(event.email);
+
+    res.fold(
+        (l) => emit(state.copyWith(
+            status: AppState.failed, errorMessage: l.errorMessage)),
+        (r) => emit(state.copyWith(
+              status: AppState.success,
+              otpId: r,
             )));
   }
 }

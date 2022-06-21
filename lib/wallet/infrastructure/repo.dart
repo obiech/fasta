@@ -17,23 +17,6 @@ class WalletDataImpl implements WalletData {
   final ApiClient _client;
 
   WalletDataImpl(this._client);
-  // @override
-  // Future<Either<PayStackError, PayStack>> initilize({
-  //   required String email,
-  //   required String amount,
-  // }) async {
-  //   try {
-  //     Map<String, dynamic> body = {
-  //       "email": email,
-  //       "amount": amount,
-  //       "callback_url": 'https://google.com'
-  //     };
-  //     final res = await _client.post(Endpoints.paystack.initialize, data: body);
-  //     return Right(PayStackModel.fromJson(res.data));
-  //   } catch (e) {
-  //     return Left(PayStackError(e.toString()));
-  //   }
-  // }
 
   @override
   Future<Either<AppError, Unit>> verifyTransaction(
@@ -50,8 +33,7 @@ class WalletDataImpl implements WalletData {
   @override
   Future<Either<AppError, PayStack>> getDepositLink(String amount) async {
     try {
-      final res = await _client
-          .post(Endpoints.wallet.getDepositLink, body: {'amount': amount});
+      final res = await _client.post(Endpoints.wallet.getDepositLink, body: {'amount': amount});
       return Right(PayStackModel.fromJson(res.data));
     } catch (e) {
       return Left(AppError(e.toString()));

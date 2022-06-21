@@ -4,6 +4,7 @@ import 'package:fasta/nav/bottom_nav_bar.dart';
 import 'package:fasta/profile/application/bloc/profile_bloc.dart';
 import 'package:fasta/profile/edit.dart';
 import 'package:fasta/profile/support.dart';
+import 'package:fasta/profile/verify_email.dart';
 import 'package:fasta/profile/widgets/feature_builder.dart';
 import 'package:fasta/theming/size_config.dart';
 import 'package:fasta/typography/text_styles.dart';
@@ -129,6 +130,9 @@ class _ProfileViewState extends State<ProfileView> {
                           break;
                         case 2:
                           Navigator.pushNamed(context, SupportView.route);
+                          break;
+                          case 4:
+                          Navigator.pushNamed(context, VerifyEmail.route);
                           break;
                         default:
                       }

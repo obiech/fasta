@@ -19,7 +19,7 @@ class TransactionModel extends Transaction {
             status: status);
 
   factory TransactionModel.fromMap(Map<String, dynamic> map) {
-    map = map['data'];
+    // map = map['data'];
     return TransactionModel(
       amount: map['amount'],
       createdAt: map['createdAt'],

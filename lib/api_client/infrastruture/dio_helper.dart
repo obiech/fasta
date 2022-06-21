@@ -1,4 +1,5 @@
 // Dart imports:
+import 'dart:developer';
 import 'dart:io';
 
 // Package imports:
@@ -13,7 +14,7 @@ class CustomInterceptor extends Interceptor {
   void onRequest(RequestOptions options, RequestInterceptorHandler handler) {
     options.headers[HttpHeaders.authorizationHeader] =
         'Bearer ' + const ServerAddress().token;
-
+    log(ServerAddress().token);
     return super.onRequest(options, handler);
   }
 }

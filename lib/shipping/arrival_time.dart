@@ -1,9 +1,6 @@
 import 'package:fasta/colors/colors.dart';
 import 'package:fasta/dashboard/dashboard.dart';
 import 'package:fasta/shipping/application/bloc/shipment_handler_bloc.dart';
-import 'package:fasta/shipping/application/map/shipment_bloc.dart';
-import 'package:fasta/shipping/chat.dart';
-import 'package:fasta/shipping/contact_rider.dart';
 import 'package:fasta/shipping/map_view.dart';
 import 'package:fasta/shipping/rider_profile.dart';
 import 'package:fasta/shipping/tracker.dart';

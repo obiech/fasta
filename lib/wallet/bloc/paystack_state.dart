@@ -6,7 +6,7 @@ class PaystackState with _$PaystackState {
     AppError? error,
     PayStack? payStack,
     required AppState appState,
-    List<Transaction> allTransaction,
+    @Default([]) List<Transaction> allTransaction,
     Transaction? transactionDetail,
     Transaction? balance,
     required String totalEarning,
@@ -14,6 +14,5 @@ class PaystackState with _$PaystackState {
   factory PaystackState.initial() => const PaystackState(
         appState: AppState.waiting,
         totalEarning: '0',
-        allTransaction: [],
       );
 }

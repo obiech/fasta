@@ -1726,7 +1726,7 @@ class _$PaystackStateTearOff {
       {AppError? error,
       PayStack? payStack,
       required AppState appState,
-      List<Transaction>? allTransaction,
+      List<Transaction> allTransaction = const [],
       Transaction? transactionDetail,
       Transaction? balance,
       required String totalEarning}) {
@@ -1750,7 +1750,7 @@ mixin _$PaystackState {
   AppError? get error => throw _privateConstructorUsedError;
   PayStack? get payStack => throw _privateConstructorUsedError;
   AppState get appState => throw _privateConstructorUsedError;
-  List<Transaction>? get allTransaction => throw _privateConstructorUsedError;
+  List<Transaction> get allTransaction => throw _privateConstructorUsedError;
   Transaction? get transactionDetail => throw _privateConstructorUsedError;
   Transaction? get balance => throw _privateConstructorUsedError;
   String get totalEarning => throw _privateConstructorUsedError;
@@ -1769,7 +1769,7 @@ abstract class $PaystackStateCopyWith<$Res> {
       {AppError? error,
       PayStack? payStack,
       AppState appState,
-      List<Transaction>? allTransaction,
+      List<Transaction> allTransaction,
       Transaction? transactionDetail,
       Transaction? balance,
       String totalEarning});
@@ -1810,7 +1810,7 @@ class _$PaystackStateCopyWithImpl<$Res>
       allTransaction: allTransaction == freezed
           ? _value.allTransaction
           : allTransaction // ignore: cast_nullable_to_non_nullable
-              as List<Transaction>?,
+              as List<Transaction>,
       transactionDetail: transactionDetail == freezed
           ? _value.transactionDetail
           : transactionDetail // ignore: cast_nullable_to_non_nullable
@@ -1838,7 +1838,7 @@ abstract class _$PaystackStateCopyWith<$Res>
       {AppError? error,
       PayStack? payStack,
       AppState appState,
-      List<Transaction>? allTransaction,
+      List<Transaction> allTransaction,
       Transaction? transactionDetail,
       Transaction? balance,
       String totalEarning});
@@ -1881,7 +1881,7 @@ class __$PaystackStateCopyWithImpl<$Res>
       allTransaction: allTransaction == freezed
           ? _value.allTransaction
           : allTransaction // ignore: cast_nullable_to_non_nullable
-              as List<Transaction>?,
+              as List<Transaction>,
       transactionDetail: transactionDetail == freezed
           ? _value.transactionDetail
           : transactionDetail // ignore: cast_nullable_to_non_nullable
@@ -1905,7 +1905,7 @@ class _$_PaystackState implements _PaystackState {
       {this.error,
       this.payStack,
       required this.appState,
-      this.allTransaction,
+      this.allTransaction = const [],
       this.transactionDetail,
       this.balance,
       required this.totalEarning});
@@ -1916,8 +1916,9 @@ class _$_PaystackState implements _PaystackState {
   final PayStack? payStack;
   @override
   final AppState appState;
+  @JsonKey()
   @override
-  final List<Transaction>? allTransaction;
+  final List<Transaction> allTransaction;
   @override
   final Transaction? transactionDetail;
   @override
@@ -1969,7 +1970,7 @@ abstract class _PaystackState implements PaystackState {
       {AppError? error,
       PayStack? payStack,
       required AppState appState,
-      List<Transaction>? allTransaction,
+      List<Transaction> allTransaction,
       Transaction? transactionDetail,
       Transaction? balance,
       required String totalEarning}) = _$_PaystackState;
@@ -1981,7 +1982,7 @@ abstract class _PaystackState implements PaystackState {
   @override
   AppState get appState;
   @override
-  List<Transaction>? get allTransaction;
+  List<Transaction> get allTransaction;
   @override
   Transaction? get transactionDetail;
   @override

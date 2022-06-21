@@ -13,9 +13,9 @@ class PayStackModel extends PayStack {
   factory PayStackModel.fromJson(Map<String, dynamic> map) {
     map = map['data'];
     return PayStackModel(
-        authorizationUrl: map['authorization_url'],
-        accessCode: map['access_code'],
-        id: map['transactionId'],
+        authorizationUrl: map['authorizationUrl'],
+        accessCode: map['accessCode'].toString(),
+        id: map['transactionId'].toString(),
         reference: map['reference']);
   }
 }

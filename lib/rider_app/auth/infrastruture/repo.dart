@@ -76,8 +76,13 @@ class AuthRiderImpl implements AuthRider {
   ErrorOr<Unit> updateLicenceInfo(
       {required String expireDate, required String licenceNumber}) async {
     try {
+      var date = expireDate.split('/')[2] +
+          '-' +
+          expireDate.split('/')[1] +
+          '-' +
+          expireDate.split('/')[0];
       Map<String, dynamic> body = {
-        'expireDate': expireDate,
+        'licenceExpiryDate': date,
         'licenceNumber': licenceNumber,
       };
       await _client.put(Endpoints.driverAuth.updateLicenceInfo, body: body);

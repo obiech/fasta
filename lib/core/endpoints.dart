@@ -69,6 +69,8 @@ class _Email {
   String get setEmail => relevant + 'user/set-email';
   String get setEmailOTP => relevant + 'user/set-email/otp';
   String get changeEmail => relevant + 'user/change-email';
+  String get resendEmail => relevant + 'user/set-email';
+  String get verifyEmail => relevant + 'user/set-email/otp';
   String get changEmailOTP => relevant + 'user/change-email/otp';
   String get newEmailConfirmOTP => relevant + 'user/change-email/confirm/otp';
 }

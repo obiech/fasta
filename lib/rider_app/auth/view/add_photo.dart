@@ -112,22 +112,14 @@ class _AddPhotoRiderViewState extends State<AddPhotoRiderView>
                 controller: btnController,
                 name: 'Done',
                 onPressed: () {
-                  {
-                    context.read<AuthBloc>().add(const AuthEvent.register(
-                        fullName: 'rider ' + ' ' + 'Demo',
-                        email: 'rider@gmail.com',
-                        password: '123456',
-                        state: 'Enugu',
-                        city: 'Enugu',
-                        phoneNumber: '+234' + '9065018777'));
-                  }
+                  congratsDialog(context: context);
                 }),
           ),
           // CustomButton.named(
           //     name: 'Done',
           //     controller: btnController,
           //     onPressed: () {
-          //       congratsDialog(context: context);
+                
           //     }),
         ]));
   }

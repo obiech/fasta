@@ -17,4 +17,9 @@ class ProfileRepository {
   Future<Either<AppError, Unit>> updateProfileAvater(Uint8List avater) =>
       _repo.updateProfileAvater(avater);
   Future<Either<AppError, User>> getProfile() => _repo.getProfile();
+  Future<Either<AppError, String>> resendEmailOtp(String email) =>
+      _repo.resendEmailOtp(email);
+
+  Future<Either<AppError, Unit>> verifyEmail(VerifyEmailArg arg) =>
+      _repo.verifyEmail(arg);
 }

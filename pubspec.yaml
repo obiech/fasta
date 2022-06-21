@@ -38,6 +38,7 @@ dependencies:
   flutter_google_places: ^0.3.0
   # search_place_autocomplete: ^0.1.1
   maps_places_autocomplete: ^0.0.2
+  flutter_otp_text_field: ^1.0.1
   
   # image_picker_widget: ^2.0.3
 

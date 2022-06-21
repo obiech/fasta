@@ -1,17 +1,22 @@
 import 'dart:developer';
 
 import 'package:fasta/colors/colors.dart';
+import 'package:fasta/core/app_state.dart';
 import 'package:fasta/global_widgets/cards/elevated_card_responsive.dart';
+import 'package:fasta/global_widgets/notifications/notify.dart';
 import 'package:fasta/global_widgets/rounded_loading_button/button_mixin.dart';
 import 'package:fasta/global_widgets/rounded_loading_button/custom_button.dart';
 import 'package:fasta/global_widgets/scaffolds/custom_scaffold.dart';
 import 'package:fasta/global_widgets/text_fields/with_suffix.dart';
 import 'package:fasta/global_widgets/text_fields/with_title.dart';
+import 'package:fasta/rider_app/auth/bloc/auth_rider_bloc.dart';
+import 'package:fasta/rider_app/auth/repository/arguments.dart';
 import 'package:fasta/rider_app/auth/view/sign_up_verification.dart';
 import 'package:fasta/theming/size_config.dart';
 import 'package:fasta/typography/font_weights.dart';
 import 'package:fasta/typography/text_styles.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 
 class VehicleInfoRiderView extends StatefulWidget {
   static const String route = '/VehicleInfoRiderView';
@@ -178,13 +183,35 @@ class _VehicleInfoRiderViewState extends State<VehicleInfoRiderView>
           SizedBox(
             height: 65.h,
           ),
-          CustomButton(
-              controller: btnController,
-              onPressed: () async {
+          BlocListener<AuthRiderBloc, AuthRiderState>(
+            listener: (context, state) async {
+              if (state.status == AppState.loading) {
                 btnController.start();
-                await Future.delayed(Duration(seconds: 5));
+              } else if (state.status == AppState.failed) {
+                await buttonerror();
+                Notify.error(context, state.error);
+              } else if (state.status == AppState.success) {
+                await buttonsucces();
+                Notify.success(context, 'Successful');
                 Navigator.pushNamed(context, VerificationRiderView.route);
-              }),
+              }
+            },
+            child: CustomButton(
+                controller: btnController,
+                onPressed: () {
+                  context.read<AuthRiderBloc>().add(AuthRiderEvent.updateDriverVehicle(arg: VehicleArg(
+                        name: manufacturerController.text,
+                        description: 'description',
+                        type: 'bike',
+                        number: plateNumberController.text ,
+                        model: modelController.text,
+                        make: 'make',
+                        year: bikeYearController.text ,
+                        color: bikeColorController.text,
+                        enginePower: enginePowerController.text,
+                      )));
+                }),
+          ),
           SizedBox(
             height: 26.h,
           ),

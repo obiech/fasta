@@ -1,16 +1,22 @@
+import 'package:fasta/auth/bloc/auth_bloc.dart';
 import 'package:fasta/colors/colors.dart';
+import 'package:fasta/core/app_state.dart';
 import 'package:fasta/global_widgets/cards/elevated_card_responsive.dart';
+import 'package:fasta/global_widgets/notifications/notify.dart';
 import 'package:fasta/global_widgets/rounded_loading_button/button_mixin.dart';
 import 'package:fasta/global_widgets/rounded_loading_button/custom_button.dart';
 import 'package:fasta/global_widgets/scaffolds/custom_scaffold.dart';
 import 'package:fasta/global_widgets/text_fields/custom_text_field.dart';
 import 'package:fasta/global_widgets/text_fields/with_suffix.dart';
 import 'package:fasta/global_widgets/text_fields/with_title.dart';
+import 'package:fasta/rider_app/auth/bloc/auth_rider_bloc.dart';
+import 'package:fasta/rider_app/auth/view/sign_in_screen.dart';
 import 'package:fasta/rider_app/auth/view/sign_up_vehicle_type.dart';
 import 'package:fasta/theming/size_config.dart';
 import 'package:fasta/typography/font_weights.dart';
 import 'package:fasta/typography/text_styles.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 
 class SignUpRiderView extends StatefulWidget {
   static const String route = '/SignUpRiderView';
@@ -24,6 +30,7 @@ class _SignUpRiderViewState extends State<SignUpRiderView>
     with RoundedLoadingButtonMixin {
   final TextEditingController fullNameController = TextEditingController();
   final TextEditingController emailController = TextEditingController();
+  final TextEditingController passwordController = TextEditingController();
   final TextEditingController stateController = TextEditingController();
   final TextEditingController cityController = TextEditingController();
   final TextEditingController phoneNumberController = TextEditingController();
@@ -105,6 +112,13 @@ class _SignUpRiderViewState extends State<SignUpRiderView>
             height: 15.h,
           ),
           TextFieldWithTitle(
+            controller: passwordController,
+            title: 'Password',
+          ),
+          SizedBox(
+            height: 15.h,
+          ),
+          TextFieldWithTitle(
             controller: stateController,
             title: 'State',
           ),
@@ -157,20 +171,47 @@ class _SignUpRiderViewState extends State<SignUpRiderView>
           SizedBox(
             height: 65.h,
           ),
-          CustomButton(
-              controller: btnController,
-              onPressed: () async {
+          BlocListener<AuthBloc, AuthState>(
+            listener: (context, state) async {
+              if (state.appState == AppState.loading) {
                 btnController.start();
-                await Future.delayed(Duration(seconds: 5));
+              } else if (state.appState == AppState.failed) {
+                await buttonerror();
+                Notify.error(context, state.error.errorMessage);
+              } else if (state.appState == AppState.success) {
+                await buttonsucces();
+                Notify.success(context, 'Successful');
                 Navigator.pushNamed(context, VehicleInfoRiderView.route);
-              }),
+              }
+            },
+            child: CustomButton(
+                controller: btnController,
+                onPressed: () {
+                  // context.read<AuthRiderBloc>().add(AuthRiderEvent.register(
+                  //       fullName: fullNameController.text,
+                  //       email: emailController.text,
+                  //       password: passwordController.text,
+                  //       state: stateController.text,
+                  //       city: cityController.text,
+                  //       phoneNumber: phoneNumberController.text,
+                  //     ));
+                  context.read<AuthBloc>().add(AuthEvent.register(
+                                    fullName: fullNameController.text,
+                                    email: emailController.text,
+                                    password: passwordController.text,
+                                    state: stateController.text,
+                                    city: cityController.text,
+                                    phoneNumber: countryCodeController.text +
+                                        phoneNumberController.text));
+                }),
+          ),
           SizedBox(
             height: 26.h,
           ),
           Center(
             child: GestureDetector(
               onTap: () {
-                // Navigator.pushNamed(context, SignupScreen.route);
+                Navigator.pushNamed(context, SigninScreenRider.route);
               },
               child: RichText(
                 text: TextSpan(
