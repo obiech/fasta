@@ -26,7 +26,7 @@ class ShipmentDataImpl implements ShipmentData {
     try {
       String secureImage = await _uploadPictureToCloudinary(arg.image);
 
-      final res = await _client.post(Endpoints.shipment.createShipment,
+      final res = await _client.post(Endpoints.delivery.createDelivery,
           body: arg.copyWith(secureImage).toMap());
       return Right(LocationPointArg(arg.pickUpAddress, arg.deliveryPoint));
     } catch (e) {

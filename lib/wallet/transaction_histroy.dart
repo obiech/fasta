@@ -71,7 +71,7 @@ class _TransactionHistoryState extends State<TransactionHistory> {
                     width: 12.w,
                   ),
                   const CustomDropDownButton(time: 'To'),
-                  Expanded(
+                  const Expanded(
                     child: SizedBox(),
                   ),
                   Container(

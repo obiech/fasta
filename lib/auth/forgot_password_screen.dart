@@ -99,13 +99,13 @@ class _ForgotPasswordScreenState extends State<ForgotPasswordScreen>
                                 } else if (controller.text.contains('.com') &&
                                     (controller.text.contains('@'))) {
                                   btnController.start();
-                                  await Future.delayed(Duration(seconds: 3));
+                                  await Future.delayed(const Duration(seconds: 3));
                                   await buttonsucces();
                                   Navigator.pushReplacementNamed(
                                       context, SigninScreen.route);
                                 } else {
                                   btnController.start();
-                                  await Future.delayed(Duration(seconds: 3));
+                                  await Future.delayed(const Duration(seconds: 3));
                                   await buttonerror();
                                   Notify.error(context, 'Something went wrong');
                                 }

@@ -111,6 +111,10 @@ class _Wallet {
       relevant + 'wallet/earnings${optionalParams(arg)}';
 
   String get getTotalEarnings => relevant + 'wallet/earnings/total';
+
+  String get getWithdrawalOtp => relevant + 'wallet/bank/otp';
+  String get initialWithdrawal => relevant + 'wallet/withdraw/bank/initiate';
+  String get resolveAccountNumber => relevant + 'wallet/resolve-account-number';
 }
 
 class _Delivery {

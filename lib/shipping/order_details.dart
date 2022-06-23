@@ -228,7 +228,7 @@ class _SenderInfoState extends State<SenderInfo>
                           padding: EdgeInsets.symmetric(horizontal: 23.w),
                           child: TextFormField(
                               controller: sendersName
-                                ..text = state.user!.fullName,
+                                ..text = state.user?.fullName??'',
                               decoration: InputDecoration(
                                 border: OutlineInputBorder(
                                     borderRadius: BorderRadius.circular(9.h)),
@@ -256,7 +256,7 @@ class _SenderInfoState extends State<SenderInfo>
                               Expanded(
                                 child: TextFormField(
                                     controller: sendersPhoneNumber
-                                      ..text = state.user!.phoneNumber,
+                                      ..text = state.user?.phoneNumber??'',
                                     keyboardType:
                                         const TextInputType.numberWithOptions(),
                                     decoration: InputDecoration(

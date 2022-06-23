@@ -36,7 +36,7 @@ class _WalletViewState extends State<WalletView> {
             status: '',
             type: '',
             startDate: '')));
-    context.read<PaystackBloc>().add(PaystackEvent.balance());
+    context.read<PaystackBloc>().add(const PaystackEvent.balance());
   }
 
   @override
@@ -71,7 +71,7 @@ class _WalletViewState extends State<WalletView> {
                     BlocBuilder<PaystackBloc, PaystackState>(
                       builder: (context, state) {
                         return Text(
-                          'NGN ${state.balance?.amount ?? 0}.00',
+                          'NGN ${state.balance?.amount?? 0.00}',
                           style: FastaTextStyle.headline6,
                         );
                       },
@@ -134,7 +134,7 @@ class _WalletViewState extends State<WalletView> {
             ),
             BlocBuilder<PaystackBloc, PaystackState>(
               builder: (context, state) {
-                if (state.allTransaction?.isEmpty ?? [].isEmpty) {
+                if (state.allTransaction.isEmpty ) {
                   return const Center(
                     child: Text('No Histroy Yet'),
                   );
@@ -147,15 +147,13 @@ class _WalletViewState extends State<WalletView> {
                           backgroundImage:
                               Image.asset('assets/Ellipse.png').image),
                       content: Text(
-                        state.allTransaction![index].amount,
+                        state.allTransaction[index].amount,
                         style: FastaTextStyle.subtitle3,
                       ),
                       timeRecieved: GestureDetector(
                           onTap: () {
-                            context.read<WalletCubit>().removeHistory(index);
-                            setState(() {});
                           },
-                          child: Text('x', style: FastaTextStyle.subtitle3)),
+                          child: Text(state.allTransaction[index].createdAt.replaceRange(10, null, ''), style: FastaTextStyle.subtitle3)),
                     );
                   }),
                 );

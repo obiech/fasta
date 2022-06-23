@@ -10,6 +10,8 @@ class PaystackState with _$PaystackState {
     Transaction? transactionDetail,
     Transaction? balance,
     required String totalEarning,
+    AccountInfo? accountInfo,
+    String? otpId,
   }) = _PaystackState;
   factory PaystackState.initial() => const PaystackState(
         appState: AppState.waiting,

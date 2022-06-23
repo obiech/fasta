@@ -1,7 +1,5 @@
 import 'package:bubble/bubble.dart';
 import 'package:fasta/colors/colors.dart';
-import 'package:fasta/shipping/contact_rider.dart';
-import 'package:fasta/shipping/map_view.dart';
 import 'package:fasta/shipping/rider_profile.dart';
 import 'package:fasta/shipping/widgets/call_icon.dart';
 import 'package:fasta/theming/size_config.dart';

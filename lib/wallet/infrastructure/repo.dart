@@ -1,3 +1,5 @@
+import 'dart:developer';
+
 import 'package:dio/dio.dart';
 import 'package:fasta/api_client/domain.dart';
 import 'dart:io';
@@ -33,7 +35,8 @@ class WalletDataImpl implements WalletData {
   @override
   Future<Either<AppError, PayStack>> getDepositLink(String amount) async {
     try {
-      final res = await _client.post(Endpoints.wallet.getDepositLink, body: {'amount': amount});
+      final res = await _client
+          .post(Endpoints.wallet.getDepositLink, body: {'amount': amount});
       return Right(PayStackModel.fromJson(res.data));
     } catch (e) {
       return Left(AppError(e.toString()));
@@ -56,7 +59,8 @@ class WalletDataImpl implements WalletData {
   ErrorOr<Transaction> balance() async {
     try {
       final res = await _client.get(Endpoints.wallet.userBalance);
-      return Right(TransactionModel.fromMap(res.data));
+      log(res.toString());
+      return Right(TransactionModel.fromMap(res.data['data']));
     } catch (e) {
       return Left(AppError(e.toString()));
     }
@@ -116,6 +120,44 @@ class WalletDataImpl implements WalletData {
       final res =
           await _client.get(Endpoints.wallet.getATransaction(transactionId));
       return Right(TransactionModel.fromMap(res.data));
+    } catch (e) {
+      return Left(AppError(e.toString()));
+    }
+  }
+
+  @override
+  ErrorOr<Unit> confirmWithdrawalOtp(ConfirmWithdrawal arg) async {
+    try {
+      await _client.post(Endpoints.wallet.getWithdrawalOtp, body: arg.toMap());
+      return const Right(unit);
+    } catch (e) {
+      return Left(AppError(e.toString()));
+    }
+  }
+
+  @override
+  ErrorOr<List<Transaction>> getBankList(TransactionArg arg) {
+    // TODO: implement getBankList
+    throw UnimplementedError();
+  }
+
+  @override
+  ErrorOr<String> initialWithdrawal() async {
+    try {
+      final res = await _client.post(Endpoints.wallet.initialWithdrawal);
+      return Right(res.data['data']['otpId']);
+    } catch (e) {
+      return Left(AppError(e.toString()));
+    }
+  }
+
+  @override
+  ErrorOr<AccountInfo> resolveAccountNumber(
+      String accountNumber, String bankCode) async {
+    try {
+      final body = {'accountNumber': accountNumber, 'bankCode': bankCode};
+      final res = await _client.post(Endpoints.wallet.initialWithdrawal,body: body);
+      return Right(AccountInfo.fromMap(res.data['data']));
     } catch (e) {
       return Left(AppError(e.toString()));
     }

@@ -18,4 +18,10 @@ class PaystackEvent with _$PaystackEvent {
       _GetAllEarnings;
   const factory PaystackEvent.getTotalEarnings(String period) =
       _GetTotalEarnings;
+  const factory PaystackEvent.resolveAccountNumber(String accountNumber, String bankCode) =
+      _ResolveAccountNumber;
+  const factory PaystackEvent.initiateWithdrawal() =
+      _InitiateWithdrawal;
+  const factory PaystackEvent.confirmWithdrawalOtp(ConfirmWithdrawal arg)  =
+      _ConfirmWithdrawalOtp;
 }

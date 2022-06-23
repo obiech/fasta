@@ -1,6 +1,5 @@
 import 'package:bloc/bloc.dart';
 import 'package:dartz/dartz.dart';
-import 'package:fasta/auth/domain/entity/otp.dart';
 import 'package:fasta/auth/domain/entity/user.dart';
 import 'package:fasta/auth/repository/repo.dart';
 import 'package:fasta/core/app_state.dart';

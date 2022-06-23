@@ -65,8 +65,7 @@ class AuthImpl implements Auth {
       };
       final res = await _client.post(Endpoints.auth.confirmOTP, body: body);
       const ServerAddress().token = res.data['meta']['token'];
-
-      log(ServerAddress().token.toString());
+      
       return const Right(unit);
     } catch (e) {
       return Left(AppError(e.toString()));

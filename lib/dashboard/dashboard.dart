@@ -8,6 +8,7 @@ import 'package:fasta/shipping/ongoing_orders.dart';
 import 'package:fasta/theming/size_config.dart';
 import 'package:fasta/typography/font_weights.dart';
 import 'package:fasta/typography/text_styles.dart';
+import 'package:fasta/wallet/bloc/paystack_bloc.dart';
 import 'package:fasta/wallet/cubit/wallet_cubit.dart';
 import 'package:fasta/wallet/transaction_histroy.dart';
 import 'package:flutter/material.dart';
@@ -53,10 +54,10 @@ class _DashBoardViewState extends State<DashBoardView> {
                       'Wallet Balance',
                       style: FastaTextStyle.softSubtitle,
                     ),
-                    BlocBuilder<WalletCubit, WalletState>(
+                    BlocBuilder<PaystackBloc, PaystackState>(
                       builder: (context, state) {
                         return Text(
-                          'NGN ${state.amount}.00',
+                          'NGN ${state.balance?.amount?? 0}.00',
                           style: FastaTextStyle.headline6,
                         );
                       },

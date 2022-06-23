@@ -1,6 +1,5 @@
 import 'package:dartz/dartz.dart';
 import 'package:fasta/typedef.dart/typedefs.dart';
-import 'package:fasta/wallet/domain/entity/error.dart';
 import 'package:fasta/wallet/domain/entity/paystack.dart';
 import 'package:fasta/wallet/domain/entity/transcation.dart';
 import 'package:fasta/wallet/domain/repo.dart';
@@ -29,4 +28,11 @@ class WalletRepository {
       _repo.getAllEarnings(arg);
   ErrorOr<String> getTotalEarnings(String period) =>
       _repo.getTotalEarnings(period);
+
+  ErrorOr<AccountInfo> resolveAccountNumber(
+          String accountNumber, String bankCode) =>
+      _repo.resolveAccountNumber(accountNumber, bankCode);
+  ErrorOr<String> initialWithdrawal() => _repo.initialWithdrawal();
+  ErrorOr<Unit> confirmWithdrawalOtp(ConfirmWithdrawal arg) =>
+      _repo.confirmWithdrawalOtp(arg);
 }

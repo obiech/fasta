@@ -13,6 +13,5 @@ class AuthEvent with _$AuthEvent {
       required String state,
       required String city,
       required String phoneNumber}) = _Register;
-
-  // const factory AuthEvent.getOtp(OTP otp) = _GetOtp;
+      
 }

@@ -14,7 +14,7 @@ class CustomInterceptor extends Interceptor {
   void onRequest(RequestOptions options, RequestInterceptorHandler handler) {
     options.headers[HttpHeaders.authorizationHeader] =
         'Bearer ' + const ServerAddress().token;
-    log(ServerAddress().token);
+        
     return super.onRequest(options, handler);
   }
 }

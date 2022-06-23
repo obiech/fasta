@@ -21,7 +21,7 @@ class TransactionModel extends Transaction {
   factory TransactionModel.fromMap(Map<String, dynamic> map) {
     // map = map['data'];
     return TransactionModel(
-      amount: map['amount'],
+      amount: map['amount'].toString(),
       createdAt: map['createdAt'],
       id: map['id'],
       userId: map['userId'],
