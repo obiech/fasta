@@ -1,7 +1,6 @@
 import 'package:bloc/bloc.dart';
 import 'package:fasta/core/app_state.dart';
 import 'package:fasta/errrors/app_error.dart';
-import 'package:fasta/wallet/domain/entity/error.dart';
 import 'package:fasta/wallet/domain/entity/paystack.dart';
 import 'package:fasta/wallet/domain/entity/transcation.dart';
 import 'package:fasta/wallet/repository/args.dart';
@@ -126,7 +125,7 @@ class PaystackBloc extends Bloc<PaystackEvent, PaystackState> {
     res.fold(
         (l) => emit(state.copyWith(appState: AppState.failed, error: l)),
         (r) =>
-            emit(state.copyWith(appState: AppState.success, otpId: r)));
+            emit(state.copyWith(appState: AppState.success, otpId: r, amount: event.amount)));
   }
 
    void _onConfirmWithdrawalOtp(

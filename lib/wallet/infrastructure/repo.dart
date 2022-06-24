@@ -145,7 +145,7 @@ class WalletDataImpl implements WalletData {
   ErrorOr<String> initialWithdrawal() async {
     try {
       final res = await _client.post(Endpoints.wallet.initialWithdrawal);
-      return Right(res.data['data']['otpId']);
+      return Right(res.data['data']['otpId'].toString());
     } catch (e) {
       return Left(AppError(e.toString()));
     }

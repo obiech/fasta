@@ -76,8 +76,10 @@ class _$PaystackEventTearOff {
     );
   }
 
-  _InitiateWithdrawal initiateWithdrawal() {
-    return const _InitiateWithdrawal();
+  _InitiateWithdrawal initiateWithdrawal([String? amount]) {
+    return _InitiateWithdrawal(
+      amount,
+    );
   }
 
   _ConfirmWithdrawalOtp confirmWithdrawalOtp(ConfirmWithdrawal arg) {
@@ -105,7 +107,7 @@ mixin _$PaystackEvent {
     required TResult Function(String period) getTotalEarnings,
     required TResult Function(String accountNumber, String bankCode)
         resolveAccountNumber,
-    required TResult Function() initiateWithdrawal,
+    required TResult Function(String? amount) initiateWithdrawal,
     required TResult Function(ConfirmWithdrawal arg) confirmWithdrawalOtp,
   }) =>
       throw _privateConstructorUsedError;
@@ -122,7 +124,7 @@ mixin _$PaystackEvent {
     TResult Function(String period)? getTotalEarnings,
     TResult Function(String accountNumber, String bankCode)?
         resolveAccountNumber,
-    TResult Function()? initiateWithdrawal,
+    TResult Function(String? amount)? initiateWithdrawal,
     TResult Function(ConfirmWithdrawal arg)? confirmWithdrawalOtp,
   }) =>
       throw _privateConstructorUsedError;
@@ -139,7 +141,7 @@ mixin _$PaystackEvent {
     TResult Function(String period)? getTotalEarnings,
     TResult Function(String accountNumber, String bankCode)?
         resolveAccountNumber,
-    TResult Function()? initiateWithdrawal,
+    TResult Function(String? amount)? initiateWithdrawal,
     TResult Function(ConfirmWithdrawal arg)? confirmWithdrawalOtp,
     required TResult orElse(),
   }) =>
@@ -263,7 +265,7 @@ class _$_Started implements _Started {
     required TResult Function(String period) getTotalEarnings,
     required TResult Function(String accountNumber, String bankCode)
         resolveAccountNumber,
-    required TResult Function() initiateWithdrawal,
+    required TResult Function(String? amount) initiateWithdrawal,
     required TResult Function(ConfirmWithdrawal arg) confirmWithdrawalOtp,
   }) {
     return started();
@@ -283,7 +285,7 @@ class _$_Started implements _Started {
     TResult Function(String period)? getTotalEarnings,
     TResult Function(String accountNumber, String bankCode)?
         resolveAccountNumber,
-    TResult Function()? initiateWithdrawal,
+    TResult Function(String? amount)? initiateWithdrawal,
     TResult Function(ConfirmWithdrawal arg)? confirmWithdrawalOtp,
   }) {
     return started?.call();
@@ -303,7 +305,7 @@ class _$_Started implements _Started {
     TResult Function(String period)? getTotalEarnings,
     TResult Function(String accountNumber, String bankCode)?
         resolveAccountNumber,
-    TResult Function()? initiateWithdrawal,
+    TResult Function(String? amount)? initiateWithdrawal,
     TResult Function(ConfirmWithdrawal arg)? confirmWithdrawalOtp,
     required TResult orElse(),
   }) {
@@ -430,7 +432,7 @@ class _$_Balance implements _Balance {
     required TResult Function(String period) getTotalEarnings,
     required TResult Function(String accountNumber, String bankCode)
         resolveAccountNumber,
-    required TResult Function() initiateWithdrawal,
+    required TResult Function(String? amount) initiateWithdrawal,
     required TResult Function(ConfirmWithdrawal arg) confirmWithdrawalOtp,
   }) {
     return balance();
@@ -450,7 +452,7 @@ class _$_Balance implements _Balance {
     TResult Function(String period)? getTotalEarnings,
     TResult Function(String accountNumber, String bankCode)?
         resolveAccountNumber,
-    TResult Function()? initiateWithdrawal,
+    TResult Function(String? amount)? initiateWithdrawal,
     TResult Function(ConfirmWithdrawal arg)? confirmWithdrawalOtp,
   }) {
     return balance?.call();
@@ -470,7 +472,7 @@ class _$_Balance implements _Balance {
     TResult Function(String period)? getTotalEarnings,
     TResult Function(String accountNumber, String bankCode)?
         resolveAccountNumber,
-    TResult Function()? initiateWithdrawal,
+    TResult Function(String? amount)? initiateWithdrawal,
     TResult Function(ConfirmWithdrawal arg)? confirmWithdrawalOtp,
     required TResult orElse(),
   }) {
@@ -624,7 +626,7 @@ class _$_GetDepositLink implements _GetDepositLink {
     required TResult Function(String period) getTotalEarnings,
     required TResult Function(String accountNumber, String bankCode)
         resolveAccountNumber,
-    required TResult Function() initiateWithdrawal,
+    required TResult Function(String? amount) initiateWithdrawal,
     required TResult Function(ConfirmWithdrawal arg) confirmWithdrawalOtp,
   }) {
     return getDepositLink(amount);
@@ -644,7 +646,7 @@ class _$_GetDepositLink implements _GetDepositLink {
     TResult Function(String period)? getTotalEarnings,
     TResult Function(String accountNumber, String bankCode)?
         resolveAccountNumber,
-    TResult Function()? initiateWithdrawal,
+    TResult Function(String? amount)? initiateWithdrawal,
     TResult Function(ConfirmWithdrawal arg)? confirmWithdrawalOtp,
   }) {
     return getDepositLink?.call(amount);
@@ -664,7 +666,7 @@ class _$_GetDepositLink implements _GetDepositLink {
     TResult Function(String period)? getTotalEarnings,
     TResult Function(String accountNumber, String bankCode)?
         resolveAccountNumber,
-    TResult Function()? initiateWithdrawal,
+    TResult Function(String? amount)? initiateWithdrawal,
     TResult Function(ConfirmWithdrawal arg)? confirmWithdrawalOtp,
     required TResult orElse(),
   }) {
@@ -823,7 +825,7 @@ class _$_AllTransactions implements _AllTransactions {
     required TResult Function(String period) getTotalEarnings,
     required TResult Function(String accountNumber, String bankCode)
         resolveAccountNumber,
-    required TResult Function() initiateWithdrawal,
+    required TResult Function(String? amount) initiateWithdrawal,
     required TResult Function(ConfirmWithdrawal arg) confirmWithdrawalOtp,
   }) {
     return allTransactions(arg);
@@ -843,7 +845,7 @@ class _$_AllTransactions implements _AllTransactions {
     TResult Function(String period)? getTotalEarnings,
     TResult Function(String accountNumber, String bankCode)?
         resolveAccountNumber,
-    TResult Function()? initiateWithdrawal,
+    TResult Function(String? amount)? initiateWithdrawal,
     TResult Function(ConfirmWithdrawal arg)? confirmWithdrawalOtp,
   }) {
     return allTransactions?.call(arg);
@@ -863,7 +865,7 @@ class _$_AllTransactions implements _AllTransactions {
     TResult Function(String period)? getTotalEarnings,
     TResult Function(String accountNumber, String bankCode)?
         resolveAccountNumber,
-    TResult Function()? initiateWithdrawal,
+    TResult Function(String? amount)? initiateWithdrawal,
     TResult Function(ConfirmWithdrawal arg)? confirmWithdrawalOtp,
     required TResult orElse(),
   }) {
@@ -1023,7 +1025,7 @@ class _$_TransactionDetail implements _TransactionDetail {
     required TResult Function(String period) getTotalEarnings,
     required TResult Function(String accountNumber, String bankCode)
         resolveAccountNumber,
-    required TResult Function() initiateWithdrawal,
+    required TResult Function(String? amount) initiateWithdrawal,
     required TResult Function(ConfirmWithdrawal arg) confirmWithdrawalOtp,
   }) {
     return transactionDetail(transactionId);
@@ -1043,7 +1045,7 @@ class _$_TransactionDetail implements _TransactionDetail {
     TResult Function(String period)? getTotalEarnings,
     TResult Function(String accountNumber, String bankCode)?
         resolveAccountNumber,
-    TResult Function()? initiateWithdrawal,
+    TResult Function(String? amount)? initiateWithdrawal,
     TResult Function(ConfirmWithdrawal arg)? confirmWithdrawalOtp,
   }) {
     return transactionDetail?.call(transactionId);
@@ -1063,7 +1065,7 @@ class _$_TransactionDetail implements _TransactionDetail {
     TResult Function(String period)? getTotalEarnings,
     TResult Function(String accountNumber, String bankCode)?
         resolveAccountNumber,
-    TResult Function()? initiateWithdrawal,
+    TResult Function(String? amount)? initiateWithdrawal,
     TResult Function(ConfirmWithdrawal arg)? confirmWithdrawalOtp,
     required TResult orElse(),
   }) {
@@ -1223,7 +1225,7 @@ class _$_GetDepositTransaction implements _GetDepositTransaction {
     required TResult Function(String period) getTotalEarnings,
     required TResult Function(String accountNumber, String bankCode)
         resolveAccountNumber,
-    required TResult Function() initiateWithdrawal,
+    required TResult Function(String? amount) initiateWithdrawal,
     required TResult Function(ConfirmWithdrawal arg) confirmWithdrawalOtp,
   }) {
     return getDepositTransaction(arg);
@@ -1243,7 +1245,7 @@ class _$_GetDepositTransaction implements _GetDepositTransaction {
     TResult Function(String period)? getTotalEarnings,
     TResult Function(String accountNumber, String bankCode)?
         resolveAccountNumber,
-    TResult Function()? initiateWithdrawal,
+    TResult Function(String? amount)? initiateWithdrawal,
     TResult Function(ConfirmWithdrawal arg)? confirmWithdrawalOtp,
   }) {
     return getDepositTransaction?.call(arg);
@@ -1263,7 +1265,7 @@ class _$_GetDepositTransaction implements _GetDepositTransaction {
     TResult Function(String period)? getTotalEarnings,
     TResult Function(String accountNumber, String bankCode)?
         resolveAccountNumber,
-    TResult Function()? initiateWithdrawal,
+    TResult Function(String? amount)? initiateWithdrawal,
     TResult Function(ConfirmWithdrawal arg)? confirmWithdrawalOtp,
     required TResult orElse(),
   }) {
@@ -1424,7 +1426,7 @@ class _$_GetWithdrawTransaction implements _GetWithdrawTransaction {
     required TResult Function(String period) getTotalEarnings,
     required TResult Function(String accountNumber, String bankCode)
         resolveAccountNumber,
-    required TResult Function() initiateWithdrawal,
+    required TResult Function(String? amount) initiateWithdrawal,
     required TResult Function(ConfirmWithdrawal arg) confirmWithdrawalOtp,
   }) {
     return getWithdrawTransaction(arg);
@@ -1444,7 +1446,7 @@ class _$_GetWithdrawTransaction implements _GetWithdrawTransaction {
     TResult Function(String period)? getTotalEarnings,
     TResult Function(String accountNumber, String bankCode)?
         resolveAccountNumber,
-    TResult Function()? initiateWithdrawal,
+    TResult Function(String? amount)? initiateWithdrawal,
     TResult Function(ConfirmWithdrawal arg)? confirmWithdrawalOtp,
   }) {
     return getWithdrawTransaction?.call(arg);
@@ -1464,7 +1466,7 @@ class _$_GetWithdrawTransaction implements _GetWithdrawTransaction {
     TResult Function(String period)? getTotalEarnings,
     TResult Function(String accountNumber, String bankCode)?
         resolveAccountNumber,
-    TResult Function()? initiateWithdrawal,
+    TResult Function(String? amount)? initiateWithdrawal,
     TResult Function(ConfirmWithdrawal arg)? confirmWithdrawalOtp,
     required TResult orElse(),
   }) {
@@ -1624,7 +1626,7 @@ class _$_GetAllEarnings implements _GetAllEarnings {
     required TResult Function(String period) getTotalEarnings,
     required TResult Function(String accountNumber, String bankCode)
         resolveAccountNumber,
-    required TResult Function() initiateWithdrawal,
+    required TResult Function(String? amount) initiateWithdrawal,
     required TResult Function(ConfirmWithdrawal arg) confirmWithdrawalOtp,
   }) {
     return getAllEarnings(arg);
@@ -1644,7 +1646,7 @@ class _$_GetAllEarnings implements _GetAllEarnings {
     TResult Function(String period)? getTotalEarnings,
     TResult Function(String accountNumber, String bankCode)?
         resolveAccountNumber,
-    TResult Function()? initiateWithdrawal,
+    TResult Function(String? amount)? initiateWithdrawal,
     TResult Function(ConfirmWithdrawal arg)? confirmWithdrawalOtp,
   }) {
     return getAllEarnings?.call(arg);
@@ -1664,7 +1666,7 @@ class _$_GetAllEarnings implements _GetAllEarnings {
     TResult Function(String period)? getTotalEarnings,
     TResult Function(String accountNumber, String bankCode)?
         resolveAccountNumber,
-    TResult Function()? initiateWithdrawal,
+    TResult Function(String? amount)? initiateWithdrawal,
     TResult Function(ConfirmWithdrawal arg)? confirmWithdrawalOtp,
     required TResult orElse(),
   }) {
@@ -1823,7 +1825,7 @@ class _$_GetTotalEarnings implements _GetTotalEarnings {
     required TResult Function(String period) getTotalEarnings,
     required TResult Function(String accountNumber, String bankCode)
         resolveAccountNumber,
-    required TResult Function() initiateWithdrawal,
+    required TResult Function(String? amount) initiateWithdrawal,
     required TResult Function(ConfirmWithdrawal arg) confirmWithdrawalOtp,
   }) {
     return getTotalEarnings(period);
@@ -1843,7 +1845,7 @@ class _$_GetTotalEarnings implements _GetTotalEarnings {
     TResult Function(String period)? getTotalEarnings,
     TResult Function(String accountNumber, String bankCode)?
         resolveAccountNumber,
-    TResult Function()? initiateWithdrawal,
+    TResult Function(String? amount)? initiateWithdrawal,
     TResult Function(ConfirmWithdrawal arg)? confirmWithdrawalOtp,
   }) {
     return getTotalEarnings?.call(period);
@@ -1863,7 +1865,7 @@ class _$_GetTotalEarnings implements _GetTotalEarnings {
     TResult Function(String period)? getTotalEarnings,
     TResult Function(String accountNumber, String bankCode)?
         resolveAccountNumber,
-    TResult Function()? initiateWithdrawal,
+    TResult Function(String? amount)? initiateWithdrawal,
     TResult Function(ConfirmWithdrawal arg)? confirmWithdrawalOtp,
     required TResult orElse(),
   }) {
@@ -2034,7 +2036,7 @@ class _$_ResolveAccountNumber implements _ResolveAccountNumber {
     required TResult Function(String period) getTotalEarnings,
     required TResult Function(String accountNumber, String bankCode)
         resolveAccountNumber,
-    required TResult Function() initiateWithdrawal,
+    required TResult Function(String? amount) initiateWithdrawal,
     required TResult Function(ConfirmWithdrawal arg) confirmWithdrawalOtp,
   }) {
     return resolveAccountNumber(accountNumber, bankCode);
@@ -2054,7 +2056,7 @@ class _$_ResolveAccountNumber implements _ResolveAccountNumber {
     TResult Function(String period)? getTotalEarnings,
     TResult Function(String accountNumber, String bankCode)?
         resolveAccountNumber,
-    TResult Function()? initiateWithdrawal,
+    TResult Function(String? amount)? initiateWithdrawal,
     TResult Function(ConfirmWithdrawal arg)? confirmWithdrawalOtp,
   }) {
     return resolveAccountNumber?.call(accountNumber, bankCode);
@@ -2074,7 +2076,7 @@ class _$_ResolveAccountNumber implements _ResolveAccountNumber {
     TResult Function(String period)? getTotalEarnings,
     TResult Function(String accountNumber, String bankCode)?
         resolveAccountNumber,
-    TResult Function()? initiateWithdrawal,
+    TResult Function(String? amount)? initiateWithdrawal,
     TResult Function(ConfirmWithdrawal arg)? confirmWithdrawalOtp,
     required TResult orElse(),
   }) {
@@ -2164,6 +2166,7 @@ abstract class _$InitiateWithdrawalCopyWith<$Res> {
   factory _$InitiateWithdrawalCopyWith(
           _InitiateWithdrawal value, $Res Function(_InitiateWithdrawal) then) =
       __$InitiateWithdrawalCopyWithImpl<$Res>;
+  $Res call({String? amount});
 }
 
 /// @nodoc
@@ -2176,26 +2179,49 @@ class __$InitiateWithdrawalCopyWithImpl<$Res>
 
   @override
   _InitiateWithdrawal get _value => super._value as _InitiateWithdrawal;
+
+  @override
+  $Res call({
+    Object? amount = freezed,
+  }) {
+    return _then(_InitiateWithdrawal(
+      amount == freezed
+          ? _value.amount
+          : amount // ignore: cast_nullable_to_non_nullable
+              as String?,
+    ));
+  }
 }
 
 /// @nodoc
 
 class _$_InitiateWithdrawal implements _InitiateWithdrawal {
-  const _$_InitiateWithdrawal();
+  const _$_InitiateWithdrawal([this.amount]);
+
+  @override
+  final String? amount;
 
   @override
   String toString() {
-    return 'PaystackEvent.initiateWithdrawal()';
+    return 'PaystackEvent.initiateWithdrawal(amount: $amount)';
   }
 
   @override
   bool operator ==(dynamic other) {
     return identical(this, other) ||
-        (other.runtimeType == runtimeType && other is _InitiateWithdrawal);
+        (other.runtimeType == runtimeType &&
+            other is _InitiateWithdrawal &&
+            const DeepCollectionEquality().equals(other.amount, amount));
   }
 
   @override
-  int get hashCode => runtimeType.hashCode;
+  int get hashCode =>
+      Object.hash(runtimeType, const DeepCollectionEquality().hash(amount));
+
+  @JsonKey(ignore: true)
+  @override
+  _$InitiateWithdrawalCopyWith<_InitiateWithdrawal> get copyWith =>
+      __$InitiateWithdrawalCopyWithImpl<_InitiateWithdrawal>(this, _$identity);
 
   @override
   @optionalTypeArgs
@@ -2211,10 +2237,10 @@ class _$_InitiateWithdrawal implements _InitiateWithdrawal {
     required TResult Function(String period) getTotalEarnings,
     required TResult Function(String accountNumber, String bankCode)
         resolveAccountNumber,
-    required TResult Function() initiateWithdrawal,
+    required TResult Function(String? amount) initiateWithdrawal,
     required TResult Function(ConfirmWithdrawal arg) confirmWithdrawalOtp,
   }) {
-    return initiateWithdrawal();
+    return initiateWithdrawal(amount);
   }
 
   @override
@@ -2231,10 +2257,10 @@ class _$_InitiateWithdrawal implements _InitiateWithdrawal {
     TResult Function(String period)? getTotalEarnings,
     TResult Function(String accountNumber, String bankCode)?
         resolveAccountNumber,
-    TResult Function()? initiateWithdrawal,
+    TResult Function(String? amount)? initiateWithdrawal,
     TResult Function(ConfirmWithdrawal arg)? confirmWithdrawalOtp,
   }) {
-    return initiateWithdrawal?.call();
+    return initiateWithdrawal?.call(amount);
   }
 
   @override
@@ -2251,12 +2277,12 @@ class _$_InitiateWithdrawal implements _InitiateWithdrawal {
     TResult Function(String period)? getTotalEarnings,
     TResult Function(String accountNumber, String bankCode)?
         resolveAccountNumber,
-    TResult Function()? initiateWithdrawal,
+    TResult Function(String? amount)? initiateWithdrawal,
     TResult Function(ConfirmWithdrawal arg)? confirmWithdrawalOtp,
     required TResult orElse(),
   }) {
     if (initiateWithdrawal != null) {
-      return initiateWithdrawal();
+      return initiateWithdrawal(amount);
     }
     return orElse();
   }
@@ -2326,7 +2352,12 @@ class _$_InitiateWithdrawal implements _InitiateWithdrawal {
 }
 
 abstract class _InitiateWithdrawal implements PaystackEvent {
-  const factory _InitiateWithdrawal() = _$_InitiateWithdrawal;
+  const factory _InitiateWithdrawal([String? amount]) = _$_InitiateWithdrawal;
+
+  String? get amount;
+  @JsonKey(ignore: true)
+  _$InitiateWithdrawalCopyWith<_InitiateWithdrawal> get copyWith =>
+      throw _privateConstructorUsedError;
 }
 
 /// @nodoc
@@ -2406,7 +2437,7 @@ class _$_ConfirmWithdrawalOtp implements _ConfirmWithdrawalOtp {
     required TResult Function(String period) getTotalEarnings,
     required TResult Function(String accountNumber, String bankCode)
         resolveAccountNumber,
-    required TResult Function() initiateWithdrawal,
+    required TResult Function(String? amount) initiateWithdrawal,
     required TResult Function(ConfirmWithdrawal arg) confirmWithdrawalOtp,
   }) {
     return confirmWithdrawalOtp(arg);
@@ -2426,7 +2457,7 @@ class _$_ConfirmWithdrawalOtp implements _ConfirmWithdrawalOtp {
     TResult Function(String period)? getTotalEarnings,
     TResult Function(String accountNumber, String bankCode)?
         resolveAccountNumber,
-    TResult Function()? initiateWithdrawal,
+    TResult Function(String? amount)? initiateWithdrawal,
     TResult Function(ConfirmWithdrawal arg)? confirmWithdrawalOtp,
   }) {
     return confirmWithdrawalOtp?.call(arg);
@@ -2446,7 +2477,7 @@ class _$_ConfirmWithdrawalOtp implements _ConfirmWithdrawalOtp {
     TResult Function(String period)? getTotalEarnings,
     TResult Function(String accountNumber, String bankCode)?
         resolveAccountNumber,
-    TResult Function()? initiateWithdrawal,
+    TResult Function(String? amount)? initiateWithdrawal,
     TResult Function(ConfirmWithdrawal arg)? confirmWithdrawalOtp,
     required TResult orElse(),
   }) {
@@ -2543,7 +2574,8 @@ class _$PaystackStateTearOff {
       Transaction? balance,
       required String totalEarning,
       AccountInfo? accountInfo,
-      String? otpId}) {
+      String? otpId,
+      String? amount}) {
     return _PaystackState(
       error: error,
       payStack: payStack,
@@ -2554,6 +2586,7 @@ class _$PaystackStateTearOff {
       totalEarning: totalEarning,
       accountInfo: accountInfo,
       otpId: otpId,
+      amount: amount,
     );
   }
 }
@@ -2572,6 +2605,7 @@ mixin _$PaystackState {
   String get totalEarning => throw _privateConstructorUsedError;
   AccountInfo? get accountInfo => throw _privateConstructorUsedError;
   String? get otpId => throw _privateConstructorUsedError;
+  String? get amount => throw _privateConstructorUsedError;
 
   @JsonKey(ignore: true)
   $PaystackStateCopyWith<PaystackState> get copyWith =>
@@ -2592,7 +2626,8 @@ abstract class $PaystackStateCopyWith<$Res> {
       Transaction? balance,
       String totalEarning,
       AccountInfo? accountInfo,
-      String? otpId});
+      String? otpId,
+      String? amount});
 }
 
 /// @nodoc
@@ -2615,6 +2650,7 @@ class _$PaystackStateCopyWithImpl<$Res>
     Object? totalEarning = freezed,
     Object? accountInfo = freezed,
     Object? otpId = freezed,
+    Object? amount = freezed,
   }) {
     return _then(_value.copyWith(
       error: error == freezed
@@ -2653,6 +2689,10 @@ class _$PaystackStateCopyWithImpl<$Res>
           ? _value.otpId
           : otpId // ignore: cast_nullable_to_non_nullable
               as String?,
+      amount: amount == freezed
+          ? _value.amount
+          : amount // ignore: cast_nullable_to_non_nullable
+              as String?,
     ));
   }
 }
@@ -2673,7 +2713,8 @@ abstract class _$PaystackStateCopyWith<$Res>
       Transaction? balance,
       String totalEarning,
       AccountInfo? accountInfo,
-      String? otpId});
+      String? otpId,
+      String? amount});
 }
 
 /// @nodoc
@@ -2698,6 +2739,7 @@ class __$PaystackStateCopyWithImpl<$Res>
     Object? totalEarning = freezed,
     Object? accountInfo = freezed,
     Object? otpId = freezed,
+    Object? amount = freezed,
   }) {
     return _then(_PaystackState(
       error: error == freezed
@@ -2736,6 +2778,10 @@ class __$PaystackStateCopyWithImpl<$Res>
           ? _value.otpId
           : otpId // ignore: cast_nullable_to_non_nullable
               as String?,
+      amount: amount == freezed
+          ? _value.amount
+          : amount // ignore: cast_nullable_to_non_nullable
+              as String?,
     ));
   }
 }
@@ -2752,7 +2798,8 @@ class _$_PaystackState implements _PaystackState {
       this.balance,
       required this.totalEarning,
       this.accountInfo,
-      this.otpId});
+      this.otpId,
+      this.amount});
 
   @override
   final AppError? error;
@@ -2773,10 +2820,12 @@ class _$_PaystackState implements _PaystackState {
   final AccountInfo? accountInfo;
   @override
   final String? otpId;
+  @override
+  final String? amount;
 
   @override
   String toString() {
-    return 'PaystackState(error: $error, payStack: $payStack, appState: $appState, allTransaction: $allTransaction, transactionDetail: $transactionDetail, balance: $balance, totalEarning: $totalEarning, accountInfo: $accountInfo, otpId: $otpId)';
+    return 'PaystackState(error: $error, payStack: $payStack, appState: $appState, allTransaction: $allTransaction, transactionDetail: $transactionDetail, balance: $balance, totalEarning: $totalEarning, accountInfo: $accountInfo, otpId: $otpId, amount: $amount)';
   }
 
   @override
@@ -2796,7 +2845,8 @@ class _$_PaystackState implements _PaystackState {
                 .equals(other.totalEarning, totalEarning) &&
             const DeepCollectionEquality()
                 .equals(other.accountInfo, accountInfo) &&
-            const DeepCollectionEquality().equals(other.otpId, otpId));
+            const DeepCollectionEquality().equals(other.otpId, otpId) &&
+            const DeepCollectionEquality().equals(other.amount, amount));
   }
 
   @override
@@ -2810,7 +2860,8 @@ class _$_PaystackState implements _PaystackState {
       const DeepCollectionEquality().hash(balance),
       const DeepCollectionEquality().hash(totalEarning),
       const DeepCollectionEquality().hash(accountInfo),
-      const DeepCollectionEquality().hash(otpId));
+      const DeepCollectionEquality().hash(otpId),
+      const DeepCollectionEquality().hash(amount));
 
   @JsonKey(ignore: true)
   @override
@@ -2828,7 +2879,8 @@ abstract class _PaystackState implements PaystackState {
       Transaction? balance,
       required String totalEarning,
       AccountInfo? accountInfo,
-      String? otpId}) = _$_PaystackState;
+      String? otpId,
+      String? amount}) = _$_PaystackState;
 
   @override
   AppError? get error;
@@ -2848,6 +2900,8 @@ abstract class _PaystackState implements PaystackState {
   AccountInfo? get accountInfo;
   @override
   String? get otpId;
+  @override
+  String? get amount;
   @override
   @JsonKey(ignore: true)
   _$PaystackStateCopyWith<_PaystackState> get copyWith =>

@@ -141,14 +141,7 @@ class CustomDropDownButton extends StatelessWidget {
         Container(
           color: FastaColors.grey10,
           width: 102.w,
-          child: DropdownButton<String>(
-              value: '01 Jan 2022',
-              elevation: 0,
-              focusColor: FastaColors.grey10,
-              dropdownColor: FastaColors.grey10,
-              items: [
-                DropdownMenuItem(
-                  child: SizedBox(
+          child: SizedBox(
                     width: 80.w,
                     height: 32.h,
                     child: Row(
@@ -165,10 +158,6 @@ class CustomDropDownButton extends StatelessWidget {
                       ],
                     ),
                   ),
-                  value: '01 Jan 2022',
-                )
-              ],
-              onChanged: (value) {}),
         )
       ],
     );
@@ -176,3 +165,34 @@ class CustomDropDownButton extends StatelessWidget {
 }
 
 const List<String> _type = ['All', 'Wallet', 'Card'];
+Future<void> expiryDateDialog(
+    {required BuildContext context,
+    required TextEditingController controller}) async {
+  return showDialog<void>(
+    context: context,
+    barrierDismissible: false,
+    builder: (BuildContext context) {
+      return AlertDialog(
+        shape:
+            RoundedRectangleBorder(borderRadius: BorderRadius.circular(31.h)),
+        content: StatefulBuilder(builder: (context, setState) {
+          return SingleChildScrollView(
+              child: SizedBox(
+            height: 243.h,
+            width: 1.screenWidth,
+            child: CalendarDatePicker(
+              initialDate: DateTime.now(),
+              firstDate: DateTime.now(),
+              lastDate: DateTime(DateTime.now().year + 3),
+              onDateChanged: (dateTime) {
+                controller.text =
+                    '${dateTime.day}/${dateTime.month}/${dateTime.year}';
+                Navigator.pop(context);
+              },
+            ),
+          ));
+        }),
+      );
+    },
+  );
+}

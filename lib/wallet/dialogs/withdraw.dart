@@ -1,9 +1,13 @@
 import 'package:fasta/colors/colors.dart';
+import 'package:fasta/core/app_state.dart';
+import 'package:fasta/global_widgets/notifications/notify.dart';
 import 'package:fasta/global_widgets/text_fields/text_field_with_hint_text.dart';
 import 'package:fasta/theming/size_config.dart';
 import 'package:fasta/typography/text_styles.dart';
+import 'package:fasta/wallet/bloc/paystack_bloc.dart';
 import 'package:fasta/wallet/dialogs/withdrawal_options.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 
 Future<void> withdrawDialog(
     BuildContext context, TextEditingController controller) async {
@@ -46,28 +50,42 @@ Future<void> withdrawDialog(
                         Navigator.pop(context);
                       },
                       child: Text('Cancel', style: FastaTextStyle.hardLabel)),
-                  GestureDetector(
-                    onTap: () {
-                      // Navigator.pushNamed(
-                      //   context,
-                      //   TransactionHistory.route,
-                      // );
-                      Navigator.pop(context);
-                      withdrawOptionsDialog(context);
+                  BlocConsumer<PaystackBloc, PaystackState>(
+                    listener: (context, state) {
+                      if (state.appState == AppState.success) {
+                        Navigator.pop(context);
+                        withdrawOptionsDialog(context);
+                      } else if (state.appState == AppState.failed) {
+                        Notify.error(
+                            context,
+                            state.error?.errorMessage ??
+                                'Something went Wrong');
+                      }
                     },
-                    child: Container(
-                      height: 45.h,
-                      width: 148.w,
-                      decoration: BoxDecoration(
-                          color: FastaColors.primary,
-                          border: Border.all(),
-                          borderRadius: BorderRadius.circular(13.h)),
-                      child: Center(
-                        child: Text('Withdraw',
-                            style: FastaTextStyle.hardLabel
-                                .copyWith(color: FastaColors.primary2)),
-                      ),
-                    ),
+                    builder: (context, state) {
+                      return GestureDetector(
+                        onTap: () {
+                          context
+                              .read<PaystackBloc>()
+                              .add(PaystackEvent.initiateWithdrawal(controller.text));
+                        },
+                        child: Container(
+                          height: 45.h,
+                          width: 148.w,
+                          decoration: BoxDecoration(
+                              color: FastaColors.primary,
+                              border: Border.all(),
+                              borderRadius: BorderRadius.circular(13.h)),
+                          child: (state.appState == AppState.loading)
+                              ? const Center(child: CircularProgressIndicator())
+                              : Center(
+                                  child: Text('Withdraw',
+                                      style: FastaTextStyle.hardLabel.copyWith(
+                                          color: FastaColors.primary2)),
+                                ),
+                        ),
+                      );
+                    },
                   )
                 ],
               ),

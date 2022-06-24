@@ -3,4 +3,7 @@ class AppError {
 
   AppError(this.errorMessage);
   factory AppError.empty() => AppError('Unknown Error');
+
+  @override
+  String toString() => 'AppError $errorMessage';
 }
