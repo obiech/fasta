@@ -31,6 +31,7 @@ import 'package:fasta/rider_app/auth/view/sing_up_bike_name.dart';
 import 'package:fasta/rider_app/dashboard/dashboard.dart';
 import 'package:fasta/rider_app/nav/bottom_nav_bar.dart';
 import 'package:fasta/rider_app/orders/orders.dart';
+import 'package:fasta/security/change_password.dart';
 import 'package:fasta/shipping/application/bloc/shipment_handler_bloc.dart';
 import 'package:fasta/shipping/application/map/shipment_bloc.dart';
 import 'package:fasta/shipping/arrival_time.dart';
@@ -173,6 +174,7 @@ class Fasta extends StatelessWidget {
               OrdersViewRider.route: (_) => const OrdersViewRider(),
               SigninScreenRider.route:(_)=> const SigninScreenRider(),
               VerifyEmail.route:(_)=> const VerifyEmail(),
+              ChangePassword.route: (_)=> const ChangePassword(),
             },
             home: const Responsive(
                 designHeight: 812, designWidth: 375, child: Splash())),

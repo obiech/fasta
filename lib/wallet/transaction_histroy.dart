@@ -2,8 +2,11 @@ import 'package:fasta/colors/colors.dart';
 import 'package:fasta/global_widgets/app_bars/app_bar_back_button.dart';
 import 'package:fasta/theming/size_config.dart';
 import 'package:fasta/typography/text_styles.dart';
+import 'package:fasta/wallet/bloc/paystack_bloc.dart';
+import 'package:fasta/wallet/repository/args.dart';
 import 'package:fasta/wallet/widgets/notification.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 
 class TransactionHistory extends StatefulWidget {
   static const String route = '/TransactionHistory';
@@ -15,7 +18,8 @@ class TransactionHistory extends StatefulWidget {
 
 class _TransactionHistoryState extends State<TransactionHistory> {
   int _selectedIndex = 0;
-
+  String startDate = '';
+  String endDate = '';
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -74,19 +78,32 @@ class _TransactionHistoryState extends State<TransactionHistory> {
                   const Expanded(
                     child: SizedBox(),
                   ),
-                  Container(
-                    margin: EdgeInsets.only(top: 12.h),
-                    padding:
-                        EdgeInsets.symmetric(vertical: 10.h, horizontal: 10.w),
-                    decoration: BoxDecoration(
-                        color: FastaColors.primary,
-                        borderRadius: BorderRadius.circular(10.h)),
-                    child: Center(
-                        child: Text(
-                      'Search',
-                      style: FastaTextStyle.subtitleHard
-                          .copyWith(color: FastaColors.primary2),
-                    )),
+                  GestureDetector(
+                    onTap: () {
+                      context.read<PaystackBloc>().add(
+                          PaystackEvent.allTransactions(TransactionArg(
+                              endDate: endDate,
+                              page: '1',
+                              limit: '10',
+                              order: 'desc',
+                              status: '',
+                              type: '',
+                              startDate: startDate)));
+                    },
+                    child: Container(
+                      margin: EdgeInsets.only(top: 12.h),
+                      padding: EdgeInsets.symmetric(
+                          vertical: 10.h, horizontal: 10.w),
+                      decoration: BoxDecoration(
+                          color: FastaColors.primary,
+                          borderRadius: BorderRadius.circular(10.h)),
+                      child: Center(
+                          child: Text(
+                        'Search',
+                        style: FastaTextStyle.subtitleHard
+                            .copyWith(color: FastaColors.primary2),
+                      )),
+                    ),
                   )
                 ],
               ),
@@ -126,10 +143,17 @@ class _TransactionHistoryState extends State<TransactionHistory> {
   }
 }
 
-class CustomDropDownButton extends StatelessWidget {
+class CustomDropDownButton extends StatefulWidget {
   final String time;
 
   const CustomDropDownButton({Key? key, required this.time}) : super(key: key);
+
+  @override
+  State<CustomDropDownButton> createState() => _CustomDropDownButtonState();
+}
+
+class _CustomDropDownButtonState extends State<CustomDropDownButton> {
+  final TextEditingController controller = TextEditingController();
 
   @override
   Widget build(BuildContext context) {
@@ -137,27 +161,32 @@ class CustomDropDownButton extends StatelessWidget {
       crossAxisAlignment: CrossAxisAlignment.start,
       mainAxisAlignment: MainAxisAlignment.center,
       children: [
-        Text(time, style: FastaTextStyle.subtitle3),
-        Container(
-          color: FastaColors.grey10,
-          width: 102.w,
-          child: SizedBox(
-                    width: 80.w,
-                    height: 32.h,
-                    child: Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                      children: [
-                        Icon(
-                          Icons.calendar_month,
-                          size: 10.h,
-                        ),
-                        Text(
-                          '01 Jan 222',
-                          style: FastaTextStyle.subtitleHard,
-                        ),
-                      ],
-                    ),
+        Text(widget.time, style: FastaTextStyle.subtitle3),
+        GestureDetector(
+          onTap: () {
+            expiryDateDialog(context: context, controller: controller);
+          },
+          child: Container(
+            color: FastaColors.grey10,
+            width: 102.w,
+            child: SizedBox(
+              width: 80.w,
+              height: 32.h,
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                children: [
+                  Icon(
+                    Icons.calendar_month,
+                    size: 10.h,
                   ),
+                  Text(
+                    controller.text,
+                    style: FastaTextStyle.subtitleHard,
+                  ),
+                ],
+              ),
+            ),
+          ),
         )
       ],
     );
@@ -187,6 +216,7 @@ Future<void> expiryDateDialog(
               onDateChanged: (dateTime) {
                 controller.text =
                     '${dateTime.day}/${dateTime.month}/${dateTime.year}';
+
                 Navigator.pop(context);
               },
             ),
