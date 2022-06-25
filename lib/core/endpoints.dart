@@ -6,9 +6,9 @@ String get relevantPayStack => const ServerAddress().relevantPayStack;
 String get relevant => const ServerAddress().relevant;
 
 String optionalParams(TransactionArg arg) =>
-    '?page=${arg.page}\$order=${arg.order}'
-    '\$status=${arg.status}\$limit=${arg.limit}\$startDate=${arg.startDate}'
-    '\$endDate=${arg.endDate}';
+    '?page=${arg.page}&order=${arg.order}'
+    '&status=${arg.status}&limit=${arg.limit}&startDate=${arg.startDate}'
+    '&endDate=${arg.endDate}';
 
 class Endpoints {
   static _PayStack get paystack => _PayStack();
@@ -114,6 +114,7 @@ class _Wallet {
 
   String get getWithdrawalOtp => relevant + 'wallet/bank/otp';
   String get initialWithdrawal => relevant + 'wallet/withdraw/bank/initiate';
+  String get bankList => relevant + 'wallet/banks-info';
   String get resolveAccountNumber => relevant + 'wallet/resolve-account-number';
 }
 

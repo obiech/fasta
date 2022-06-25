@@ -55,6 +55,7 @@ import 'package:fasta/theming/size_config.dart';
 import 'package:fasta/wallet/bloc/paystack_bloc.dart';
 import 'package:fasta/wallet/cubit/wallet_cubit.dart';
 import 'package:fasta/wallet/infrastructure/repo.dart';
+import 'package:fasta/wallet/repository/args.dart';
 import 'package:fasta/wallet/repository/repo.dart';
 import 'package:fasta/wallet/transaction_histroy.dart';
 import 'package:fasta/wallet/wallet.dart';
@@ -109,13 +110,30 @@ class Fasta extends StatelessWidget {
             create: (context) => ShipmentBloc(),
           ),
           BlocProvider(
-            create: (context) => AuthRiderBloc(context.read<AuthRiderRepository>()),
+            create: (context) =>
+                AuthRiderBloc(context.read<AuthRiderRepository>()),
           ),
           BlocProvider(
             create: (context) => AuthBloc(context.read<AuthRepository>()),
           ),
           BlocProvider(
-            create: (context) => PaystackBloc(context.read<WalletRepository>()),
+            create: (context) => PaystackBloc(
+              context.read<WalletRepository>(),
+            )
+              ..add(
+                PaystackEvent.allTransactions(
+                  TransactionArg(
+                      endDate: '',
+                      page: '1',
+                      limit: '10',
+                      order: 'desc',
+                      status: '',
+                      type: '',
+                      startDate: ''),
+                )
+              )
+              ..add(const PaystackEvent.getBankList())
+              ..add(const PaystackEvent.balance())
           ),
           BlocProvider(
             create: (context) =>
@@ -172,9 +190,9 @@ class Fasta extends StatelessWidget {
               BottomNavBarRider.route: (_) => const BottomNavBarRider(),
               DashBoardViewRider.route: (_) => const DashBoardViewRider(),
               OrdersViewRider.route: (_) => const OrdersViewRider(),
-              SigninScreenRider.route:(_)=> const SigninScreenRider(),
-              VerifyEmail.route:(_)=> const VerifyEmail(),
-              ChangePassword.route: (_)=> const ChangePassword(),
+              SigninScreenRider.route: (_) => const SigninScreenRider(),
+              VerifyEmail.route: (_) => const VerifyEmail(),
+              ChangePassword.route: (_) => const ChangePassword(),
             },
             home: const Responsive(
                 designHeight: 812, designWidth: 375, child: Splash())),

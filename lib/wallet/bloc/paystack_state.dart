@@ -13,6 +13,10 @@ class PaystackState with _$PaystackState {
     AccountInfo? accountInfo,
     String? otpId,
     String? amount,
+    String? otpCode,
+    String? bankCode,
+    String? userId,
+    @Default([]) List<BankInfo> bankList,
   }) = _PaystackState;
   factory PaystackState.initial() => const PaystackState(
         appState: AppState.waiting,

@@ -2,10 +2,13 @@ import 'package:fasta/colors/colors.dart';
 import 'package:fasta/theming/size_config.dart';
 import 'package:fasta/typography/font_weights.dart';
 import 'package:fasta/typography/text_styles.dart';
+import 'package:fasta/wallet/bloc/paystack_bloc.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 
 Future<void> successDialog(
   BuildContext context,
+  [String type= 'Funded',]
 ) async {
   return showDialog<void>(
     context: context,
@@ -29,18 +32,22 @@ Future<void> successDialog(
                 height: 8.h,
                 width: 1.screenWidth,
               ),
-              RichText(
-                  textAlign: TextAlign.center,
-                  text: TextSpan(
-                      text: 'Congratulations you just funded'
-                          ' your account witn ',
-                      style: FastaTextStyle.subtitle2,
-                      children: [
-                        TextSpan(
-                            text: 'NGN 7,000',
-                            style: FastaTextStyle.subtitle2
-                                .copyWith(fontWeight: FastaFontWeight.semiBold))
-                      ])),
+              BlocBuilder<PaystackBloc, PaystackState>(
+                builder: (context, state) {
+                  return RichText(
+                      textAlign: TextAlign.center,
+                      text: TextSpan(
+                          text: 'Congratulations you just $type'
+                              ' your account witn ',
+                          style: FastaTextStyle.subtitle2,
+                          children: [
+                            TextSpan(
+                                text: 'NGN ${state.amount}',
+                                style: FastaTextStyle.subtitle2.copyWith(
+                                    fontWeight: FastaFontWeight.semiBold))
+                          ]));
+                },
+              ),
               SizedBox(
                 height: 30.h,
               ),

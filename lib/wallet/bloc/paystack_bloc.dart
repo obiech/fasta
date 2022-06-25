@@ -25,8 +25,10 @@ class PaystackBloc extends Bloc<PaystackEvent, PaystackState> {
     on<_ResolveAccountNumber>(_onResolveAccountNumber);
     on<_InitiateWithdrawal>(_onInitiateWithdrawal);
     on<_ConfirmWithdrawalOtp>(_onConfirmWithdrawalOtp);
+    on<_GetBankList>(_onGetBankList);
+    on<_EnterOtpAndBankCode>(_onEnterOtpAndBankCode);
   }
-  
+
   void _onBalance(_Balance event, Emitter<PaystackState> emit) async {
     emit(state.copyWith(appState: AppState.loading));
     final res = await _repo.balance();
@@ -104,19 +106,20 @@ class PaystackBloc extends Bloc<PaystackEvent, PaystackState> {
             emit(state.copyWith(appState: AppState.success, totalEarning: r)));
   }
 
-   void _onResolveAccountNumber(
+  void _onResolveAccountNumber(
     _ResolveAccountNumber event,
     Emitter<PaystackState> emit,
   ) async {
     emit(state.copyWith(appState: AppState.loading));
-    final res = await _repo.resolveAccountNumber(event.accountNumber,event.bankCode);
+    final res =
+        await _repo.resolveAccountNumber(event.accountNumber, event.bankCode);
     res.fold(
         (l) => emit(state.copyWith(appState: AppState.failed, error: l)),
         (r) =>
             emit(state.copyWith(appState: AppState.success, accountInfo: r)));
   }
 
-   void _onInitiateWithdrawal(
+  void _onInitiateWithdrawal(
     _InitiateWithdrawal event,
     Emitter<PaystackState> emit,
   ) async {
@@ -124,19 +127,47 @@ class PaystackBloc extends Bloc<PaystackEvent, PaystackState> {
     final res = await _repo.initialWithdrawal();
     res.fold(
         (l) => emit(state.copyWith(appState: AppState.failed, error: l)),
-        (r) =>
-            emit(state.copyWith(appState: AppState.success, otpId: r, amount: event.amount)));
+        (r) => emit(state.copyWith(
+            appState: AppState.success, otpId: r, amount: event.amount)));
   }
 
-   void _onConfirmWithdrawalOtp(
+  void _onConfirmWithdrawalOtp(
     _ConfirmWithdrawalOtp event,
     Emitter<PaystackState> emit,
   ) async {
     emit(state.copyWith(appState: AppState.loading));
-    final res = await _repo.confirmWithdrawalOtp(event.arg);
+    final res = await _repo.confirmWithdrawalOtp(ConfirmWithdrawal(
+        otpId: state.otpId!,
+        otpCode: state.otpCode!,
+        amount: state.amount!,
+        bankCode: state.bankCode!,
+        userId: state.userId!,
+        accountNumber: state.accountInfo!.accountNumber));
     res.fold(
         (l) => emit(state.copyWith(appState: AppState.failed, error: l)),
-        (r) =>
-            emit(state.copyWith(appState: AppState.success, )));
+        (r) => emit(state.copyWith(
+              appState: AppState.success,
+            )));
+  }
+
+  void _onGetBankList(
+    _GetBankList event,
+    Emitter<PaystackState> emit,
+  ) async {
+    emit(state.copyWith(appState: AppState.loading));
+    final res = await _repo.getBankList();
+    res.fold((l) => emit(state.copyWith(appState: AppState.failed, error: l)),
+        (r) => emit(state.copyWith(appState: AppState.success, bankList: r)));
+  }
+
+  void _onEnterOtpAndBankCode(
+    _EnterOtpAndBankCode event,
+    Emitter<PaystackState> emit,
+  ) async {
+    emit(state.copyWith(
+        otpCode: event.otp,
+        bankCode: event.bankCode,
+        userId: event.userId,
+        appState: AppState.loading));
   }
 }

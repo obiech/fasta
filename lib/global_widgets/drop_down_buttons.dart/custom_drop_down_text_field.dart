@@ -7,7 +7,8 @@ class CustomDropDownTextField<T> extends DropdownButtonFormField<T> {
   CustomDropDownTextField(
       {Key? key,
       required List<DropdownMenuItem<T>>? items,
-      required ValueChanged? onChanged})
+      T? value,
+      required ValueChanged<T?>? onChanged})
       : super(
             key: key,
             decoration: InputDecoration(
@@ -19,6 +20,7 @@ class CustomDropDownTextField<T> extends DropdownButtonFormField<T> {
                   borderSide: BorderSide.none,
                   borderRadius: BorderRadius.circular(13.h)),
             ),
+            value: value,
             isDense: true,
             focusColor: FastaColors.grey8,
             isExpanded: true,

@@ -27,16 +27,8 @@ class _WalletViewState extends State<WalletView> {
   @override
   void initState() {
     super.initState();
-    context.read<PaystackBloc>().add(PaystackEvent.allTransactions(
-        TransactionArg(
-            endDate: '2023-10-10',
-            page: '1',
-            limit: '10',
-            order: 'desc',
-            status: '',
-            type: '',
-            startDate: '')));
     context.read<PaystackBloc>().add(const PaystackEvent.balance());
+    context.read<PaystackBloc>().add(const PaystackEvent.getBankList());
   }
 
   @override
@@ -71,7 +63,7 @@ class _WalletViewState extends State<WalletView> {
                     BlocBuilder<PaystackBloc, PaystackState>(
                       builder: (context, state) {
                         return Text(
-                          'NGN ${state.balance?.amount?? 0.00}',
+                          'NGN ${state.balance?.amount ?? 0.00}',
                           style: FastaTextStyle.headline6,
                         );
                       },
@@ -134,7 +126,7 @@ class _WalletViewState extends State<WalletView> {
             ),
             BlocBuilder<PaystackBloc, PaystackState>(
               builder: (context, state) {
-                if (state.allTransaction.isEmpty ) {
+                if (state.allTransaction.isEmpty) {
                   return const Center(
                     child: Text('No Histroy Yet'),
                   );
@@ -151,9 +143,11 @@ class _WalletViewState extends State<WalletView> {
                         style: FastaTextStyle.subtitle3,
                       ),
                       timeRecieved: GestureDetector(
-                          onTap: () {
-                          },
-                          child: Text(state.allTransaction[index].createdAt.replaceRange(10, null, ''), style: FastaTextStyle.subtitle3)),
+                          onTap: () {},
+                          child: Text(
+                              state.allTransaction[index].createdAt
+                                  .replaceRange(10, null, ''),
+                              style: FastaTextStyle.subtitle3)),
                     );
                   }),
                 );

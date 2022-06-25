@@ -5,6 +5,7 @@ import 'package:fasta/api_client/domain.dart';
 import 'dart:io';
 import 'package:fasta/core/endpoints.dart';
 import 'package:fasta/errrors/app_error.dart';
+import 'package:fasta/rider_app/auth/domain/entity/otp.dart';
 import 'package:fasta/typedef.dart/typedefs.dart';
 import 'package:fasta/wallet/domain/entity/paystack.dart';
 import 'package:fasta/wallet/domain/entity/error.dart';
@@ -46,6 +47,10 @@ class WalletDataImpl implements WalletData {
   @override
   ErrorOr<List<Transaction>> allTransactions(TransactionArg arg) async {
     try {
+      log(Endpoints.wallet.allTransactions(arg));
+      final rs = (Endpoints.wallet.allTransactions(arg));
+      log(rs);
+
       final res = await _client.get(Endpoints.wallet.allTransactions(arg));
       return Right((res.data['data'] as List)
           .map((e) => TransactionModel.fromMap(e))
@@ -128,6 +133,9 @@ class WalletDataImpl implements WalletData {
   @override
   ErrorOr<Unit> confirmWithdrawalOtp(ConfirmWithdrawal arg) async {
     try {
+      final res =
+          await getOtp(OTP(int.parse(arg.userId!), int.parse(arg.otpId)));
+      arg = arg.copyWith(res);
       await _client.post(Endpoints.wallet.getWithdrawalOtp, body: arg.toMap());
       return const Right(unit);
     } catch (e) {
@@ -136,9 +144,15 @@ class WalletDataImpl implements WalletData {
   }
 
   @override
-  ErrorOr<List<Transaction>> getBankList(TransactionArg arg) {
-    // TODO: implement getBankList
-    throw UnimplementedError();
+  ErrorOr<List<BankInfo>> getBankList() async {
+    try {
+      final res = await _client.get(Endpoints.wallet.bankList);
+      log(res.data['data'].toString());
+      return Right(
+          (res.data['data'] as List).map((e) => BankInfo.fromMap(e)).toList());
+    } catch (e) {
+      return Left(AppError(e.toString()));
+    }
   }
 
   @override
@@ -156,10 +170,32 @@ class WalletDataImpl implements WalletData {
       String accountNumber, String bankCode) async {
     try {
       final body = {'accountNumber': accountNumber, 'bankCode': bankCode};
-      final res = await _client.post(Endpoints.wallet.initialWithdrawal,body: body);
+      final res =
+          await _client.post(Endpoints.wallet.resolveAccountNumber, body: body);
       return Right(AccountInfo.fromMap(res.data['data']));
     } catch (e) {
       return Left(AppError(e.toString()));
+    }
+  }
+
+  Future<String> getOtp(OTP otp) async {
+    try {
+      log(Endpoints.auth.getUserOTP(
+        otp.userID,
+        otp.otpID,
+      ));
+      var e = await _client.get(Endpoints.auth.getUserOTP(
+        otp.userID,
+        otp.otpID,
+      ));
+      log(e.toString());
+      // await confirmOtp(
+      //     otpID: e.data['data']['id'],
+      //     otpCode: int.parse(e.data['data']['code'] as String),
+      //     userID: e.data['data']['userId']);
+      return e.data['data']['code'];
+    } catch (e) {
+      return '';
     }
   }
 }

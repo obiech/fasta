@@ -1,3 +1,5 @@
+import 'dart:developer';
+
 import 'package:fasta/colors/colors.dart';
 import 'package:fasta/global_widgets/app_bars/app_bar_back_button.dart';
 import 'package:fasta/theming/size_config.dart';
@@ -20,6 +22,17 @@ class _TransactionHistoryState extends State<TransactionHistory> {
   int _selectedIndex = 0;
   String startDate = '';
   String endDate = '';
+
+  void reload(String date) {
+    startDate = date;
+    setState(() {});
+  }
+
+  void reloadEndDate(String date) {
+    endDate = date;
+    setState(() {});
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -70,11 +83,11 @@ class _TransactionHistoryState extends State<TransactionHistory> {
               Row(
                 crossAxisAlignment: CrossAxisAlignment.center,
                 children: [
-                  const CustomDropDownButton(time: 'From'),
+                  CustomDropDownButton(time: 'From', reload: reload),
                   SizedBox(
                     width: 12.w,
                   ),
-                  const CustomDropDownButton(time: 'To'),
+                  CustomDropDownButton(time: 'To', reload: reloadEndDate),
                   const Expanded(
                     child: SizedBox(),
                   ),
@@ -89,6 +102,7 @@ class _TransactionHistoryState extends State<TransactionHistory> {
                               status: '',
                               type: '',
                               startDate: startDate)));
+                      // reload(date)
                     },
                     child: Container(
                       margin: EdgeInsets.only(top: 12.h),
@@ -108,36 +122,43 @@ class _TransactionHistoryState extends State<TransactionHistory> {
                 ],
               ),
               SizedBox(height: 38.h),
-              Column(
-                children: List.generate(3, (index) {
-                  return NotificationMessage(
-                    radius: 15.h,
-                    padding: EdgeInsets.symmetric(
-                      horizontal: 15.w,
-                    ),
-                    icon: Container(
-                      height: 25.h,
-                      width: 27.w,
-                      decoration: BoxDecoration(
-                        borderRadius: BorderRadius.circular(6.h),
-                        color: FastaColors.lightBlue,
+              BlocBuilder<PaystackBloc, PaystackState>(
+                builder: (context, state) {
+                  if (state.allTransaction.isEmpty)
+                    {return const Center(child: Text('No Result'));}
+                  return Column(
+                      children:
+                          List.generate(state.allTransaction.length, (index) {
+                    return NotificationMessage(
+                      radius: 15.h,
+                      padding: EdgeInsets.symmetric(
+                        horizontal: 15.w,
                       ),
-                      child: Center(
-                          child: Image.asset(
-                        'assets/2.0x/credit-card.png',
-                        height: 16.h,
-                        width: 16.h,
-                      )),
-                    ),
-                    content: Text(
-                      'Paid NGN 5,000',
-                      style: FastaTextStyle.hardLabel2.copyWith(fontSize: 12.f),
-                    ),
-                    timeRecieved: Text('Yesterday 5:15pm',
-                        style: FastaTextStyle.subtitle3
-                            .copyWith(color: FastaColors.grey8)),
-                  );
-                }),
+                      icon: Container(
+                        height: 25.h,
+                        width: 27.w,
+                        decoration: BoxDecoration(
+                          borderRadius: BorderRadius.circular(6.h),
+                          color: FastaColors.lightBlue,
+                        ),
+                        child: Center(
+                            child: Image.asset(
+                          'assets/2.0x/credit-card.png',
+                          height: 16.h,
+                          width: 16.h,
+                        )),
+                      ),
+                      content: Text(
+                        'Paid NGN ${state.allTransaction[index].amount}',
+                        style:
+                            FastaTextStyle.hardLabel2.copyWith(fontSize: 12.f),
+                      ),
+                      timeRecieved: Text(state.allTransaction[index].createdAt,
+                          style: FastaTextStyle.subtitle3
+                              .copyWith(color: FastaColors.grey8)),
+                    );
+                  }));
+                },
               )
             ])));
   }
@@ -145,8 +166,11 @@ class _TransactionHistoryState extends State<TransactionHistory> {
 
 class CustomDropDownButton extends StatefulWidget {
   final String time;
+  final void Function(String date) reload;
 
-  const CustomDropDownButton({Key? key, required this.time}) : super(key: key);
+  const CustomDropDownButton(
+      {Key? key, required this.time, required this.reload})
+      : super(key: key);
 
   @override
   State<CustomDropDownButton> createState() => _CustomDropDownButtonState();
@@ -163,8 +187,10 @@ class _CustomDropDownButtonState extends State<CustomDropDownButton> {
       children: [
         Text(widget.time, style: FastaTextStyle.subtitle3),
         GestureDetector(
-          onTap: () {
-            expiryDateDialog(context: context, controller: controller);
+          onTap: () async {
+            String? date = await expiryDateDialog(
+                context: context, controller: controller);
+            widget.reload(date ?? '');
           },
           child: Container(
             color: FastaColors.grey10,
@@ -194,10 +220,10 @@ class _CustomDropDownButtonState extends State<CustomDropDownButton> {
 }
 
 const List<String> _type = ['All', 'Wallet', 'Card'];
-Future<void> expiryDateDialog(
+Future<String?> expiryDateDialog(
     {required BuildContext context,
     required TextEditingController controller}) async {
-  return showDialog<void>(
+  return showDialog<String>(
     context: context,
     barrierDismissible: false,
     builder: (BuildContext context) {
@@ -211,13 +237,15 @@ Future<void> expiryDateDialog(
             width: 1.screenWidth,
             child: CalendarDatePicker(
               initialDate: DateTime.now(),
-              firstDate: DateTime.now(),
-              lastDate: DateTime(DateTime.now().year + 3),
+              firstDate: DateTime(DateTime.now().year - 10),
+              lastDate: DateTime(DateTime.now().year + 10),
               onDateChanged: (dateTime) {
-                controller.text =
-                    '${dateTime.day}/${dateTime.month}/${dateTime.year}';
+                var month =
+                    dateTime.month <= 9 ? '0${dateTime.month}' : dateTime.month;
+                var day = dateTime.day <= 9 ? '0${dateTime.day}' : dateTime.day;
+                controller.text = '${dateTime.year}-$month-$day';
 
-                Navigator.pop(context);
+                Navigator.pop(context, controller.text);
               },
             ),
           ));

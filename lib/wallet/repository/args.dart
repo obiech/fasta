@@ -34,20 +34,35 @@ class AccountInfo {
   }
 }
 
+class BankInfo {
+  final String accountNumber;
+  final String accountName;
+
+  BankInfo(this.accountNumber, this.accountName);
+  factory BankInfo.fromMap(Map<String, dynamic> map) {
+    return BankInfo(map['code'], map['name']);
+  }
+
+  @override
+  String toString() =>
+      '${{accountName: 'accountName', accountNumber: 'accountNumber'}}';
+}
+
 class ConfirmWithdrawal {
   final String otpId;
   final String otpCode;
+  final String? userId;
   final String amount;
   final String bankCode;
   final String accountNumber;
 
-  ConfirmWithdrawal({
-    required this.otpId,
-    required this.otpCode,
-    required this.amount,
-    required this.bankCode,
-    required this.accountNumber,
-  });
+  ConfirmWithdrawal(
+      {required this.otpId,
+      required this.otpCode,
+      required this.amount,
+      required this.bankCode,
+      required this.accountNumber,
+      this.userId});
   factory ConfirmWithdrawal.fromMap(Map<String, dynamic> map) {
     return ConfirmWithdrawal(
       otpId: map['otpId'],
@@ -56,6 +71,14 @@ class ConfirmWithdrawal {
       bankCode: map['bankCode'],
       accountNumber: map['accountNumber'],
     );
+  }
+  ConfirmWithdrawal copyWith(String otpCode) {
+    return ConfirmWithdrawal(
+        otpId: otpId,
+        otpCode: otpCode,
+        amount: amount,
+        bankCode: bankCode,
+        accountNumber: accountNumber);
   }
 
   Map<String, dynamic> toMap() {
@@ -67,4 +90,7 @@ class ConfirmWithdrawal {
       'accountNumber': accountNumber,
     };
   }
+
+  @override
+  toString() => '${toMap()}';
 }

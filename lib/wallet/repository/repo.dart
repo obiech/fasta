@@ -35,4 +35,6 @@ class WalletRepository {
   ErrorOr<String> initialWithdrawal() => _repo.initialWithdrawal();
   ErrorOr<Unit> confirmWithdrawalOtp(ConfirmWithdrawal arg) =>
       _repo.confirmWithdrawalOtp(arg);
+  ErrorOr<List<BankInfo>> getBankList() =>
+      _repo.getBankList();
 }

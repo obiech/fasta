@@ -11,6 +11,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 
 Future<void> withdrawDialog(
     BuildContext context, TextEditingController controller) async {
+  bool buttonClicked = false;
   return showDialog<void>(
     context: context,
     barrierDismissible: false,
@@ -36,7 +37,7 @@ Future<void> withdrawDialog(
               ),
               CustomHintTextField(
                 controller: controller,
-                hintText: '\$ Enter Amount',
+                hintText: 'Enter Amount',
               ),
               SizedBox(
                 height: 42.h,
@@ -51,6 +52,7 @@ Future<void> withdrawDialog(
                       },
                       child: Text('Cancel', style: FastaTextStyle.hardLabel)),
                   BlocConsumer<PaystackBloc, PaystackState>(
+                    listenWhen: (previous, current) => buttonClicked,
                     listener: (context, state) {
                       if (state.appState == AppState.success) {
                         Navigator.pop(context);
@@ -65,9 +67,10 @@ Future<void> withdrawDialog(
                     builder: (context, state) {
                       return GestureDetector(
                         onTap: () {
-                          context
-                              .read<PaystackBloc>()
-                              .add(PaystackEvent.initiateWithdrawal(controller.text));
+                          context.read<PaystackBloc>().add(
+                              PaystackEvent.initiateWithdrawal(
+                                  controller.text));
+                          buttonClicked = true;
                         },
                         child: Container(
                           height: 45.h,
@@ -76,13 +79,11 @@ Future<void> withdrawDialog(
                               color: FastaColors.primary,
                               border: Border.all(),
                               borderRadius: BorderRadius.circular(13.h)),
-                          child: (state.appState == AppState.loading)
-                              ? const Center(child: CircularProgressIndicator())
-                              : Center(
-                                  child: Text('Withdraw',
-                                      style: FastaTextStyle.hardLabel.copyWith(
-                                          color: FastaColors.primary2)),
-                                ),
+                          child: Center(
+                            child: Text('Withdraw',
+                                style: FastaTextStyle.hardLabel
+                                    .copyWith(color: FastaColors.primary2)),
+                          ),
                         ),
                       );
                     },

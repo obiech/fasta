@@ -16,7 +16,7 @@ abstract class WalletData {
   ErrorOr<List<Transaction>> getAllEarnings(TransactionArg arg);
   ErrorOr<String> getTotalEarnings(String period);
 
-  ErrorOr<List<Transaction>> getBankList(TransactionArg arg);
+  ErrorOr<List<BankInfo>> getBankList();
   ErrorOr<AccountInfo> resolveAccountNumber(String accountNumber, String bankCode);
   ErrorOr<String> initialWithdrawal();
   ErrorOr<Unit> confirmWithdrawalOtp(ConfirmWithdrawal  arg);

@@ -1,7 +1,9 @@
 import 'package:fasta/colors/colors.dart';
 import 'package:fasta/core/app_state.dart';
+import 'package:fasta/global_widgets/drop_down_buttons.dart/custom_drop_down_text_field.dart';
 import 'package:fasta/global_widgets/notifications/notify.dart';
 import 'package:fasta/global_widgets/text_fields/text_field_with_hint_text.dart';
+import 'package:fasta/profile/application/bloc/profile_bloc.dart';
 import 'package:fasta/theming/size_config.dart';
 import 'package:fasta/typography/text_styles.dart';
 import 'package:fasta/wallet/bloc/paystack_bloc.dart';
@@ -12,7 +14,9 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 
 Future<void> inputAccountDetailsDialog(
     BuildContext context, TextEditingController controller) async {
-  final bankController = TextEditingController();
+  final otpController = TextEditingController();
+  String? selectedBank;
+  bool buttonClicked = false;
   return showDialog<void>(
     context: context,
     barrierDismissible: false,
@@ -27,83 +31,133 @@ Future<void> inputAccountDetailsDialog(
         contentPadding: EdgeInsets.symmetric(
           horizontal: 24.w,
         ),
-        content: SingleChildScrollView(
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.center,
-            children: <Widget>[
-              Text(
-                'Choose Destination account number',
-                style: FastaTextStyle.softSubtitle,
-              ),
-              SizedBox(
-                height: 25.h,
-              ),
-              CustomHintTextField(
-                controller: controller,
-                hintText: '   Account Number',
-              ),
-              SizedBox(
-                height: 10.h,
-              ),
-              CustomHintTextField(
-                controller: bankController,
-                hintText: '   Bank Code',
-              ),
-              SizedBox(
-                height: 42.h,
-                width: 1.screenWidth,
-              ),
-              Row(
-                mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                children: [
-                  GestureDetector(
-                      onTap: () {
-                        Navigator.pop(context);
+        content: StatefulBuilder(builder: (context, setState) {
+          return SingleChildScrollView(
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.center,
+              children: <Widget>[
+                Text(
+                  'Choose Destination account number',
+                  style: FastaTextStyle.softSubtitle,
+                ),
+                SizedBox(
+                  height: 25.h,
+                ),
+                CustomHintTextField(
+                  controller: controller,
+                  hintText: 'Account Number',
+                ),
+                SizedBox(
+                  height: 10.h,
+                ),
+                BlocBuilder<PaystackBloc, PaystackState>(
+                  builder: (context, state) {
+                    return CustomDropDownTextField<String>(
+                      value: selectedBank,
+                      items: [
+                        ...state.bankList.map((e) => DropdownMenuItem(
+                            child: Text(e.accountName), value: e.accountName))
+                      ],
+                      onChanged: (_) {
+                        selectedBank = _;
+                        setState;
                       },
-                      child: Text('Cancel', style: FastaTextStyle.hardLabel)),
-                  BlocConsumer<PaystackBloc, PaystackState>(
-                    listener: (context, state) {
-                      if (state.appState == AppState.success) {
-                        Navigator.pop(context);
-                        accountDetailsDialog(context);
-                      } else if (state.appState == AppState.failed) {
-                        Notify.error(
-                            context,
-                            state.error?.errorMessage ??
-                                'Something went wrong');
-                      }
-                    },
-                    builder: (context, state) {
-                      return GestureDetector(
+                    );
+                  },
+                ),
+                SizedBox(
+                  height: 25.h,
+                ),
+                CustomHintTextField(
+                  controller: otpController,
+                  hintText: ' Enter OTP',
+                ),
+                SizedBox(
+                  height: 42.h,
+                  width: 1.screenWidth,
+                ),
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                  children: [
+                    GestureDetector(
                         onTap: () {
-                          context.read<PaystackBloc>().add(
-                              PaystackEvent.resolveAccountNumber(
-                                  controller.text, bankController.text));
+                          Navigator.pop(context);
                         },
-                        child: Container(
-                          height: 45.h,
-                          width: 148.w,
-                          decoration: BoxDecoration(
-                              color: FastaColors.primary,
-                              border: Border.all(),
-                              borderRadius: BorderRadius.circular(13.h)),
-                          child: Center(
-                            child: Text('Continue',
-                                style: FastaTextStyle.hardLabel
-                                    .copyWith(color: FastaColors.primary2)),
-                          ),
-                        ),
-                      );
-                    },
-                  )
-                ],
-              ),
-              SizedBox(
-                height: 132.h,
-              ),
-            ],
-          ),
-        ),
+                        child: Text('Cancel', style: FastaTextStyle.hardLabel)),
+                    BlocConsumer<PaystackBloc, PaystackState>(
+                      listenWhen: (previous, current) => buttonClicked,
+                      listener: (context, state) {
+                        if (state.appState == AppState.success) {
+                          Navigator.pop(context);
+                          accountDetailsDialog(context, selectedBank!);
+                        } else if (state.appState == AppState.failed) {
+                          Notify.error(
+                              context,
+                              state.error?.errorMessage ??
+                                  'Something went wrong');
+                        } else if (state.appState == AppState.loading) {}
+                      },
+                      builder: (context, state) {
+                        return BlocBuilder<PaystackBloc, PaystackState>(
+                          builder: (context, state) {
+                            return BlocBuilder<ProfileBloc, ProfileState>(
+                              builder: (context, profileState) {
+                                return GestureDetector(
+                                  onTap: () {
+                                    context.read<PaystackBloc>().add(
+                                        PaystackEvent.enterOtpAndBankCode(
+                                            state.bankList
+                                                .firstWhere((element) =>
+                                                    element.accountName ==
+                                                    selectedBank)
+                                                .accountNumber,
+                                            otpController.text,
+                                            profileState.user!.id.toString()));
+                                    context.read<PaystackBloc>().add(
+                                        PaystackEvent.resolveAccountNumber(
+                                            controller.text,
+                                            state.bankList
+                                                .firstWhere((element) =>
+                                                    element.accountName ==
+                                                    selectedBank)
+                                                .accountNumber));
+                                    buttonClicked = true;
+                                  },
+                                  child: Container(
+                                    height: 45.h,
+                                    width: 148.w,
+                                    decoration: BoxDecoration(
+                                        color: FastaColors.primary,
+                                        border: Border.all(),
+                                        borderRadius:
+                                            BorderRadius.circular(13.h)),
+                                    child: Center(
+                                      child: (state.appState ==
+                                              AppState.loading)
+                                          ? CircularProgressIndicator()
+                                          : Text('Continue',
+                                              style: FastaTextStyle.hardLabel
+                                                  .copyWith(
+                                                      color: FastaColors
+                                                          .primary2)),
+                                    ),
+                                  ),
+                                );
+                              },
+                            );
+                          },
+                        );
+                      },
+                    )
+                  ],
+                ),
+                SizedBox(
+                  height: 132.h,
+                ),
+              ],
+            ),
+          );
+        }),
       );
     },
   );
