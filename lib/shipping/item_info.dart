@@ -432,30 +432,37 @@ class _ItemInfoState extends State<ItemInfo> with RoundedLoadingButtonMixin {
                       //     currentPosition: _currentPosition,
                       //     currentAddress: _currentAddress));
                       if (itemNameController.text.isNotEmpty &&
-                          quatityController.text.isNotEmpty &&
-                          valueController.text.isNotEmpty &&
-                          weightController.text.isNotEmpty &&
-                          descriptionController.text.isNotEmpty &&
-                          itemPath != null) {
+                              quatityController.text.isNotEmpty &&
+                              valueController.text.isNotEmpty &&
+                              weightController.text.isNotEmpty &&
+                              descriptionController.text.isNotEmpty
+                          // &&
+                          // itemPath != null
+                          ) {
                         btnController.start();
+                        arg.remove('ItemInfoArg');
                         arg.putIfAbsent(
                             'ItemInfoArg',
                             () => ItemInfoArg(
-                                itemName: itemNameController.text,
-                                quantity: quatityController.text,
-                                value: valueController.text,
-                                weight: weightController.text,
-                                state: stateController.text,
-                                description: descriptionController.text,
-                                image: itemPath!));
-                        context.read<ShipmentHandlerBloc>().add(
-                            ShipmentHandlerEvent.createShipment(
+                                  itemName: itemNameController.text,
+                                  quantity: quatityController.text,
+                                  value: valueController.text,
+                                  weight: weightController.text,
+                                  state: stateController.text,
+                                  description: descriptionController.text,
+                                  image: 'https://google.com',
+                                  // image: itemPath??'https://google.com',
+                                ));
+                        context
+                            .read<ShipmentHandlerBloc>()
+                            .add(ShipmentHandlerEvent.createShipment(
                                 arg: CreateShipmentArg.fromModels(
-                                    arg['aboutGoods'],
-                                    arg['VechicleType'],
-                                    arg['SendersInfoArg'],
-                                    arg['ItemInfoArg'],
-                                    state.user!.email)));
+                              arg['aboutGoods'],
+                              arg['VechicleType'],
+                              arg['SendersInfoArg'],
+                              arg['ItemInfoArg'],
+                            )));
+                        // context.read<ShipmentHandlerBloc>().add(ShipmentHandlerEvent.deliveryCost(DeliveryCostArg(fromLat: , fromLng: '', toLng: '', toLnt: '', priority: null, vehicleType: '')));
                         // context.read<ShipmentBloc>().add(ShipmentEvent.setMarkers(
                         //     startAddress: (arg['SendersInfoArg'] as SendersInfoArg)
                         //         .pickupAddress,

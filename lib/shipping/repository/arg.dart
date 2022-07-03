@@ -1,6 +1,10 @@
+import 'package:fasta/extension/string.dart';
+import 'package:fasta/shipping/domain/entity/coordinate.dart';
+import 'package:geolocator/geolocator.dart';
+
 class CreateShipmentArg {
   CreateShipmentArg({
-    required this.email,
+    // required this.email,
     required this.senderName,
     required this.pickUpAddress,
     required this.phoneNumber,
@@ -36,17 +40,17 @@ class CreateShipmentArg {
       pickUpTime,
       phoneNumber,
       pickUpAddress,
-      senderName,
-      email;
+      senderName;
+  // email;
   final int priority;
   factory CreateShipmentArg.fromModels(
-      AboutGoods about,
-      VechicleType vechicleType,
-      SendersInfoArg sendersInfo,
-      ItemInfoArg itemInfo,
-      String email) {
+    AboutGoods about,
+    VechicleType vechicleType,
+    SendersInfoArg sendersInfo,
+    ItemInfoArg itemInfo,
+  ) {
     return CreateShipmentArg(
-        email: email,
+        // email: email,
         senderName: sendersInfo.sendersName,
         pickUpAddress: sendersInfo.pickupAddress,
         phoneNumber: sendersInfo.sendersPhonNumber,
@@ -66,37 +70,55 @@ class CreateShipmentArg {
         vechicleType: vechicleType.vehicle);
   }
 
-  Map<String, dynamic> toMap() {
+  Future<Map<String, dynamic>> toMap() async {
+    final Position position = await Geolocator.getCurrentPosition(
+        desiredAccuracy: LocationAccuracy.high);
+    // TODO FIX
+    // final from = await deliveryPoint.getCoordinateFromAddress();
+    // final to = await deliveryPoint.getCoordinateFromAddress();
+
+    final from = Coordinate(
+        latitude: position.latitude,
+        longitude: position.longitude,
+        parentAddress: 'parentAddress');
+    final to =Coordinate(
+        latitude: position.latitude,
+        longitude: position.longitude,
+        parentAddress: 'parentAddress');
+
     return {
       // 'email': email,
       'senderName': senderName,
-      'fromAddress': pickUpAddress,
+      // TODO FIX
+      'fromAddress': deliveryPoint,
       'senderPhoneNumber': phoneNumber,
       // 'pickup_time': pickUpTime,
       // 'delivery_priority': 1,
       'toAddress': deliveryPoint,
-      'rrecieverName': receiversName,
+      'recieverName': receiversName,
       'recieverPhoneNumber': receieversNumber,
       // 'senderName': senderName,
       'items': itemName,
       // 'qty': qty,
       // 'value': value,
-      'weight': weight, 
+      'weight': weight,
       // 'description_details': description,
-      'imageUrl': image, 
-      'itemState': status,
-      'vehicleType': vechicleType,
-      'fromLatitude': 0,
-      'fromLongitude':0,
-      'toLatitude':10,
-      'toLongitude':10,
-
+      'imageUrl': image,
+      // [fragile, non-fragile, broken, missing, damaged, unavailable, glassy, unspecified]","error":true}})
+      'itemState': 'unspecified',
+      // TODO VECHICLE TYPE [bike, car, van, bus, truck]
+      'vehicleType': 'bike',
+      'priority': true,
+      'fromLatitude': from.latitude,
+      'fromLongitude': from.longitude,
+      'toLatitude': to.latitude,
+      'toLongitude': to.longitude,
     };
   }
 
   CreateShipmentArg copyWith(String? secureUrl) {
     return CreateShipmentArg(
-        email: email,
+        // email: email,
         senderName: senderName,
         pickUpAddress: pickUpAddress,
         phoneNumber: phoneNumber,
@@ -211,4 +233,35 @@ class RateDeliveryArg {
     required this.rating,
     required this.comment,
   });
+}
+
+class DeliveryCostArg {
+  final String fromLat, fromLng, toLnt, toLng, vehicleType;
+  final bool priority;
+
+  DeliveryCostArg(
+      {required this.fromLat,
+      required this.fromLng,
+      required this.toLnt,
+      required this.toLng,
+      required this.vehicleType,
+      required this.priority});
+
+  Map<String, dynamic> toMap() {
+    // final to =
+    return {
+      'fromLatitude': fromLat,
+      'fromLongitude': fromLng,
+      'toLatitude': toLnt,
+      'toLongitude': toLng,
+      'vehicleType': 'bus',
+      'priority': true,
+    };
+  }
+
+  // factory  DeliveryCostArg.fromAddress(String to, String from) {
+  //   final toAddress = to.getCoordinateFromAddress();
+  //   final fromAddress = await from.getCoordinateFromAddress();
+  //       return DeliveryCostArg(fromLat: fromAddress.to, fromLng: fromLng, toLnt: toLnt, toLng: toLng, vehicleType: vehicleType, priority: priority)
+  // }
 }

@@ -3,18 +3,11 @@ import 'dart:io';
 import 'package:fasta/auth/bloc/auth_bloc.dart';
 import 'package:fasta/colors/colors.dart';
 import 'package:fasta/core/app_state.dart';
-import 'package:fasta/global_widgets/cards/elevated_card_responsive.dart';
 import 'package:fasta/global_widgets/rounded_loading_button/button_mixin.dart';
 import 'package:fasta/global_widgets/rounded_loading_button/custom_button.dart';
 import 'package:fasta/global_widgets/scaffolds/custom_scaffold.dart';
-import 'package:fasta/global_widgets/text_fields/custom_text_field.dart';
-import 'package:fasta/global_widgets/text_fields/with_suffix.dart';
-import 'package:fasta/global_widgets/text_fields/with_title.dart';
-import 'package:fasta/rider_app/auth/view/sign_up_confirmation.dart';
-import 'package:fasta/rider_app/auth/view/sign_up_vehicle_type.dart';
 import 'package:fasta/rider_app/nav/bottom_nav_bar.dart';
 import 'package:fasta/theming/size_config.dart';
-import 'package:fasta/typography/font_weights.dart';
 import 'package:fasta/typography/text_styles.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -115,12 +108,6 @@ class _AddPhotoRiderViewState extends State<AddPhotoRiderView>
                   congratsDialog(context: context);
                 }),
           ),
-          // CustomButton.named(
-          //     name: 'Done',
-          //     controller: btnController,
-          //     onPressed: () {
-                
-          //     }),
         ]));
   }
 }

@@ -28,6 +28,7 @@ class _BottomNavBarState extends State<BottomNavBar> {
   void initState() {
     super.initState();
     pageIndex = widget.index ?? pageIndex;
+    
   }
 
   static const List<String> _images = ['dashboard', 'send', 'wallet', 'cards'];

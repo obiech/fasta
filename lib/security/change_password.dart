@@ -1,7 +1,6 @@
 import 'package:fasta/global_widgets/rounded_loading_button/button_mixin.dart';
 import 'package:fasta/global_widgets/rounded_loading_button/custom_button.dart';
 import 'package:fasta/global_widgets/scaffolds/custom_scaffold.dart';
-import 'package:fasta/global_widgets/text_fields/custom_text_field.dart';
 import 'package:fasta/global_widgets/text_fields/with_title.dart';
 import 'package:fasta/theming/size_config.dart';
 import 'package:fasta/typography/text_styles.dart';
@@ -59,8 +58,7 @@ class _ChangePasswordState extends State<ChangePassword>
           ),
           CustomButton.named(
             controller: btnController,
-            onPressed: () {
-            },
+            onPressed: () {},
             name: 'Save',
           ),
           SizedBox(

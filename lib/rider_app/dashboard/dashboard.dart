@@ -7,6 +7,8 @@ import 'package:fasta/profile/home.dart';
 import 'package:fasta/rider_app/dashboard/widgets/dashboard_overview.dart';
 import 'package:fasta/rider_app/nav/bottom_nav_bar.dart';
 import 'package:fasta/rider_app/orders/orders.dart';
+import 'package:fasta/shipping/application/bloc/shipment_handler_bloc.dart';
+import 'package:fasta/shipping/infrastructure/scoket_io.dart';
 import 'package:fasta/shipping/ongoing_orders.dart';
 import 'package:fasta/theming/size_config.dart';
 import 'package:fasta/typography/font_weights.dart';
@@ -25,6 +27,17 @@ class DashBoardViewRider extends StatefulWidget {
 }
 
 class _DashBoardViewRiderState extends State<DashBoardViewRider> {
+  @override
+  void initState() {
+    super.initState();
+    context
+        .read<ShipmentHandlerBloc>()
+        .add(const ShipmentHandlerEvent.started());
+    context
+        .read<ShipmentHandlerBloc>()
+        .add(const ShipmentHandlerEvent.getAllDeliveriesPendingInvitations());
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -71,12 +84,16 @@ class _DashBoardViewRiderState extends State<DashBoardViewRider> {
                       children: [
                         GestureDetector(
                           onTap: () {
-                            Navigator.push(context,
-                                MaterialPageRoute(builder: (context) {
-                              return const BottomNavBar(
-                                index: 2,
-                              );
-                            }));
+                            // ShippingSocketImpl().initialize();
+                            context
+                                .read<ShipmentHandlerBloc>()
+                                .add(const ShipmentHandlerEvent.started());
+                            // Navigator.push(context,
+                            //     MaterialPageRoute(builder: (context) {
+                            //   return const BottomNavBarRider(
+                            //     index: 2,
+                            //   );
+                            // }));
                           },
                           child: Container(
                             height: 27.h,
@@ -99,7 +116,7 @@ class _DashBoardViewRiderState extends State<DashBoardViewRider> {
                           onTap: () {
                             Navigator.push(context,
                                 MaterialPageRoute(builder: (context) {
-                              return const BottomNavBar(
+                              return const BottomNavBarRider(
                                 index: 2,
                               );
                             }));

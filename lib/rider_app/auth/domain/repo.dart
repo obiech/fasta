@@ -23,4 +23,7 @@ abstract class AuthRider {
   ErrorOr<Unit> updateDriverVehicle({required VehicleArg arg});
 
   ErrorOr<Unit> uploadVehicleImage({required FormData image});
+  ErrorOr<Unit> updateDriverLocation();
+  ErrorOr<Unit> setAsActive();
+  ErrorOr<Unit> setAsInActive();
 }

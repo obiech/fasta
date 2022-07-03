@@ -22,57 +22,76 @@ class _OngoingOrdersState extends State<OngoingOrders> {
   @override
   void initState() {
     super.initState();
+    context
+        .read<ShipmentHandlerBloc>()
+        .add(const ShipmentHandlerEvent.getAllDeliveries());
   }
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      backgroundColor: FastaColors.primary2,
-      appBar: AppBarWithBackButton(
-        onPressed: (() => Navigator.pop(context)),
-      ),
-      body: BlocBuilder<AuthBloc, AuthState>(
-        builder: (context, state) {
-          context.read<ShipmentHandlerBloc>().add(
-              ShipmentHandlerEvent.getAllShipment(email: state.user!.email));
-          return SingleChildScrollView(
-            physics: const BouncingScrollPhysics(),
-            padding: EdgeInsets.symmetric(horizontal: 23.w, vertical: 30.h),
-            child: BlocConsumer<ShipmentHandlerBloc, ShipmentHandlerState>(
-              listener: (context, state) {
-                // TODO: implement listener
-              },
-              builder: (context, state) {
-                if (state.status == AppState.loading) {
-                  return const Center(
-                    child: CircularProgressIndicator.adaptive(),
-                  );
-                }
-                if (state.allDelivery == null) {
-                  return const Center(
-                    child: Text('No order Yet'),
-                  );
-                }
-                return Column(
-                    children:
-                        List.generate(state.allDelivery?.length ?? 0, (index) {
-                  return GestureDetector(
-                    onTap: () {
-                      Navigator.pushNamed(context, OrderReceipt.route,
-                          arguments: state.allDelivery![index]);
-                    },
-                    child: OrderPreview(
-                      to: state.allDelivery![index].to,
-                      from: state.allDelivery![index].from,
-                      distance: state.allDelivery![index].distance,
-                      name: state.allDelivery![index].status,
-                    ),
-                  );
-                }));
-              },
-            ),
-          );
-        },
+    return RefreshIndicator(
+      onRefresh: () async => context
+          .read<ShipmentHandlerBloc>()
+          .add(const ShipmentHandlerEvent.getAllDeliveries()),
+      child: Scaffold(
+        backgroundColor: FastaColors.primary2,
+        appBar: AppBarWithBackButton(
+          onPressed: (() => Navigator.pop(context)),
+        ),
+        body: BlocBuilder<AuthBloc, AuthState>(
+          builder: (context, state) {
+            //
+            return SingleChildScrollView(
+              physics: const BouncingScrollPhysics(),
+              padding: EdgeInsets.symmetric(horizontal: 23.w, vertical: 30.h),
+              child: BlocConsumer<ShipmentHandlerBloc, ShipmentHandlerState>(
+                listener: (context, state) {
+                  // TODO: implement listener
+                },
+                builder: (context, state) {
+                  if (state.status == AppState.loading) {
+                    return const Center(
+                      child: CircularProgressIndicator.adaptive(),
+                    );
+                  }
+                  if (state.deliverySummary?.isEmpty ?? true) {
+                    return const Center(
+                      child: Text('No order Yet'),
+                    );
+                  }
+                  return Column(
+                      children: List.generate(
+                          state.deliverySummary?.length ?? 0, (index) {
+                    return GestureDetector(
+                      onTap: () {
+                        if (state.deliverySummary![index].status
+                                .trim()
+                                .toUpperCase() ==
+                            'pending'.toUpperCase()) {
+                              
+                        } else if (state.deliverySummary![index].status
+                                .trim()
+                                .toUpperCase() ==
+                            'accepted'.toUpperCase()) {
+                        } else {
+                          Navigator.pushNamed(context, OrderReceipt.route,
+                              arguments: state.deliverySummary![index]);
+                        }
+                      },
+                      child: OrderPreview(
+                        to: state.deliverySummary![index].toAddress,
+                        from: state.deliverySummary![index].fromAddress,
+                        distance: state.deliverySummary![index].distance,
+                        deliveryId: state.deliverySummary![index].id,
+                        name: state.deliverySummary![index].status,
+                      ),
+                    );
+                  }));
+                },
+              ),
+            );
+          },
+        ),
       ),
     );
   }

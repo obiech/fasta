@@ -4,6 +4,8 @@ import 'package:fasta/dashboard/widgets/container_with_image.dart';
 import 'package:fasta/global_widgets/app_bars/app_bar_with_Avater.dart';
 import 'package:fasta/nav/bottom_nav_bar.dart';
 import 'package:fasta/profile/home.dart';
+import 'package:fasta/shipping/application/bloc/shipment_handler_bloc.dart';
+import 'package:fasta/shipping/infrastructure/scoket_io.dart';
 import 'package:fasta/shipping/ongoing_orders.dart';
 import 'package:fasta/theming/size_config.dart';
 import 'package:fasta/typography/font_weights.dart';
@@ -23,6 +25,16 @@ class DashBoardView extends StatefulWidget {
 }
 
 class _DashBoardViewState extends State<DashBoardView> {
+  @override
+  void initState() {
+    super.initState();
+    context
+        .read<ShipmentHandlerBloc>()
+        .add(const ShipmentHandlerEvent.started());
+    context.read<ShippingSocketImpl>().onConnectEvent();
+
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -57,7 +69,7 @@ class _DashBoardViewState extends State<DashBoardView> {
                     BlocBuilder<PaystackBloc, PaystackState>(
                       builder: (context, state) {
                         return Text(
-                          'NGN ${state.balance?.amount?? 0}.00',
+                          'NGN ${state.balance?.amount ?? 0}',
                           style: FastaTextStyle.headline6,
                         );
                       },
@@ -95,12 +107,15 @@ class _DashBoardViewState extends State<DashBoardView> {
                         ),
                         GestureDetector(
                           onTap: () {
-                            Navigator.push(context,
-                                MaterialPageRoute(builder: (context) {
-                              return const BottomNavBar(
-                                index: 2,
-                              );
-                            }));
+                            final a = ShippingSocketImpl();
+                            a.initialize();
+                            // await
+                            // Navigator.push(context,
+                            //     MaterialPageRoute(builder: (context) {
+                            //   return const BottomNavBar(
+                            //     index: 2,
+                            //   );
+                            // }));
                           },
                           child: Container(
                             height: 27.h,

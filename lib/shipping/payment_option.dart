@@ -1,4 +1,6 @@
 import 'package:fasta/colors/colors.dart';
+import 'package:fasta/shipping/application/bloc/shipment_handler_bloc.dart';
+// import 'package:fasta/shipping/application/bloc/shipment_handler_bloc.dart';
 import 'package:fasta/shipping/map_view.dart';
 import 'package:fasta/shipping/rider_scan.dart';
 import 'package:fasta/shipping/widgets/elevated_card_small.dart';
@@ -67,9 +69,13 @@ class _PaymentOptionsState extends State<PaymentOptions> {
                               SizedBox(
                                 height: 20.h,
                               ),
-                              Text(
-                                'NGN 500.00 - NGN 900.00',
-                                style: FastaTextStyle.headline1,
+                              BlocBuilder<ShipmentHandlerBloc, ShipmentHandlerState>(
+                                builder: (context, state) {
+                                  return Text(
+                                    'NGN ${state.deliveryEstimate}',
+                                    style: FastaTextStyle.headline1,
+                                  );
+                                },
                               ),
                               Text(
                                 '35 Mins to arrival, 1.5km.',

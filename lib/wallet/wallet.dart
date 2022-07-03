@@ -29,6 +29,17 @@ class _WalletViewState extends State<WalletView> {
     super.initState();
     context.read<PaystackBloc>().add(const PaystackEvent.balance());
     context.read<PaystackBloc>().add(const PaystackEvent.getBankList());
+    context.read<PaystackBloc>().add(
+                PaystackEvent.allTransactions(
+                  TransactionArg(
+                      endDate: '',
+                      page: '1',
+                      limit: '10',
+                      order: 'desc',
+                      status: '',
+                      type: '',
+                      startDate: ''),
+                ));
   }
 
   @override

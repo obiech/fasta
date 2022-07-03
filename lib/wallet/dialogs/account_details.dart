@@ -102,7 +102,8 @@ Future<void> accountDetailsDialog(BuildContext context, String bankName) async {
                         child: GestureDetector(
                           onTap: () {
                             context.read<PaystackBloc>().add(
-                                const PaystackEvent.confirmWithdrawalOtp());
+                                  const PaystackEvent.confirmWithdrawalOtp(),
+                                );
                             buttonClicked = true;
                           },
                           child: Container(

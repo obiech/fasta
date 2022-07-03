@@ -9,6 +9,7 @@ import 'package:fasta/models/otp_models.dart';
 import 'package:fasta/rider_app/auth/domain/repo.dart';
 import 'package:fasta/typedef.dart/typedefs.dart';
 import 'package:fasta/rider_app/auth/repository/arguments.dart';
+import 'package:geolocator/geolocator.dart';
 
 class AuthRiderImpl implements AuthRider {
   final ApiClient _client;
@@ -20,6 +21,8 @@ class AuthRiderImpl implements AuthRider {
       Map<String, dynamic> body = {'email': email, 'password': password};
       final res = await _client.post(Endpoints.auth.login, body: body);
       const ServerAddress().token = res.data['meta']['token'];
+      await updateDriverLocation();
+      await setAsActive();
       return const Right(unit);
     } catch (e) {
       return Left(AppError(e.toString()));
@@ -45,6 +48,7 @@ class AuthRiderImpl implements AuthRider {
         'phoneNumber': phoneNumber,
       };
       final res = await _client.post(Endpoints.auth.register, body: body);
+      await setAsActive();
       return Right(OTPModel.fromJson(res.data));
     } catch (e) {
       return Left(AppError(e.toString()));
@@ -55,6 +59,7 @@ class AuthRiderImpl implements AuthRider {
   ErrorOr<Unit> registerAsDriver() async {
     try {
       await _client.post(Endpoints.driverAuth.registerAsDriver);
+      await updateDriverLocation();
       return const Right(unit);
     } catch (e) {
       return Left(AppError(e.toString()));
@@ -97,6 +102,42 @@ class AuthRiderImpl implements AuthRider {
     try {
       await _client.post(Endpoints.driverAuth.uploadVehicleImages,
           body: {'image': image});
+      return const Right(unit);
+    } catch (e) {
+      return Left(AppError(e.toString()));
+    }
+  }
+
+  @override
+  ErrorOr<Unit> updateDriverLocation() async {
+    try {
+      final position = await Geolocator.getCurrentPosition(
+          desiredAccuracy: LocationAccuracy.high);
+      final body = {
+        'longitude': position.longitude,
+        'latitude': position.latitude
+      };
+      await _client.put(Endpoints.driverAuth.updateDriverLocation, body: body);
+      return const Right(unit);
+    } catch (e) {
+      return Left(AppError(e.toString()));
+    }
+  }
+
+  @override
+  ErrorOr<Unit> setAsActive() async {
+    try {
+      _client.put(Endpoints.driverAuth.setAsActive);
+      return const Right(unit);
+    } catch (e) {
+      return Left(AppError(e.toString()));
+    }
+  }
+
+  @override
+  ErrorOr<Unit> setAsInActive() async {
+    try {
+      _client.put(Endpoints.driverAuth.setAsInActive);
       return const Right(unit);
     } catch (e) {
       return Left(AppError(e.toString()));

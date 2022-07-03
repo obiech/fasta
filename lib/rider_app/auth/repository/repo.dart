@@ -31,4 +31,10 @@ ErrorOr<Unit> updateLicenceInfo(
       _repo.updateDriverVehicle(arg: arg);
    ErrorOr<Unit> uploadVehicleImage({required FormData image})=>
       _repo.uploadVehicleImage(image: image);
+   ErrorOr<Unit> updateDriverLocation()=>
+      _repo.updateDriverLocation();
+  ErrorOr<Unit> setAsInActive()=>
+      _repo.setAsInActive();
+  ErrorOr<Unit> setAsActive()=>
+      _repo.setAsActive();
 }

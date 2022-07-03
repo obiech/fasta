@@ -5,6 +5,7 @@ import 'package:fasta/auth/repository/repo.dart';
 import 'package:fasta/core/app_state.dart';
 import 'package:fasta/errrors/app_error.dart';
 import 'package:fasta/models/otp.dart';
+import 'package:fasta/shipping/infrastructure/scoket_io.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 
 part 'auth_event.dart';
@@ -24,11 +25,13 @@ class AuthBloc extends Bloc<AuthEvent, AuthState> {
     final Either<AppError, Unit> res =
         await _repo.login(email: event.email, password: event.password);
 
-    res.fold(
-        (l) => emit(state.copyWith(appState: AppState.failed, error: l)),
-        (r) => emit(state.copyWith(
-              appState: AppState.success,
-            )));
+    res.fold((l) => emit(state.copyWith(appState: AppState.failed, error: l)),
+        (r) {
+      emit(state.copyWith(
+        appState: AppState.success,
+      ));
+       ShippingSocketImpl().initialize();
+    });
   }
 
   void _onRegister(_Register event, Emitter<AuthState> emit) async {

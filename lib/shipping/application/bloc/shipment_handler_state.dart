@@ -7,7 +7,14 @@ class ShipmentHandlerState with _$ShipmentHandlerState {
       {required String errorMessage,
       required AppState status,
       LocationPointArg? address,
-      List<Trip>? allDelivery}) = _ShipmentHandlerState;
+      DeliveryInvitation? pendingInvitations,
+      String? deliveryEstimate,
+      DeliveryModel? delivery,
+      @Deprecated('replace with deliverySummary')
+      List<DeliverySummary>? deliverySummary,
+      DeliveryInvitation? invitationEvent,
+      DeliverySummary? newDeliveryEvent,
+      List<DeliverySummaryDTO>? allDelivery}) = _ShipmentHandlerState;
   factory ShipmentHandlerState.initial() =>
-      ShipmentHandlerState(errorMessage: '', status: AppState.waiting);
+      ShipmentHandlerState(errorMessage: '', status: AppState.waiting, deliveryEstimate: '0');
 }

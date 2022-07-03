@@ -30,14 +30,19 @@ import 'package:fasta/rider_app/auth/view/sign_up_verification.dart';
 import 'package:fasta/rider_app/auth/view/sing_up_bike_name.dart';
 import 'package:fasta/rider_app/dashboard/dashboard.dart';
 import 'package:fasta/rider_app/nav/bottom_nav_bar.dart';
+import 'package:fasta/rider_app/orders/complete_order.dart';
+import 'package:fasta/rider_app/orders/new_order.dart';
 import 'package:fasta/rider_app/orders/orders.dart';
 import 'package:fasta/security/change_password.dart';
 import 'package:fasta/shipping/application/bloc/shipment_handler_bloc.dart';
 import 'package:fasta/shipping/application/map/shipment_bloc.dart';
+// import 'package:fasta/shipping/application/bloc/shipment_handler_bloc.dart';
+// import 'package:fasta/shipping/application/map/shipment_bloc.dart';
 import 'package:fasta/shipping/arrival_time.dart';
 import 'package:fasta/shipping/chat.dart';
 import 'package:fasta/shipping/contact_rider.dart';
 import 'package:fasta/shipping/infrastructure/repo.dart';
+import 'package:fasta/shipping/infrastructure/scoket_io.dart';
 import 'package:fasta/shipping/item_info.dart';
 import 'package:fasta/shipping/ongoing_orders.dart';
 import 'package:fasta/shipping/order_details.dart';
@@ -86,6 +91,8 @@ class Fasta extends StatelessWidget {
     precacheImage(
         Image.asset('assets/2.0x/nav_bar_dashboard.png').image, context);
     getLocation();
+    // ShippingSocketImpl.test().initialize('eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJkYXRhIjoxMTI1ODk5OTA2ODQyNzY3LCJpYXQiOjE2NTY1MjI3NjgsImV4cCI6MTY1NjYwOTE2OH0.uAGpHkI9Ed8wru7J84WegDL9LTbqTFp5T7RFFcNRuRc');
+    // 
     return MultiRepositoryProvider(
       providers: [
         RepositoryProvider(
@@ -102,6 +109,9 @@ class Fasta extends StatelessWidget {
         ),
         RepositoryProvider(
           create: (context) => ProfileRepository(ProfileDataImpl(_plugin)),
+        ),
+         RepositoryProvider(
+          create: (context) => ShippingSocketImpl(),
         ),
       ],
       child: MultiBlocProvider(
@@ -137,7 +147,7 @@ class Fasta extends StatelessWidget {
           ),
           BlocProvider(
             create: (context) =>
-                ShipmentHandlerBloc(context.read<ShipmentRepository>()),
+                ShipmentHandlerBloc(context.read<ShipmentRepository>(),context.read<ShippingSocketImpl>()),
           ),
           BlocProvider(
             create: (context) => ProfileBloc(context.read<ProfileRepository>())
@@ -193,6 +203,8 @@ class Fasta extends StatelessWidget {
               SigninScreenRider.route: (_) => const SigninScreenRider(),
               VerifyEmail.route: (_) => const VerifyEmail(),
               ChangePassword.route: (_) => const ChangePassword(),
+              NewOrder.route:(_)=> const NewOrder(),
+              CompleteOrder.route:(_)=> const CompleteOrder(),
             },
             home: const Responsive(
                 designHeight: 812, designWidth: 375, child: Splash())),

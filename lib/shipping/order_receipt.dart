@@ -1,9 +1,13 @@
 import 'package:fasta/colors/colors.dart';
+import 'package:fasta/core/app_state.dart';
 import 'package:fasta/global_widgets/app_bars/app_bar_back_button.dart';
+import 'package:fasta/shipping/application/bloc/shipment_handler_bloc.dart';
 import 'package:fasta/shipping/domain/entity/delivery.dart';
+import 'package:fasta/shipping/domain/entity/delivery_model.dart';
 import 'package:fasta/theming/size_config.dart';
 import 'package:fasta/typography/text_styles.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 
 class OrderReceipt extends StatefulWidget {
   static const String route = '/OrderReceipt';
@@ -14,13 +18,16 @@ class OrderReceipt extends StatefulWidget {
 }
 
 class _OrderReceiptState extends State<OrderReceipt> {
-  late Trip? arg;
+  late DeliverySummary? arg;
 
   @override
   void didChangeDependencies() {
     super.didChangeDependencies();
     // arg = (ModalRoute.of(context)?.settings.arguments as Trip);
-    arg = (ModalRoute.of(context)?.settings.arguments as Trip?);
+    arg = (ModalRoute.of(context)?.settings.arguments as DeliverySummary?);
+    context
+        .read<ShipmentHandlerBloc>()
+        .add(ShipmentHandlerEvent.getADelivery(arg!.id, Owner.user));
   }
 
   @override
@@ -54,75 +61,91 @@ class _OrderReceiptState extends State<OrderReceipt> {
                     color: FastaColors.grey10,
                     border: Border.all(color: FastaColors.grey9),
                     borderRadius: BorderRadius.circular(23.h)),
-                child: Column(
-                    mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                    children: [
-                      OrderInfo(
-                        name: 'Items',
-                        value: Text(arg?.itemName ?? '',
-                            style: FastaTextStyle.subtitleHard),
-                      ),
-                      OrderInfo(
-                        name: 'Order No',
-                        value: Text(arg?.tripId ?? '',
-                            style: FastaTextStyle.subtitleHard),
-                      ),
-                      OrderInfo(
-                        name: 'Rider',
-                        value: Text(arg?.rider ?? '',
-                            style: FastaTextStyle.subtitleHard),
-                      ),
-                      OrderInfo(
-                        name: 'Pickup point',
-                        value: Text(arg?.from ?? '',
-                            style: FastaTextStyle.subtitleHard),
-                      ),
-                      OrderInfo(
-                        name: 'Items',
-                        value: Text(arg?.itemName ?? '',
-                            style: FastaTextStyle.subtitleHard),
-                      ),
-                      OrderInfo(
-                        name: 'Delivery Point',
-                        value: Text(arg?.to ?? '',
-                            style: FastaTextStyle.subtitleHard),
-                      ),
-                      OrderInfo(
-                        name: 'Items',
-                        value: Text(arg?.itemName ?? '',
-                            style: FastaTextStyle.subtitleHard),
-                      ),
-                      OrderInfo(
-                        name: 'Rating',
-                        value: Row(
-                          children: List.generate(int.parse(arg?.rating ?? '1'),
-                              (index) {
-                            return const Icon(Icons.star,
-                                color: FastaColors.green);
-                          }),
-                        ),
-                      ),
-                      OrderInfo(
-                        name: 'Depature time',
-                        value: Text(arg?.departureTime ?? '',
-                            style: FastaTextStyle.subtitleHard),
-                      ),
-                      OrderInfo(
-                        name: 'Payment method',
-                        value: Text(arg?.paymentMethod ?? '',
-                            style: FastaTextStyle.subtitleHard),
-                      ),
-                      OrderInfo(
-                        name: 'Arrival time',
-                        value: Text(arg?.arrivalTime ?? '',
-                            style: FastaTextStyle.subtitleHard),
-                      ),
-                      OrderInfo(
-                        name: 'Cost',
-                        value: Text(arg?.price ?? '',
-                            style: FastaTextStyle.subtitleHard),
-                      ),
-                    ])),
+                child: BlocConsumer<ShipmentHandlerBloc, ShipmentHandlerState>(
+                    listener: (context, state) {
+                  // TODO: implement listener
+                }, builder: (context, state) {
+                  if (state.status == AppState.success) {
+                    return Column(
+                        mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                        children: [
+                          OrderInfo(
+                            name: 'Items',
+                            value: Text(state.delivery!.sender.items,
+                                style: FastaTextStyle.subtitleHard),
+                          ),
+                          OrderInfo(
+                            name: 'Order No',
+                            value: Text(state.delivery!.deliverySummary.id,
+                                style: FastaTextStyle.subtitleHard),
+                          ),
+                          OrderInfo(
+                            name: 'Rider',
+                            value: Text(state.delivery!.rider?.fullName ?? '',
+                                style: FastaTextStyle.subtitleHard),
+                          ),
+                          OrderInfo(
+                            name: 'Pickup point',
+                            value: Text(
+                                state.delivery!.deliverySummary.fromAddress,
+                                style: FastaTextStyle.subtitleHard),
+                          ),
+                          OrderInfo(
+                            name: 'Items',
+                            value: Text(state.delivery!.sender.items,
+                                style: FastaTextStyle.subtitleHard),
+                          ),
+                          OrderInfo(
+                            name: 'Delivery Point',
+                            value: Text(
+                                state.delivery!.deliverySummary.toAddress,
+                                style: FastaTextStyle.subtitleHard),
+                          ),
+                          OrderInfo(
+                            name: 'Items',
+                            value: Text(state.delivery!.sender.items,
+                                style: FastaTextStyle.subtitleHard),
+                          ),
+                          OrderInfo(
+                            name: 'Rating',
+                            value: Row(
+                              children: List.generate(
+                                  int.parse(
+                                      (state.delivery!.rating.rating.isEmpty)
+                                          ? '0'
+                                          : state.delivery!.rating.rating),
+                                  (index) {
+                                return const Icon(Icons.star,
+                                    color: FastaColors.green);
+                              }),
+                            ),
+                          ),
+                          OrderInfo(
+                            name: 'Depature time',
+                            value: Text(state.delivery!.deliverySummary.endTime,
+                                style: FastaTextStyle.subtitleHard),
+                          ),
+                          OrderInfo(
+                            name: 'Payment method',
+                            value: Text('wallet',
+                                style: FastaTextStyle.subtitleHard),
+                          ),
+                          OrderInfo(
+                            name: 'Arrival time',
+                            value: Text(state.delivery!.deliverySummary.endTime,
+                                style: FastaTextStyle.subtitleHard),
+                          ),
+                          OrderInfo(
+                            name: 'Cost',
+                            value: Text(state.delivery!.deliverySummary.cost,
+                                style: FastaTextStyle.subtitleHard),
+                          ),
+                        ]);
+                  }
+                  return const Center(
+                    child: CircularProgressIndicator.adaptive(),
+                  );
+                })),
             SizedBox(
               height: 58.h,
             ),

@@ -87,8 +87,11 @@ class _DriverAuth {
   String get updateLicenceInfo => relevant + 'driver/licence-info';
   String get updateDriverVehicle => relevant + 'driver/vehicle';
   String get uploadVehicleImages => relevant + 'driver/vehicle/images';
+  String get updateDriverLocation => relevant + 'driver/location';
   String deleteVehicleImage(String imageID) =>
       relevant + 'driver/vehicle/images/:$imageID';
+  String get setAsActive => relevant + 'driver/status/online';
+  String get setAsInActive => relevant + 'driver/status/offline';
 }
 
 class _Wallet {
@@ -112,7 +115,7 @@ class _Wallet {
 
   String get getTotalEarnings => relevant + 'wallet/earnings/total';
 
-  String get getWithdrawalOtp => relevant + 'wallet/bank/otp';
+  String get getWithdrawalOtp => relevant + 'wallet/withdraw/bank/otp';
   String get initialWithdrawal => relevant + 'wallet/withdraw/bank/initiate';
   String get bankList => relevant + 'wallet/banks-info';
   String get resolveAccountNumber => relevant + 'wallet/resolve-account-number';
@@ -121,19 +124,27 @@ class _Wallet {
 class _Delivery {
   String get createDelivery => relevant + 'delivery';
   String acceptCompletedDelivery(String deliveryId) =>
-      relevant + 'delivery/:$deliveryId/accept-finish';
+      relevant + 'delivery/$deliveryId/accept-finish';
   String rateDelivery(String deliveryId) =>
-      relevant + 'delivery/:$deliveryId/rate';
-  String tipDriver(String deliveryId) => relevant + 'delivery/:$deliveryId/tip';
+      relevant + 'delivery/$deliveryId/rate';
+  String get deliveryCost => relevant + 'delivery/estimated-cost';
+  String tipDriver(String deliveryId) => relevant + 'delivery/$deliveryId/tip';
+  String getADelivery(String deliveryId) => relevant + 'delivery/$deliveryId';
+  String get getAllDeliveries => relevant + 'delivery';
 }
 
 class _DriverDelivery {
   String get pendingDelivery =>
       relevant + 'delivery/delivery-invitations/pending';
   String acceptDelivery(String deliveryInvitationId) =>
-      relevant + 'delivery/delivery-invitations/:$deliveryInvitationId/accept';
+      relevant + 'delivery/delivery-invitations/$deliveryInvitationId/accept';
   String rejectDelivery(String deliveryInvitationId) =>
-      relevant + 'delivery/delivery-invitations/:$deliveryInvitationId/reject';
+      relevant + 'delivery/delivery-invitations/$deliveryInvitationId/reject';
   String finishDelivery(String deliveryId) =>
-      relevant + 'delivery/:$deliveryId/driver-finish';
+      relevant + 'delivery/$deliveryId/driver-finish';
+  String get allDeliveryInvitations =>
+      relevant + 'delivery/delivery-invitations/all';
+
+  String getADelivery(String deliveryId) =>
+      relevant + 'delivery/$deliveryId/as-driver';
 }

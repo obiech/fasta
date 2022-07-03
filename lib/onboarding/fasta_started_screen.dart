@@ -3,6 +3,7 @@ import 'package:fasta/auth/signin_screen.dart';
 import 'package:fasta/auth/signup_screen.dart';
 // project imports
 import 'package:fasta/colors/colors.dart';
+import 'package:fasta/rider_app/auth/view/sign_in_screen.dart';
 import 'package:fasta/rider_app/auth/view/sign_up_personal_info.dart';
 import 'package:fasta/theming/size_config.dart';
 import 'package:fasta/typography/text_styles.dart';
@@ -72,7 +73,11 @@ class _FastaStartedScreenState extends State<FastaStartedScreen> {
                         onPressed: () {
                           if (arg == 0) {
                             Navigator.pushNamed(context, SigninScreen.route);
-                          } else if (arg == 1) {}
+                          } else if (arg == 1) {
+                             
+                            Navigator.pushNamed(context, SigninScreenRider.route);
+
+                          }
                         },
                         child: Row(
                           children: [

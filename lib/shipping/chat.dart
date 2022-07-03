@@ -1,5 +1,6 @@
 import 'package:bubble/bubble.dart';
 import 'package:fasta/colors/colors.dart';
+import 'package:fasta/profile/domain/entity/user.dart';
 import 'package:fasta/shipping/rider_profile.dart';
 import 'package:fasta/shipping/widgets/call_icon.dart';
 import 'package:fasta/theming/size_config.dart';
@@ -17,6 +18,13 @@ class ChatView extends StatefulWidget {
 
 class _ChatViewState extends State<ChatView> {
   final TextEditingController _messageController = TextEditingController();
+  late User? arg;
+
+  @override
+  void didChangeDependencies() {
+    super.didChangeDependencies();
+    arg = (ModalRoute.of(context)?.settings.arguments as User);
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -53,17 +61,22 @@ class _ChatViewState extends State<ChatView> {
             children: [
               CircleAvatar(
                   radius: 20.h,
-                  backgroundImage: Image.asset('assets/2.0x/young.png').image),
+                  backgroundImage: (arg?.avatarUrl == null)
+                      ? Image.asset('assets/young.png').image
+                      : Image.network(arg!.avatarUrl!).image),
               SizedBox(
                 width: 10.w,
               ),
               RichText(
                   text: TextSpan(
-                      text: 'Joseph Aregbesola\n',
+                      text: arg?.fullName  ?? 'Joseph Aregbesola',
                       style: FastaTextStyle.hardLabel2,
                       children: [
+                       const  TextSpan(
+                        text: '\n'),
                     TextSpan(
-                        text: 'Bike type & Plate Number',
+                        text: arg?.userId.toString() ??
+                            'Bike type & Plate Number',
                         style: FastaTextStyle.subtitle3)
                   ]))
             ],

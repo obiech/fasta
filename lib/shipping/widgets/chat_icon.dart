@@ -1,12 +1,13 @@
 import 'package:fasta/colors/colors.dart';
+import 'package:fasta/profile/domain/entity/user.dart';
 import 'package:fasta/shipping/chat.dart';
 import 'package:fasta/theming/size_config.dart';
 import 'package:flutter/material.dart';
 
 class ChatIcon extends StatelessWidget {
-  const ChatIcon({
-    Key? key,
-  }) : super(key: key);
+  const ChatIcon([this.user,Key? key,]) : super(key: key);
+
+  final User? user;
 
   @override
   Widget build(BuildContext context) {
@@ -21,7 +22,7 @@ class ChatIcon extends StatelessWidget {
           ),
           onPressed: () {
             Navigator.pushNamed(
-                context, ChatView.route);
+                context, ChatView.route, arguments: user);
           },
         ),
       ),

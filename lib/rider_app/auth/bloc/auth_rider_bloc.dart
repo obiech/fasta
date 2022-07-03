@@ -5,6 +5,7 @@ import 'package:fasta/models/otp.dart';
 // import 'package:fasta/rider_app/auth/domain/entity/otp.dart';
 import 'package:fasta/rider_app/auth/repository/arguments.dart';
 import 'package:fasta/rider_app/auth/repository/repo.dart';
+import 'package:fasta/shipping/infrastructure/scoket_io.dart';
 import 'package:flutter_contacts/properties/event.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 
@@ -30,7 +31,10 @@ class AuthRiderBloc extends Bloc<AuthRiderEvent, AuthRiderState> {
     res.fold(
         (l) => emit(
             state.copyWith(error: l.errorMessage, status: AppState.failed)),
-        (r) => emit(state.copyWith(status: AppState.success)));
+        (r) {
+      ShippingSocketImpl().initialize();
+      emit(state.copyWith(status: AppState.success));
+    });
   }
 
   void _onRegister(_Register event, Emitter<AuthRiderState> emit) async {
@@ -47,7 +51,10 @@ class AuthRiderBloc extends Bloc<AuthRiderEvent, AuthRiderState> {
     res.fold(
         (l) => emit(
             state.copyWith(error: l.errorMessage, status: AppState.failed)),
-        (r) => emit(state.copyWith(status: AppState.success, otp: r)));
+        (r) {
+      ShippingSocketImpl().initialize();
+      emit(state.copyWith(status: AppState.success, otp: r));
+    });
   }
 
   void _onRegisterAsDriver(
@@ -77,7 +84,7 @@ class AuthRiderBloc extends Bloc<AuthRiderEvent, AuthRiderState> {
 
   void _onUpdateDriverVehicle(
       _UpdateDriverVehicle event, Emitter<AuthRiderState> emit) async {
-         emit(state.copyWith(status: AppState.loading));
+    emit(state.copyWith(status: AppState.loading));
 
     final res = await repo.updateDriverVehicle(arg: event.arg);
 
@@ -85,10 +92,11 @@ class AuthRiderBloc extends Bloc<AuthRiderEvent, AuthRiderState> {
         (l) => emit(
             state.copyWith(error: l.errorMessage, status: AppState.failed)),
         (r) => emit(state.copyWith(status: AppState.success)));
-      }
+  }
+
   void _onUploadVehicleImage(
       _UploadVehicleImage event, Emitter<AuthRiderState> emit) async {
-         emit(state.copyWith(status: AppState.loading));
+    emit(state.copyWith(status: AppState.loading));
 
     final res = await repo.uploadVehicleImage(image: event.image);
 
@@ -96,5 +104,5 @@ class AuthRiderBloc extends Bloc<AuthRiderEvent, AuthRiderState> {
         (l) => emit(
             state.copyWith(error: l.errorMessage, status: AppState.failed)),
         (r) => emit(state.copyWith(status: AppState.success)));
-      }
+  }
 }

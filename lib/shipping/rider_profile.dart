@@ -1,4 +1,5 @@
 import 'package:fasta/colors/colors.dart';
+import 'package:fasta/profile/domain/entity/user.dart';
 import 'package:fasta/shipping/map_view.dart';
 import 'package:fasta/shipping/tracker.dart';
 import 'package:fasta/shipping/widgets/call_icon.dart';
@@ -16,6 +17,14 @@ class RiderProfile extends StatefulWidget {
 }
 
 class _RiderProfileState extends State<RiderProfile> {
+  late User? arg;
+
+  @override
+  void didChangeDependencies() {
+    super.didChangeDependencies();
+    arg = (ModalRoute.of(context)?.settings.arguments as User);
+  }
+
   @override
   Widget build(BuildContext context) {
     return MapView(
@@ -80,7 +89,9 @@ class _RiderProfileState extends State<RiderProfile> {
                               child: CircleAvatar(
                                 radius: 62.h,
                                 backgroundImage:
-                                    Image.asset('assets/young.png').image,
+                                    (arg!.avatarUrl ==null)?
+                                            Image.asset('assets/young.png')
+                                                .image: Image.network(arg!.avatarUrl!).image,
                               ),
                             ),
                             SizedBox(
@@ -88,28 +99,29 @@ class _RiderProfileState extends State<RiderProfile> {
                             ),
                             Center(
                                 child: Text(
-                              'Joshua Aregbesola',
+                              arg!.fullName,
                               style: FastaTextStyle.hardLabel,
                             )),
                             SizedBox(
                               height: 13.h,
                             ),
-                            Row(
-                              mainAxisAlignment: MainAxisAlignment.center,
-                              children: [
-                                const Icon(
-                                  Icons.star,
-                                  color: FastaColors.green,
-                                ),
-                                SizedBox(
-                                  width: 3.w,
-                                ),
-                                Text(
-                                  '5.0',
-                                  style: FastaTextStyle.hardLabel2,
-                                )
-                              ],
-                            ),
+                            // TODO uncomment and fix
+                            // Row(
+                            //   mainAxisAlignment: MainAxisAlignment.center,
+                            //   children: [
+                            //     const Icon(
+                            //       Icons.star,
+                            //       color: FastaColors.green,
+                            //     ),
+                            //     SizedBox(
+                            //       width: 3.w,
+                            //     ),
+                            //     Text(
+                            //       '5.0',
+                            //       style: FastaTextStyle.hardLabel2,
+                            //     )
+                            //   ],
+                            // ),
                             SizedBox(
                               height: 21.h,
                             ),
@@ -134,15 +146,17 @@ class _RiderProfileState extends State<RiderProfile> {
                                   Navigator.pushNamed(
                                       context, ItemTrackerView.route);
                                 },
-                                child: Container(
-                                  height: 31.h,
-                                  width: 90.w,
-                                  decoration: BoxDecoration(
-                                      color: FastaColors.grey5,
-                                      borderRadius: BorderRadius.circular(7.h)),
-                                  child: Center(
-                                      child: Text('Fstjsksjs',
-                                          style: FastaTextStyle.hardLabel2)),
+                                child: SizedBox(
+                                  child: Container(
+                                    padding: EdgeInsets.symmetric(vertical: 10.h,horizontal:
+                                    10.w),
+                                    decoration: BoxDecoration(
+                                        color: FastaColors.grey5,
+                                        borderRadius: BorderRadius.circular(7.h)),
+                                    child: Center(
+                                        child: Text(arg!.userId.toString(),
+                                            style: FastaTextStyle.hardLabel2)),
+                                  ),
                                 ),
                               ),
                             )

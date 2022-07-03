@@ -138,7 +138,8 @@ class PaystackBloc extends Bloc<PaystackEvent, PaystackState> {
     emit(state.copyWith(appState: AppState.loading));
     final res = await _repo.confirmWithdrawalOtp(ConfirmWithdrawal(
         otpId: state.otpId!,
-        otpCode: state.otpCode!,
+        otpCode: '999999',
+        // otpCode: state.otpCode??'999999',
         amount: state.amount!,
         bankCode: state.bankCode!,
         userId: state.userId!,

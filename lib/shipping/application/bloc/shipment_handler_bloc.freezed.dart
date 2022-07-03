@@ -34,10 +34,12 @@ class _$ShipmentHandlerEventTearOff {
     );
   }
 
-  _GetAllDeliveries getAllDeliveries({required String email}) {
-    return _GetAllDeliveries(
-      email: email,
-    );
+  _GetAllDeliveries getAllDeliveries() {
+    return const _GetAllDeliveries();
+  }
+
+  _GetAllDeliveriesPendingInvitations getAllDeliveriesPendingInvitations() {
+    return const _GetAllDeliveriesPendingInvitations();
   }
 
   _GetAllShipment getAllShipment({required String email}) {
@@ -72,6 +74,41 @@ class _$ShipmentHandlerEventTearOff {
       amount,
     );
   }
+
+  _DeliveryCost deliveryCost(DeliveryCostArg arg) {
+    return _DeliveryCost(
+      arg,
+    );
+  }
+
+  _GetPendingDelivery getPendingDelivery() {
+    return const _GetPendingDelivery();
+  }
+
+  _AcceptDelivery acceptDelivery(String deliveryId) {
+    return _AcceptDelivery(
+      deliveryId,
+    );
+  }
+
+  _RejectDelivery rejectDelivery(String deliveryId) {
+    return _RejectDelivery(
+      deliveryId,
+    );
+  }
+
+  _FinishDelivery finishDelivery(String deliveryId) {
+    return _FinishDelivery(
+      deliveryId,
+    );
+  }
+
+  _GetADelivery getADelivery(String deliveryId, Owner owner) {
+    return _GetADelivery(
+      deliveryId,
+      owner,
+    );
+  }
 }
 
 /// @nodoc
@@ -84,12 +121,19 @@ mixin _$ShipmentHandlerEvent {
     required TResult Function() started,
     required TResult Function(CreateShipmentArg arg) createShipment,
     required TResult Function(CreateTripArg arg) createTrip,
-    required TResult Function(String email) getAllDeliveries,
+    required TResult Function() getAllDeliveries,
+    required TResult Function() getAllDeliveriesPendingInvitations,
     required TResult Function(String email) getAllShipment,
     required TResult Function(String id, String status) updateTripStatus,
     required TResult Function(String deliveryId) acceptCompletedDelivery,
     required TResult Function(RateDeliveryArg arg) rateDelivery,
     required TResult Function(String deliveryId, String amount) tipDelivery,
+    required TResult Function(DeliveryCostArg arg) deliveryCost,
+    required TResult Function() getPendingDelivery,
+    required TResult Function(String deliveryId) acceptDelivery,
+    required TResult Function(String deliveryId) rejectDelivery,
+    required TResult Function(String deliveryId) finishDelivery,
+    required TResult Function(String deliveryId, Owner owner) getADelivery,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
@@ -97,12 +141,19 @@ mixin _$ShipmentHandlerEvent {
     TResult Function()? started,
     TResult Function(CreateShipmentArg arg)? createShipment,
     TResult Function(CreateTripArg arg)? createTrip,
-    TResult Function(String email)? getAllDeliveries,
+    TResult Function()? getAllDeliveries,
+    TResult Function()? getAllDeliveriesPendingInvitations,
     TResult Function(String email)? getAllShipment,
     TResult Function(String id, String status)? updateTripStatus,
     TResult Function(String deliveryId)? acceptCompletedDelivery,
     TResult Function(RateDeliveryArg arg)? rateDelivery,
     TResult Function(String deliveryId, String amount)? tipDelivery,
+    TResult Function(DeliveryCostArg arg)? deliveryCost,
+    TResult Function()? getPendingDelivery,
+    TResult Function(String deliveryId)? acceptDelivery,
+    TResult Function(String deliveryId)? rejectDelivery,
+    TResult Function(String deliveryId)? finishDelivery,
+    TResult Function(String deliveryId, Owner owner)? getADelivery,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
@@ -110,12 +161,19 @@ mixin _$ShipmentHandlerEvent {
     TResult Function()? started,
     TResult Function(CreateShipmentArg arg)? createShipment,
     TResult Function(CreateTripArg arg)? createTrip,
-    TResult Function(String email)? getAllDeliveries,
+    TResult Function()? getAllDeliveries,
+    TResult Function()? getAllDeliveriesPendingInvitations,
     TResult Function(String email)? getAllShipment,
     TResult Function(String id, String status)? updateTripStatus,
     TResult Function(String deliveryId)? acceptCompletedDelivery,
     TResult Function(RateDeliveryArg arg)? rateDelivery,
     TResult Function(String deliveryId, String amount)? tipDelivery,
+    TResult Function(DeliveryCostArg arg)? deliveryCost,
+    TResult Function()? getPendingDelivery,
+    TResult Function(String deliveryId)? acceptDelivery,
+    TResult Function(String deliveryId)? rejectDelivery,
+    TResult Function(String deliveryId)? finishDelivery,
+    TResult Function(String deliveryId, Owner owner)? getADelivery,
     required TResult orElse(),
   }) =>
       throw _privateConstructorUsedError;
@@ -125,12 +183,20 @@ mixin _$ShipmentHandlerEvent {
     required TResult Function(_CreateShipment value) createShipment,
     required TResult Function(_CreateTrip value) createTrip,
     required TResult Function(_GetAllDeliveries value) getAllDeliveries,
+    required TResult Function(_GetAllDeliveriesPendingInvitations value)
+        getAllDeliveriesPendingInvitations,
     required TResult Function(_GetAllShipment value) getAllShipment,
     required TResult Function(_UpdateTripStatus value) updateTripStatus,
     required TResult Function(_AcceptCompletedDelivery value)
         acceptCompletedDelivery,
     required TResult Function(_RateDelivery value) rateDelivery,
     required TResult Function(_TipDelivery value) tipDelivery,
+    required TResult Function(_DeliveryCost value) deliveryCost,
+    required TResult Function(_GetPendingDelivery value) getPendingDelivery,
+    required TResult Function(_AcceptDelivery value) acceptDelivery,
+    required TResult Function(_RejectDelivery value) rejectDelivery,
+    required TResult Function(_FinishDelivery value) finishDelivery,
+    required TResult Function(_GetADelivery value) getADelivery,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
@@ -139,11 +205,19 @@ mixin _$ShipmentHandlerEvent {
     TResult Function(_CreateShipment value)? createShipment,
     TResult Function(_CreateTrip value)? createTrip,
     TResult Function(_GetAllDeliveries value)? getAllDeliveries,
+    TResult Function(_GetAllDeliveriesPendingInvitations value)?
+        getAllDeliveriesPendingInvitations,
     TResult Function(_GetAllShipment value)? getAllShipment,
     TResult Function(_UpdateTripStatus value)? updateTripStatus,
     TResult Function(_AcceptCompletedDelivery value)? acceptCompletedDelivery,
     TResult Function(_RateDelivery value)? rateDelivery,
     TResult Function(_TipDelivery value)? tipDelivery,
+    TResult Function(_DeliveryCost value)? deliveryCost,
+    TResult Function(_GetPendingDelivery value)? getPendingDelivery,
+    TResult Function(_AcceptDelivery value)? acceptDelivery,
+    TResult Function(_RejectDelivery value)? rejectDelivery,
+    TResult Function(_FinishDelivery value)? finishDelivery,
+    TResult Function(_GetADelivery value)? getADelivery,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
@@ -152,11 +226,19 @@ mixin _$ShipmentHandlerEvent {
     TResult Function(_CreateShipment value)? createShipment,
     TResult Function(_CreateTrip value)? createTrip,
     TResult Function(_GetAllDeliveries value)? getAllDeliveries,
+    TResult Function(_GetAllDeliveriesPendingInvitations value)?
+        getAllDeliveriesPendingInvitations,
     TResult Function(_GetAllShipment value)? getAllShipment,
     TResult Function(_UpdateTripStatus value)? updateTripStatus,
     TResult Function(_AcceptCompletedDelivery value)? acceptCompletedDelivery,
     TResult Function(_RateDelivery value)? rateDelivery,
     TResult Function(_TipDelivery value)? tipDelivery,
+    TResult Function(_DeliveryCost value)? deliveryCost,
+    TResult Function(_GetPendingDelivery value)? getPendingDelivery,
+    TResult Function(_AcceptDelivery value)? acceptDelivery,
+    TResult Function(_RejectDelivery value)? rejectDelivery,
+    TResult Function(_FinishDelivery value)? finishDelivery,
+    TResult Function(_GetADelivery value)? getADelivery,
     required TResult orElse(),
   }) =>
       throw _privateConstructorUsedError;
@@ -221,12 +303,19 @@ class _$_Started implements _Started {
     required TResult Function() started,
     required TResult Function(CreateShipmentArg arg) createShipment,
     required TResult Function(CreateTripArg arg) createTrip,
-    required TResult Function(String email) getAllDeliveries,
+    required TResult Function() getAllDeliveries,
+    required TResult Function() getAllDeliveriesPendingInvitations,
     required TResult Function(String email) getAllShipment,
     required TResult Function(String id, String status) updateTripStatus,
     required TResult Function(String deliveryId) acceptCompletedDelivery,
     required TResult Function(RateDeliveryArg arg) rateDelivery,
     required TResult Function(String deliveryId, String amount) tipDelivery,
+    required TResult Function(DeliveryCostArg arg) deliveryCost,
+    required TResult Function() getPendingDelivery,
+    required TResult Function(String deliveryId) acceptDelivery,
+    required TResult Function(String deliveryId) rejectDelivery,
+    required TResult Function(String deliveryId) finishDelivery,
+    required TResult Function(String deliveryId, Owner owner) getADelivery,
   }) {
     return started();
   }
@@ -237,12 +326,19 @@ class _$_Started implements _Started {
     TResult Function()? started,
     TResult Function(CreateShipmentArg arg)? createShipment,
     TResult Function(CreateTripArg arg)? createTrip,
-    TResult Function(String email)? getAllDeliveries,
+    TResult Function()? getAllDeliveries,
+    TResult Function()? getAllDeliveriesPendingInvitations,
     TResult Function(String email)? getAllShipment,
     TResult Function(String id, String status)? updateTripStatus,
     TResult Function(String deliveryId)? acceptCompletedDelivery,
     TResult Function(RateDeliveryArg arg)? rateDelivery,
     TResult Function(String deliveryId, String amount)? tipDelivery,
+    TResult Function(DeliveryCostArg arg)? deliveryCost,
+    TResult Function()? getPendingDelivery,
+    TResult Function(String deliveryId)? acceptDelivery,
+    TResult Function(String deliveryId)? rejectDelivery,
+    TResult Function(String deliveryId)? finishDelivery,
+    TResult Function(String deliveryId, Owner owner)? getADelivery,
   }) {
     return started?.call();
   }
@@ -253,12 +349,19 @@ class _$_Started implements _Started {
     TResult Function()? started,
     TResult Function(CreateShipmentArg arg)? createShipment,
     TResult Function(CreateTripArg arg)? createTrip,
-    TResult Function(String email)? getAllDeliveries,
+    TResult Function()? getAllDeliveries,
+    TResult Function()? getAllDeliveriesPendingInvitations,
     TResult Function(String email)? getAllShipment,
     TResult Function(String id, String status)? updateTripStatus,
     TResult Function(String deliveryId)? acceptCompletedDelivery,
     TResult Function(RateDeliveryArg arg)? rateDelivery,
     TResult Function(String deliveryId, String amount)? tipDelivery,
+    TResult Function(DeliveryCostArg arg)? deliveryCost,
+    TResult Function()? getPendingDelivery,
+    TResult Function(String deliveryId)? acceptDelivery,
+    TResult Function(String deliveryId)? rejectDelivery,
+    TResult Function(String deliveryId)? finishDelivery,
+    TResult Function(String deliveryId, Owner owner)? getADelivery,
     required TResult orElse(),
   }) {
     if (started != null) {
@@ -274,12 +377,20 @@ class _$_Started implements _Started {
     required TResult Function(_CreateShipment value) createShipment,
     required TResult Function(_CreateTrip value) createTrip,
     required TResult Function(_GetAllDeliveries value) getAllDeliveries,
+    required TResult Function(_GetAllDeliveriesPendingInvitations value)
+        getAllDeliveriesPendingInvitations,
     required TResult Function(_GetAllShipment value) getAllShipment,
     required TResult Function(_UpdateTripStatus value) updateTripStatus,
     required TResult Function(_AcceptCompletedDelivery value)
         acceptCompletedDelivery,
     required TResult Function(_RateDelivery value) rateDelivery,
     required TResult Function(_TipDelivery value) tipDelivery,
+    required TResult Function(_DeliveryCost value) deliveryCost,
+    required TResult Function(_GetPendingDelivery value) getPendingDelivery,
+    required TResult Function(_AcceptDelivery value) acceptDelivery,
+    required TResult Function(_RejectDelivery value) rejectDelivery,
+    required TResult Function(_FinishDelivery value) finishDelivery,
+    required TResult Function(_GetADelivery value) getADelivery,
   }) {
     return started(this);
   }
@@ -291,11 +402,19 @@ class _$_Started implements _Started {
     TResult Function(_CreateShipment value)? createShipment,
     TResult Function(_CreateTrip value)? createTrip,
     TResult Function(_GetAllDeliveries value)? getAllDeliveries,
+    TResult Function(_GetAllDeliveriesPendingInvitations value)?
+        getAllDeliveriesPendingInvitations,
     TResult Function(_GetAllShipment value)? getAllShipment,
     TResult Function(_UpdateTripStatus value)? updateTripStatus,
     TResult Function(_AcceptCompletedDelivery value)? acceptCompletedDelivery,
     TResult Function(_RateDelivery value)? rateDelivery,
     TResult Function(_TipDelivery value)? tipDelivery,
+    TResult Function(_DeliveryCost value)? deliveryCost,
+    TResult Function(_GetPendingDelivery value)? getPendingDelivery,
+    TResult Function(_AcceptDelivery value)? acceptDelivery,
+    TResult Function(_RejectDelivery value)? rejectDelivery,
+    TResult Function(_FinishDelivery value)? finishDelivery,
+    TResult Function(_GetADelivery value)? getADelivery,
   }) {
     return started?.call(this);
   }
@@ -307,11 +426,19 @@ class _$_Started implements _Started {
     TResult Function(_CreateShipment value)? createShipment,
     TResult Function(_CreateTrip value)? createTrip,
     TResult Function(_GetAllDeliveries value)? getAllDeliveries,
+    TResult Function(_GetAllDeliveriesPendingInvitations value)?
+        getAllDeliveriesPendingInvitations,
     TResult Function(_GetAllShipment value)? getAllShipment,
     TResult Function(_UpdateTripStatus value)? updateTripStatus,
     TResult Function(_AcceptCompletedDelivery value)? acceptCompletedDelivery,
     TResult Function(_RateDelivery value)? rateDelivery,
     TResult Function(_TipDelivery value)? tipDelivery,
+    TResult Function(_DeliveryCost value)? deliveryCost,
+    TResult Function(_GetPendingDelivery value)? getPendingDelivery,
+    TResult Function(_AcceptDelivery value)? acceptDelivery,
+    TResult Function(_RejectDelivery value)? rejectDelivery,
+    TResult Function(_FinishDelivery value)? finishDelivery,
+    TResult Function(_GetADelivery value)? getADelivery,
     required TResult orElse(),
   }) {
     if (started != null) {
@@ -393,12 +520,19 @@ class _$_CreateShipment implements _CreateShipment {
     required TResult Function() started,
     required TResult Function(CreateShipmentArg arg) createShipment,
     required TResult Function(CreateTripArg arg) createTrip,
-    required TResult Function(String email) getAllDeliveries,
+    required TResult Function() getAllDeliveries,
+    required TResult Function() getAllDeliveriesPendingInvitations,
     required TResult Function(String email) getAllShipment,
     required TResult Function(String id, String status) updateTripStatus,
     required TResult Function(String deliveryId) acceptCompletedDelivery,
     required TResult Function(RateDeliveryArg arg) rateDelivery,
     required TResult Function(String deliveryId, String amount) tipDelivery,
+    required TResult Function(DeliveryCostArg arg) deliveryCost,
+    required TResult Function() getPendingDelivery,
+    required TResult Function(String deliveryId) acceptDelivery,
+    required TResult Function(String deliveryId) rejectDelivery,
+    required TResult Function(String deliveryId) finishDelivery,
+    required TResult Function(String deliveryId, Owner owner) getADelivery,
   }) {
     return createShipment(arg);
   }
@@ -409,12 +543,19 @@ class _$_CreateShipment implements _CreateShipment {
     TResult Function()? started,
     TResult Function(CreateShipmentArg arg)? createShipment,
     TResult Function(CreateTripArg arg)? createTrip,
-    TResult Function(String email)? getAllDeliveries,
+    TResult Function()? getAllDeliveries,
+    TResult Function()? getAllDeliveriesPendingInvitations,
     TResult Function(String email)? getAllShipment,
     TResult Function(String id, String status)? updateTripStatus,
     TResult Function(String deliveryId)? acceptCompletedDelivery,
     TResult Function(RateDeliveryArg arg)? rateDelivery,
     TResult Function(String deliveryId, String amount)? tipDelivery,
+    TResult Function(DeliveryCostArg arg)? deliveryCost,
+    TResult Function()? getPendingDelivery,
+    TResult Function(String deliveryId)? acceptDelivery,
+    TResult Function(String deliveryId)? rejectDelivery,
+    TResult Function(String deliveryId)? finishDelivery,
+    TResult Function(String deliveryId, Owner owner)? getADelivery,
   }) {
     return createShipment?.call(arg);
   }
@@ -425,12 +566,19 @@ class _$_CreateShipment implements _CreateShipment {
     TResult Function()? started,
     TResult Function(CreateShipmentArg arg)? createShipment,
     TResult Function(CreateTripArg arg)? createTrip,
-    TResult Function(String email)? getAllDeliveries,
+    TResult Function()? getAllDeliveries,
+    TResult Function()? getAllDeliveriesPendingInvitations,
     TResult Function(String email)? getAllShipment,
     TResult Function(String id, String status)? updateTripStatus,
     TResult Function(String deliveryId)? acceptCompletedDelivery,
     TResult Function(RateDeliveryArg arg)? rateDelivery,
     TResult Function(String deliveryId, String amount)? tipDelivery,
+    TResult Function(DeliveryCostArg arg)? deliveryCost,
+    TResult Function()? getPendingDelivery,
+    TResult Function(String deliveryId)? acceptDelivery,
+    TResult Function(String deliveryId)? rejectDelivery,
+    TResult Function(String deliveryId)? finishDelivery,
+    TResult Function(String deliveryId, Owner owner)? getADelivery,
     required TResult orElse(),
   }) {
     if (createShipment != null) {
@@ -446,12 +594,20 @@ class _$_CreateShipment implements _CreateShipment {
     required TResult Function(_CreateShipment value) createShipment,
     required TResult Function(_CreateTrip value) createTrip,
     required TResult Function(_GetAllDeliveries value) getAllDeliveries,
+    required TResult Function(_GetAllDeliveriesPendingInvitations value)
+        getAllDeliveriesPendingInvitations,
     required TResult Function(_GetAllShipment value) getAllShipment,
     required TResult Function(_UpdateTripStatus value) updateTripStatus,
     required TResult Function(_AcceptCompletedDelivery value)
         acceptCompletedDelivery,
     required TResult Function(_RateDelivery value) rateDelivery,
     required TResult Function(_TipDelivery value) tipDelivery,
+    required TResult Function(_DeliveryCost value) deliveryCost,
+    required TResult Function(_GetPendingDelivery value) getPendingDelivery,
+    required TResult Function(_AcceptDelivery value) acceptDelivery,
+    required TResult Function(_RejectDelivery value) rejectDelivery,
+    required TResult Function(_FinishDelivery value) finishDelivery,
+    required TResult Function(_GetADelivery value) getADelivery,
   }) {
     return createShipment(this);
   }
@@ -463,11 +619,19 @@ class _$_CreateShipment implements _CreateShipment {
     TResult Function(_CreateShipment value)? createShipment,
     TResult Function(_CreateTrip value)? createTrip,
     TResult Function(_GetAllDeliveries value)? getAllDeliveries,
+    TResult Function(_GetAllDeliveriesPendingInvitations value)?
+        getAllDeliveriesPendingInvitations,
     TResult Function(_GetAllShipment value)? getAllShipment,
     TResult Function(_UpdateTripStatus value)? updateTripStatus,
     TResult Function(_AcceptCompletedDelivery value)? acceptCompletedDelivery,
     TResult Function(_RateDelivery value)? rateDelivery,
     TResult Function(_TipDelivery value)? tipDelivery,
+    TResult Function(_DeliveryCost value)? deliveryCost,
+    TResult Function(_GetPendingDelivery value)? getPendingDelivery,
+    TResult Function(_AcceptDelivery value)? acceptDelivery,
+    TResult Function(_RejectDelivery value)? rejectDelivery,
+    TResult Function(_FinishDelivery value)? finishDelivery,
+    TResult Function(_GetADelivery value)? getADelivery,
   }) {
     return createShipment?.call(this);
   }
@@ -479,11 +643,19 @@ class _$_CreateShipment implements _CreateShipment {
     TResult Function(_CreateShipment value)? createShipment,
     TResult Function(_CreateTrip value)? createTrip,
     TResult Function(_GetAllDeliveries value)? getAllDeliveries,
+    TResult Function(_GetAllDeliveriesPendingInvitations value)?
+        getAllDeliveriesPendingInvitations,
     TResult Function(_GetAllShipment value)? getAllShipment,
     TResult Function(_UpdateTripStatus value)? updateTripStatus,
     TResult Function(_AcceptCompletedDelivery value)? acceptCompletedDelivery,
     TResult Function(_RateDelivery value)? rateDelivery,
     TResult Function(_TipDelivery value)? tipDelivery,
+    TResult Function(_DeliveryCost value)? deliveryCost,
+    TResult Function(_GetPendingDelivery value)? getPendingDelivery,
+    TResult Function(_AcceptDelivery value)? acceptDelivery,
+    TResult Function(_RejectDelivery value)? rejectDelivery,
+    TResult Function(_FinishDelivery value)? finishDelivery,
+    TResult Function(_GetADelivery value)? getADelivery,
     required TResult orElse(),
   }) {
     if (createShipment != null) {
@@ -571,12 +743,19 @@ class _$_CreateTrip implements _CreateTrip {
     required TResult Function() started,
     required TResult Function(CreateShipmentArg arg) createShipment,
     required TResult Function(CreateTripArg arg) createTrip,
-    required TResult Function(String email) getAllDeliveries,
+    required TResult Function() getAllDeliveries,
+    required TResult Function() getAllDeliveriesPendingInvitations,
     required TResult Function(String email) getAllShipment,
     required TResult Function(String id, String status) updateTripStatus,
     required TResult Function(String deliveryId) acceptCompletedDelivery,
     required TResult Function(RateDeliveryArg arg) rateDelivery,
     required TResult Function(String deliveryId, String amount) tipDelivery,
+    required TResult Function(DeliveryCostArg arg) deliveryCost,
+    required TResult Function() getPendingDelivery,
+    required TResult Function(String deliveryId) acceptDelivery,
+    required TResult Function(String deliveryId) rejectDelivery,
+    required TResult Function(String deliveryId) finishDelivery,
+    required TResult Function(String deliveryId, Owner owner) getADelivery,
   }) {
     return createTrip(arg);
   }
@@ -587,12 +766,19 @@ class _$_CreateTrip implements _CreateTrip {
     TResult Function()? started,
     TResult Function(CreateShipmentArg arg)? createShipment,
     TResult Function(CreateTripArg arg)? createTrip,
-    TResult Function(String email)? getAllDeliveries,
+    TResult Function()? getAllDeliveries,
+    TResult Function()? getAllDeliveriesPendingInvitations,
     TResult Function(String email)? getAllShipment,
     TResult Function(String id, String status)? updateTripStatus,
     TResult Function(String deliveryId)? acceptCompletedDelivery,
     TResult Function(RateDeliveryArg arg)? rateDelivery,
     TResult Function(String deliveryId, String amount)? tipDelivery,
+    TResult Function(DeliveryCostArg arg)? deliveryCost,
+    TResult Function()? getPendingDelivery,
+    TResult Function(String deliveryId)? acceptDelivery,
+    TResult Function(String deliveryId)? rejectDelivery,
+    TResult Function(String deliveryId)? finishDelivery,
+    TResult Function(String deliveryId, Owner owner)? getADelivery,
   }) {
     return createTrip?.call(arg);
   }
@@ -603,12 +789,19 @@ class _$_CreateTrip implements _CreateTrip {
     TResult Function()? started,
     TResult Function(CreateShipmentArg arg)? createShipment,
     TResult Function(CreateTripArg arg)? createTrip,
-    TResult Function(String email)? getAllDeliveries,
+    TResult Function()? getAllDeliveries,
+    TResult Function()? getAllDeliveriesPendingInvitations,
     TResult Function(String email)? getAllShipment,
     TResult Function(String id, String status)? updateTripStatus,
     TResult Function(String deliveryId)? acceptCompletedDelivery,
     TResult Function(RateDeliveryArg arg)? rateDelivery,
     TResult Function(String deliveryId, String amount)? tipDelivery,
+    TResult Function(DeliveryCostArg arg)? deliveryCost,
+    TResult Function()? getPendingDelivery,
+    TResult Function(String deliveryId)? acceptDelivery,
+    TResult Function(String deliveryId)? rejectDelivery,
+    TResult Function(String deliveryId)? finishDelivery,
+    TResult Function(String deliveryId, Owner owner)? getADelivery,
     required TResult orElse(),
   }) {
     if (createTrip != null) {
@@ -624,12 +817,20 @@ class _$_CreateTrip implements _CreateTrip {
     required TResult Function(_CreateShipment value) createShipment,
     required TResult Function(_CreateTrip value) createTrip,
     required TResult Function(_GetAllDeliveries value) getAllDeliveries,
+    required TResult Function(_GetAllDeliveriesPendingInvitations value)
+        getAllDeliveriesPendingInvitations,
     required TResult Function(_GetAllShipment value) getAllShipment,
     required TResult Function(_UpdateTripStatus value) updateTripStatus,
     required TResult Function(_AcceptCompletedDelivery value)
         acceptCompletedDelivery,
     required TResult Function(_RateDelivery value) rateDelivery,
     required TResult Function(_TipDelivery value) tipDelivery,
+    required TResult Function(_DeliveryCost value) deliveryCost,
+    required TResult Function(_GetPendingDelivery value) getPendingDelivery,
+    required TResult Function(_AcceptDelivery value) acceptDelivery,
+    required TResult Function(_RejectDelivery value) rejectDelivery,
+    required TResult Function(_FinishDelivery value) finishDelivery,
+    required TResult Function(_GetADelivery value) getADelivery,
   }) {
     return createTrip(this);
   }
@@ -641,11 +842,19 @@ class _$_CreateTrip implements _CreateTrip {
     TResult Function(_CreateShipment value)? createShipment,
     TResult Function(_CreateTrip value)? createTrip,
     TResult Function(_GetAllDeliveries value)? getAllDeliveries,
+    TResult Function(_GetAllDeliveriesPendingInvitations value)?
+        getAllDeliveriesPendingInvitations,
     TResult Function(_GetAllShipment value)? getAllShipment,
     TResult Function(_UpdateTripStatus value)? updateTripStatus,
     TResult Function(_AcceptCompletedDelivery value)? acceptCompletedDelivery,
     TResult Function(_RateDelivery value)? rateDelivery,
     TResult Function(_TipDelivery value)? tipDelivery,
+    TResult Function(_DeliveryCost value)? deliveryCost,
+    TResult Function(_GetPendingDelivery value)? getPendingDelivery,
+    TResult Function(_AcceptDelivery value)? acceptDelivery,
+    TResult Function(_RejectDelivery value)? rejectDelivery,
+    TResult Function(_FinishDelivery value)? finishDelivery,
+    TResult Function(_GetADelivery value)? getADelivery,
   }) {
     return createTrip?.call(this);
   }
@@ -657,11 +866,19 @@ class _$_CreateTrip implements _CreateTrip {
     TResult Function(_CreateShipment value)? createShipment,
     TResult Function(_CreateTrip value)? createTrip,
     TResult Function(_GetAllDeliveries value)? getAllDeliveries,
+    TResult Function(_GetAllDeliveriesPendingInvitations value)?
+        getAllDeliveriesPendingInvitations,
     TResult Function(_GetAllShipment value)? getAllShipment,
     TResult Function(_UpdateTripStatus value)? updateTripStatus,
     TResult Function(_AcceptCompletedDelivery value)? acceptCompletedDelivery,
     TResult Function(_RateDelivery value)? rateDelivery,
     TResult Function(_TipDelivery value)? tipDelivery,
+    TResult Function(_DeliveryCost value)? deliveryCost,
+    TResult Function(_GetPendingDelivery value)? getPendingDelivery,
+    TResult Function(_AcceptDelivery value)? acceptDelivery,
+    TResult Function(_RejectDelivery value)? rejectDelivery,
+    TResult Function(_FinishDelivery value)? finishDelivery,
+    TResult Function(_GetADelivery value)? getADelivery,
     required TResult orElse(),
   }) {
     if (createTrip != null) {
@@ -685,7 +902,6 @@ abstract class _$GetAllDeliveriesCopyWith<$Res> {
   factory _$GetAllDeliveriesCopyWith(
           _GetAllDeliveries value, $Res Function(_GetAllDeliveries) then) =
       __$GetAllDeliveriesCopyWithImpl<$Res>;
-  $Res call({String email});
 }
 
 /// @nodoc
@@ -698,49 +914,26 @@ class __$GetAllDeliveriesCopyWithImpl<$Res>
 
   @override
   _GetAllDeliveries get _value => super._value as _GetAllDeliveries;
-
-  @override
-  $Res call({
-    Object? email = freezed,
-  }) {
-    return _then(_GetAllDeliveries(
-      email: email == freezed
-          ? _value.email
-          : email // ignore: cast_nullable_to_non_nullable
-              as String,
-    ));
-  }
 }
 
 /// @nodoc
 
 class _$_GetAllDeliveries implements _GetAllDeliveries {
-  const _$_GetAllDeliveries({required this.email});
-
-  @override
-  final String email;
+  const _$_GetAllDeliveries();
 
   @override
   String toString() {
-    return 'ShipmentHandlerEvent.getAllDeliveries(email: $email)';
+    return 'ShipmentHandlerEvent.getAllDeliveries()';
   }
 
   @override
   bool operator ==(dynamic other) {
     return identical(this, other) ||
-        (other.runtimeType == runtimeType &&
-            other is _GetAllDeliveries &&
-            const DeepCollectionEquality().equals(other.email, email));
+        (other.runtimeType == runtimeType && other is _GetAllDeliveries);
   }
 
   @override
-  int get hashCode =>
-      Object.hash(runtimeType, const DeepCollectionEquality().hash(email));
-
-  @JsonKey(ignore: true)
-  @override
-  _$GetAllDeliveriesCopyWith<_GetAllDeliveries> get copyWith =>
-      __$GetAllDeliveriesCopyWithImpl<_GetAllDeliveries>(this, _$identity);
+  int get hashCode => runtimeType.hashCode;
 
   @override
   @optionalTypeArgs
@@ -748,14 +941,21 @@ class _$_GetAllDeliveries implements _GetAllDeliveries {
     required TResult Function() started,
     required TResult Function(CreateShipmentArg arg) createShipment,
     required TResult Function(CreateTripArg arg) createTrip,
-    required TResult Function(String email) getAllDeliveries,
+    required TResult Function() getAllDeliveries,
+    required TResult Function() getAllDeliveriesPendingInvitations,
     required TResult Function(String email) getAllShipment,
     required TResult Function(String id, String status) updateTripStatus,
     required TResult Function(String deliveryId) acceptCompletedDelivery,
     required TResult Function(RateDeliveryArg arg) rateDelivery,
     required TResult Function(String deliveryId, String amount) tipDelivery,
+    required TResult Function(DeliveryCostArg arg) deliveryCost,
+    required TResult Function() getPendingDelivery,
+    required TResult Function(String deliveryId) acceptDelivery,
+    required TResult Function(String deliveryId) rejectDelivery,
+    required TResult Function(String deliveryId) finishDelivery,
+    required TResult Function(String deliveryId, Owner owner) getADelivery,
   }) {
-    return getAllDeliveries(email);
+    return getAllDeliveries();
   }
 
   @override
@@ -764,14 +964,21 @@ class _$_GetAllDeliveries implements _GetAllDeliveries {
     TResult Function()? started,
     TResult Function(CreateShipmentArg arg)? createShipment,
     TResult Function(CreateTripArg arg)? createTrip,
-    TResult Function(String email)? getAllDeliveries,
+    TResult Function()? getAllDeliveries,
+    TResult Function()? getAllDeliveriesPendingInvitations,
     TResult Function(String email)? getAllShipment,
     TResult Function(String id, String status)? updateTripStatus,
     TResult Function(String deliveryId)? acceptCompletedDelivery,
     TResult Function(RateDeliveryArg arg)? rateDelivery,
     TResult Function(String deliveryId, String amount)? tipDelivery,
+    TResult Function(DeliveryCostArg arg)? deliveryCost,
+    TResult Function()? getPendingDelivery,
+    TResult Function(String deliveryId)? acceptDelivery,
+    TResult Function(String deliveryId)? rejectDelivery,
+    TResult Function(String deliveryId)? finishDelivery,
+    TResult Function(String deliveryId, Owner owner)? getADelivery,
   }) {
-    return getAllDeliveries?.call(email);
+    return getAllDeliveries?.call();
   }
 
   @override
@@ -780,16 +987,23 @@ class _$_GetAllDeliveries implements _GetAllDeliveries {
     TResult Function()? started,
     TResult Function(CreateShipmentArg arg)? createShipment,
     TResult Function(CreateTripArg arg)? createTrip,
-    TResult Function(String email)? getAllDeliveries,
+    TResult Function()? getAllDeliveries,
+    TResult Function()? getAllDeliveriesPendingInvitations,
     TResult Function(String email)? getAllShipment,
     TResult Function(String id, String status)? updateTripStatus,
     TResult Function(String deliveryId)? acceptCompletedDelivery,
     TResult Function(RateDeliveryArg arg)? rateDelivery,
     TResult Function(String deliveryId, String amount)? tipDelivery,
+    TResult Function(DeliveryCostArg arg)? deliveryCost,
+    TResult Function()? getPendingDelivery,
+    TResult Function(String deliveryId)? acceptDelivery,
+    TResult Function(String deliveryId)? rejectDelivery,
+    TResult Function(String deliveryId)? finishDelivery,
+    TResult Function(String deliveryId, Owner owner)? getADelivery,
     required TResult orElse(),
   }) {
     if (getAllDeliveries != null) {
-      return getAllDeliveries(email);
+      return getAllDeliveries();
     }
     return orElse();
   }
@@ -801,12 +1015,20 @@ class _$_GetAllDeliveries implements _GetAllDeliveries {
     required TResult Function(_CreateShipment value) createShipment,
     required TResult Function(_CreateTrip value) createTrip,
     required TResult Function(_GetAllDeliveries value) getAllDeliveries,
+    required TResult Function(_GetAllDeliveriesPendingInvitations value)
+        getAllDeliveriesPendingInvitations,
     required TResult Function(_GetAllShipment value) getAllShipment,
     required TResult Function(_UpdateTripStatus value) updateTripStatus,
     required TResult Function(_AcceptCompletedDelivery value)
         acceptCompletedDelivery,
     required TResult Function(_RateDelivery value) rateDelivery,
     required TResult Function(_TipDelivery value) tipDelivery,
+    required TResult Function(_DeliveryCost value) deliveryCost,
+    required TResult Function(_GetPendingDelivery value) getPendingDelivery,
+    required TResult Function(_AcceptDelivery value) acceptDelivery,
+    required TResult Function(_RejectDelivery value) rejectDelivery,
+    required TResult Function(_FinishDelivery value) finishDelivery,
+    required TResult Function(_GetADelivery value) getADelivery,
   }) {
     return getAllDeliveries(this);
   }
@@ -818,11 +1040,19 @@ class _$_GetAllDeliveries implements _GetAllDeliveries {
     TResult Function(_CreateShipment value)? createShipment,
     TResult Function(_CreateTrip value)? createTrip,
     TResult Function(_GetAllDeliveries value)? getAllDeliveries,
+    TResult Function(_GetAllDeliveriesPendingInvitations value)?
+        getAllDeliveriesPendingInvitations,
     TResult Function(_GetAllShipment value)? getAllShipment,
     TResult Function(_UpdateTripStatus value)? updateTripStatus,
     TResult Function(_AcceptCompletedDelivery value)? acceptCompletedDelivery,
     TResult Function(_RateDelivery value)? rateDelivery,
     TResult Function(_TipDelivery value)? tipDelivery,
+    TResult Function(_DeliveryCost value)? deliveryCost,
+    TResult Function(_GetPendingDelivery value)? getPendingDelivery,
+    TResult Function(_AcceptDelivery value)? acceptDelivery,
+    TResult Function(_RejectDelivery value)? rejectDelivery,
+    TResult Function(_FinishDelivery value)? finishDelivery,
+    TResult Function(_GetADelivery value)? getADelivery,
   }) {
     return getAllDeliveries?.call(this);
   }
@@ -834,11 +1064,19 @@ class _$_GetAllDeliveries implements _GetAllDeliveries {
     TResult Function(_CreateShipment value)? createShipment,
     TResult Function(_CreateTrip value)? createTrip,
     TResult Function(_GetAllDeliveries value)? getAllDeliveries,
+    TResult Function(_GetAllDeliveriesPendingInvitations value)?
+        getAllDeliveriesPendingInvitations,
     TResult Function(_GetAllShipment value)? getAllShipment,
     TResult Function(_UpdateTripStatus value)? updateTripStatus,
     TResult Function(_AcceptCompletedDelivery value)? acceptCompletedDelivery,
     TResult Function(_RateDelivery value)? rateDelivery,
     TResult Function(_TipDelivery value)? tipDelivery,
+    TResult Function(_DeliveryCost value)? deliveryCost,
+    TResult Function(_GetPendingDelivery value)? getPendingDelivery,
+    TResult Function(_AcceptDelivery value)? acceptDelivery,
+    TResult Function(_RejectDelivery value)? rejectDelivery,
+    TResult Function(_FinishDelivery value)? finishDelivery,
+    TResult Function(_GetADelivery value)? getADelivery,
     required TResult orElse(),
   }) {
     if (getAllDeliveries != null) {
@@ -849,13 +1087,207 @@ class _$_GetAllDeliveries implements _GetAllDeliveries {
 }
 
 abstract class _GetAllDeliveries implements ShipmentHandlerEvent {
-  const factory _GetAllDeliveries({required String email}) =
-      _$_GetAllDeliveries;
+  const factory _GetAllDeliveries() = _$_GetAllDeliveries;
+}
 
-  String get email;
-  @JsonKey(ignore: true)
-  _$GetAllDeliveriesCopyWith<_GetAllDeliveries> get copyWith =>
-      throw _privateConstructorUsedError;
+/// @nodoc
+abstract class _$GetAllDeliveriesPendingInvitationsCopyWith<$Res> {
+  factory _$GetAllDeliveriesPendingInvitationsCopyWith(
+          _GetAllDeliveriesPendingInvitations value,
+          $Res Function(_GetAllDeliveriesPendingInvitations) then) =
+      __$GetAllDeliveriesPendingInvitationsCopyWithImpl<$Res>;
+}
+
+/// @nodoc
+class __$GetAllDeliveriesPendingInvitationsCopyWithImpl<$Res>
+    extends _$ShipmentHandlerEventCopyWithImpl<$Res>
+    implements _$GetAllDeliveriesPendingInvitationsCopyWith<$Res> {
+  __$GetAllDeliveriesPendingInvitationsCopyWithImpl(
+      _GetAllDeliveriesPendingInvitations _value,
+      $Res Function(_GetAllDeliveriesPendingInvitations) _then)
+      : super(_value, (v) => _then(v as _GetAllDeliveriesPendingInvitations));
+
+  @override
+  _GetAllDeliveriesPendingInvitations get _value =>
+      super._value as _GetAllDeliveriesPendingInvitations;
+}
+
+/// @nodoc
+
+class _$_GetAllDeliveriesPendingInvitations
+    implements _GetAllDeliveriesPendingInvitations {
+  const _$_GetAllDeliveriesPendingInvitations();
+
+  @override
+  String toString() {
+    return 'ShipmentHandlerEvent.getAllDeliveriesPendingInvitations()';
+  }
+
+  @override
+  bool operator ==(dynamic other) {
+    return identical(this, other) ||
+        (other.runtimeType == runtimeType &&
+            other is _GetAllDeliveriesPendingInvitations);
+  }
+
+  @override
+  int get hashCode => runtimeType.hashCode;
+
+  @override
+  @optionalTypeArgs
+  TResult when<TResult extends Object?>({
+    required TResult Function() started,
+    required TResult Function(CreateShipmentArg arg) createShipment,
+    required TResult Function(CreateTripArg arg) createTrip,
+    required TResult Function() getAllDeliveries,
+    required TResult Function() getAllDeliveriesPendingInvitations,
+    required TResult Function(String email) getAllShipment,
+    required TResult Function(String id, String status) updateTripStatus,
+    required TResult Function(String deliveryId) acceptCompletedDelivery,
+    required TResult Function(RateDeliveryArg arg) rateDelivery,
+    required TResult Function(String deliveryId, String amount) tipDelivery,
+    required TResult Function(DeliveryCostArg arg) deliveryCost,
+    required TResult Function() getPendingDelivery,
+    required TResult Function(String deliveryId) acceptDelivery,
+    required TResult Function(String deliveryId) rejectDelivery,
+    required TResult Function(String deliveryId) finishDelivery,
+    required TResult Function(String deliveryId, Owner owner) getADelivery,
+  }) {
+    return getAllDeliveriesPendingInvitations();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? whenOrNull<TResult extends Object?>({
+    TResult Function()? started,
+    TResult Function(CreateShipmentArg arg)? createShipment,
+    TResult Function(CreateTripArg arg)? createTrip,
+    TResult Function()? getAllDeliveries,
+    TResult Function()? getAllDeliveriesPendingInvitations,
+    TResult Function(String email)? getAllShipment,
+    TResult Function(String id, String status)? updateTripStatus,
+    TResult Function(String deliveryId)? acceptCompletedDelivery,
+    TResult Function(RateDeliveryArg arg)? rateDelivery,
+    TResult Function(String deliveryId, String amount)? tipDelivery,
+    TResult Function(DeliveryCostArg arg)? deliveryCost,
+    TResult Function()? getPendingDelivery,
+    TResult Function(String deliveryId)? acceptDelivery,
+    TResult Function(String deliveryId)? rejectDelivery,
+    TResult Function(String deliveryId)? finishDelivery,
+    TResult Function(String deliveryId, Owner owner)? getADelivery,
+  }) {
+    return getAllDeliveriesPendingInvitations?.call();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeWhen<TResult extends Object?>({
+    TResult Function()? started,
+    TResult Function(CreateShipmentArg arg)? createShipment,
+    TResult Function(CreateTripArg arg)? createTrip,
+    TResult Function()? getAllDeliveries,
+    TResult Function()? getAllDeliveriesPendingInvitations,
+    TResult Function(String email)? getAllShipment,
+    TResult Function(String id, String status)? updateTripStatus,
+    TResult Function(String deliveryId)? acceptCompletedDelivery,
+    TResult Function(RateDeliveryArg arg)? rateDelivery,
+    TResult Function(String deliveryId, String amount)? tipDelivery,
+    TResult Function(DeliveryCostArg arg)? deliveryCost,
+    TResult Function()? getPendingDelivery,
+    TResult Function(String deliveryId)? acceptDelivery,
+    TResult Function(String deliveryId)? rejectDelivery,
+    TResult Function(String deliveryId)? finishDelivery,
+    TResult Function(String deliveryId, Owner owner)? getADelivery,
+    required TResult orElse(),
+  }) {
+    if (getAllDeliveriesPendingInvitations != null) {
+      return getAllDeliveriesPendingInvitations();
+    }
+    return orElse();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult map<TResult extends Object?>({
+    required TResult Function(_Started value) started,
+    required TResult Function(_CreateShipment value) createShipment,
+    required TResult Function(_CreateTrip value) createTrip,
+    required TResult Function(_GetAllDeliveries value) getAllDeliveries,
+    required TResult Function(_GetAllDeliveriesPendingInvitations value)
+        getAllDeliveriesPendingInvitations,
+    required TResult Function(_GetAllShipment value) getAllShipment,
+    required TResult Function(_UpdateTripStatus value) updateTripStatus,
+    required TResult Function(_AcceptCompletedDelivery value)
+        acceptCompletedDelivery,
+    required TResult Function(_RateDelivery value) rateDelivery,
+    required TResult Function(_TipDelivery value) tipDelivery,
+    required TResult Function(_DeliveryCost value) deliveryCost,
+    required TResult Function(_GetPendingDelivery value) getPendingDelivery,
+    required TResult Function(_AcceptDelivery value) acceptDelivery,
+    required TResult Function(_RejectDelivery value) rejectDelivery,
+    required TResult Function(_FinishDelivery value) finishDelivery,
+    required TResult Function(_GetADelivery value) getADelivery,
+  }) {
+    return getAllDeliveriesPendingInvitations(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? mapOrNull<TResult extends Object?>({
+    TResult Function(_Started value)? started,
+    TResult Function(_CreateShipment value)? createShipment,
+    TResult Function(_CreateTrip value)? createTrip,
+    TResult Function(_GetAllDeliveries value)? getAllDeliveries,
+    TResult Function(_GetAllDeliveriesPendingInvitations value)?
+        getAllDeliveriesPendingInvitations,
+    TResult Function(_GetAllShipment value)? getAllShipment,
+    TResult Function(_UpdateTripStatus value)? updateTripStatus,
+    TResult Function(_AcceptCompletedDelivery value)? acceptCompletedDelivery,
+    TResult Function(_RateDelivery value)? rateDelivery,
+    TResult Function(_TipDelivery value)? tipDelivery,
+    TResult Function(_DeliveryCost value)? deliveryCost,
+    TResult Function(_GetPendingDelivery value)? getPendingDelivery,
+    TResult Function(_AcceptDelivery value)? acceptDelivery,
+    TResult Function(_RejectDelivery value)? rejectDelivery,
+    TResult Function(_FinishDelivery value)? finishDelivery,
+    TResult Function(_GetADelivery value)? getADelivery,
+  }) {
+    return getAllDeliveriesPendingInvitations?.call(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeMap<TResult extends Object?>({
+    TResult Function(_Started value)? started,
+    TResult Function(_CreateShipment value)? createShipment,
+    TResult Function(_CreateTrip value)? createTrip,
+    TResult Function(_GetAllDeliveries value)? getAllDeliveries,
+    TResult Function(_GetAllDeliveriesPendingInvitations value)?
+        getAllDeliveriesPendingInvitations,
+    TResult Function(_GetAllShipment value)? getAllShipment,
+    TResult Function(_UpdateTripStatus value)? updateTripStatus,
+    TResult Function(_AcceptCompletedDelivery value)? acceptCompletedDelivery,
+    TResult Function(_RateDelivery value)? rateDelivery,
+    TResult Function(_TipDelivery value)? tipDelivery,
+    TResult Function(_DeliveryCost value)? deliveryCost,
+    TResult Function(_GetPendingDelivery value)? getPendingDelivery,
+    TResult Function(_AcceptDelivery value)? acceptDelivery,
+    TResult Function(_RejectDelivery value)? rejectDelivery,
+    TResult Function(_FinishDelivery value)? finishDelivery,
+    TResult Function(_GetADelivery value)? getADelivery,
+    required TResult orElse(),
+  }) {
+    if (getAllDeliveriesPendingInvitations != null) {
+      return getAllDeliveriesPendingInvitations(this);
+    }
+    return orElse();
+  }
+}
+
+abstract class _GetAllDeliveriesPendingInvitations
+    implements ShipmentHandlerEvent {
+  const factory _GetAllDeliveriesPendingInvitations() =
+      _$_GetAllDeliveriesPendingInvitations;
 }
 
 /// @nodoc
@@ -926,12 +1358,19 @@ class _$_GetAllShipment implements _GetAllShipment {
     required TResult Function() started,
     required TResult Function(CreateShipmentArg arg) createShipment,
     required TResult Function(CreateTripArg arg) createTrip,
-    required TResult Function(String email) getAllDeliveries,
+    required TResult Function() getAllDeliveries,
+    required TResult Function() getAllDeliveriesPendingInvitations,
     required TResult Function(String email) getAllShipment,
     required TResult Function(String id, String status) updateTripStatus,
     required TResult Function(String deliveryId) acceptCompletedDelivery,
     required TResult Function(RateDeliveryArg arg) rateDelivery,
     required TResult Function(String deliveryId, String amount) tipDelivery,
+    required TResult Function(DeliveryCostArg arg) deliveryCost,
+    required TResult Function() getPendingDelivery,
+    required TResult Function(String deliveryId) acceptDelivery,
+    required TResult Function(String deliveryId) rejectDelivery,
+    required TResult Function(String deliveryId) finishDelivery,
+    required TResult Function(String deliveryId, Owner owner) getADelivery,
   }) {
     return getAllShipment(email);
   }
@@ -942,12 +1381,19 @@ class _$_GetAllShipment implements _GetAllShipment {
     TResult Function()? started,
     TResult Function(CreateShipmentArg arg)? createShipment,
     TResult Function(CreateTripArg arg)? createTrip,
-    TResult Function(String email)? getAllDeliveries,
+    TResult Function()? getAllDeliveries,
+    TResult Function()? getAllDeliveriesPendingInvitations,
     TResult Function(String email)? getAllShipment,
     TResult Function(String id, String status)? updateTripStatus,
     TResult Function(String deliveryId)? acceptCompletedDelivery,
     TResult Function(RateDeliveryArg arg)? rateDelivery,
     TResult Function(String deliveryId, String amount)? tipDelivery,
+    TResult Function(DeliveryCostArg arg)? deliveryCost,
+    TResult Function()? getPendingDelivery,
+    TResult Function(String deliveryId)? acceptDelivery,
+    TResult Function(String deliveryId)? rejectDelivery,
+    TResult Function(String deliveryId)? finishDelivery,
+    TResult Function(String deliveryId, Owner owner)? getADelivery,
   }) {
     return getAllShipment?.call(email);
   }
@@ -958,12 +1404,19 @@ class _$_GetAllShipment implements _GetAllShipment {
     TResult Function()? started,
     TResult Function(CreateShipmentArg arg)? createShipment,
     TResult Function(CreateTripArg arg)? createTrip,
-    TResult Function(String email)? getAllDeliveries,
+    TResult Function()? getAllDeliveries,
+    TResult Function()? getAllDeliveriesPendingInvitations,
     TResult Function(String email)? getAllShipment,
     TResult Function(String id, String status)? updateTripStatus,
     TResult Function(String deliveryId)? acceptCompletedDelivery,
     TResult Function(RateDeliveryArg arg)? rateDelivery,
     TResult Function(String deliveryId, String amount)? tipDelivery,
+    TResult Function(DeliveryCostArg arg)? deliveryCost,
+    TResult Function()? getPendingDelivery,
+    TResult Function(String deliveryId)? acceptDelivery,
+    TResult Function(String deliveryId)? rejectDelivery,
+    TResult Function(String deliveryId)? finishDelivery,
+    TResult Function(String deliveryId, Owner owner)? getADelivery,
     required TResult orElse(),
   }) {
     if (getAllShipment != null) {
@@ -979,12 +1432,20 @@ class _$_GetAllShipment implements _GetAllShipment {
     required TResult Function(_CreateShipment value) createShipment,
     required TResult Function(_CreateTrip value) createTrip,
     required TResult Function(_GetAllDeliveries value) getAllDeliveries,
+    required TResult Function(_GetAllDeliveriesPendingInvitations value)
+        getAllDeliveriesPendingInvitations,
     required TResult Function(_GetAllShipment value) getAllShipment,
     required TResult Function(_UpdateTripStatus value) updateTripStatus,
     required TResult Function(_AcceptCompletedDelivery value)
         acceptCompletedDelivery,
     required TResult Function(_RateDelivery value) rateDelivery,
     required TResult Function(_TipDelivery value) tipDelivery,
+    required TResult Function(_DeliveryCost value) deliveryCost,
+    required TResult Function(_GetPendingDelivery value) getPendingDelivery,
+    required TResult Function(_AcceptDelivery value) acceptDelivery,
+    required TResult Function(_RejectDelivery value) rejectDelivery,
+    required TResult Function(_FinishDelivery value) finishDelivery,
+    required TResult Function(_GetADelivery value) getADelivery,
   }) {
     return getAllShipment(this);
   }
@@ -996,11 +1457,19 @@ class _$_GetAllShipment implements _GetAllShipment {
     TResult Function(_CreateShipment value)? createShipment,
     TResult Function(_CreateTrip value)? createTrip,
     TResult Function(_GetAllDeliveries value)? getAllDeliveries,
+    TResult Function(_GetAllDeliveriesPendingInvitations value)?
+        getAllDeliveriesPendingInvitations,
     TResult Function(_GetAllShipment value)? getAllShipment,
     TResult Function(_UpdateTripStatus value)? updateTripStatus,
     TResult Function(_AcceptCompletedDelivery value)? acceptCompletedDelivery,
     TResult Function(_RateDelivery value)? rateDelivery,
     TResult Function(_TipDelivery value)? tipDelivery,
+    TResult Function(_DeliveryCost value)? deliveryCost,
+    TResult Function(_GetPendingDelivery value)? getPendingDelivery,
+    TResult Function(_AcceptDelivery value)? acceptDelivery,
+    TResult Function(_RejectDelivery value)? rejectDelivery,
+    TResult Function(_FinishDelivery value)? finishDelivery,
+    TResult Function(_GetADelivery value)? getADelivery,
   }) {
     return getAllShipment?.call(this);
   }
@@ -1012,11 +1481,19 @@ class _$_GetAllShipment implements _GetAllShipment {
     TResult Function(_CreateShipment value)? createShipment,
     TResult Function(_CreateTrip value)? createTrip,
     TResult Function(_GetAllDeliveries value)? getAllDeliveries,
+    TResult Function(_GetAllDeliveriesPendingInvitations value)?
+        getAllDeliveriesPendingInvitations,
     TResult Function(_GetAllShipment value)? getAllShipment,
     TResult Function(_UpdateTripStatus value)? updateTripStatus,
     TResult Function(_AcceptCompletedDelivery value)? acceptCompletedDelivery,
     TResult Function(_RateDelivery value)? rateDelivery,
     TResult Function(_TipDelivery value)? tipDelivery,
+    TResult Function(_DeliveryCost value)? deliveryCost,
+    TResult Function(_GetPendingDelivery value)? getPendingDelivery,
+    TResult Function(_AcceptDelivery value)? acceptDelivery,
+    TResult Function(_RejectDelivery value)? rejectDelivery,
+    TResult Function(_FinishDelivery value)? finishDelivery,
+    TResult Function(_GetADelivery value)? getADelivery,
     required TResult orElse(),
   }) {
     if (getAllShipment != null) {
@@ -1113,12 +1590,19 @@ class _$_UpdateTripStatus implements _UpdateTripStatus {
     required TResult Function() started,
     required TResult Function(CreateShipmentArg arg) createShipment,
     required TResult Function(CreateTripArg arg) createTrip,
-    required TResult Function(String email) getAllDeliveries,
+    required TResult Function() getAllDeliveries,
+    required TResult Function() getAllDeliveriesPendingInvitations,
     required TResult Function(String email) getAllShipment,
     required TResult Function(String id, String status) updateTripStatus,
     required TResult Function(String deliveryId) acceptCompletedDelivery,
     required TResult Function(RateDeliveryArg arg) rateDelivery,
     required TResult Function(String deliveryId, String amount) tipDelivery,
+    required TResult Function(DeliveryCostArg arg) deliveryCost,
+    required TResult Function() getPendingDelivery,
+    required TResult Function(String deliveryId) acceptDelivery,
+    required TResult Function(String deliveryId) rejectDelivery,
+    required TResult Function(String deliveryId) finishDelivery,
+    required TResult Function(String deliveryId, Owner owner) getADelivery,
   }) {
     return updateTripStatus(id, status);
   }
@@ -1129,12 +1613,19 @@ class _$_UpdateTripStatus implements _UpdateTripStatus {
     TResult Function()? started,
     TResult Function(CreateShipmentArg arg)? createShipment,
     TResult Function(CreateTripArg arg)? createTrip,
-    TResult Function(String email)? getAllDeliveries,
+    TResult Function()? getAllDeliveries,
+    TResult Function()? getAllDeliveriesPendingInvitations,
     TResult Function(String email)? getAllShipment,
     TResult Function(String id, String status)? updateTripStatus,
     TResult Function(String deliveryId)? acceptCompletedDelivery,
     TResult Function(RateDeliveryArg arg)? rateDelivery,
     TResult Function(String deliveryId, String amount)? tipDelivery,
+    TResult Function(DeliveryCostArg arg)? deliveryCost,
+    TResult Function()? getPendingDelivery,
+    TResult Function(String deliveryId)? acceptDelivery,
+    TResult Function(String deliveryId)? rejectDelivery,
+    TResult Function(String deliveryId)? finishDelivery,
+    TResult Function(String deliveryId, Owner owner)? getADelivery,
   }) {
     return updateTripStatus?.call(id, status);
   }
@@ -1145,12 +1636,19 @@ class _$_UpdateTripStatus implements _UpdateTripStatus {
     TResult Function()? started,
     TResult Function(CreateShipmentArg arg)? createShipment,
     TResult Function(CreateTripArg arg)? createTrip,
-    TResult Function(String email)? getAllDeliveries,
+    TResult Function()? getAllDeliveries,
+    TResult Function()? getAllDeliveriesPendingInvitations,
     TResult Function(String email)? getAllShipment,
     TResult Function(String id, String status)? updateTripStatus,
     TResult Function(String deliveryId)? acceptCompletedDelivery,
     TResult Function(RateDeliveryArg arg)? rateDelivery,
     TResult Function(String deliveryId, String amount)? tipDelivery,
+    TResult Function(DeliveryCostArg arg)? deliveryCost,
+    TResult Function()? getPendingDelivery,
+    TResult Function(String deliveryId)? acceptDelivery,
+    TResult Function(String deliveryId)? rejectDelivery,
+    TResult Function(String deliveryId)? finishDelivery,
+    TResult Function(String deliveryId, Owner owner)? getADelivery,
     required TResult orElse(),
   }) {
     if (updateTripStatus != null) {
@@ -1166,12 +1664,20 @@ class _$_UpdateTripStatus implements _UpdateTripStatus {
     required TResult Function(_CreateShipment value) createShipment,
     required TResult Function(_CreateTrip value) createTrip,
     required TResult Function(_GetAllDeliveries value) getAllDeliveries,
+    required TResult Function(_GetAllDeliveriesPendingInvitations value)
+        getAllDeliveriesPendingInvitations,
     required TResult Function(_GetAllShipment value) getAllShipment,
     required TResult Function(_UpdateTripStatus value) updateTripStatus,
     required TResult Function(_AcceptCompletedDelivery value)
         acceptCompletedDelivery,
     required TResult Function(_RateDelivery value) rateDelivery,
     required TResult Function(_TipDelivery value) tipDelivery,
+    required TResult Function(_DeliveryCost value) deliveryCost,
+    required TResult Function(_GetPendingDelivery value) getPendingDelivery,
+    required TResult Function(_AcceptDelivery value) acceptDelivery,
+    required TResult Function(_RejectDelivery value) rejectDelivery,
+    required TResult Function(_FinishDelivery value) finishDelivery,
+    required TResult Function(_GetADelivery value) getADelivery,
   }) {
     return updateTripStatus(this);
   }
@@ -1183,11 +1689,19 @@ class _$_UpdateTripStatus implements _UpdateTripStatus {
     TResult Function(_CreateShipment value)? createShipment,
     TResult Function(_CreateTrip value)? createTrip,
     TResult Function(_GetAllDeliveries value)? getAllDeliveries,
+    TResult Function(_GetAllDeliveriesPendingInvitations value)?
+        getAllDeliveriesPendingInvitations,
     TResult Function(_GetAllShipment value)? getAllShipment,
     TResult Function(_UpdateTripStatus value)? updateTripStatus,
     TResult Function(_AcceptCompletedDelivery value)? acceptCompletedDelivery,
     TResult Function(_RateDelivery value)? rateDelivery,
     TResult Function(_TipDelivery value)? tipDelivery,
+    TResult Function(_DeliveryCost value)? deliveryCost,
+    TResult Function(_GetPendingDelivery value)? getPendingDelivery,
+    TResult Function(_AcceptDelivery value)? acceptDelivery,
+    TResult Function(_RejectDelivery value)? rejectDelivery,
+    TResult Function(_FinishDelivery value)? finishDelivery,
+    TResult Function(_GetADelivery value)? getADelivery,
   }) {
     return updateTripStatus?.call(this);
   }
@@ -1199,11 +1713,19 @@ class _$_UpdateTripStatus implements _UpdateTripStatus {
     TResult Function(_CreateShipment value)? createShipment,
     TResult Function(_CreateTrip value)? createTrip,
     TResult Function(_GetAllDeliveries value)? getAllDeliveries,
+    TResult Function(_GetAllDeliveriesPendingInvitations value)?
+        getAllDeliveriesPendingInvitations,
     TResult Function(_GetAllShipment value)? getAllShipment,
     TResult Function(_UpdateTripStatus value)? updateTripStatus,
     TResult Function(_AcceptCompletedDelivery value)? acceptCompletedDelivery,
     TResult Function(_RateDelivery value)? rateDelivery,
     TResult Function(_TipDelivery value)? tipDelivery,
+    TResult Function(_DeliveryCost value)? deliveryCost,
+    TResult Function(_GetPendingDelivery value)? getPendingDelivery,
+    TResult Function(_AcceptDelivery value)? acceptDelivery,
+    TResult Function(_RejectDelivery value)? rejectDelivery,
+    TResult Function(_FinishDelivery value)? finishDelivery,
+    TResult Function(_GetADelivery value)? getADelivery,
     required TResult orElse(),
   }) {
     if (updateTripStatus != null) {
@@ -1295,12 +1817,19 @@ class _$_AcceptCompletedDelivery implements _AcceptCompletedDelivery {
     required TResult Function() started,
     required TResult Function(CreateShipmentArg arg) createShipment,
     required TResult Function(CreateTripArg arg) createTrip,
-    required TResult Function(String email) getAllDeliveries,
+    required TResult Function() getAllDeliveries,
+    required TResult Function() getAllDeliveriesPendingInvitations,
     required TResult Function(String email) getAllShipment,
     required TResult Function(String id, String status) updateTripStatus,
     required TResult Function(String deliveryId) acceptCompletedDelivery,
     required TResult Function(RateDeliveryArg arg) rateDelivery,
     required TResult Function(String deliveryId, String amount) tipDelivery,
+    required TResult Function(DeliveryCostArg arg) deliveryCost,
+    required TResult Function() getPendingDelivery,
+    required TResult Function(String deliveryId) acceptDelivery,
+    required TResult Function(String deliveryId) rejectDelivery,
+    required TResult Function(String deliveryId) finishDelivery,
+    required TResult Function(String deliveryId, Owner owner) getADelivery,
   }) {
     return acceptCompletedDelivery(deliveryId);
   }
@@ -1311,12 +1840,19 @@ class _$_AcceptCompletedDelivery implements _AcceptCompletedDelivery {
     TResult Function()? started,
     TResult Function(CreateShipmentArg arg)? createShipment,
     TResult Function(CreateTripArg arg)? createTrip,
-    TResult Function(String email)? getAllDeliveries,
+    TResult Function()? getAllDeliveries,
+    TResult Function()? getAllDeliveriesPendingInvitations,
     TResult Function(String email)? getAllShipment,
     TResult Function(String id, String status)? updateTripStatus,
     TResult Function(String deliveryId)? acceptCompletedDelivery,
     TResult Function(RateDeliveryArg arg)? rateDelivery,
     TResult Function(String deliveryId, String amount)? tipDelivery,
+    TResult Function(DeliveryCostArg arg)? deliveryCost,
+    TResult Function()? getPendingDelivery,
+    TResult Function(String deliveryId)? acceptDelivery,
+    TResult Function(String deliveryId)? rejectDelivery,
+    TResult Function(String deliveryId)? finishDelivery,
+    TResult Function(String deliveryId, Owner owner)? getADelivery,
   }) {
     return acceptCompletedDelivery?.call(deliveryId);
   }
@@ -1327,12 +1863,19 @@ class _$_AcceptCompletedDelivery implements _AcceptCompletedDelivery {
     TResult Function()? started,
     TResult Function(CreateShipmentArg arg)? createShipment,
     TResult Function(CreateTripArg arg)? createTrip,
-    TResult Function(String email)? getAllDeliveries,
+    TResult Function()? getAllDeliveries,
+    TResult Function()? getAllDeliveriesPendingInvitations,
     TResult Function(String email)? getAllShipment,
     TResult Function(String id, String status)? updateTripStatus,
     TResult Function(String deliveryId)? acceptCompletedDelivery,
     TResult Function(RateDeliveryArg arg)? rateDelivery,
     TResult Function(String deliveryId, String amount)? tipDelivery,
+    TResult Function(DeliveryCostArg arg)? deliveryCost,
+    TResult Function()? getPendingDelivery,
+    TResult Function(String deliveryId)? acceptDelivery,
+    TResult Function(String deliveryId)? rejectDelivery,
+    TResult Function(String deliveryId)? finishDelivery,
+    TResult Function(String deliveryId, Owner owner)? getADelivery,
     required TResult orElse(),
   }) {
     if (acceptCompletedDelivery != null) {
@@ -1348,12 +1891,20 @@ class _$_AcceptCompletedDelivery implements _AcceptCompletedDelivery {
     required TResult Function(_CreateShipment value) createShipment,
     required TResult Function(_CreateTrip value) createTrip,
     required TResult Function(_GetAllDeliveries value) getAllDeliveries,
+    required TResult Function(_GetAllDeliveriesPendingInvitations value)
+        getAllDeliveriesPendingInvitations,
     required TResult Function(_GetAllShipment value) getAllShipment,
     required TResult Function(_UpdateTripStatus value) updateTripStatus,
     required TResult Function(_AcceptCompletedDelivery value)
         acceptCompletedDelivery,
     required TResult Function(_RateDelivery value) rateDelivery,
     required TResult Function(_TipDelivery value) tipDelivery,
+    required TResult Function(_DeliveryCost value) deliveryCost,
+    required TResult Function(_GetPendingDelivery value) getPendingDelivery,
+    required TResult Function(_AcceptDelivery value) acceptDelivery,
+    required TResult Function(_RejectDelivery value) rejectDelivery,
+    required TResult Function(_FinishDelivery value) finishDelivery,
+    required TResult Function(_GetADelivery value) getADelivery,
   }) {
     return acceptCompletedDelivery(this);
   }
@@ -1365,11 +1916,19 @@ class _$_AcceptCompletedDelivery implements _AcceptCompletedDelivery {
     TResult Function(_CreateShipment value)? createShipment,
     TResult Function(_CreateTrip value)? createTrip,
     TResult Function(_GetAllDeliveries value)? getAllDeliveries,
+    TResult Function(_GetAllDeliveriesPendingInvitations value)?
+        getAllDeliveriesPendingInvitations,
     TResult Function(_GetAllShipment value)? getAllShipment,
     TResult Function(_UpdateTripStatus value)? updateTripStatus,
     TResult Function(_AcceptCompletedDelivery value)? acceptCompletedDelivery,
     TResult Function(_RateDelivery value)? rateDelivery,
     TResult Function(_TipDelivery value)? tipDelivery,
+    TResult Function(_DeliveryCost value)? deliveryCost,
+    TResult Function(_GetPendingDelivery value)? getPendingDelivery,
+    TResult Function(_AcceptDelivery value)? acceptDelivery,
+    TResult Function(_RejectDelivery value)? rejectDelivery,
+    TResult Function(_FinishDelivery value)? finishDelivery,
+    TResult Function(_GetADelivery value)? getADelivery,
   }) {
     return acceptCompletedDelivery?.call(this);
   }
@@ -1381,11 +1940,19 @@ class _$_AcceptCompletedDelivery implements _AcceptCompletedDelivery {
     TResult Function(_CreateShipment value)? createShipment,
     TResult Function(_CreateTrip value)? createTrip,
     TResult Function(_GetAllDeliveries value)? getAllDeliveries,
+    TResult Function(_GetAllDeliveriesPendingInvitations value)?
+        getAllDeliveriesPendingInvitations,
     TResult Function(_GetAllShipment value)? getAllShipment,
     TResult Function(_UpdateTripStatus value)? updateTripStatus,
     TResult Function(_AcceptCompletedDelivery value)? acceptCompletedDelivery,
     TResult Function(_RateDelivery value)? rateDelivery,
     TResult Function(_TipDelivery value)? tipDelivery,
+    TResult Function(_DeliveryCost value)? deliveryCost,
+    TResult Function(_GetPendingDelivery value)? getPendingDelivery,
+    TResult Function(_AcceptDelivery value)? acceptDelivery,
+    TResult Function(_RejectDelivery value)? rejectDelivery,
+    TResult Function(_FinishDelivery value)? finishDelivery,
+    TResult Function(_GetADelivery value)? getADelivery,
     required TResult orElse(),
   }) {
     if (acceptCompletedDelivery != null) {
@@ -1473,12 +2040,19 @@ class _$_RateDelivery implements _RateDelivery {
     required TResult Function() started,
     required TResult Function(CreateShipmentArg arg) createShipment,
     required TResult Function(CreateTripArg arg) createTrip,
-    required TResult Function(String email) getAllDeliveries,
+    required TResult Function() getAllDeliveries,
+    required TResult Function() getAllDeliveriesPendingInvitations,
     required TResult Function(String email) getAllShipment,
     required TResult Function(String id, String status) updateTripStatus,
     required TResult Function(String deliveryId) acceptCompletedDelivery,
     required TResult Function(RateDeliveryArg arg) rateDelivery,
     required TResult Function(String deliveryId, String amount) tipDelivery,
+    required TResult Function(DeliveryCostArg arg) deliveryCost,
+    required TResult Function() getPendingDelivery,
+    required TResult Function(String deliveryId) acceptDelivery,
+    required TResult Function(String deliveryId) rejectDelivery,
+    required TResult Function(String deliveryId) finishDelivery,
+    required TResult Function(String deliveryId, Owner owner) getADelivery,
   }) {
     return rateDelivery(arg);
   }
@@ -1489,12 +2063,19 @@ class _$_RateDelivery implements _RateDelivery {
     TResult Function()? started,
     TResult Function(CreateShipmentArg arg)? createShipment,
     TResult Function(CreateTripArg arg)? createTrip,
-    TResult Function(String email)? getAllDeliveries,
+    TResult Function()? getAllDeliveries,
+    TResult Function()? getAllDeliveriesPendingInvitations,
     TResult Function(String email)? getAllShipment,
     TResult Function(String id, String status)? updateTripStatus,
     TResult Function(String deliveryId)? acceptCompletedDelivery,
     TResult Function(RateDeliveryArg arg)? rateDelivery,
     TResult Function(String deliveryId, String amount)? tipDelivery,
+    TResult Function(DeliveryCostArg arg)? deliveryCost,
+    TResult Function()? getPendingDelivery,
+    TResult Function(String deliveryId)? acceptDelivery,
+    TResult Function(String deliveryId)? rejectDelivery,
+    TResult Function(String deliveryId)? finishDelivery,
+    TResult Function(String deliveryId, Owner owner)? getADelivery,
   }) {
     return rateDelivery?.call(arg);
   }
@@ -1505,12 +2086,19 @@ class _$_RateDelivery implements _RateDelivery {
     TResult Function()? started,
     TResult Function(CreateShipmentArg arg)? createShipment,
     TResult Function(CreateTripArg arg)? createTrip,
-    TResult Function(String email)? getAllDeliveries,
+    TResult Function()? getAllDeliveries,
+    TResult Function()? getAllDeliveriesPendingInvitations,
     TResult Function(String email)? getAllShipment,
     TResult Function(String id, String status)? updateTripStatus,
     TResult Function(String deliveryId)? acceptCompletedDelivery,
     TResult Function(RateDeliveryArg arg)? rateDelivery,
     TResult Function(String deliveryId, String amount)? tipDelivery,
+    TResult Function(DeliveryCostArg arg)? deliveryCost,
+    TResult Function()? getPendingDelivery,
+    TResult Function(String deliveryId)? acceptDelivery,
+    TResult Function(String deliveryId)? rejectDelivery,
+    TResult Function(String deliveryId)? finishDelivery,
+    TResult Function(String deliveryId, Owner owner)? getADelivery,
     required TResult orElse(),
   }) {
     if (rateDelivery != null) {
@@ -1526,12 +2114,20 @@ class _$_RateDelivery implements _RateDelivery {
     required TResult Function(_CreateShipment value) createShipment,
     required TResult Function(_CreateTrip value) createTrip,
     required TResult Function(_GetAllDeliveries value) getAllDeliveries,
+    required TResult Function(_GetAllDeliveriesPendingInvitations value)
+        getAllDeliveriesPendingInvitations,
     required TResult Function(_GetAllShipment value) getAllShipment,
     required TResult Function(_UpdateTripStatus value) updateTripStatus,
     required TResult Function(_AcceptCompletedDelivery value)
         acceptCompletedDelivery,
     required TResult Function(_RateDelivery value) rateDelivery,
     required TResult Function(_TipDelivery value) tipDelivery,
+    required TResult Function(_DeliveryCost value) deliveryCost,
+    required TResult Function(_GetPendingDelivery value) getPendingDelivery,
+    required TResult Function(_AcceptDelivery value) acceptDelivery,
+    required TResult Function(_RejectDelivery value) rejectDelivery,
+    required TResult Function(_FinishDelivery value) finishDelivery,
+    required TResult Function(_GetADelivery value) getADelivery,
   }) {
     return rateDelivery(this);
   }
@@ -1543,11 +2139,19 @@ class _$_RateDelivery implements _RateDelivery {
     TResult Function(_CreateShipment value)? createShipment,
     TResult Function(_CreateTrip value)? createTrip,
     TResult Function(_GetAllDeliveries value)? getAllDeliveries,
+    TResult Function(_GetAllDeliveriesPendingInvitations value)?
+        getAllDeliveriesPendingInvitations,
     TResult Function(_GetAllShipment value)? getAllShipment,
     TResult Function(_UpdateTripStatus value)? updateTripStatus,
     TResult Function(_AcceptCompletedDelivery value)? acceptCompletedDelivery,
     TResult Function(_RateDelivery value)? rateDelivery,
     TResult Function(_TipDelivery value)? tipDelivery,
+    TResult Function(_DeliveryCost value)? deliveryCost,
+    TResult Function(_GetPendingDelivery value)? getPendingDelivery,
+    TResult Function(_AcceptDelivery value)? acceptDelivery,
+    TResult Function(_RejectDelivery value)? rejectDelivery,
+    TResult Function(_FinishDelivery value)? finishDelivery,
+    TResult Function(_GetADelivery value)? getADelivery,
   }) {
     return rateDelivery?.call(this);
   }
@@ -1559,11 +2163,19 @@ class _$_RateDelivery implements _RateDelivery {
     TResult Function(_CreateShipment value)? createShipment,
     TResult Function(_CreateTrip value)? createTrip,
     TResult Function(_GetAllDeliveries value)? getAllDeliveries,
+    TResult Function(_GetAllDeliveriesPendingInvitations value)?
+        getAllDeliveriesPendingInvitations,
     TResult Function(_GetAllShipment value)? getAllShipment,
     TResult Function(_UpdateTripStatus value)? updateTripStatus,
     TResult Function(_AcceptCompletedDelivery value)? acceptCompletedDelivery,
     TResult Function(_RateDelivery value)? rateDelivery,
     TResult Function(_TipDelivery value)? tipDelivery,
+    TResult Function(_DeliveryCost value)? deliveryCost,
+    TResult Function(_GetPendingDelivery value)? getPendingDelivery,
+    TResult Function(_AcceptDelivery value)? acceptDelivery,
+    TResult Function(_RejectDelivery value)? rejectDelivery,
+    TResult Function(_FinishDelivery value)? finishDelivery,
+    TResult Function(_GetADelivery value)? getADelivery,
     required TResult orElse(),
   }) {
     if (rateDelivery != null) {
@@ -1661,12 +2273,19 @@ class _$_TipDelivery implements _TipDelivery {
     required TResult Function() started,
     required TResult Function(CreateShipmentArg arg) createShipment,
     required TResult Function(CreateTripArg arg) createTrip,
-    required TResult Function(String email) getAllDeliveries,
+    required TResult Function() getAllDeliveries,
+    required TResult Function() getAllDeliveriesPendingInvitations,
     required TResult Function(String email) getAllShipment,
     required TResult Function(String id, String status) updateTripStatus,
     required TResult Function(String deliveryId) acceptCompletedDelivery,
     required TResult Function(RateDeliveryArg arg) rateDelivery,
     required TResult Function(String deliveryId, String amount) tipDelivery,
+    required TResult Function(DeliveryCostArg arg) deliveryCost,
+    required TResult Function() getPendingDelivery,
+    required TResult Function(String deliveryId) acceptDelivery,
+    required TResult Function(String deliveryId) rejectDelivery,
+    required TResult Function(String deliveryId) finishDelivery,
+    required TResult Function(String deliveryId, Owner owner) getADelivery,
   }) {
     return tipDelivery(deliveryId, amount);
   }
@@ -1677,12 +2296,19 @@ class _$_TipDelivery implements _TipDelivery {
     TResult Function()? started,
     TResult Function(CreateShipmentArg arg)? createShipment,
     TResult Function(CreateTripArg arg)? createTrip,
-    TResult Function(String email)? getAllDeliveries,
+    TResult Function()? getAllDeliveries,
+    TResult Function()? getAllDeliveriesPendingInvitations,
     TResult Function(String email)? getAllShipment,
     TResult Function(String id, String status)? updateTripStatus,
     TResult Function(String deliveryId)? acceptCompletedDelivery,
     TResult Function(RateDeliveryArg arg)? rateDelivery,
     TResult Function(String deliveryId, String amount)? tipDelivery,
+    TResult Function(DeliveryCostArg arg)? deliveryCost,
+    TResult Function()? getPendingDelivery,
+    TResult Function(String deliveryId)? acceptDelivery,
+    TResult Function(String deliveryId)? rejectDelivery,
+    TResult Function(String deliveryId)? finishDelivery,
+    TResult Function(String deliveryId, Owner owner)? getADelivery,
   }) {
     return tipDelivery?.call(deliveryId, amount);
   }
@@ -1693,12 +2319,19 @@ class _$_TipDelivery implements _TipDelivery {
     TResult Function()? started,
     TResult Function(CreateShipmentArg arg)? createShipment,
     TResult Function(CreateTripArg arg)? createTrip,
-    TResult Function(String email)? getAllDeliveries,
+    TResult Function()? getAllDeliveries,
+    TResult Function()? getAllDeliveriesPendingInvitations,
     TResult Function(String email)? getAllShipment,
     TResult Function(String id, String status)? updateTripStatus,
     TResult Function(String deliveryId)? acceptCompletedDelivery,
     TResult Function(RateDeliveryArg arg)? rateDelivery,
     TResult Function(String deliveryId, String amount)? tipDelivery,
+    TResult Function(DeliveryCostArg arg)? deliveryCost,
+    TResult Function()? getPendingDelivery,
+    TResult Function(String deliveryId)? acceptDelivery,
+    TResult Function(String deliveryId)? rejectDelivery,
+    TResult Function(String deliveryId)? finishDelivery,
+    TResult Function(String deliveryId, Owner owner)? getADelivery,
     required TResult orElse(),
   }) {
     if (tipDelivery != null) {
@@ -1714,12 +2347,20 @@ class _$_TipDelivery implements _TipDelivery {
     required TResult Function(_CreateShipment value) createShipment,
     required TResult Function(_CreateTrip value) createTrip,
     required TResult Function(_GetAllDeliveries value) getAllDeliveries,
+    required TResult Function(_GetAllDeliveriesPendingInvitations value)
+        getAllDeliveriesPendingInvitations,
     required TResult Function(_GetAllShipment value) getAllShipment,
     required TResult Function(_UpdateTripStatus value) updateTripStatus,
     required TResult Function(_AcceptCompletedDelivery value)
         acceptCompletedDelivery,
     required TResult Function(_RateDelivery value) rateDelivery,
     required TResult Function(_TipDelivery value) tipDelivery,
+    required TResult Function(_DeliveryCost value) deliveryCost,
+    required TResult Function(_GetPendingDelivery value) getPendingDelivery,
+    required TResult Function(_AcceptDelivery value) acceptDelivery,
+    required TResult Function(_RejectDelivery value) rejectDelivery,
+    required TResult Function(_FinishDelivery value) finishDelivery,
+    required TResult Function(_GetADelivery value) getADelivery,
   }) {
     return tipDelivery(this);
   }
@@ -1731,11 +2372,19 @@ class _$_TipDelivery implements _TipDelivery {
     TResult Function(_CreateShipment value)? createShipment,
     TResult Function(_CreateTrip value)? createTrip,
     TResult Function(_GetAllDeliveries value)? getAllDeliveries,
+    TResult Function(_GetAllDeliveriesPendingInvitations value)?
+        getAllDeliveriesPendingInvitations,
     TResult Function(_GetAllShipment value)? getAllShipment,
     TResult Function(_UpdateTripStatus value)? updateTripStatus,
     TResult Function(_AcceptCompletedDelivery value)? acceptCompletedDelivery,
     TResult Function(_RateDelivery value)? rateDelivery,
     TResult Function(_TipDelivery value)? tipDelivery,
+    TResult Function(_DeliveryCost value)? deliveryCost,
+    TResult Function(_GetPendingDelivery value)? getPendingDelivery,
+    TResult Function(_AcceptDelivery value)? acceptDelivery,
+    TResult Function(_RejectDelivery value)? rejectDelivery,
+    TResult Function(_FinishDelivery value)? finishDelivery,
+    TResult Function(_GetADelivery value)? getADelivery,
   }) {
     return tipDelivery?.call(this);
   }
@@ -1747,11 +2396,19 @@ class _$_TipDelivery implements _TipDelivery {
     TResult Function(_CreateShipment value)? createShipment,
     TResult Function(_CreateTrip value)? createTrip,
     TResult Function(_GetAllDeliveries value)? getAllDeliveries,
+    TResult Function(_GetAllDeliveriesPendingInvitations value)?
+        getAllDeliveriesPendingInvitations,
     TResult Function(_GetAllShipment value)? getAllShipment,
     TResult Function(_UpdateTripStatus value)? updateTripStatus,
     TResult Function(_AcceptCompletedDelivery value)? acceptCompletedDelivery,
     TResult Function(_RateDelivery value)? rateDelivery,
     TResult Function(_TipDelivery value)? tipDelivery,
+    TResult Function(_DeliveryCost value)? deliveryCost,
+    TResult Function(_GetPendingDelivery value)? getPendingDelivery,
+    TResult Function(_AcceptDelivery value)? acceptDelivery,
+    TResult Function(_RejectDelivery value)? rejectDelivery,
+    TResult Function(_FinishDelivery value)? finishDelivery,
+    TResult Function(_GetADelivery value)? getADelivery,
     required TResult orElse(),
   }) {
     if (tipDelivery != null) {
@@ -1772,6 +2429,1324 @@ abstract class _TipDelivery implements ShipmentHandlerEvent {
 }
 
 /// @nodoc
+abstract class _$DeliveryCostCopyWith<$Res> {
+  factory _$DeliveryCostCopyWith(
+          _DeliveryCost value, $Res Function(_DeliveryCost) then) =
+      __$DeliveryCostCopyWithImpl<$Res>;
+  $Res call({DeliveryCostArg arg});
+}
+
+/// @nodoc
+class __$DeliveryCostCopyWithImpl<$Res>
+    extends _$ShipmentHandlerEventCopyWithImpl<$Res>
+    implements _$DeliveryCostCopyWith<$Res> {
+  __$DeliveryCostCopyWithImpl(
+      _DeliveryCost _value, $Res Function(_DeliveryCost) _then)
+      : super(_value, (v) => _then(v as _DeliveryCost));
+
+  @override
+  _DeliveryCost get _value => super._value as _DeliveryCost;
+
+  @override
+  $Res call({
+    Object? arg = freezed,
+  }) {
+    return _then(_DeliveryCost(
+      arg == freezed
+          ? _value.arg
+          : arg // ignore: cast_nullable_to_non_nullable
+              as DeliveryCostArg,
+    ));
+  }
+}
+
+/// @nodoc
+
+class _$_DeliveryCost implements _DeliveryCost {
+  const _$_DeliveryCost(this.arg);
+
+  @override
+  final DeliveryCostArg arg;
+
+  @override
+  String toString() {
+    return 'ShipmentHandlerEvent.deliveryCost(arg: $arg)';
+  }
+
+  @override
+  bool operator ==(dynamic other) {
+    return identical(this, other) ||
+        (other.runtimeType == runtimeType &&
+            other is _DeliveryCost &&
+            const DeepCollectionEquality().equals(other.arg, arg));
+  }
+
+  @override
+  int get hashCode =>
+      Object.hash(runtimeType, const DeepCollectionEquality().hash(arg));
+
+  @JsonKey(ignore: true)
+  @override
+  _$DeliveryCostCopyWith<_DeliveryCost> get copyWith =>
+      __$DeliveryCostCopyWithImpl<_DeliveryCost>(this, _$identity);
+
+  @override
+  @optionalTypeArgs
+  TResult when<TResult extends Object?>({
+    required TResult Function() started,
+    required TResult Function(CreateShipmentArg arg) createShipment,
+    required TResult Function(CreateTripArg arg) createTrip,
+    required TResult Function() getAllDeliveries,
+    required TResult Function() getAllDeliveriesPendingInvitations,
+    required TResult Function(String email) getAllShipment,
+    required TResult Function(String id, String status) updateTripStatus,
+    required TResult Function(String deliveryId) acceptCompletedDelivery,
+    required TResult Function(RateDeliveryArg arg) rateDelivery,
+    required TResult Function(String deliveryId, String amount) tipDelivery,
+    required TResult Function(DeliveryCostArg arg) deliveryCost,
+    required TResult Function() getPendingDelivery,
+    required TResult Function(String deliveryId) acceptDelivery,
+    required TResult Function(String deliveryId) rejectDelivery,
+    required TResult Function(String deliveryId) finishDelivery,
+    required TResult Function(String deliveryId, Owner owner) getADelivery,
+  }) {
+    return deliveryCost(arg);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? whenOrNull<TResult extends Object?>({
+    TResult Function()? started,
+    TResult Function(CreateShipmentArg arg)? createShipment,
+    TResult Function(CreateTripArg arg)? createTrip,
+    TResult Function()? getAllDeliveries,
+    TResult Function()? getAllDeliveriesPendingInvitations,
+    TResult Function(String email)? getAllShipment,
+    TResult Function(String id, String status)? updateTripStatus,
+    TResult Function(String deliveryId)? acceptCompletedDelivery,
+    TResult Function(RateDeliveryArg arg)? rateDelivery,
+    TResult Function(String deliveryId, String amount)? tipDelivery,
+    TResult Function(DeliveryCostArg arg)? deliveryCost,
+    TResult Function()? getPendingDelivery,
+    TResult Function(String deliveryId)? acceptDelivery,
+    TResult Function(String deliveryId)? rejectDelivery,
+    TResult Function(String deliveryId)? finishDelivery,
+    TResult Function(String deliveryId, Owner owner)? getADelivery,
+  }) {
+    return deliveryCost?.call(arg);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeWhen<TResult extends Object?>({
+    TResult Function()? started,
+    TResult Function(CreateShipmentArg arg)? createShipment,
+    TResult Function(CreateTripArg arg)? createTrip,
+    TResult Function()? getAllDeliveries,
+    TResult Function()? getAllDeliveriesPendingInvitations,
+    TResult Function(String email)? getAllShipment,
+    TResult Function(String id, String status)? updateTripStatus,
+    TResult Function(String deliveryId)? acceptCompletedDelivery,
+    TResult Function(RateDeliveryArg arg)? rateDelivery,
+    TResult Function(String deliveryId, String amount)? tipDelivery,
+    TResult Function(DeliveryCostArg arg)? deliveryCost,
+    TResult Function()? getPendingDelivery,
+    TResult Function(String deliveryId)? acceptDelivery,
+    TResult Function(String deliveryId)? rejectDelivery,
+    TResult Function(String deliveryId)? finishDelivery,
+    TResult Function(String deliveryId, Owner owner)? getADelivery,
+    required TResult orElse(),
+  }) {
+    if (deliveryCost != null) {
+      return deliveryCost(arg);
+    }
+    return orElse();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult map<TResult extends Object?>({
+    required TResult Function(_Started value) started,
+    required TResult Function(_CreateShipment value) createShipment,
+    required TResult Function(_CreateTrip value) createTrip,
+    required TResult Function(_GetAllDeliveries value) getAllDeliveries,
+    required TResult Function(_GetAllDeliveriesPendingInvitations value)
+        getAllDeliveriesPendingInvitations,
+    required TResult Function(_GetAllShipment value) getAllShipment,
+    required TResult Function(_UpdateTripStatus value) updateTripStatus,
+    required TResult Function(_AcceptCompletedDelivery value)
+        acceptCompletedDelivery,
+    required TResult Function(_RateDelivery value) rateDelivery,
+    required TResult Function(_TipDelivery value) tipDelivery,
+    required TResult Function(_DeliveryCost value) deliveryCost,
+    required TResult Function(_GetPendingDelivery value) getPendingDelivery,
+    required TResult Function(_AcceptDelivery value) acceptDelivery,
+    required TResult Function(_RejectDelivery value) rejectDelivery,
+    required TResult Function(_FinishDelivery value) finishDelivery,
+    required TResult Function(_GetADelivery value) getADelivery,
+  }) {
+    return deliveryCost(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? mapOrNull<TResult extends Object?>({
+    TResult Function(_Started value)? started,
+    TResult Function(_CreateShipment value)? createShipment,
+    TResult Function(_CreateTrip value)? createTrip,
+    TResult Function(_GetAllDeliveries value)? getAllDeliveries,
+    TResult Function(_GetAllDeliveriesPendingInvitations value)?
+        getAllDeliveriesPendingInvitations,
+    TResult Function(_GetAllShipment value)? getAllShipment,
+    TResult Function(_UpdateTripStatus value)? updateTripStatus,
+    TResult Function(_AcceptCompletedDelivery value)? acceptCompletedDelivery,
+    TResult Function(_RateDelivery value)? rateDelivery,
+    TResult Function(_TipDelivery value)? tipDelivery,
+    TResult Function(_DeliveryCost value)? deliveryCost,
+    TResult Function(_GetPendingDelivery value)? getPendingDelivery,
+    TResult Function(_AcceptDelivery value)? acceptDelivery,
+    TResult Function(_RejectDelivery value)? rejectDelivery,
+    TResult Function(_FinishDelivery value)? finishDelivery,
+    TResult Function(_GetADelivery value)? getADelivery,
+  }) {
+    return deliveryCost?.call(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeMap<TResult extends Object?>({
+    TResult Function(_Started value)? started,
+    TResult Function(_CreateShipment value)? createShipment,
+    TResult Function(_CreateTrip value)? createTrip,
+    TResult Function(_GetAllDeliveries value)? getAllDeliveries,
+    TResult Function(_GetAllDeliveriesPendingInvitations value)?
+        getAllDeliveriesPendingInvitations,
+    TResult Function(_GetAllShipment value)? getAllShipment,
+    TResult Function(_UpdateTripStatus value)? updateTripStatus,
+    TResult Function(_AcceptCompletedDelivery value)? acceptCompletedDelivery,
+    TResult Function(_RateDelivery value)? rateDelivery,
+    TResult Function(_TipDelivery value)? tipDelivery,
+    TResult Function(_DeliveryCost value)? deliveryCost,
+    TResult Function(_GetPendingDelivery value)? getPendingDelivery,
+    TResult Function(_AcceptDelivery value)? acceptDelivery,
+    TResult Function(_RejectDelivery value)? rejectDelivery,
+    TResult Function(_FinishDelivery value)? finishDelivery,
+    TResult Function(_GetADelivery value)? getADelivery,
+    required TResult orElse(),
+  }) {
+    if (deliveryCost != null) {
+      return deliveryCost(this);
+    }
+    return orElse();
+  }
+}
+
+abstract class _DeliveryCost implements ShipmentHandlerEvent {
+  const factory _DeliveryCost(DeliveryCostArg arg) = _$_DeliveryCost;
+
+  DeliveryCostArg get arg;
+  @JsonKey(ignore: true)
+  _$DeliveryCostCopyWith<_DeliveryCost> get copyWith =>
+      throw _privateConstructorUsedError;
+}
+
+/// @nodoc
+abstract class _$GetPendingDeliveryCopyWith<$Res> {
+  factory _$GetPendingDeliveryCopyWith(
+          _GetPendingDelivery value, $Res Function(_GetPendingDelivery) then) =
+      __$GetPendingDeliveryCopyWithImpl<$Res>;
+}
+
+/// @nodoc
+class __$GetPendingDeliveryCopyWithImpl<$Res>
+    extends _$ShipmentHandlerEventCopyWithImpl<$Res>
+    implements _$GetPendingDeliveryCopyWith<$Res> {
+  __$GetPendingDeliveryCopyWithImpl(
+      _GetPendingDelivery _value, $Res Function(_GetPendingDelivery) _then)
+      : super(_value, (v) => _then(v as _GetPendingDelivery));
+
+  @override
+  _GetPendingDelivery get _value => super._value as _GetPendingDelivery;
+}
+
+/// @nodoc
+
+class _$_GetPendingDelivery implements _GetPendingDelivery {
+  const _$_GetPendingDelivery();
+
+  @override
+  String toString() {
+    return 'ShipmentHandlerEvent.getPendingDelivery()';
+  }
+
+  @override
+  bool operator ==(dynamic other) {
+    return identical(this, other) ||
+        (other.runtimeType == runtimeType && other is _GetPendingDelivery);
+  }
+
+  @override
+  int get hashCode => runtimeType.hashCode;
+
+  @override
+  @optionalTypeArgs
+  TResult when<TResult extends Object?>({
+    required TResult Function() started,
+    required TResult Function(CreateShipmentArg arg) createShipment,
+    required TResult Function(CreateTripArg arg) createTrip,
+    required TResult Function() getAllDeliveries,
+    required TResult Function() getAllDeliveriesPendingInvitations,
+    required TResult Function(String email) getAllShipment,
+    required TResult Function(String id, String status) updateTripStatus,
+    required TResult Function(String deliveryId) acceptCompletedDelivery,
+    required TResult Function(RateDeliveryArg arg) rateDelivery,
+    required TResult Function(String deliveryId, String amount) tipDelivery,
+    required TResult Function(DeliveryCostArg arg) deliveryCost,
+    required TResult Function() getPendingDelivery,
+    required TResult Function(String deliveryId) acceptDelivery,
+    required TResult Function(String deliveryId) rejectDelivery,
+    required TResult Function(String deliveryId) finishDelivery,
+    required TResult Function(String deliveryId, Owner owner) getADelivery,
+  }) {
+    return getPendingDelivery();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? whenOrNull<TResult extends Object?>({
+    TResult Function()? started,
+    TResult Function(CreateShipmentArg arg)? createShipment,
+    TResult Function(CreateTripArg arg)? createTrip,
+    TResult Function()? getAllDeliveries,
+    TResult Function()? getAllDeliveriesPendingInvitations,
+    TResult Function(String email)? getAllShipment,
+    TResult Function(String id, String status)? updateTripStatus,
+    TResult Function(String deliveryId)? acceptCompletedDelivery,
+    TResult Function(RateDeliveryArg arg)? rateDelivery,
+    TResult Function(String deliveryId, String amount)? tipDelivery,
+    TResult Function(DeliveryCostArg arg)? deliveryCost,
+    TResult Function()? getPendingDelivery,
+    TResult Function(String deliveryId)? acceptDelivery,
+    TResult Function(String deliveryId)? rejectDelivery,
+    TResult Function(String deliveryId)? finishDelivery,
+    TResult Function(String deliveryId, Owner owner)? getADelivery,
+  }) {
+    return getPendingDelivery?.call();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeWhen<TResult extends Object?>({
+    TResult Function()? started,
+    TResult Function(CreateShipmentArg arg)? createShipment,
+    TResult Function(CreateTripArg arg)? createTrip,
+    TResult Function()? getAllDeliveries,
+    TResult Function()? getAllDeliveriesPendingInvitations,
+    TResult Function(String email)? getAllShipment,
+    TResult Function(String id, String status)? updateTripStatus,
+    TResult Function(String deliveryId)? acceptCompletedDelivery,
+    TResult Function(RateDeliveryArg arg)? rateDelivery,
+    TResult Function(String deliveryId, String amount)? tipDelivery,
+    TResult Function(DeliveryCostArg arg)? deliveryCost,
+    TResult Function()? getPendingDelivery,
+    TResult Function(String deliveryId)? acceptDelivery,
+    TResult Function(String deliveryId)? rejectDelivery,
+    TResult Function(String deliveryId)? finishDelivery,
+    TResult Function(String deliveryId, Owner owner)? getADelivery,
+    required TResult orElse(),
+  }) {
+    if (getPendingDelivery != null) {
+      return getPendingDelivery();
+    }
+    return orElse();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult map<TResult extends Object?>({
+    required TResult Function(_Started value) started,
+    required TResult Function(_CreateShipment value) createShipment,
+    required TResult Function(_CreateTrip value) createTrip,
+    required TResult Function(_GetAllDeliveries value) getAllDeliveries,
+    required TResult Function(_GetAllDeliveriesPendingInvitations value)
+        getAllDeliveriesPendingInvitations,
+    required TResult Function(_GetAllShipment value) getAllShipment,
+    required TResult Function(_UpdateTripStatus value) updateTripStatus,
+    required TResult Function(_AcceptCompletedDelivery value)
+        acceptCompletedDelivery,
+    required TResult Function(_RateDelivery value) rateDelivery,
+    required TResult Function(_TipDelivery value) tipDelivery,
+    required TResult Function(_DeliveryCost value) deliveryCost,
+    required TResult Function(_GetPendingDelivery value) getPendingDelivery,
+    required TResult Function(_AcceptDelivery value) acceptDelivery,
+    required TResult Function(_RejectDelivery value) rejectDelivery,
+    required TResult Function(_FinishDelivery value) finishDelivery,
+    required TResult Function(_GetADelivery value) getADelivery,
+  }) {
+    return getPendingDelivery(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? mapOrNull<TResult extends Object?>({
+    TResult Function(_Started value)? started,
+    TResult Function(_CreateShipment value)? createShipment,
+    TResult Function(_CreateTrip value)? createTrip,
+    TResult Function(_GetAllDeliveries value)? getAllDeliveries,
+    TResult Function(_GetAllDeliveriesPendingInvitations value)?
+        getAllDeliveriesPendingInvitations,
+    TResult Function(_GetAllShipment value)? getAllShipment,
+    TResult Function(_UpdateTripStatus value)? updateTripStatus,
+    TResult Function(_AcceptCompletedDelivery value)? acceptCompletedDelivery,
+    TResult Function(_RateDelivery value)? rateDelivery,
+    TResult Function(_TipDelivery value)? tipDelivery,
+    TResult Function(_DeliveryCost value)? deliveryCost,
+    TResult Function(_GetPendingDelivery value)? getPendingDelivery,
+    TResult Function(_AcceptDelivery value)? acceptDelivery,
+    TResult Function(_RejectDelivery value)? rejectDelivery,
+    TResult Function(_FinishDelivery value)? finishDelivery,
+    TResult Function(_GetADelivery value)? getADelivery,
+  }) {
+    return getPendingDelivery?.call(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeMap<TResult extends Object?>({
+    TResult Function(_Started value)? started,
+    TResult Function(_CreateShipment value)? createShipment,
+    TResult Function(_CreateTrip value)? createTrip,
+    TResult Function(_GetAllDeliveries value)? getAllDeliveries,
+    TResult Function(_GetAllDeliveriesPendingInvitations value)?
+        getAllDeliveriesPendingInvitations,
+    TResult Function(_GetAllShipment value)? getAllShipment,
+    TResult Function(_UpdateTripStatus value)? updateTripStatus,
+    TResult Function(_AcceptCompletedDelivery value)? acceptCompletedDelivery,
+    TResult Function(_RateDelivery value)? rateDelivery,
+    TResult Function(_TipDelivery value)? tipDelivery,
+    TResult Function(_DeliveryCost value)? deliveryCost,
+    TResult Function(_GetPendingDelivery value)? getPendingDelivery,
+    TResult Function(_AcceptDelivery value)? acceptDelivery,
+    TResult Function(_RejectDelivery value)? rejectDelivery,
+    TResult Function(_FinishDelivery value)? finishDelivery,
+    TResult Function(_GetADelivery value)? getADelivery,
+    required TResult orElse(),
+  }) {
+    if (getPendingDelivery != null) {
+      return getPendingDelivery(this);
+    }
+    return orElse();
+  }
+}
+
+abstract class _GetPendingDelivery implements ShipmentHandlerEvent {
+  const factory _GetPendingDelivery() = _$_GetPendingDelivery;
+}
+
+/// @nodoc
+abstract class _$AcceptDeliveryCopyWith<$Res> {
+  factory _$AcceptDeliveryCopyWith(
+          _AcceptDelivery value, $Res Function(_AcceptDelivery) then) =
+      __$AcceptDeliveryCopyWithImpl<$Res>;
+  $Res call({String deliveryId});
+}
+
+/// @nodoc
+class __$AcceptDeliveryCopyWithImpl<$Res>
+    extends _$ShipmentHandlerEventCopyWithImpl<$Res>
+    implements _$AcceptDeliveryCopyWith<$Res> {
+  __$AcceptDeliveryCopyWithImpl(
+      _AcceptDelivery _value, $Res Function(_AcceptDelivery) _then)
+      : super(_value, (v) => _then(v as _AcceptDelivery));
+
+  @override
+  _AcceptDelivery get _value => super._value as _AcceptDelivery;
+
+  @override
+  $Res call({
+    Object? deliveryId = freezed,
+  }) {
+    return _then(_AcceptDelivery(
+      deliveryId == freezed
+          ? _value.deliveryId
+          : deliveryId // ignore: cast_nullable_to_non_nullable
+              as String,
+    ));
+  }
+}
+
+/// @nodoc
+
+class _$_AcceptDelivery implements _AcceptDelivery {
+  const _$_AcceptDelivery(this.deliveryId);
+
+  @override
+  final String deliveryId;
+
+  @override
+  String toString() {
+    return 'ShipmentHandlerEvent.acceptDelivery(deliveryId: $deliveryId)';
+  }
+
+  @override
+  bool operator ==(dynamic other) {
+    return identical(this, other) ||
+        (other.runtimeType == runtimeType &&
+            other is _AcceptDelivery &&
+            const DeepCollectionEquality()
+                .equals(other.deliveryId, deliveryId));
+  }
+
+  @override
+  int get hashCode =>
+      Object.hash(runtimeType, const DeepCollectionEquality().hash(deliveryId));
+
+  @JsonKey(ignore: true)
+  @override
+  _$AcceptDeliveryCopyWith<_AcceptDelivery> get copyWith =>
+      __$AcceptDeliveryCopyWithImpl<_AcceptDelivery>(this, _$identity);
+
+  @override
+  @optionalTypeArgs
+  TResult when<TResult extends Object?>({
+    required TResult Function() started,
+    required TResult Function(CreateShipmentArg arg) createShipment,
+    required TResult Function(CreateTripArg arg) createTrip,
+    required TResult Function() getAllDeliveries,
+    required TResult Function() getAllDeliveriesPendingInvitations,
+    required TResult Function(String email) getAllShipment,
+    required TResult Function(String id, String status) updateTripStatus,
+    required TResult Function(String deliveryId) acceptCompletedDelivery,
+    required TResult Function(RateDeliveryArg arg) rateDelivery,
+    required TResult Function(String deliveryId, String amount) tipDelivery,
+    required TResult Function(DeliveryCostArg arg) deliveryCost,
+    required TResult Function() getPendingDelivery,
+    required TResult Function(String deliveryId) acceptDelivery,
+    required TResult Function(String deliveryId) rejectDelivery,
+    required TResult Function(String deliveryId) finishDelivery,
+    required TResult Function(String deliveryId, Owner owner) getADelivery,
+  }) {
+    return acceptDelivery(deliveryId);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? whenOrNull<TResult extends Object?>({
+    TResult Function()? started,
+    TResult Function(CreateShipmentArg arg)? createShipment,
+    TResult Function(CreateTripArg arg)? createTrip,
+    TResult Function()? getAllDeliveries,
+    TResult Function()? getAllDeliveriesPendingInvitations,
+    TResult Function(String email)? getAllShipment,
+    TResult Function(String id, String status)? updateTripStatus,
+    TResult Function(String deliveryId)? acceptCompletedDelivery,
+    TResult Function(RateDeliveryArg arg)? rateDelivery,
+    TResult Function(String deliveryId, String amount)? tipDelivery,
+    TResult Function(DeliveryCostArg arg)? deliveryCost,
+    TResult Function()? getPendingDelivery,
+    TResult Function(String deliveryId)? acceptDelivery,
+    TResult Function(String deliveryId)? rejectDelivery,
+    TResult Function(String deliveryId)? finishDelivery,
+    TResult Function(String deliveryId, Owner owner)? getADelivery,
+  }) {
+    return acceptDelivery?.call(deliveryId);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeWhen<TResult extends Object?>({
+    TResult Function()? started,
+    TResult Function(CreateShipmentArg arg)? createShipment,
+    TResult Function(CreateTripArg arg)? createTrip,
+    TResult Function()? getAllDeliveries,
+    TResult Function()? getAllDeliveriesPendingInvitations,
+    TResult Function(String email)? getAllShipment,
+    TResult Function(String id, String status)? updateTripStatus,
+    TResult Function(String deliveryId)? acceptCompletedDelivery,
+    TResult Function(RateDeliveryArg arg)? rateDelivery,
+    TResult Function(String deliveryId, String amount)? tipDelivery,
+    TResult Function(DeliveryCostArg arg)? deliveryCost,
+    TResult Function()? getPendingDelivery,
+    TResult Function(String deliveryId)? acceptDelivery,
+    TResult Function(String deliveryId)? rejectDelivery,
+    TResult Function(String deliveryId)? finishDelivery,
+    TResult Function(String deliveryId, Owner owner)? getADelivery,
+    required TResult orElse(),
+  }) {
+    if (acceptDelivery != null) {
+      return acceptDelivery(deliveryId);
+    }
+    return orElse();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult map<TResult extends Object?>({
+    required TResult Function(_Started value) started,
+    required TResult Function(_CreateShipment value) createShipment,
+    required TResult Function(_CreateTrip value) createTrip,
+    required TResult Function(_GetAllDeliveries value) getAllDeliveries,
+    required TResult Function(_GetAllDeliveriesPendingInvitations value)
+        getAllDeliveriesPendingInvitations,
+    required TResult Function(_GetAllShipment value) getAllShipment,
+    required TResult Function(_UpdateTripStatus value) updateTripStatus,
+    required TResult Function(_AcceptCompletedDelivery value)
+        acceptCompletedDelivery,
+    required TResult Function(_RateDelivery value) rateDelivery,
+    required TResult Function(_TipDelivery value) tipDelivery,
+    required TResult Function(_DeliveryCost value) deliveryCost,
+    required TResult Function(_GetPendingDelivery value) getPendingDelivery,
+    required TResult Function(_AcceptDelivery value) acceptDelivery,
+    required TResult Function(_RejectDelivery value) rejectDelivery,
+    required TResult Function(_FinishDelivery value) finishDelivery,
+    required TResult Function(_GetADelivery value) getADelivery,
+  }) {
+    return acceptDelivery(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? mapOrNull<TResult extends Object?>({
+    TResult Function(_Started value)? started,
+    TResult Function(_CreateShipment value)? createShipment,
+    TResult Function(_CreateTrip value)? createTrip,
+    TResult Function(_GetAllDeliveries value)? getAllDeliveries,
+    TResult Function(_GetAllDeliveriesPendingInvitations value)?
+        getAllDeliveriesPendingInvitations,
+    TResult Function(_GetAllShipment value)? getAllShipment,
+    TResult Function(_UpdateTripStatus value)? updateTripStatus,
+    TResult Function(_AcceptCompletedDelivery value)? acceptCompletedDelivery,
+    TResult Function(_RateDelivery value)? rateDelivery,
+    TResult Function(_TipDelivery value)? tipDelivery,
+    TResult Function(_DeliveryCost value)? deliveryCost,
+    TResult Function(_GetPendingDelivery value)? getPendingDelivery,
+    TResult Function(_AcceptDelivery value)? acceptDelivery,
+    TResult Function(_RejectDelivery value)? rejectDelivery,
+    TResult Function(_FinishDelivery value)? finishDelivery,
+    TResult Function(_GetADelivery value)? getADelivery,
+  }) {
+    return acceptDelivery?.call(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeMap<TResult extends Object?>({
+    TResult Function(_Started value)? started,
+    TResult Function(_CreateShipment value)? createShipment,
+    TResult Function(_CreateTrip value)? createTrip,
+    TResult Function(_GetAllDeliveries value)? getAllDeliveries,
+    TResult Function(_GetAllDeliveriesPendingInvitations value)?
+        getAllDeliveriesPendingInvitations,
+    TResult Function(_GetAllShipment value)? getAllShipment,
+    TResult Function(_UpdateTripStatus value)? updateTripStatus,
+    TResult Function(_AcceptCompletedDelivery value)? acceptCompletedDelivery,
+    TResult Function(_RateDelivery value)? rateDelivery,
+    TResult Function(_TipDelivery value)? tipDelivery,
+    TResult Function(_DeliveryCost value)? deliveryCost,
+    TResult Function(_GetPendingDelivery value)? getPendingDelivery,
+    TResult Function(_AcceptDelivery value)? acceptDelivery,
+    TResult Function(_RejectDelivery value)? rejectDelivery,
+    TResult Function(_FinishDelivery value)? finishDelivery,
+    TResult Function(_GetADelivery value)? getADelivery,
+    required TResult orElse(),
+  }) {
+    if (acceptDelivery != null) {
+      return acceptDelivery(this);
+    }
+    return orElse();
+  }
+}
+
+abstract class _AcceptDelivery implements ShipmentHandlerEvent {
+  const factory _AcceptDelivery(String deliveryId) = _$_AcceptDelivery;
+
+  String get deliveryId;
+  @JsonKey(ignore: true)
+  _$AcceptDeliveryCopyWith<_AcceptDelivery> get copyWith =>
+      throw _privateConstructorUsedError;
+}
+
+/// @nodoc
+abstract class _$RejectDeliveryCopyWith<$Res> {
+  factory _$RejectDeliveryCopyWith(
+          _RejectDelivery value, $Res Function(_RejectDelivery) then) =
+      __$RejectDeliveryCopyWithImpl<$Res>;
+  $Res call({String deliveryId});
+}
+
+/// @nodoc
+class __$RejectDeliveryCopyWithImpl<$Res>
+    extends _$ShipmentHandlerEventCopyWithImpl<$Res>
+    implements _$RejectDeliveryCopyWith<$Res> {
+  __$RejectDeliveryCopyWithImpl(
+      _RejectDelivery _value, $Res Function(_RejectDelivery) _then)
+      : super(_value, (v) => _then(v as _RejectDelivery));
+
+  @override
+  _RejectDelivery get _value => super._value as _RejectDelivery;
+
+  @override
+  $Res call({
+    Object? deliveryId = freezed,
+  }) {
+    return _then(_RejectDelivery(
+      deliveryId == freezed
+          ? _value.deliveryId
+          : deliveryId // ignore: cast_nullable_to_non_nullable
+              as String,
+    ));
+  }
+}
+
+/// @nodoc
+
+class _$_RejectDelivery implements _RejectDelivery {
+  const _$_RejectDelivery(this.deliveryId);
+
+  @override
+  final String deliveryId;
+
+  @override
+  String toString() {
+    return 'ShipmentHandlerEvent.rejectDelivery(deliveryId: $deliveryId)';
+  }
+
+  @override
+  bool operator ==(dynamic other) {
+    return identical(this, other) ||
+        (other.runtimeType == runtimeType &&
+            other is _RejectDelivery &&
+            const DeepCollectionEquality()
+                .equals(other.deliveryId, deliveryId));
+  }
+
+  @override
+  int get hashCode =>
+      Object.hash(runtimeType, const DeepCollectionEquality().hash(deliveryId));
+
+  @JsonKey(ignore: true)
+  @override
+  _$RejectDeliveryCopyWith<_RejectDelivery> get copyWith =>
+      __$RejectDeliveryCopyWithImpl<_RejectDelivery>(this, _$identity);
+
+  @override
+  @optionalTypeArgs
+  TResult when<TResult extends Object?>({
+    required TResult Function() started,
+    required TResult Function(CreateShipmentArg arg) createShipment,
+    required TResult Function(CreateTripArg arg) createTrip,
+    required TResult Function() getAllDeliveries,
+    required TResult Function() getAllDeliveriesPendingInvitations,
+    required TResult Function(String email) getAllShipment,
+    required TResult Function(String id, String status) updateTripStatus,
+    required TResult Function(String deliveryId) acceptCompletedDelivery,
+    required TResult Function(RateDeliveryArg arg) rateDelivery,
+    required TResult Function(String deliveryId, String amount) tipDelivery,
+    required TResult Function(DeliveryCostArg arg) deliveryCost,
+    required TResult Function() getPendingDelivery,
+    required TResult Function(String deliveryId) acceptDelivery,
+    required TResult Function(String deliveryId) rejectDelivery,
+    required TResult Function(String deliveryId) finishDelivery,
+    required TResult Function(String deliveryId, Owner owner) getADelivery,
+  }) {
+    return rejectDelivery(deliveryId);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? whenOrNull<TResult extends Object?>({
+    TResult Function()? started,
+    TResult Function(CreateShipmentArg arg)? createShipment,
+    TResult Function(CreateTripArg arg)? createTrip,
+    TResult Function()? getAllDeliveries,
+    TResult Function()? getAllDeliveriesPendingInvitations,
+    TResult Function(String email)? getAllShipment,
+    TResult Function(String id, String status)? updateTripStatus,
+    TResult Function(String deliveryId)? acceptCompletedDelivery,
+    TResult Function(RateDeliveryArg arg)? rateDelivery,
+    TResult Function(String deliveryId, String amount)? tipDelivery,
+    TResult Function(DeliveryCostArg arg)? deliveryCost,
+    TResult Function()? getPendingDelivery,
+    TResult Function(String deliveryId)? acceptDelivery,
+    TResult Function(String deliveryId)? rejectDelivery,
+    TResult Function(String deliveryId)? finishDelivery,
+    TResult Function(String deliveryId, Owner owner)? getADelivery,
+  }) {
+    return rejectDelivery?.call(deliveryId);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeWhen<TResult extends Object?>({
+    TResult Function()? started,
+    TResult Function(CreateShipmentArg arg)? createShipment,
+    TResult Function(CreateTripArg arg)? createTrip,
+    TResult Function()? getAllDeliveries,
+    TResult Function()? getAllDeliveriesPendingInvitations,
+    TResult Function(String email)? getAllShipment,
+    TResult Function(String id, String status)? updateTripStatus,
+    TResult Function(String deliveryId)? acceptCompletedDelivery,
+    TResult Function(RateDeliveryArg arg)? rateDelivery,
+    TResult Function(String deliveryId, String amount)? tipDelivery,
+    TResult Function(DeliveryCostArg arg)? deliveryCost,
+    TResult Function()? getPendingDelivery,
+    TResult Function(String deliveryId)? acceptDelivery,
+    TResult Function(String deliveryId)? rejectDelivery,
+    TResult Function(String deliveryId)? finishDelivery,
+    TResult Function(String deliveryId, Owner owner)? getADelivery,
+    required TResult orElse(),
+  }) {
+    if (rejectDelivery != null) {
+      return rejectDelivery(deliveryId);
+    }
+    return orElse();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult map<TResult extends Object?>({
+    required TResult Function(_Started value) started,
+    required TResult Function(_CreateShipment value) createShipment,
+    required TResult Function(_CreateTrip value) createTrip,
+    required TResult Function(_GetAllDeliveries value) getAllDeliveries,
+    required TResult Function(_GetAllDeliveriesPendingInvitations value)
+        getAllDeliveriesPendingInvitations,
+    required TResult Function(_GetAllShipment value) getAllShipment,
+    required TResult Function(_UpdateTripStatus value) updateTripStatus,
+    required TResult Function(_AcceptCompletedDelivery value)
+        acceptCompletedDelivery,
+    required TResult Function(_RateDelivery value) rateDelivery,
+    required TResult Function(_TipDelivery value) tipDelivery,
+    required TResult Function(_DeliveryCost value) deliveryCost,
+    required TResult Function(_GetPendingDelivery value) getPendingDelivery,
+    required TResult Function(_AcceptDelivery value) acceptDelivery,
+    required TResult Function(_RejectDelivery value) rejectDelivery,
+    required TResult Function(_FinishDelivery value) finishDelivery,
+    required TResult Function(_GetADelivery value) getADelivery,
+  }) {
+    return rejectDelivery(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? mapOrNull<TResult extends Object?>({
+    TResult Function(_Started value)? started,
+    TResult Function(_CreateShipment value)? createShipment,
+    TResult Function(_CreateTrip value)? createTrip,
+    TResult Function(_GetAllDeliveries value)? getAllDeliveries,
+    TResult Function(_GetAllDeliveriesPendingInvitations value)?
+        getAllDeliveriesPendingInvitations,
+    TResult Function(_GetAllShipment value)? getAllShipment,
+    TResult Function(_UpdateTripStatus value)? updateTripStatus,
+    TResult Function(_AcceptCompletedDelivery value)? acceptCompletedDelivery,
+    TResult Function(_RateDelivery value)? rateDelivery,
+    TResult Function(_TipDelivery value)? tipDelivery,
+    TResult Function(_DeliveryCost value)? deliveryCost,
+    TResult Function(_GetPendingDelivery value)? getPendingDelivery,
+    TResult Function(_AcceptDelivery value)? acceptDelivery,
+    TResult Function(_RejectDelivery value)? rejectDelivery,
+    TResult Function(_FinishDelivery value)? finishDelivery,
+    TResult Function(_GetADelivery value)? getADelivery,
+  }) {
+    return rejectDelivery?.call(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeMap<TResult extends Object?>({
+    TResult Function(_Started value)? started,
+    TResult Function(_CreateShipment value)? createShipment,
+    TResult Function(_CreateTrip value)? createTrip,
+    TResult Function(_GetAllDeliveries value)? getAllDeliveries,
+    TResult Function(_GetAllDeliveriesPendingInvitations value)?
+        getAllDeliveriesPendingInvitations,
+    TResult Function(_GetAllShipment value)? getAllShipment,
+    TResult Function(_UpdateTripStatus value)? updateTripStatus,
+    TResult Function(_AcceptCompletedDelivery value)? acceptCompletedDelivery,
+    TResult Function(_RateDelivery value)? rateDelivery,
+    TResult Function(_TipDelivery value)? tipDelivery,
+    TResult Function(_DeliveryCost value)? deliveryCost,
+    TResult Function(_GetPendingDelivery value)? getPendingDelivery,
+    TResult Function(_AcceptDelivery value)? acceptDelivery,
+    TResult Function(_RejectDelivery value)? rejectDelivery,
+    TResult Function(_FinishDelivery value)? finishDelivery,
+    TResult Function(_GetADelivery value)? getADelivery,
+    required TResult orElse(),
+  }) {
+    if (rejectDelivery != null) {
+      return rejectDelivery(this);
+    }
+    return orElse();
+  }
+}
+
+abstract class _RejectDelivery implements ShipmentHandlerEvent {
+  const factory _RejectDelivery(String deliveryId) = _$_RejectDelivery;
+
+  String get deliveryId;
+  @JsonKey(ignore: true)
+  _$RejectDeliveryCopyWith<_RejectDelivery> get copyWith =>
+      throw _privateConstructorUsedError;
+}
+
+/// @nodoc
+abstract class _$FinishDeliveryCopyWith<$Res> {
+  factory _$FinishDeliveryCopyWith(
+          _FinishDelivery value, $Res Function(_FinishDelivery) then) =
+      __$FinishDeliveryCopyWithImpl<$Res>;
+  $Res call({String deliveryId});
+}
+
+/// @nodoc
+class __$FinishDeliveryCopyWithImpl<$Res>
+    extends _$ShipmentHandlerEventCopyWithImpl<$Res>
+    implements _$FinishDeliveryCopyWith<$Res> {
+  __$FinishDeliveryCopyWithImpl(
+      _FinishDelivery _value, $Res Function(_FinishDelivery) _then)
+      : super(_value, (v) => _then(v as _FinishDelivery));
+
+  @override
+  _FinishDelivery get _value => super._value as _FinishDelivery;
+
+  @override
+  $Res call({
+    Object? deliveryId = freezed,
+  }) {
+    return _then(_FinishDelivery(
+      deliveryId == freezed
+          ? _value.deliveryId
+          : deliveryId // ignore: cast_nullable_to_non_nullable
+              as String,
+    ));
+  }
+}
+
+/// @nodoc
+
+class _$_FinishDelivery implements _FinishDelivery {
+  const _$_FinishDelivery(this.deliveryId);
+
+  @override
+  final String deliveryId;
+
+  @override
+  String toString() {
+    return 'ShipmentHandlerEvent.finishDelivery(deliveryId: $deliveryId)';
+  }
+
+  @override
+  bool operator ==(dynamic other) {
+    return identical(this, other) ||
+        (other.runtimeType == runtimeType &&
+            other is _FinishDelivery &&
+            const DeepCollectionEquality()
+                .equals(other.deliveryId, deliveryId));
+  }
+
+  @override
+  int get hashCode =>
+      Object.hash(runtimeType, const DeepCollectionEquality().hash(deliveryId));
+
+  @JsonKey(ignore: true)
+  @override
+  _$FinishDeliveryCopyWith<_FinishDelivery> get copyWith =>
+      __$FinishDeliveryCopyWithImpl<_FinishDelivery>(this, _$identity);
+
+  @override
+  @optionalTypeArgs
+  TResult when<TResult extends Object?>({
+    required TResult Function() started,
+    required TResult Function(CreateShipmentArg arg) createShipment,
+    required TResult Function(CreateTripArg arg) createTrip,
+    required TResult Function() getAllDeliveries,
+    required TResult Function() getAllDeliveriesPendingInvitations,
+    required TResult Function(String email) getAllShipment,
+    required TResult Function(String id, String status) updateTripStatus,
+    required TResult Function(String deliveryId) acceptCompletedDelivery,
+    required TResult Function(RateDeliveryArg arg) rateDelivery,
+    required TResult Function(String deliveryId, String amount) tipDelivery,
+    required TResult Function(DeliveryCostArg arg) deliveryCost,
+    required TResult Function() getPendingDelivery,
+    required TResult Function(String deliveryId) acceptDelivery,
+    required TResult Function(String deliveryId) rejectDelivery,
+    required TResult Function(String deliveryId) finishDelivery,
+    required TResult Function(String deliveryId, Owner owner) getADelivery,
+  }) {
+    return finishDelivery(deliveryId);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? whenOrNull<TResult extends Object?>({
+    TResult Function()? started,
+    TResult Function(CreateShipmentArg arg)? createShipment,
+    TResult Function(CreateTripArg arg)? createTrip,
+    TResult Function()? getAllDeliveries,
+    TResult Function()? getAllDeliveriesPendingInvitations,
+    TResult Function(String email)? getAllShipment,
+    TResult Function(String id, String status)? updateTripStatus,
+    TResult Function(String deliveryId)? acceptCompletedDelivery,
+    TResult Function(RateDeliveryArg arg)? rateDelivery,
+    TResult Function(String deliveryId, String amount)? tipDelivery,
+    TResult Function(DeliveryCostArg arg)? deliveryCost,
+    TResult Function()? getPendingDelivery,
+    TResult Function(String deliveryId)? acceptDelivery,
+    TResult Function(String deliveryId)? rejectDelivery,
+    TResult Function(String deliveryId)? finishDelivery,
+    TResult Function(String deliveryId, Owner owner)? getADelivery,
+  }) {
+    return finishDelivery?.call(deliveryId);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeWhen<TResult extends Object?>({
+    TResult Function()? started,
+    TResult Function(CreateShipmentArg arg)? createShipment,
+    TResult Function(CreateTripArg arg)? createTrip,
+    TResult Function()? getAllDeliveries,
+    TResult Function()? getAllDeliveriesPendingInvitations,
+    TResult Function(String email)? getAllShipment,
+    TResult Function(String id, String status)? updateTripStatus,
+    TResult Function(String deliveryId)? acceptCompletedDelivery,
+    TResult Function(RateDeliveryArg arg)? rateDelivery,
+    TResult Function(String deliveryId, String amount)? tipDelivery,
+    TResult Function(DeliveryCostArg arg)? deliveryCost,
+    TResult Function()? getPendingDelivery,
+    TResult Function(String deliveryId)? acceptDelivery,
+    TResult Function(String deliveryId)? rejectDelivery,
+    TResult Function(String deliveryId)? finishDelivery,
+    TResult Function(String deliveryId, Owner owner)? getADelivery,
+    required TResult orElse(),
+  }) {
+    if (finishDelivery != null) {
+      return finishDelivery(deliveryId);
+    }
+    return orElse();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult map<TResult extends Object?>({
+    required TResult Function(_Started value) started,
+    required TResult Function(_CreateShipment value) createShipment,
+    required TResult Function(_CreateTrip value) createTrip,
+    required TResult Function(_GetAllDeliveries value) getAllDeliveries,
+    required TResult Function(_GetAllDeliveriesPendingInvitations value)
+        getAllDeliveriesPendingInvitations,
+    required TResult Function(_GetAllShipment value) getAllShipment,
+    required TResult Function(_UpdateTripStatus value) updateTripStatus,
+    required TResult Function(_AcceptCompletedDelivery value)
+        acceptCompletedDelivery,
+    required TResult Function(_RateDelivery value) rateDelivery,
+    required TResult Function(_TipDelivery value) tipDelivery,
+    required TResult Function(_DeliveryCost value) deliveryCost,
+    required TResult Function(_GetPendingDelivery value) getPendingDelivery,
+    required TResult Function(_AcceptDelivery value) acceptDelivery,
+    required TResult Function(_RejectDelivery value) rejectDelivery,
+    required TResult Function(_FinishDelivery value) finishDelivery,
+    required TResult Function(_GetADelivery value) getADelivery,
+  }) {
+    return finishDelivery(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? mapOrNull<TResult extends Object?>({
+    TResult Function(_Started value)? started,
+    TResult Function(_CreateShipment value)? createShipment,
+    TResult Function(_CreateTrip value)? createTrip,
+    TResult Function(_GetAllDeliveries value)? getAllDeliveries,
+    TResult Function(_GetAllDeliveriesPendingInvitations value)?
+        getAllDeliveriesPendingInvitations,
+    TResult Function(_GetAllShipment value)? getAllShipment,
+    TResult Function(_UpdateTripStatus value)? updateTripStatus,
+    TResult Function(_AcceptCompletedDelivery value)? acceptCompletedDelivery,
+    TResult Function(_RateDelivery value)? rateDelivery,
+    TResult Function(_TipDelivery value)? tipDelivery,
+    TResult Function(_DeliveryCost value)? deliveryCost,
+    TResult Function(_GetPendingDelivery value)? getPendingDelivery,
+    TResult Function(_AcceptDelivery value)? acceptDelivery,
+    TResult Function(_RejectDelivery value)? rejectDelivery,
+    TResult Function(_FinishDelivery value)? finishDelivery,
+    TResult Function(_GetADelivery value)? getADelivery,
+  }) {
+    return finishDelivery?.call(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeMap<TResult extends Object?>({
+    TResult Function(_Started value)? started,
+    TResult Function(_CreateShipment value)? createShipment,
+    TResult Function(_CreateTrip value)? createTrip,
+    TResult Function(_GetAllDeliveries value)? getAllDeliveries,
+    TResult Function(_GetAllDeliveriesPendingInvitations value)?
+        getAllDeliveriesPendingInvitations,
+    TResult Function(_GetAllShipment value)? getAllShipment,
+    TResult Function(_UpdateTripStatus value)? updateTripStatus,
+    TResult Function(_AcceptCompletedDelivery value)? acceptCompletedDelivery,
+    TResult Function(_RateDelivery value)? rateDelivery,
+    TResult Function(_TipDelivery value)? tipDelivery,
+    TResult Function(_DeliveryCost value)? deliveryCost,
+    TResult Function(_GetPendingDelivery value)? getPendingDelivery,
+    TResult Function(_AcceptDelivery value)? acceptDelivery,
+    TResult Function(_RejectDelivery value)? rejectDelivery,
+    TResult Function(_FinishDelivery value)? finishDelivery,
+    TResult Function(_GetADelivery value)? getADelivery,
+    required TResult orElse(),
+  }) {
+    if (finishDelivery != null) {
+      return finishDelivery(this);
+    }
+    return orElse();
+  }
+}
+
+abstract class _FinishDelivery implements ShipmentHandlerEvent {
+  const factory _FinishDelivery(String deliveryId) = _$_FinishDelivery;
+
+  String get deliveryId;
+  @JsonKey(ignore: true)
+  _$FinishDeliveryCopyWith<_FinishDelivery> get copyWith =>
+      throw _privateConstructorUsedError;
+}
+
+/// @nodoc
+abstract class _$GetADeliveryCopyWith<$Res> {
+  factory _$GetADeliveryCopyWith(
+          _GetADelivery value, $Res Function(_GetADelivery) then) =
+      __$GetADeliveryCopyWithImpl<$Res>;
+  $Res call({String deliveryId, Owner owner});
+}
+
+/// @nodoc
+class __$GetADeliveryCopyWithImpl<$Res>
+    extends _$ShipmentHandlerEventCopyWithImpl<$Res>
+    implements _$GetADeliveryCopyWith<$Res> {
+  __$GetADeliveryCopyWithImpl(
+      _GetADelivery _value, $Res Function(_GetADelivery) _then)
+      : super(_value, (v) => _then(v as _GetADelivery));
+
+  @override
+  _GetADelivery get _value => super._value as _GetADelivery;
+
+  @override
+  $Res call({
+    Object? deliveryId = freezed,
+    Object? owner = freezed,
+  }) {
+    return _then(_GetADelivery(
+      deliveryId == freezed
+          ? _value.deliveryId
+          : deliveryId // ignore: cast_nullable_to_non_nullable
+              as String,
+      owner == freezed
+          ? _value.owner
+          : owner // ignore: cast_nullable_to_non_nullable
+              as Owner,
+    ));
+  }
+}
+
+/// @nodoc
+
+class _$_GetADelivery implements _GetADelivery {
+  const _$_GetADelivery(this.deliveryId, this.owner);
+
+  @override
+  final String deliveryId;
+  @override
+  final Owner owner;
+
+  @override
+  String toString() {
+    return 'ShipmentHandlerEvent.getADelivery(deliveryId: $deliveryId, owner: $owner)';
+  }
+
+  @override
+  bool operator ==(dynamic other) {
+    return identical(this, other) ||
+        (other.runtimeType == runtimeType &&
+            other is _GetADelivery &&
+            const DeepCollectionEquality()
+                .equals(other.deliveryId, deliveryId) &&
+            const DeepCollectionEquality().equals(other.owner, owner));
+  }
+
+  @override
+  int get hashCode => Object.hash(
+      runtimeType,
+      const DeepCollectionEquality().hash(deliveryId),
+      const DeepCollectionEquality().hash(owner));
+
+  @JsonKey(ignore: true)
+  @override
+  _$GetADeliveryCopyWith<_GetADelivery> get copyWith =>
+      __$GetADeliveryCopyWithImpl<_GetADelivery>(this, _$identity);
+
+  @override
+  @optionalTypeArgs
+  TResult when<TResult extends Object?>({
+    required TResult Function() started,
+    required TResult Function(CreateShipmentArg arg) createShipment,
+    required TResult Function(CreateTripArg arg) createTrip,
+    required TResult Function() getAllDeliveries,
+    required TResult Function() getAllDeliveriesPendingInvitations,
+    required TResult Function(String email) getAllShipment,
+    required TResult Function(String id, String status) updateTripStatus,
+    required TResult Function(String deliveryId) acceptCompletedDelivery,
+    required TResult Function(RateDeliveryArg arg) rateDelivery,
+    required TResult Function(String deliveryId, String amount) tipDelivery,
+    required TResult Function(DeliveryCostArg arg) deliveryCost,
+    required TResult Function() getPendingDelivery,
+    required TResult Function(String deliveryId) acceptDelivery,
+    required TResult Function(String deliveryId) rejectDelivery,
+    required TResult Function(String deliveryId) finishDelivery,
+    required TResult Function(String deliveryId, Owner owner) getADelivery,
+  }) {
+    return getADelivery(deliveryId, owner);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? whenOrNull<TResult extends Object?>({
+    TResult Function()? started,
+    TResult Function(CreateShipmentArg arg)? createShipment,
+    TResult Function(CreateTripArg arg)? createTrip,
+    TResult Function()? getAllDeliveries,
+    TResult Function()? getAllDeliveriesPendingInvitations,
+    TResult Function(String email)? getAllShipment,
+    TResult Function(String id, String status)? updateTripStatus,
+    TResult Function(String deliveryId)? acceptCompletedDelivery,
+    TResult Function(RateDeliveryArg arg)? rateDelivery,
+    TResult Function(String deliveryId, String amount)? tipDelivery,
+    TResult Function(DeliveryCostArg arg)? deliveryCost,
+    TResult Function()? getPendingDelivery,
+    TResult Function(String deliveryId)? acceptDelivery,
+    TResult Function(String deliveryId)? rejectDelivery,
+    TResult Function(String deliveryId)? finishDelivery,
+    TResult Function(String deliveryId, Owner owner)? getADelivery,
+  }) {
+    return getADelivery?.call(deliveryId, owner);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeWhen<TResult extends Object?>({
+    TResult Function()? started,
+    TResult Function(CreateShipmentArg arg)? createShipment,
+    TResult Function(CreateTripArg arg)? createTrip,
+    TResult Function()? getAllDeliveries,
+    TResult Function()? getAllDeliveriesPendingInvitations,
+    TResult Function(String email)? getAllShipment,
+    TResult Function(String id, String status)? updateTripStatus,
+    TResult Function(String deliveryId)? acceptCompletedDelivery,
+    TResult Function(RateDeliveryArg arg)? rateDelivery,
+    TResult Function(String deliveryId, String amount)? tipDelivery,
+    TResult Function(DeliveryCostArg arg)? deliveryCost,
+    TResult Function()? getPendingDelivery,
+    TResult Function(String deliveryId)? acceptDelivery,
+    TResult Function(String deliveryId)? rejectDelivery,
+    TResult Function(String deliveryId)? finishDelivery,
+    TResult Function(String deliveryId, Owner owner)? getADelivery,
+    required TResult orElse(),
+  }) {
+    if (getADelivery != null) {
+      return getADelivery(deliveryId, owner);
+    }
+    return orElse();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult map<TResult extends Object?>({
+    required TResult Function(_Started value) started,
+    required TResult Function(_CreateShipment value) createShipment,
+    required TResult Function(_CreateTrip value) createTrip,
+    required TResult Function(_GetAllDeliveries value) getAllDeliveries,
+    required TResult Function(_GetAllDeliveriesPendingInvitations value)
+        getAllDeliveriesPendingInvitations,
+    required TResult Function(_GetAllShipment value) getAllShipment,
+    required TResult Function(_UpdateTripStatus value) updateTripStatus,
+    required TResult Function(_AcceptCompletedDelivery value)
+        acceptCompletedDelivery,
+    required TResult Function(_RateDelivery value) rateDelivery,
+    required TResult Function(_TipDelivery value) tipDelivery,
+    required TResult Function(_DeliveryCost value) deliveryCost,
+    required TResult Function(_GetPendingDelivery value) getPendingDelivery,
+    required TResult Function(_AcceptDelivery value) acceptDelivery,
+    required TResult Function(_RejectDelivery value) rejectDelivery,
+    required TResult Function(_FinishDelivery value) finishDelivery,
+    required TResult Function(_GetADelivery value) getADelivery,
+  }) {
+    return getADelivery(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? mapOrNull<TResult extends Object?>({
+    TResult Function(_Started value)? started,
+    TResult Function(_CreateShipment value)? createShipment,
+    TResult Function(_CreateTrip value)? createTrip,
+    TResult Function(_GetAllDeliveries value)? getAllDeliveries,
+    TResult Function(_GetAllDeliveriesPendingInvitations value)?
+        getAllDeliveriesPendingInvitations,
+    TResult Function(_GetAllShipment value)? getAllShipment,
+    TResult Function(_UpdateTripStatus value)? updateTripStatus,
+    TResult Function(_AcceptCompletedDelivery value)? acceptCompletedDelivery,
+    TResult Function(_RateDelivery value)? rateDelivery,
+    TResult Function(_TipDelivery value)? tipDelivery,
+    TResult Function(_DeliveryCost value)? deliveryCost,
+    TResult Function(_GetPendingDelivery value)? getPendingDelivery,
+    TResult Function(_AcceptDelivery value)? acceptDelivery,
+    TResult Function(_RejectDelivery value)? rejectDelivery,
+    TResult Function(_FinishDelivery value)? finishDelivery,
+    TResult Function(_GetADelivery value)? getADelivery,
+  }) {
+    return getADelivery?.call(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeMap<TResult extends Object?>({
+    TResult Function(_Started value)? started,
+    TResult Function(_CreateShipment value)? createShipment,
+    TResult Function(_CreateTrip value)? createTrip,
+    TResult Function(_GetAllDeliveries value)? getAllDeliveries,
+    TResult Function(_GetAllDeliveriesPendingInvitations value)?
+        getAllDeliveriesPendingInvitations,
+    TResult Function(_GetAllShipment value)? getAllShipment,
+    TResult Function(_UpdateTripStatus value)? updateTripStatus,
+    TResult Function(_AcceptCompletedDelivery value)? acceptCompletedDelivery,
+    TResult Function(_RateDelivery value)? rateDelivery,
+    TResult Function(_TipDelivery value)? tipDelivery,
+    TResult Function(_DeliveryCost value)? deliveryCost,
+    TResult Function(_GetPendingDelivery value)? getPendingDelivery,
+    TResult Function(_AcceptDelivery value)? acceptDelivery,
+    TResult Function(_RejectDelivery value)? rejectDelivery,
+    TResult Function(_FinishDelivery value)? finishDelivery,
+    TResult Function(_GetADelivery value)? getADelivery,
+    required TResult orElse(),
+  }) {
+    if (getADelivery != null) {
+      return getADelivery(this);
+    }
+    return orElse();
+  }
+}
+
+abstract class _GetADelivery implements ShipmentHandlerEvent {
+  const factory _GetADelivery(String deliveryId, Owner owner) = _$_GetADelivery;
+
+  String get deliveryId;
+  Owner get owner;
+  @JsonKey(ignore: true)
+  _$GetADeliveryCopyWith<_GetADelivery> get copyWith =>
+      throw _privateConstructorUsedError;
+}
+
+/// @nodoc
 class _$ShipmentHandlerStateTearOff {
   const _$ShipmentHandlerStateTearOff();
 
@@ -1779,11 +3754,24 @@ class _$ShipmentHandlerStateTearOff {
       {required String errorMessage,
       required AppState status,
       LocationPointArg? address,
-      List<Trip>? allDelivery}) {
+      DeliveryInvitation? pendingInvitations,
+      String? deliveryEstimate,
+      DeliveryModel? delivery,
+      @Deprecated('replace with deliverySummary')
+          List<DeliverySummary>? deliverySummary,
+      DeliveryInvitation? invitationEvent,
+      DeliverySummary? newDeliveryEvent,
+      List<DeliverySummaryDTO>? allDelivery}) {
     return _ShipmentHandlerState(
       errorMessage: errorMessage,
       status: status,
       address: address,
+      pendingInvitations: pendingInvitations,
+      deliveryEstimate: deliveryEstimate,
+      delivery: delivery,
+      deliverySummary: deliverySummary,
+      invitationEvent: invitationEvent,
+      newDeliveryEvent: newDeliveryEvent,
       allDelivery: allDelivery,
     );
   }
@@ -1797,7 +3785,17 @@ mixin _$ShipmentHandlerState {
   String get errorMessage => throw _privateConstructorUsedError;
   AppState get status => throw _privateConstructorUsedError;
   LocationPointArg? get address => throw _privateConstructorUsedError;
-  List<Trip>? get allDelivery => throw _privateConstructorUsedError;
+  DeliveryInvitation? get pendingInvitations =>
+      throw _privateConstructorUsedError;
+  String? get deliveryEstimate => throw _privateConstructorUsedError;
+  DeliveryModel? get delivery => throw _privateConstructorUsedError;
+  @Deprecated('replace with deliverySummary')
+  List<DeliverySummary>? get deliverySummary =>
+      throw _privateConstructorUsedError;
+  DeliveryInvitation? get invitationEvent => throw _privateConstructorUsedError;
+  DeliverySummary? get newDeliveryEvent => throw _privateConstructorUsedError;
+  List<DeliverySummaryDTO>? get allDelivery =>
+      throw _privateConstructorUsedError;
 
   @JsonKey(ignore: true)
   $ShipmentHandlerStateCopyWith<ShipmentHandlerState> get copyWith =>
@@ -1813,7 +3811,14 @@ abstract class $ShipmentHandlerStateCopyWith<$Res> {
       {String errorMessage,
       AppState status,
       LocationPointArg? address,
-      List<Trip>? allDelivery});
+      DeliveryInvitation? pendingInvitations,
+      String? deliveryEstimate,
+      DeliveryModel? delivery,
+      @Deprecated('replace with deliverySummary')
+          List<DeliverySummary>? deliverySummary,
+      DeliveryInvitation? invitationEvent,
+      DeliverySummary? newDeliveryEvent,
+      List<DeliverySummaryDTO>? allDelivery});
 }
 
 /// @nodoc
@@ -1830,6 +3835,12 @@ class _$ShipmentHandlerStateCopyWithImpl<$Res>
     Object? errorMessage = freezed,
     Object? status = freezed,
     Object? address = freezed,
+    Object? pendingInvitations = freezed,
+    Object? deliveryEstimate = freezed,
+    Object? delivery = freezed,
+    Object? deliverySummary = freezed,
+    Object? invitationEvent = freezed,
+    Object? newDeliveryEvent = freezed,
     Object? allDelivery = freezed,
   }) {
     return _then(_value.copyWith(
@@ -1845,10 +3856,34 @@ class _$ShipmentHandlerStateCopyWithImpl<$Res>
           ? _value.address
           : address // ignore: cast_nullable_to_non_nullable
               as LocationPointArg?,
+      pendingInvitations: pendingInvitations == freezed
+          ? _value.pendingInvitations
+          : pendingInvitations // ignore: cast_nullable_to_non_nullable
+              as DeliveryInvitation?,
+      deliveryEstimate: deliveryEstimate == freezed
+          ? _value.deliveryEstimate
+          : deliveryEstimate // ignore: cast_nullable_to_non_nullable
+              as String?,
+      delivery: delivery == freezed
+          ? _value.delivery
+          : delivery // ignore: cast_nullable_to_non_nullable
+              as DeliveryModel?,
+      deliverySummary: deliverySummary == freezed
+          ? _value.deliverySummary
+          : deliverySummary // ignore: cast_nullable_to_non_nullable
+              as List<DeliverySummary>?,
+      invitationEvent: invitationEvent == freezed
+          ? _value.invitationEvent
+          : invitationEvent // ignore: cast_nullable_to_non_nullable
+              as DeliveryInvitation?,
+      newDeliveryEvent: newDeliveryEvent == freezed
+          ? _value.newDeliveryEvent
+          : newDeliveryEvent // ignore: cast_nullable_to_non_nullable
+              as DeliverySummary?,
       allDelivery: allDelivery == freezed
           ? _value.allDelivery
           : allDelivery // ignore: cast_nullable_to_non_nullable
-              as List<Trip>?,
+              as List<DeliverySummaryDTO>?,
     ));
   }
 }
@@ -1864,7 +3899,14 @@ abstract class _$ShipmentHandlerStateCopyWith<$Res>
       {String errorMessage,
       AppState status,
       LocationPointArg? address,
-      List<Trip>? allDelivery});
+      DeliveryInvitation? pendingInvitations,
+      String? deliveryEstimate,
+      DeliveryModel? delivery,
+      @Deprecated('replace with deliverySummary')
+          List<DeliverySummary>? deliverySummary,
+      DeliveryInvitation? invitationEvent,
+      DeliverySummary? newDeliveryEvent,
+      List<DeliverySummaryDTO>? allDelivery});
 }
 
 /// @nodoc
@@ -1883,6 +3925,12 @@ class __$ShipmentHandlerStateCopyWithImpl<$Res>
     Object? errorMessage = freezed,
     Object? status = freezed,
     Object? address = freezed,
+    Object? pendingInvitations = freezed,
+    Object? deliveryEstimate = freezed,
+    Object? delivery = freezed,
+    Object? deliverySummary = freezed,
+    Object? invitationEvent = freezed,
+    Object? newDeliveryEvent = freezed,
     Object? allDelivery = freezed,
   }) {
     return _then(_ShipmentHandlerState(
@@ -1898,10 +3946,34 @@ class __$ShipmentHandlerStateCopyWithImpl<$Res>
           ? _value.address
           : address // ignore: cast_nullable_to_non_nullable
               as LocationPointArg?,
+      pendingInvitations: pendingInvitations == freezed
+          ? _value.pendingInvitations
+          : pendingInvitations // ignore: cast_nullable_to_non_nullable
+              as DeliveryInvitation?,
+      deliveryEstimate: deliveryEstimate == freezed
+          ? _value.deliveryEstimate
+          : deliveryEstimate // ignore: cast_nullable_to_non_nullable
+              as String?,
+      delivery: delivery == freezed
+          ? _value.delivery
+          : delivery // ignore: cast_nullable_to_non_nullable
+              as DeliveryModel?,
+      deliverySummary: deliverySummary == freezed
+          ? _value.deliverySummary
+          : deliverySummary // ignore: cast_nullable_to_non_nullable
+              as List<DeliverySummary>?,
+      invitationEvent: invitationEvent == freezed
+          ? _value.invitationEvent
+          : invitationEvent // ignore: cast_nullable_to_non_nullable
+              as DeliveryInvitation?,
+      newDeliveryEvent: newDeliveryEvent == freezed
+          ? _value.newDeliveryEvent
+          : newDeliveryEvent // ignore: cast_nullable_to_non_nullable
+              as DeliverySummary?,
       allDelivery: allDelivery == freezed
           ? _value.allDelivery
           : allDelivery // ignore: cast_nullable_to_non_nullable
-              as List<Trip>?,
+              as List<DeliverySummaryDTO>?,
     ));
   }
 }
@@ -1913,6 +3985,12 @@ class _$_ShipmentHandlerState implements _ShipmentHandlerState {
       {required this.errorMessage,
       required this.status,
       this.address,
+      this.pendingInvitations,
+      this.deliveryEstimate,
+      this.delivery,
+      @Deprecated('replace with deliverySummary') this.deliverySummary,
+      this.invitationEvent,
+      this.newDeliveryEvent,
       this.allDelivery});
 
   @override
@@ -1922,11 +4000,24 @@ class _$_ShipmentHandlerState implements _ShipmentHandlerState {
   @override
   final LocationPointArg? address;
   @override
-  final List<Trip>? allDelivery;
+  final DeliveryInvitation? pendingInvitations;
+  @override
+  final String? deliveryEstimate;
+  @override
+  final DeliveryModel? delivery;
+  @override
+  @Deprecated('replace with deliverySummary')
+  final List<DeliverySummary>? deliverySummary;
+  @override
+  final DeliveryInvitation? invitationEvent;
+  @override
+  final DeliverySummary? newDeliveryEvent;
+  @override
+  final List<DeliverySummaryDTO>? allDelivery;
 
   @override
   String toString() {
-    return 'ShipmentHandlerState(errorMessage: $errorMessage, status: $status, address: $address, allDelivery: $allDelivery)';
+    return 'ShipmentHandlerState(errorMessage: $errorMessage, status: $status, address: $address, pendingInvitations: $pendingInvitations, deliveryEstimate: $deliveryEstimate, delivery: $delivery, deliverySummary: $deliverySummary, invitationEvent: $invitationEvent, newDeliveryEvent: $newDeliveryEvent, allDelivery: $allDelivery)';
   }
 
   @override
@@ -1939,6 +4030,17 @@ class _$_ShipmentHandlerState implements _ShipmentHandlerState {
             const DeepCollectionEquality().equals(other.status, status) &&
             const DeepCollectionEquality().equals(other.address, address) &&
             const DeepCollectionEquality()
+                .equals(other.pendingInvitations, pendingInvitations) &&
+            const DeepCollectionEquality()
+                .equals(other.deliveryEstimate, deliveryEstimate) &&
+            const DeepCollectionEquality().equals(other.delivery, delivery) &&
+            const DeepCollectionEquality()
+                .equals(other.deliverySummary, deliverySummary) &&
+            const DeepCollectionEquality()
+                .equals(other.invitationEvent, invitationEvent) &&
+            const DeepCollectionEquality()
+                .equals(other.newDeliveryEvent, newDeliveryEvent) &&
+            const DeepCollectionEquality()
                 .equals(other.allDelivery, allDelivery));
   }
 
@@ -1948,6 +4050,12 @@ class _$_ShipmentHandlerState implements _ShipmentHandlerState {
       const DeepCollectionEquality().hash(errorMessage),
       const DeepCollectionEquality().hash(status),
       const DeepCollectionEquality().hash(address),
+      const DeepCollectionEquality().hash(pendingInvitations),
+      const DeepCollectionEquality().hash(deliveryEstimate),
+      const DeepCollectionEquality().hash(delivery),
+      const DeepCollectionEquality().hash(deliverySummary),
+      const DeepCollectionEquality().hash(invitationEvent),
+      const DeepCollectionEquality().hash(newDeliveryEvent),
       const DeepCollectionEquality().hash(allDelivery));
 
   @JsonKey(ignore: true)
@@ -1962,7 +4070,14 @@ abstract class _ShipmentHandlerState implements ShipmentHandlerState {
       {required String errorMessage,
       required AppState status,
       LocationPointArg? address,
-      List<Trip>? allDelivery}) = _$_ShipmentHandlerState;
+      DeliveryInvitation? pendingInvitations,
+      String? deliveryEstimate,
+      DeliveryModel? delivery,
+      @Deprecated('replace with deliverySummary')
+          List<DeliverySummary>? deliverySummary,
+      DeliveryInvitation? invitationEvent,
+      DeliverySummary? newDeliveryEvent,
+      List<DeliverySummaryDTO>? allDelivery}) = _$_ShipmentHandlerState;
 
   @override
   String get errorMessage;
@@ -1971,7 +4086,20 @@ abstract class _ShipmentHandlerState implements ShipmentHandlerState {
   @override
   LocationPointArg? get address;
   @override
-  List<Trip>? get allDelivery;
+  DeliveryInvitation? get pendingInvitations;
+  @override
+  String? get deliveryEstimate;
+  @override
+  DeliveryModel? get delivery;
+  @override
+  @Deprecated('replace with deliverySummary')
+  List<DeliverySummary>? get deliverySummary;
+  @override
+  DeliveryInvitation? get invitationEvent;
+  @override
+  DeliverySummary? get newDeliveryEvent;
+  @override
+  List<DeliverySummaryDTO>? get allDelivery;
   @override
   @JsonKey(ignore: true)
   _$ShipmentHandlerStateCopyWith<_ShipmentHandlerState> get copyWith =>
