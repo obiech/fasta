@@ -103,8 +103,9 @@ class _NewOrderState extends State<NewOrder> {
                                       },
                                       child: CircleAvatar(
                                         radius: 34.h,
+                                        backgroundColor: FastaColors.lightOrange,
                                         backgroundImage:(state.delivery!.user.avatarUrl ==null)?
-                                            Image.asset('assets/young.png')
+                                            Image.asset('assets/2.png')
                                                 .image: Image.network(state.delivery!.user.avatarUrl!).image,
                                       ),
                                     ),

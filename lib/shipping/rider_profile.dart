@@ -128,7 +128,7 @@ class _RiderProfileState extends State<RiderProfile> {
                             Row(
                               mainAxisAlignment: MainAxisAlignment.center,
                               children: [
-                                const ChatIcon(),
+                                ChatIcon(arg),
                                 SizedBox(
                                   width: 51.w,
                                 ),

@@ -48,6 +48,7 @@ class ShipmentHandlerBloc
     on<_FinishDelivery>(_onFinishDelivery);
     on<_GetADelivery>(_onGetADelivery);
     on<_Started>(_onSubscription);
+    on<_DeliveryInvitations>(_onDeliveryInvitations);
     on<_GetAllDeliveriesPendingInvitations>(
         _onGetAllDeliveriesPendingInvitations);
   }
@@ -63,6 +64,8 @@ class ShipmentHandlerBloc
         (r) => emit(state.copyWith(
               status: AppState.success,
             )));
+      add(const ShipmentHandlerEvent.getAllDeliveriesPendingInvitations());
+
   }
 
   _onRejectDelivery(
@@ -186,6 +189,7 @@ class ShipmentHandlerBloc
         (r) => emit(state.copyWith(
               status: AppState.success,
             )));
+            add(const ShipmentHandlerEvent.getAllDeliveries());
   }
 
   _onRateDelivery(
@@ -233,6 +237,11 @@ class ShipmentHandlerBloc
             state.copyWith(status: AppState.success, pendingInvitations: r)));
   }
 
+    _onDeliveryInvitations(
+      _DeliveryInvitations event, Emitter<ShipmentHandlerState> emit) async {
+    emit(state.copyWith(pendingInvitations: event.invitation));
+  }
+
   _onGetADelivery(
       _GetADelivery event, Emitter<ShipmentHandlerState> emit) async {
     emit(state.copyWith(status: AppState.loading));
@@ -254,22 +263,23 @@ class ShipmentHandlerBloc
       log(event.toString(), name: 'cancelBloc');
     });
     listener1 = socketIO.getacceptedDelivery.listen((event) {
-      emit(state.copyWith(newDeliveryEvent: event));
+      // emit(state.copyWith(newDeliveryEvent: event));
       add(const ShipmentHandlerEvent.getAllDeliveries());
       log(event.toString(), name: 'getacceptedDeliveryBloc');
     });
     listener2 = socketIO.getdriverCompletedDelivery.listen((event) {
-      emit(state.copyWith(newDeliveryEvent: event));
+      // emit(state.copyWith(newDeliveryEvent: event));
       add(const ShipmentHandlerEvent.getAllDeliveries());
       log(event.toString(), name: 'getdriverCompletedDeliveryBloc');
     });
     listener3 = socketIO.getuserAcceptCompletedDelivery.listen((event) {
-      emit(state.copyWith(newDeliveryEvent: event));
+      // emit(state.copyWith(newDeliveryEvent: event));
+       add(const ShipmentHandlerEvent.getAllDeliveries());
       add(const ShipmentHandlerEvent.getAllDeliveriesPendingInvitations());
       log(event.toString(), name: 'getuserAcceptCompletedDeliveryBloc');
     });
     listener4 = socketIO.getnewDeliveryInvitation.listen((event) {
-      emit(state.copyWith(invitationEvent: event));
+      add(ShipmentHandlerEvent.deliveryInvitations(event));
       add(const ShipmentHandlerEvent.getAllDeliveriesPendingInvitations());
       log(event.toString(), name: 'getnewDeliveryInvitationBloc');
     });

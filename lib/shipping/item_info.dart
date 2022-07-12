@@ -55,7 +55,7 @@ class _ItemInfoState extends State<ItemInfo> with RoundedLoadingButtonMixin {
   @override
   void didChangeDependencies() {
     super.didChangeDependencies();
-    arg = (ModalRoute.of(context)?.settings.arguments as Map<String, dynamic>);
+    arg = ModalRoute.of(context)?.settings.arguments as Map<String, dynamic>;
   }
 
   @override
@@ -272,7 +272,7 @@ class _ItemInfoState extends State<ItemInfo> with RoundedLoadingButtonMixin {
                                           child: Text('Fragile'),
                                           value: 'Fragile'),
                                       DropdownMenuItem(
-                                          child: Text('NonFragile'),
+                                          child: Text('Non Fragile'),
                                           value: 'NonFragile')
                                     ],
                                     onChanged: (value) {
@@ -450,7 +450,7 @@ class _ItemInfoState extends State<ItemInfo> with RoundedLoadingButtonMixin {
                                   weight: weightController.text,
                                   state: stateController.text,
                                   description: descriptionController.text,
-                                  image: 'https://google.com',
+                                  image:itemPath?? '',
                                   // image: itemPath??'https://google.com',
                                 ));
                         context

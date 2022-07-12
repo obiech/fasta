@@ -1,3 +1,4 @@
+import 'package:dio/dio.dart';
 import 'package:fasta/api_client/domain.dart';
 import 'package:fasta/core/endpoints.dart';
 import 'package:fasta/errrors/app_error.dart';
@@ -14,6 +15,8 @@ class SecurityDataImpl implements SecurityData {
       final res = await _client
           .post(Endpoints.email.changeEmail, body: {'email': email});
       return Right(res.data['data']['otpId']);
+    } on DioError catch (e) {
+      return Left(e.fromDioError);
     } catch (e) {
       return Left(AppError(e.toString()));
     }
@@ -26,6 +29,8 @@ class SecurityDataImpl implements SecurityData {
       final body = {'otpId': otpId, 'otpCode': otpCode};
       await _client.post(Endpoints.email.newEmailConfirmOTP, body: body);
       return const Right(unit);
+    } on DioError catch (e) {
+      return Left(e.fromDioError);
     } catch (e) {
       return Left(AppError(e.toString()));
     }
@@ -42,6 +47,8 @@ class SecurityDataImpl implements SecurityData {
       };
       await _client.post(Endpoints.password.changePassword, body: body);
       return const Right(unit);
+    } on DioError catch (e) {
+      return Left(e.fromDioError);
     } catch (e) {
       return Left(AppError(e.toString()));
     }
@@ -53,6 +60,8 @@ class SecurityDataImpl implements SecurityData {
       final res = await _client.post(Endpoints.phoneNumber.changePhoneNumber,
           body: {'phoneNumber': phoneNumber});
       return Right(res.data['data']['otpId']);
+    } on DioError catch (e) {
+      return Left(e.fromDioError);
     } catch (e) {
       return Left(AppError(e.toString()));
     }
@@ -66,6 +75,8 @@ class SecurityDataImpl implements SecurityData {
       await _client.post(Endpoints.phoneNumber.newPhoneNumberConfirmOTP,
           body: body);
       return const Right(unit);
+    } on DioError catch (e) {
+      return Left(e.fromDioError);
     } catch (e) {
       return Left(AppError(e.toString()));
     }

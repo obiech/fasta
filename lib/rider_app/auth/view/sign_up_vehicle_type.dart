@@ -35,6 +35,7 @@ class _VehicleInfoRiderViewState extends State<VehicleInfoRiderView>
   final TextEditingController bikeColorController = TextEditingController();
   final TextEditingController enginePowerController = TextEditingController();
   final TextEditingController countryCodeController = TextEditingController();
+  final TextEditingController vehicleTypeController = TextEditingController();
 
   @override
   Widget build(BuildContext context) {
@@ -177,8 +178,19 @@ class _VehicleInfoRiderViewState extends State<VehicleInfoRiderView>
                   data: enginePowerData);
             },
           ),
+          
           SizedBox(
             height: 15.h,
+          ),
+          Text('Vechicle Type', style: FastaTextStyle.subtitle2),
+          SizedBox(
+            height: 9.h,
+          ),
+          TextFieldWithSuffixIcon(
+            controller: vehicleTypeController,
+            onPressed: () {
+              selectVehicleTypeDialog1(context, vehicleTypeController);
+            },
           ),
           SizedBox(
             height: 65.h,
@@ -202,7 +214,7 @@ class _VehicleInfoRiderViewState extends State<VehicleInfoRiderView>
                   context.read<AuthRiderBloc>().add(AuthRiderEvent.updateDriverVehicle(arg: VehicleArg(
                         name: manufacturerController.text,
                         description: 'description',
-                        type: 'bike',
+                        type: vehicleTypeController.text,
                         number: plateNumberController.text ,
                         model: modelController.text,
                         make: 'make',
@@ -771,4 +783,112 @@ List<_BikeColor> _colorPalette = [
   _BikeColor('Blue', FastaColors.blue),
   _BikeColor('Yellow', FastaColors.yellow),
   _BikeColor('Pink', FastaColors.pink),
+];
+Future<void> selectVehicleTypeDialog1(
+    BuildContext context, TextEditingController controller) async {
+  return showDialog<void>(
+    context: context,
+    barrierDismissible: false,
+    builder: (BuildContext context) {
+      return AlertDialog(
+        shape:
+            RoundedRectangleBorder(borderRadius: BorderRadius.circular(31.h)),
+        titleTextStyle: FastaTextStyle.hardLabel.copyWith(
+          fontSize: 20.f,
+        ),
+        title: const Center(child: Text('Please Select Vehicle Type')),
+        contentPadding: EdgeInsets.symmetric(
+          horizontal: 24.w,
+        ),
+        content: SingleChildScrollView(
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.center,
+            children: <Widget>[
+              SizedBox(
+                height: 36.h,
+                width: 1.screenWidth,
+              ),
+              GestureDetector(
+                onTap: (() {
+                  Navigator.pop(context);
+                  controller.text = _data1[0].name;
+                }),
+                child: ElevatedCardResponsive(
+                  height: 64.h,
+                  width: 204.w,
+                  image: _data1[0].image,
+                  type: _data1[0].name,
+                  isSelected: false,
+                ),
+              ),
+              SizedBox(
+                height: 9.h,
+              ),
+              GestureDetector(
+                onTap: (() {
+                  Navigator.pop(context);
+                  controller.text = _data1[1].name;
+                }),
+                child: ElevatedCardResponsive(
+                  height: 64.h,
+                  width: 204.w,
+                  image: _data1[1].image,
+                  type: _data1[1].name,
+                  isSelected: false,
+                ),
+              ),
+              SizedBox(
+                height: 9.h,
+              ),
+              GestureDetector(
+                onTap: (() {
+                  Navigator.pop(context);
+                  controller.text = _data1[2].name;
+                }),
+                child: ElevatedCardResponsive(
+                  height: 64.h,
+                  width: 204.w,
+                  image: _data1[2].image,
+                  type: _data1[2].name,
+                  isSelected: false,
+                ),
+              ),
+              SizedBox(
+                height: 9.h,
+              ),
+              GestureDetector(
+                onTap: (() {
+                  Navigator.pop(context);
+                  controller.text = _data1[3].name;
+                }),
+                child: ElevatedCardResponsive(
+                  height: 64.h,
+                  width: 204.w,
+                  image: _data1[3].image,
+                  type: _data1[3].name,
+                  isSelected: false,
+                ),
+              ),
+              SizedBox(
+                height: 57.h,
+              ),
+            ],
+          ),
+        ),
+      );
+    },
+  );
+}
+
+class _RideOptions {
+  final String name, image;
+
+  _RideOptions(this.name, this.image);
+}
+
+List<_RideOptions> _data1 = [
+  _RideOptions('bike', 'bike_small'),
+  _RideOptions('bus', 'car'),
+  _RideOptions('van', 'delivery-van'),
+  _RideOptions('truck', 'container'),
 ];

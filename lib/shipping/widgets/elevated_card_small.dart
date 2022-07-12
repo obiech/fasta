@@ -26,7 +26,7 @@ class ElevatedCardSmall extends StatelessWidget {
       elevation: 7,
       child: Container(
         height: height ?? 48.h,
-        width: width ?? 112.w,
+        width: width ?? 132.w,
         padding: EdgeInsets.symmetric(horizontal: 13.w),
         decoration: BoxDecoration(
             border: Border.all(

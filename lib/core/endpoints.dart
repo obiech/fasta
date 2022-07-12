@@ -22,6 +22,7 @@ class Endpoints {
   static _Wallet get wallet => _Wallet();
   static _Delivery get delivery => _Delivery();
   static _DriverDelivery get driverDelivery => _DriverDelivery();
+  static _ChatAndCall get chatAndCall => _ChatAndCall();
 }
 
 class _PayStack {
@@ -147,4 +148,8 @@ class _DriverDelivery {
 
   String getADelivery(String deliveryId) =>
       relevant + 'delivery/$deliveryId/as-driver';
+}
+
+class _ChatAndCall {
+  String get getAccessToken => relevant + 'user/sendbird/auth/details';
 }

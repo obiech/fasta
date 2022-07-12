@@ -1,3 +1,5 @@
+import 'package:dio/dio.dart';
+
 class AppError {
   final String errorMessage;
 
@@ -6,4 +8,10 @@ class AppError {
 
   @override
   String toString() => 'AppError $errorMessage';
+}
+
+extension ExceptionToErrorX on DioError {
+  AppError get fromDioError {
+    return AppError(response?.data['meta']['message']);
+  }
 }

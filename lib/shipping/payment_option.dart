@@ -24,112 +24,131 @@ class _PaymentOptionsState extends State<PaymentOptions> {
   bool isCardSelected = false;
   @override
   Widget build(BuildContext context) {
-    return MapView(
-      children: [
-        Align(
-          alignment: Alignment.bottomCenter,
-          child: SizedBox(
-            height: 0.4.screenHeight,
-            child: DraggableScrollableSheet(
-                minChildSize: 0.12,
-                // expand: false,
-                initialChildSize: 0.85,
-                builder:
-                    (BuildContext context, ScrollController scrollController) {
-                  return Container(
-                      decoration: BoxDecoration(
-                          color: FastaColors.primary2,
-                          borderRadius: BorderRadius.only(
-                              topLeft: Radius.circular(30.h),
-                              topRight: Radius.circular(30.h))),
-                      child: ListView(
-                        controller: scrollController,
-                        children: [
-                          Column(
-                            children: [
-                              Container(
-                                height: 6.h,
-                                width: 100.w,
-                                decoration: BoxDecoration(
-                                  color: FastaColors.grey5,
-                                  borderRadius: BorderRadius.circular(100.h),
-                                ),
-                              ),
-                              SizedBox(
-                                height: 20.h,
-                              ),
-                              Container(
-                                width: 48.h,
-                                height: 48.h,
-                                child: Image.asset('assets/gift-box.png'),
-                                decoration: const BoxDecoration(
-                                    color: FastaColors.lightBlue,
-                                    shape: BoxShape.circle),
-                              ),
-                              SizedBox(
-                                height: 20.h,
-                              ),
-                              BlocBuilder<ShipmentHandlerBloc, ShipmentHandlerState>(
-                                builder: (context, state) {
-                                  return Text(
-                                    'NGN ${state.deliveryEstimate}',
-                                    style: FastaTextStyle.headline1,
-                                  );
-                                },
-                              ),
-                              Text(
-                                '35 Mins to arrival, 1.5km.',
-                                style: FastaTextStyle.subtitle1
-                                    .copyWith(color: FastaColors.grey7),
-                              ),
-                              SizedBox(
-                                height: 54.h,
-                              ),
-                              Row(
-                                mainAxisAlignment: MainAxisAlignment.center,
-                                children: [
-                                  GestureDetector(
-                                      onTap: () {
-                                        isCardSelected = true;
-                                        isWalletSelected = false;
-                                        setState(() {});
+    return RefreshIndicator(
+      onRefresh: () async {
+        context
+            .read<ShipmentHandlerBloc>()
+            .add(const ShipmentHandlerEvent.getAllDeliveries());
+        context.read<ShipmentHandlerBloc>().add(
+            const ShipmentHandlerEvent.getAllDeliveriesPendingInvitations());
+        await Future.delayed(const Duration(seconds: 3));
+      },
+      child: MapView(
+        children: [
+          Align(
+            alignment: Alignment.bottomCenter,
+            child: SizedBox(
+              height: 0.4.screenHeight,
+              child: DraggableScrollableSheet(
+                  minChildSize: 0.12,
+                  // expand: false,
+                  initialChildSize: 0.85,
+                  builder:
+                      (BuildContext context, ScrollController scrollController) {
+                    return Container(
+                        decoration: BoxDecoration(
+                            color: FastaColors.primary2,
+                            borderRadius: BorderRadius.only(
+                                topLeft: Radius.circular(30.h),
+                                topRight: Radius.circular(30.h))),
+                        child: ListView(
+                          controller: scrollController,
+                          children: [
+                            BlocConsumer<ShipmentHandlerBloc, ShipmentHandlerState>(
+                              listener: (context, state) {
+                                // TODO: implement listener
+                              },
+                              builder: (context, state) {
+                                return Column(
+                                  children: [
+                                    Container(
+                                      height: 6.h,
+                                      width: 100.w,
+                                      decoration: BoxDecoration(
+                                        color: FastaColors.grey5,
+                                        borderRadius:
+                                            BorderRadius.circular(100.h),
+                                      ),
+                                    ),
+                                    SizedBox(
+                                      height: 20.h,
+                                    ),
+                                    Container(
+                                      width: 48.h,
+                                      height: 48.h,
+                                      child: Image.asset('assets/gift-box.png'),
+                                      decoration: const BoxDecoration(
+                                          color: FastaColors.lightBlue,
+                                          shape: BoxShape.circle),
+                                    ),
+                                    SizedBox(
+                                      height: 20.h,
+                                    ),
+                                    BlocBuilder<ShipmentHandlerBloc,
+                                        ShipmentHandlerState>(
+                                      builder: (context, state) {
+                                        return Text(
+                                          'NGN ${state.deliveryEstimate}',
+                                          style: FastaTextStyle.headline1,
+                                        );
                                       },
-                                      child: ElevatedCardSmall(
-                                        type: 'Card',
-                                        image: 'credit-card',
-                                        isSelected: isCardSelected,
-                                      )),
-                                  SizedBox(
-                                    height: 28.w,
-                                  ),
-                                  GestureDetector(
-                                      onTap: () async {
-                                        isCardSelected = false;
-                                        isWalletSelected = true;
-                                        setState(() {});
-                                        await Future.delayed(
-                                            Duration(seconds: 2));
-                                        context
-                                            .read<WalletCubit>()
-                                            .deductWallet(700);
-                                        Navigator.pushNamed(
-                                            context, RiderScan.route);
-                                      },
-                                      child: ElevatedCardSmall(
-                                        type: 'Wallet',
-                                        image: 'wallet',
-                                        isSelected: isWalletSelected,
-                                      )),
-                                ],
-                              )
-                            ],
-                          )
-                        ],
-                      ));
-                }),
-          ),
-        )
-      ],
+                                    ),
+                                    Text(
+                                      '35 Mins to arrival, 1.5km.',
+                                      style: FastaTextStyle.subtitle1
+                                          .copyWith(color: FastaColors.grey7),
+                                    ),
+                                    SizedBox(
+                                      height: 54.h,
+                                    ),
+                                    Row(
+                                      mainAxisAlignment: MainAxisAlignment.center,
+                                      children: [
+                                        GestureDetector(
+                                            onTap: () {
+                                              isCardSelected = true;
+                                              isWalletSelected = false;
+                                              setState(() {});
+                                            },
+                                            child: ElevatedCardSmall(
+                                              type: 'Card',
+                                              image: 'credit-card',
+                                              isSelected: isCardSelected,
+                                            )),
+                                        SizedBox(
+                                          height: 28.w,
+                                        ),
+                                        GestureDetector(
+                                            onTap: () async {
+                                              isCardSelected = false;
+                                              isWalletSelected = true;
+                                              setState(() {});
+                                              await Future.delayed(
+                                                  Duration(seconds: 2));
+                                              context
+                                                  .read<WalletCubit>()
+                                                  .deductWallet(700);
+                                              Navigator.pushNamed(
+                                                  context, RiderScan.route);
+                                            },
+                                            child: ElevatedCardSmall(
+                                              type: 'Wallet',
+                                              image: 'wallet',
+                                              isSelected: isWalletSelected,
+                                            )),
+                                      ],
+                                    )
+                                  ],
+                                );
+                              },
+                            )
+                          ],
+                        ));
+                  }),
+            ),
+          )
+        ],
+      ),
     );
   }
 }

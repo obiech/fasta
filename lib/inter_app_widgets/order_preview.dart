@@ -8,16 +8,16 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 
 class OrderPreview extends StatelessWidget {
   final String name, to, from, distance, deliveryId;
+  final Owner owner;
   const OrderPreview({
     required this.name,
     required this.to,
     required this.from,
     required this.distance,
     required this.deliveryId,
+    this.owner= Owner.user,
     Key? key,
   }) : super(key: key);
-
-  
 
   @override
   Widget build(BuildContext context) {
@@ -32,7 +32,7 @@ class OrderPreview extends StatelessWidget {
             border: Border.all(color: FastaColors.grey9)),
         child: Row(
           children: [
-           const TrackerIcon(),
+            const TrackerIcon(),
             SizedBox(
               width: 12.w,
             ),
@@ -40,16 +40,14 @@ class OrderPreview extends StatelessWidget {
             const Spacer(),
             Align(
               alignment: Alignment.bottomRight,
-              child:(name == 'pending')
+              child: (name == 'initiated' && owner == Owner.rider)
                   ? AcceptOrDecline(deliveryId: deliveryId)
-                  :  OrderStatus(name: name),
+                  : OrderStatus(name: name),
             )
           ],
         ));
   }
 }
-
-
 
 class OrderStatus extends StatelessWidget {
   const OrderStatus({
@@ -66,22 +64,28 @@ class OrderStatus extends StatelessWidget {
       return FastaColors.primary;
     } else if (name.trim().toUpperCase() == 'cancelled'.toUpperCase()) {
       return FastaColors.alert;
-    } 
+    } else if (name.trim().toUpperCase() == 'driver-completed'.toUpperCase()) {
+      return FastaColors.green;
+    } else if (name.trim().toUpperCase() == 'initiated'.toUpperCase()) {
+      return FastaColors.grey9;
+    }
     return FastaColors.primary;
   }
 
   @override
   Widget build(BuildContext context) {
     return Container(
-            padding: EdgeInsets.symmetric(horizontal: 15.w),
-            decoration: BoxDecoration(
-                color: getColor(name),
-                borderRadius: BorderRadius.circular(7.h)),
-            height: 27.h,
-            child: Center(
-                child: Text(name,
-                    style: FastaTextStyle.subtitleHard
-                        .copyWith(color: FastaColors.primary2))));
+        padding: EdgeInsets.symmetric(horizontal: 15.w),
+        decoration: BoxDecoration(
+            color: getColor(name), borderRadius: BorderRadius.circular(7.h)),
+        height: 27.h,
+        child: Center(
+            child: Text(name,
+                style: FastaTextStyle.subtitleHard.copyWith(
+                    color:
+                        (name.trim().toUpperCase() == 'initiated'.toUpperCase())
+                            ? FastaColors.primary
+                            : FastaColors.primary2))));
   }
 }
 
@@ -96,51 +100,46 @@ class AcceptOrDecline extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Row(
-        children: [
-          GestureDetector(
-            onTap: () {
-              context.read<ShipmentHandlerBloc>().add(
-                  ShipmentHandlerEvent.rejectDelivery(
-                      deliveryId));
-            },
-            child: Container(
-                // width: 75.w,
-                padding: EdgeInsets.symmetric(horizontal: 15.w),
-                decoration: BoxDecoration(
-                    border:
-                        Border.all(color: FastaColors.primary),
-                    color: FastaColors.primary2,
-                    borderRadius: BorderRadius.circular(7.h)),
-                height: 27.h,
-                child: Center(
-                    child: Text('Decline',
-                        style: FastaTextStyle.subtitleHard
-                            .copyWith(
-                                color: FastaColors.primary)))),
-          ),
-          SizedBox(
-            width: 14.w,
-          ),
-          GestureDetector(
-            onTap: () {
-              context.read<ShipmentHandlerBloc>().add(
-                  ShipmentHandlerEvent.acceptDelivery(
-                      deliveryId));
-            },
-            child: Container(
-                // width: 75.w,
-                padding: EdgeInsets.symmetric(horizontal: 15.w),
-                decoration: BoxDecoration(
-                    color: FastaColors.primary,
-                    borderRadius: BorderRadius.circular(7.h)),
-                height: 27.h,
-                child: Center(
-                    child: Text('Accept',
-                        style: FastaTextStyle.subtitleHard
-                            .copyWith(
-                                color: FastaColors.primary2)))),
-          ),
-        ],
-      );
+      children: [
+        GestureDetector(
+          onTap: () {
+            context
+                .read<ShipmentHandlerBloc>()
+                .add(ShipmentHandlerEvent.rejectDelivery(deliveryId));
+          },
+          child: Container(
+              padding: EdgeInsets.symmetric(horizontal: 15.w),
+              decoration: BoxDecoration(
+                  border: Border.all(color: FastaColors.primary),
+                  color: FastaColors.primary2,
+                  borderRadius: BorderRadius.circular(7.h)),
+              height: 27.h,
+              child: Center(
+                  child: Text('Decline',
+                      style: FastaTextStyle.subtitleHard
+                          .copyWith(color: FastaColors.primary)))),
+        ),
+        SizedBox(
+          width: 14.w,
+        ),
+        GestureDetector(
+          onTap: () {
+            context
+                .read<ShipmentHandlerBloc>()
+                .add(ShipmentHandlerEvent.acceptDelivery(deliveryId));
+          },
+          child: Container(
+              padding: EdgeInsets.symmetric(horizontal: 15.w),
+              decoration: BoxDecoration(
+                  color: FastaColors.primary,
+                  borderRadius: BorderRadius.circular(7.h)),
+              height: 27.h,
+              child: Center(
+                  child: Text('Accept',
+                      style: FastaTextStyle.subtitleHard
+                          .copyWith(color: FastaColors.primary2)))),
+        ),
+      ],
+    );
   }
 }

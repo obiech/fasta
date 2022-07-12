@@ -31,7 +31,7 @@ class DeliveryDTO extends DeliveryModel {
           Receiver(map['receiver']['name'], map['receiver']['phoneNumber']),
       tip: Tip(map['tip']?['amount'] ?? "0.00"),
       rating: Rating(map['rating']?['comment'] ?? '',
-          map['rating']?['rating'] ?? ''.toString()),
+          map['rating']?['rating'] ?? '0'.toString()),
       vechicle: map['driver'] != null ? VehicleDTO.fromMap(map['vehicle']):null,
       rider: map['driver'] != null ? UserModel.fromMap(map['driver']) : null,
       user: UserModel.fromMap(map['user']),
@@ -85,18 +85,18 @@ class DeliverySummaryDTO extends DeliverySummary {
       endTime: map['endTime'] ?? "",
       priority: map['priority'],
       duration: map['probableDuration'].toString(),
-      imageUrl: map['imageUrl'],
+      imageUrl: map['imageUrl']?? "",
       category: map['category'] ?? "",
     );
   }
 
   factory DeliverySummaryDTO.fromMapRider(Map<String, dynamic> map) {
     return DeliverySummaryDTO(
-      id: map['deliveryId'].toString(),
-      userId: map['id'].toString(),
+      id: map['id'].toString(),
+      userId: map['deliveryId'].toString(),
       driverId: map['delivery']['driverId'].toString(),
       vehicleType: map['delivery']['vehicleType'],
-      status: map['status']??'',
+      status: map['delivery'] ['status']??'',
       cost: map['delivery']['cost'].toString()+' NGN',
       distance: map['delivery']['distance'].toString()+' Km',
       fromAddress: map['delivery']['fromAddress'],
@@ -104,7 +104,7 @@ class DeliverySummaryDTO extends DeliverySummary {
       endTime: map['createdAt'].toString(),
       priority: map['delivery']['priority'],
       duration: map['probableDuration'].toString(),
-      imageUrl: map['delivery']['imageUrl'],
+      imageUrl: map['delivery']['imageUrl']?? "",
       category: map['delivery']['category']??'',
     );
   }

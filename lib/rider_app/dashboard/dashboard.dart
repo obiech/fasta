@@ -1,6 +1,8 @@
 import 'package:fasta/colors/colors.dart';
+import 'package:fasta/core/app_state.dart';
 import 'package:fasta/dashboard/add_interests.dart';
 import 'package:fasta/dashboard/widgets/container_with_image.dart';
+import 'package:fasta/extension/string.dart';
 import 'package:fasta/global_widgets/app_bars/app_bar_with_Avater.dart';
 import 'package:fasta/nav/bottom_nav_bar.dart';
 import 'package:fasta/profile/home.dart';
@@ -13,6 +15,7 @@ import 'package:fasta/shipping/ongoing_orders.dart';
 import 'package:fasta/theming/size_config.dart';
 import 'package:fasta/typography/font_weights.dart';
 import 'package:fasta/typography/text_styles.dart';
+import 'package:fasta/wallet/bloc/paystack_bloc.dart';
 import 'package:fasta/wallet/cubit/wallet_cubit.dart';
 import 'package:fasta/wallet/transaction_histroy.dart';
 import 'package:flutter/material.dart';
@@ -69,10 +72,10 @@ class _DashBoardViewRiderState extends State<DashBoardViewRider> {
                       'Wallet Balance',
                       style: FastaTextStyle.softSubtitle,
                     ),
-                    BlocBuilder<WalletCubit, WalletState>(
+                    BlocBuilder<PaystackBloc, PaystackState>(
                       builder: (context, state) {
-                        return Text(
-                          'NGN ${state.amount}.00',
+                        return Text((state.appState != AppState.success)?'NGN 0.00':
+                          '${state.balance?.amount??0.00}'.toAmount,
                           style: FastaTextStyle.headline6,
                         );
                       },

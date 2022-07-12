@@ -61,25 +61,25 @@ class DeliveryInvitationDTO extends DeliveryInvitation {
   }
   factory DeliveryInvitationDTO.fromMapTest(Map<String, dynamic> map) {
     // map = map['data'][0];
-    log(map.toString());
+    // log(map.toString());
     return DeliveryInvitationDTO(
-      id: map['id']??1,
-      deliveryId: map['deliveryId']??1,
-      form: map['form']??"",
-      to: map['to']??"",
-      items: map['items']??"",
-      paymentMethod: map['paymentMethod']??"",
-      state: map['state']??"",
-      weight: map['weight']??"",
-      estTime: map['estTime']??"",
-      priority: map['priority']??false,
-      cost: map['cost']??"",
-      distance: map['distance']??"",
-      probableDuration: map['probableDuration']??"",
-      status: map['status']??"",
-      userId: map['userId']??1,
-      createdAt: map['createdAt']??"",
-      reason: map['reason']??"",
+    id: map['delivery']['id']??1,
+      deliveryId: map['deliveryId']??1, 
+      form: map['delivery']['form']??'',
+      to: map['delivery']['to']??'',
+      items: map['delivery']['items']??'',
+      paymentMethod: map['delivery']['paymentMethod']??'',
+      state: map['delivery']['state']??'',
+      weight: map['delivery']['weight']??'',
+      estTime: map['delivery']['estTime']??'',
+      priority: map['delivery']['priority']??false,
+      cost: map['delivery']['cost'].toString(),
+      distance: map['delivery']['distance'].toString(),
+      probableDuration: map['delivery']['probableDuration'].toString(),
+      status: map['status']??'',
+      userId: map['delivery']['userId']??1,
+      createdAt: map['createdAt'].toString(),
+      reason: map['reason']??'',
     );
   }
 }

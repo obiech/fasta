@@ -18,6 +18,7 @@ import 'package:fasta/typography/text_styles.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_contacts/flutter_contacts.dart';
+import 'package:geolocator/geolocator.dart';
 import 'dart:math';
 
 import 'package:google_api_headers/google_api_headers.dart';
@@ -26,6 +27,8 @@ import 'package:flutter_google_places/flutter_google_places.dart';
 import 'package:google_maps_webservice/places.dart';
 import 'package:maps_places_autocomplete/maps_places_autocomplete.dart';
 import 'package:maps_places_autocomplete/model/suggestion.dart';
+
+import '../profile/application/bloc/profile_bloc.dart';
 
 class SenderInfo extends StatefulWidget {
   static const String route = '/SenderInfo';
@@ -76,6 +79,13 @@ class _SenderInfoState extends State<SenderInfo>
     ScaffoldMessenger.of(context).showSnackBar(
       SnackBar(content: Text(response.errorMessage!)),
     );
+  }
+
+  Future getCurrentLoation() async {
+    final Position position = await Geolocator.getCurrentPosition(
+        desiredAccuracy: LocationAccuracy.high);
+
+        // pickupAddress.text = position.
   }
 
   Future<void> _handlePressButton() async {
@@ -133,7 +143,7 @@ class _SenderInfoState extends State<SenderInfo>
         padding: EdgeInsets.symmetric(
           horizontal: 27.w,
         ),
-        child: BlocBuilder<AuthBloc, AuthState>(
+        child: BlocBuilder<ProfileBloc, ProfileState>(
           builder: (context, state) {
             return Column(
               crossAxisAlignment: CrossAxisAlignment.start,
@@ -190,22 +200,31 @@ class _SenderInfoState extends State<SenderInfo>
                         SizedBox(
                           height: 3.h,
                         ),
+                        // Padding(
+                        //   padding: EdgeInsets.symmetric(horizontal: 23.w),
+                        //   child: MapsPlacesAutocomplete(
+                        //       inputDecoration: InputDecoration(
+                        //         border: OutlineInputBorder(
+                        //             borderRadius: BorderRadius.circular(9.h)),
+                        //       ),
+                        //       onSuggestionClick: (place) {
+                        //         pickUpAddressMap =
+                        //             '${place.streetNumber} ${place.street}, ${place.city} ${place.state}';
+                        //       },
+                        //       mapsApiKey: Constants.googleMapApi,
+                        //       buildItem: (Suggestion suggestion, int index) {
+                        //         return SizedBox(
+                        //             child: Text(suggestion.description));
+                        //       }),
+                        // ),
                         Padding(
                           padding: EdgeInsets.symmetric(horizontal: 23.w),
-                          child: MapsPlacesAutocomplete(
-                              inputDecoration: InputDecoration(
+                          child: TextFormField(
+                              controller: pickupAddress..text = '${state.user?.city??''}, ${state.user?.state??''}',
+                              decoration: InputDecoration(
                                 border: OutlineInputBorder(
                                     borderRadius: BorderRadius.circular(9.h)),
-                              ),
-                              onSuggestionClick: (place) {
-                                pickUpAddressMap =
-                                    '${place.streetNumber} ${place.street}, ${place.city} ${place.state}';
-                              },
-                              mapsApiKey: Constants.googleMapApi,
-                              buildItem: (Suggestion suggestion, int index) {
-                                return SizedBox(
-                                    child: Text(suggestion.description));
-                              }),
+                              )),
                         ),
                         SizedBox(
                           height: 16.h,
@@ -228,7 +247,7 @@ class _SenderInfoState extends State<SenderInfo>
                           padding: EdgeInsets.symmetric(horizontal: 23.w),
                           child: TextFormField(
                               controller: sendersName
-                                ..text = state.user?.fullName??'',
+                                ..text = state.user?.fullName ?? '',
                               decoration: InputDecoration(
                                 border: OutlineInputBorder(
                                     borderRadius: BorderRadius.circular(9.h)),
@@ -256,7 +275,7 @@ class _SenderInfoState extends State<SenderInfo>
                               Expanded(
                                 child: TextFormField(
                                     controller: sendersPhoneNumber
-                                      ..text = state.user?.phoneNumber??'',
+                                      ..text = state.user?.phoneNumber ?? '',
                                     keyboardType:
                                         const TextInputType.numberWithOptions(),
                                     decoration: InputDecoration(
@@ -332,12 +351,12 @@ class _SenderInfoState extends State<SenderInfo>
                                         value: 'Now',
                                       ),
                                       DropdownMenuItem(
-                                        child: Text('30 Minutes'),
-                                        value: '30 Minutes',
+                                        child: Text('30'),
+                                        value: '30',
                                       ),
-                                      DropdownMenuItem(child: Text('1 Hour')),
-                                      DropdownMenuItem(child: Text('2 Hour')),
-                                      DropdownMenuItem(child: Text('3 Hour')),
+                                      DropdownMenuItem(child: Text('1')),
+                                      DropdownMenuItem(child: Text('2')),
+                                      DropdownMenuItem(child: Text('3')),
                                     ],
                                     onChanged: (_) {}),
                               )

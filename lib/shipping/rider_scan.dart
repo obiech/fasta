@@ -27,7 +27,7 @@ class _RiderScanState extends State<RiderScan> {
       if (mounted && timer.isActive) {
         setState(() {
           
-          if(value<= 9){value += 0.0001;}
+          if(value<= 9){value += 0.000001;}
         });
       }
 
@@ -124,8 +124,10 @@ class _RiderScanState extends State<RiderScan> {
                                   children: [
                                     CircleAvatar(
                                       radius: 34.h,
+                                      backgroundColor: FastaColors.lightOrange,
                                       backgroundImage:
-                                          Image.asset('assets/young.png').image,
+                                      
+                                          Image.asset('assets/2.png').image,
                                     ),
                                     SizedBox(
                                       width: 46.w,

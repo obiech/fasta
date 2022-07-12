@@ -1,5 +1,6 @@
 import 'package:fasta/api_client/infrastruture/dio_helper.dart';
 import 'package:fasta/auth/bloc/auth_bloc.dart';
+import 'package:fasta/chat/infrastructure/repo.dart';
 import 'package:fasta/onboarding/fasta_started_screen.dart';
 import 'package:fasta/auth/forgot_password_screen.dart';
 import 'package:fasta/auth/infrastucture/repo.dart';
@@ -34,6 +35,7 @@ import 'package:fasta/rider_app/orders/complete_order.dart';
 import 'package:fasta/rider_app/orders/new_order.dart';
 import 'package:fasta/rider_app/orders/orders.dart';
 import 'package:fasta/security/change_password.dart';
+import 'package:fasta/security/home.dart';
 import 'package:fasta/shipping/application/bloc/shipment_handler_bloc.dart';
 import 'package:fasta/shipping/application/map/shipment_bloc.dart';
 // import 'package:fasta/shipping/application/bloc/shipment_handler_bloc.dart';
@@ -68,13 +70,19 @@ import 'package:fasta/wallet/wallet.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:permission_handler/permission_handler.dart';
+import 'package:sendbird_sdk/sendbird_sdk.dart';
+
+import 'secrets.dart';
 
 class Fasta extends StatelessWidget {
   const Fasta({Key? key}) : super(key: key);
 
-  Future getLocation() async {
+  Future getLocation(DioClient _plugin) async {
     await [Permission.location].request();
     bool isEnabled = await Permission.location.serviceStatus.isEnabled;
+final ChatImpl impl = ChatImpl(_plugin);
+    await impl.initialize();
+   await impl.sendMessage('fd');
     if (!isEnabled) {
       await [Permission.location].request();
     }
@@ -90,9 +98,16 @@ class Fasta extends StatelessWidget {
     precacheImage(Image.asset('assets/2.0x/nav_bar_cards.png').image, context);
     precacheImage(
         Image.asset('assets/2.0x/nav_bar_dashboard.png').image, context);
-    getLocation();
+
+    precacheImage(Image.asset('assets/rider_dashboard.png').image, context);
+    precacheImage(Image.asset('assets/rider_wallet.png').image, context);
+    precacheImage(Image.asset('assets/rider_order.png').image, context);
+    getLocation(_plugin);
     // ShippingSocketImpl.test().initialize('eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJkYXRhIjoxMTI1ODk5OTA2ODQyNzY3LCJpYXQiOjE2NTY1MjI3NjgsImV4cCI6MTY1NjYwOTE2OH0.uAGpHkI9Ed8wru7J84WegDL9LTbqTFp5T7RFFcNRuRc');
-    // 
+    // Initialize SendbirdSdk instance to use APIs in your app.
+
+    
+   
     return MultiRepositoryProvider(
       providers: [
         RepositoryProvider(
@@ -110,7 +125,7 @@ class Fasta extends StatelessWidget {
         RepositoryProvider(
           create: (context) => ProfileRepository(ProfileDataImpl(_plugin)),
         ),
-         RepositoryProvider(
+        RepositoryProvider(
           create: (context) => ShippingSocketImpl(),
         ),
       ],
@@ -127,27 +142,26 @@ class Fasta extends StatelessWidget {
             create: (context) => AuthBloc(context.read<AuthRepository>()),
           ),
           BlocProvider(
-            create: (context) => PaystackBloc(
-              context.read<WalletRepository>(),
-            )
-              ..add(
-                PaystackEvent.allTransactions(
-                  TransactionArg(
-                      endDate: '',
-                      page: '1',
-                      limit: '10',
-                      order: 'desc',
-                      status: '',
-                      type: '',
-                      startDate: ''),
-                )
-              )
-              ..add(const PaystackEvent.getBankList())
-              ..add(const PaystackEvent.balance())
-          ),
+              create: (context) => PaystackBloc(
+                    context.read<WalletRepository>(),
+                  )
+                    ..add(const PaystackEvent.balance())
+                    ..add(PaystackEvent.allTransactions(
+                      TransactionArg(
+                          endDate: '',
+                          page: '1',
+                          limit: '10',
+                          order: 'desc',
+                          status: '',
+                          type: '',
+                          startDate: ''),
+                    ))
+                    ..add(const PaystackEvent.getBankList())),
           BlocProvider(
-            create: (context) =>
-                ShipmentHandlerBloc(context.read<ShipmentRepository>(),context.read<ShippingSocketImpl>()),
+            create: (context) => ShipmentHandlerBloc(
+                context.read<ShipmentRepository>(),
+                context.read<ShippingSocketImpl>())
+              ..add(const ShipmentHandlerEvent.getAllDeliveries()),
           ),
           BlocProvider(
             create: (context) => ProfileBloc(context.read<ProfileRepository>())
@@ -160,7 +174,7 @@ class Fasta extends StatelessWidget {
           ),
         ],
         child: MaterialApp(
-            title: 'Fasta',
+            title: 'Itekku',
             debugShowCheckedModeBanner: false,
             routes: {
               Splash.route: (_) => const Splash(),
@@ -203,8 +217,9 @@ class Fasta extends StatelessWidget {
               SigninScreenRider.route: (_) => const SigninScreenRider(),
               VerifyEmail.route: (_) => const VerifyEmail(),
               ChangePassword.route: (_) => const ChangePassword(),
-              NewOrder.route:(_)=> const NewOrder(),
-              CompleteOrder.route:(_)=> const CompleteOrder(),
+              NewOrder.route: (_) => const NewOrder(),
+              CompleteOrder.route: (_) => const CompleteOrder(),
+              SecurityView.route: (_) => const SecurityView(),
             },
             home: const Responsive(
                 designHeight: 812, designWidth: 375, child: Splash())),

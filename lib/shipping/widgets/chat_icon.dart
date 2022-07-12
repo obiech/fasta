@@ -5,7 +5,7 @@ import 'package:fasta/theming/size_config.dart';
 import 'package:flutter/material.dart';
 
 class ChatIcon extends StatelessWidget {
-  const ChatIcon([this.user,Key? key,]) : super(key: key);
+  const ChatIcon(this.user,{Key? key,}) : super(key: key);
 
   final User? user;
 

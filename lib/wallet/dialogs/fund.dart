@@ -1,6 +1,7 @@
 import 'package:fasta/colors/colors.dart';
 import 'package:fasta/core/app_state.dart';
 import 'package:fasta/global_widgets/notifications/notify.dart';
+import 'package:fasta/global_widgets/rounded_loading_button/custom_button.dart';
 import 'package:fasta/global_widgets/text_fields/text_field_with_hint_text.dart';
 import 'package:fasta/theming/size_config.dart';
 import 'package:fasta/typography/text_styles.dart';
@@ -8,9 +9,12 @@ import 'package:fasta/wallet/bloc/paystack_bloc.dart';
 import 'package:fasta/wallet/webview.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:rounded_loading_button/rounded_loading_button.dart';
 
 Future<void> fundDialog(
     BuildContext context, TextEditingController controller) async {
+  final btnController = RoundedLoadingButtonController();
+  bool buttconClicked = false;
   return showDialog<void>(
     context: context,
     barrierDismissible: false,
@@ -45,14 +49,17 @@ Future<void> fundDialog(
                       },
                       child: Text('Cancel', style: FastaTextStyle.hardLabel)),
                   BlocListener<PaystackBloc, PaystackState>(
-                    listener: (context, state) {
+                    listenWhen: (previous, current) => buttconClicked,
+                    listener: (context, state) async {
                       if (state.appState == AppState.waiting) {
                       } else if (state.appState == AppState.loading) {
-                        // btnController.start();
+                        btnController.start();
                         Notify.success(context, 'Loading');
-                      } else if (state.appState == AppState.success) {
+                      } else if (state.appState == AppState.success &&
+                          state.payStack?.authorizationUrl != null) {
                         // await buttonsucces();
-
+                        btnController.success();
+                        btnController.reset();
                         Navigator.pushReplacement(context,
                             MaterialPageRoute(builder: (context) {
                           return PayStackPaymentView(
@@ -62,6 +69,9 @@ Future<void> fundDialog(
                         }));
                       } else if (state.appState == AppState.failed) {
                         // await buttonerror();
+                        btnController.error();
+                        btnController.reset();
+
                         Notify.error(
                             context,
                             state.error?.errorMessage ??
@@ -70,26 +80,27 @@ Future<void> fundDialog(
                     },
                     child: GestureDetector(
                       onTap: () {
-                        if (controller.text.isNotEmpty) {
-                          context.read<PaystackBloc>().add(
-                              PaystackEvent.getDepositLink(controller.text));
-                        } else {
-                          Notify.error(context, 'Enter Amount');
-                        }
+                        // if (controller.text.isNotEmpty) {
+                        //   context.read<PaystackBloc>().add(
+                        //       PaystackEvent.getDepositLink(controller.text));
+                        // } else {
+                        //   Notify.error(context, 'Enter Amount');
+                        // }
                       },
-                      child: Container(
-                        height: 55.h,
-                        width: 92.w,
-                        decoration: BoxDecoration(
-                            color: FastaColors.primary,
-                            border: Border.all(),
-                            borderRadius: BorderRadius.circular(13.h)),
-                        child: Center(
-                          child: Text('Fund',
-                              style: FastaTextStyle.hardLabel
-                                  .copyWith(color: FastaColors.primary2)),
-                        ),
-                      ),
+                      child: CustomButton.named(
+                          controller: btnController,
+                          width: 92.w,
+                          name: 'Fund',
+                          onPressed: () {
+                            if (controller.text.isNotEmpty) {
+                              context.read<PaystackBloc>().add(
+                                  PaystackEvent.getDepositLink(
+                                      controller.text));
+                              buttconClicked = true;
+                            } else {
+                              Notify.error(context, 'Enter Amount');
+                            }
+                          }),
                     ),
                   )
                 ],

@@ -1,5 +1,6 @@
 import 'package:fasta/colors/colors.dart';
 import 'package:fasta/core/app_state.dart';
+import 'package:fasta/global_widgets/rounded_loading_button/custom_button.dart';
 import 'package:fasta/theming/size_config.dart';
 import 'package:fasta/typography/font_weights.dart';
 import 'package:fasta/typography/text_styles.dart';
@@ -9,10 +10,11 @@ import 'package:fasta/wallet/repository/args.dart';
 import 'package:fasta/wallet/transaction_histroy.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:rounded_loading_button/rounded_loading_button.dart';
 
 Future<void> accountDetailsDialog(BuildContext context, String bankName) async {
   bool buttonClicked = false;
-
+  final btnController = RoundedLoadingButtonController();
   return showDialog<void>(
     context: context,
     barrierDismissible: false,
@@ -47,7 +49,7 @@ Future<void> accountDetailsDialog(BuildContext context, String bankName) async {
                             ),
                             TextSpan(
                               text:
-                                  'to ${state.accountInfo?.accountName ?? ''}',
+                                  ' to ${state.accountInfo?.accountName ?? ''}',
                               style: FastaTextStyle.subtitle2,
                             )
                           ])),
@@ -95,31 +97,60 @@ Future<void> accountDetailsDialog(BuildContext context, String bankName) async {
                         listenWhen: (previous, current) => buttonClicked,
                         listener: (context, state) {
                           if (state.appState == AppState.success) {
+                            btnController.success();
+                            btnController.reset();
                             Navigator.pop(context);
                             successDialog(context, 'Withdraw');
+                             context.read<PaystackBloc>().add(const PaystackEvent.balance());
+        context.read<PaystackBloc>().add(PaystackEvent.allTransactions(
+              TransactionArg(
+                  endDate: '',
+                  page: '1',
+                  limit: '10',
+                  order: 'desc',
+                  status: '',
+                  type: '',
+                  startDate: ''),
+            ));
+                          } else if (state.appState == AppState.loading) {
+                            btnController.start();
+                          } else if (state.appState == AppState.failed) {
+                            btnController.error();
+                            btnController.reset();
                           }
                         },
                         child: GestureDetector(
-                          onTap: () {
-                            context.read<PaystackBloc>().add(
-                                  const PaystackEvent.confirmWithdrawalOtp(),
-                                );
-                            buttonClicked = true;
-                          },
-                          child: Container(
-                            height: 45.h,
-                            width: 135.w,
-                            decoration: BoxDecoration(
-                                color: FastaColors.primary,
-                                border: Border.all(),
-                                borderRadius: BorderRadius.circular(13.h)),
-                            child: Center(
-                              child: Text('Proceed',
-                                  style: FastaTextStyle.hardLabel
-                                      .copyWith(color: FastaColors.primary2)),
+                            onTap: () {
+                              // context.read<PaystackBloc>().add(
+                              //       const PaystackEvent.confirmWithdrawalOtp(),
+                              //     );
+                              // buttonClicked = true;
+                            },
+                            child: CustomButton.named(
+                                name: 'Proceed',
+                                width: 135.w,
+                                onPressed: () {
+                                  context.read<PaystackBloc>().add(
+                                        const PaystackEvent
+                                            .confirmWithdrawalOtp(),
+                                      );
+                                  buttonClicked = true;
+                                },
+                                controller: btnController)
+                            // child: Container(
+                            //   height: 45.h,
+                            //   width: 135.w,
+                            //   decoration: BoxDecoration(
+                            //       color: FastaColors.primary,
+                            //       border: Border.all(),
+                            //       borderRadius: BorderRadius.circular(13.h)),
+                            //   child: Center(
+                            //     child: Text('Proceed',
+                            //         style: FastaTextStyle.hardLabel
+                            //             .copyWith(color: FastaColors.primary2)),
+                            //   ),
+                            // ),
                             ),
-                          ),
-                        ),
                       )
                     ],
                   ),

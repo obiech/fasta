@@ -2,10 +2,12 @@ import 'dart:developer';
 
 import 'package:cloudinary_public/cloudinary_public.dart';
 import 'package:dartz/dartz.dart';
+import 'package:dio/dio.dart';
 import 'package:fasta/api_client/domain.dart';
 import 'package:fasta/core/constants.dart';
 import 'package:fasta/core/endpoints.dart';
 import 'package:fasta/errrors/app_error.dart';
+import 'package:fasta/errrors/app_exceptions.dart';
 import 'package:fasta/shipping/domain/entity/delivery.dart';
 import 'package:fasta/shipping/domain/entity/delivery_invitations.dart';
 import 'package:fasta/shipping/domain/entity/delivery_model.dart';
@@ -30,13 +32,23 @@ class ShipmentDataImpl implements ShipmentData {
   ErrorOr<LocationPointArg> createShipment(
       {required CreateShipmentArg arg}) async {
     try {
-      // String secureImage = await _uploadPictureToCloudinary(arg.image);
+      final Map<String, dynamic> body;
+      if (arg.image.isNotEmpty) {
+        String secureImage = await _uploadPictureToCloudinary(arg.image);
+        body = await arg.copyWith(secureImage).toMap();
+      } else {
+        body = await arg.toMap();
+      }
 
-      final body = await arg.toMap();
-      // final body  = await arg.copyWith(secureImage).toMap();
+      // final
       final res =
           await _client.post(Endpoints.delivery.createDelivery, body: body);
-      return Right(LocationPointArg(arg.pickUpAddress, arg.deliveryPoint));
+      return Right(LocationPointArg(
+        arg.deliveryPoint,
+        arg.pickUpAddress,
+      ));
+    } on DioError catch (e) {
+      return Left(e.fromDioError);
     } catch (e) {
       return Left(AppError(e.toString()));
     }
@@ -58,6 +70,8 @@ class ShipmentDataImpl implements ShipmentData {
       final res = await _client.get(Endpoints.shipment.getAllShipment(email));
       return Right(
           (res.data['data'] as List).map((e) => TripDTO.fromJson(e)).toList());
+    } on DioError catch (e) {
+      return Left(e.fromDioError);
     } catch (e) {
       return Left(AppError(e.toString()));
     }
@@ -68,6 +82,8 @@ class ShipmentDataImpl implements ShipmentData {
     try {
       final res = await _client.get(Endpoints.shipment.createTrip);
       return Right(unit);
+    } on DioError catch (e) {
+      return Left(e.fromDioError);
     } catch (e) {
       return Left(AppError(e.toString()));
     }
@@ -79,7 +95,10 @@ class ShipmentDataImpl implements ShipmentData {
       log(deliveryInvitationId);
       await _client
           .put(Endpoints.driverDelivery.acceptDelivery(deliveryInvitationId));
+      log(Endpoints.driverDelivery.acceptDelivery(deliveryInvitationId));
       return const Right(unit);
+    } on DioError catch (e) {
+      return Left(e.fromDioError);
     } catch (e) {
       return Left(AppError(e.toString()));
     }
@@ -91,9 +110,11 @@ class ShipmentDataImpl implements ShipmentData {
     try {
       log(deliveryInvitationId);
       final res = await _client
-          .get(Endpoints.driverDelivery.getADelivery('2251799813685271'));
+          .get(Endpoints.driverDelivery.getADelivery(deliveryInvitationId));
 
       return Right(DeliveryDTO.fromMap(res.data['data']));
+    } on DioError catch (e) {
+      return Left(e.fromDioError);
     } catch (e) {
       return Left(AppError(e.toString()));
     }
@@ -105,6 +126,8 @@ class ShipmentDataImpl implements ShipmentData {
       final res = await _client
           .get(Endpoints.delivery.getADelivery(deliveryInvitationId.trim()));
       return Right(DeliveryDTO.fromMap(res.data['data']));
+    } on DioError catch (e) {
+      return Left(e.fromDioError);
     } catch (e) {
       return Left(AppError(e.toString()));
     }
@@ -116,6 +139,8 @@ class ShipmentDataImpl implements ShipmentData {
       await _client
           .put(Endpoints.driverDelivery.rejectDelivery(deliveryInvitationId));
       return const Right(unit);
+    } on DioError catch (e) {
+      return Left(e.fromDioError);
     } catch (e) {
       return Left(AppError(e.toString()));
     }
@@ -125,8 +150,11 @@ class ShipmentDataImpl implements ShipmentData {
   ErrorOr<Unit> finishDelivery(String deliveryInvitationId) async {
     try {
       await _client
-          .put(Endpoints.driverDelivery.acceptDelivery(deliveryInvitationId));
+          .put(Endpoints.driverDelivery.finishDelivery(deliveryInvitationId));
+      log(Endpoints.driverDelivery.finishDelivery(deliveryInvitationId));
       return const Right(unit);
+    } on DioError catch (e) {
+      return Left(e.fromDioError);
     } catch (e) {
       return Left(AppError(e.toString()));
     }
@@ -137,8 +165,11 @@ class ShipmentDataImpl implements ShipmentData {
     try {
       final res =
           await _client.get(Endpoints.driverDelivery.allDeliveryInvitations);
-      return Right(
-          (res.data['data'] as List).map((e) => DeliverySummaryDTO.fromMapRider(e)).toList());
+      return Right((res.data['data'] as List)
+          .map((e) => DeliverySummaryDTO.fromMapRider(e))
+          .toList());
+    } on DioError catch (e) {
+      return Left(e.fromDioError);
     } catch (e) {
       return Left(AppError(e.toString()));
     }
@@ -147,10 +178,12 @@ class ShipmentDataImpl implements ShipmentData {
   @override
   ErrorOr<List<DeliverySummary>> getAllDeliveries() async {
     try {
-      final res =
-          await _client.get(Endpoints.delivery.getAllDeliveries);
-      return Right(
-          (res.data['data'] as List).map((e) => DeliverySummaryDTO.fromMap(e)).toList());
+      final res = await _client.get(Endpoints.delivery.getAllDeliveries);
+      return Right((res.data['data'] as List)
+          .map((e) => DeliverySummaryDTO.fromMap(e))
+          .toList());
+    } on DioError catch (e) {
+      return Left(e.fromDioError);
     } catch (e) {
       return Left(AppError(e.toString()));
     }
@@ -162,6 +195,8 @@ class ShipmentDataImpl implements ShipmentData {
       final res = await _client.get(Endpoints.driverDelivery.pendingDelivery);
       if ((res.data['data'] as List).isEmpty) return const Right(null);
       return Right(DeliveryInvitationDTO.fromMap(res.data));
+    } on DioError catch (e) {
+      return Left(e.fromDioError);
     } catch (e) {
       return Left(AppError(e.toString()));
     }
@@ -174,6 +209,8 @@ class ShipmentDataImpl implements ShipmentData {
       await _client.put(Endpoints.shipment.updateTripStatus,
           body: {'id': id, 'status': status});
       return const Right(unit);
+    } on DioError catch (e) {
+      return Left(e.fromDioError);
     } catch (e) {
       return Left(AppError(e.toString()));
     }
@@ -182,8 +219,11 @@ class ShipmentDataImpl implements ShipmentData {
   @override
   ErrorOr<Unit> acceptCompletedDelivery(String deliveryId) async {
     try {
+      log(Endpoints.delivery.acceptCompletedDelivery(deliveryId));
       await _client.put(Endpoints.delivery.acceptCompletedDelivery(deliveryId));
       return const Right(unit);
+    } on DioError catch (e) {
+      return Left(e.fromDioError);
     } catch (e) {
       return Left(AppError(e.toString()));
     }
@@ -197,6 +237,8 @@ class ShipmentDataImpl implements ShipmentData {
         'comment': arg.comment,
       });
       return const Right(unit);
+    } on DioError catch (e) {
+      return Left(e.fromDioError);
     } catch (e) {
       return Left(AppError(e.toString()));
     }
@@ -209,6 +251,8 @@ class ShipmentDataImpl implements ShipmentData {
         'amount': amount,
       });
       return const Right(unit);
+    } on DioError catch (e) {
+      return Left(e.fromDioError);
     } catch (e) {
       return Left(AppError(e.toString()));
     }
@@ -220,6 +264,8 @@ class ShipmentDataImpl implements ShipmentData {
       final res = await _client.post(Endpoints.delivery.deliveryCost,
           body: arg.toMap());
       return Right(res.data['data']['cost'].toString());
+    } on DioError catch (e) {
+      return Left(e.fromDioError);
     } catch (e) {
       return Left(AppError(e.toString()));
     }

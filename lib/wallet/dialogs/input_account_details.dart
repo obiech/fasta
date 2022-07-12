@@ -2,6 +2,7 @@ import 'package:fasta/colors/colors.dart';
 import 'package:fasta/core/app_state.dart';
 import 'package:fasta/global_widgets/drop_down_buttons.dart/custom_drop_down_text_field.dart';
 import 'package:fasta/global_widgets/notifications/notify.dart';
+import 'package:fasta/global_widgets/rounded_loading_button/custom_button.dart';
 import 'package:fasta/global_widgets/text_fields/text_field_with_hint_text.dart';
 import 'package:fasta/profile/application/bloc/profile_bloc.dart';
 import 'package:fasta/theming/size_config.dart';
@@ -11,10 +12,13 @@ import 'package:fasta/wallet/dialogs/account_details.dart';
 import 'package:fasta/wallet/transaction_histroy.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:rounded_loading_button/rounded_loading_button.dart';
 
 Future<void> inputAccountDetailsDialog(
     BuildContext context, TextEditingController controller) async {
   final otpController = TextEditingController();
+  final btnController = RoundedLoadingButtonController();
+
   String? selectedBank;
   bool buttonClicked = false;
   return showDialog<void>(
@@ -88,14 +92,20 @@ Future<void> inputAccountDetailsDialog(
                       listenWhen: (previous, current) => buttonClicked,
                       listener: (context, state) {
                         if (state.appState == AppState.success) {
+                          btnController.success();
+                          btnController.reset();
                           Navigator.pop(context);
                           accountDetailsDialog(context, selectedBank!);
                         } else if (state.appState == AppState.failed) {
+                          btnController.error();
+                          btnController.reset();
                           Notify.error(
                               context,
                               state.error?.errorMessage ??
                                   'Something went wrong');
-                        } else if (state.appState == AppState.loading) {}
+                        } else if (state.appState == AppState.loading) {
+                          btnController.start();
+                        }
                       },
                       builder: (context, state) {
                         return BlocBuilder<PaystackBloc, PaystackState>(
@@ -103,46 +113,53 @@ Future<void> inputAccountDetailsDialog(
                             return BlocBuilder<ProfileBloc, ProfileState>(
                               builder: (context, profileState) {
                                 return GestureDetector(
-                                  onTap: () {
-                                    context.read<PaystackBloc>().add(
-                                        PaystackEvent.enterOtpAndBankCode(
-                                            state.bankList
-                                                .firstWhere((element) =>
-                                                    element.accountName ==
-                                                    selectedBank)
-                                                .accountNumber,
-                                            otpController.text,
-                                            profileState.user!.id.toString()));
-                                    context.read<PaystackBloc>().add(
-                                        PaystackEvent.resolveAccountNumber(
-                                            controller.text,
-                                            state.bankList
-                                                .firstWhere((element) =>
-                                                    element.accountName ==
-                                                    selectedBank)
-                                                .accountNumber));
-                                    buttonClicked = true;
-                                  },
-                                  child: Container(
-                                    height: 45.h,
-                                    width: 148.w,
-                                    decoration: BoxDecoration(
-                                        color: FastaColors.primary,
-                                        border: Border.all(),
-                                        borderRadius:
-                                            BorderRadius.circular(13.h)),
-                                    child: Center(
-                                      child: (state.appState ==
-                                              AppState.loading)
-                                          ? CircularProgressIndicator()
-                                          : Text('Continue',
-                                              style: FastaTextStyle.hardLabel
-                                                  .copyWith(
-                                                      color: FastaColors
-                                                          .primary2)),
-                                    ),
-                                  ),
-                                );
+                                    onTap: () {},
+                                    child: CustomButton.named(
+                                      name: 'Continue',
+                                      controller: btnController,
+                                       width: 148.w,
+                                      onPressed: () {
+                                        context.read<PaystackBloc>().add(
+                                            PaystackEvent.enterOtpAndBankCode(
+                                                state.bankList
+                                                    .firstWhere((element) =>
+                                                        element.accountName ==
+                                                        selectedBank)
+                                                    .accountNumber,
+                                                otpController.text,
+                                                profileState.user!.id
+                                                    .toString()));
+                                        context.read<PaystackBloc>().add(
+                                            PaystackEvent.resolveAccountNumber(
+                                                controller.text,
+                                                state.bankList
+                                                    .firstWhere((element) =>
+                                                        element.accountName ==
+                                                        selectedBank)
+                                                    .accountNumber));
+                                        buttonClicked = true;
+                                      },
+                                    )
+                                    // child: Container(
+                                    //   height: 45.h,
+                                    //   width: 148.w,
+                                    //   decoration: BoxDecoration(
+                                    //       color: FastaColors.primary,
+                                    //       border: Border.all(),
+                                    //       borderRadius:
+                                    //           BorderRadius.circular(13.h)),
+                                    //   child: Center(
+                                    //     child: (state.appState ==
+                                    //             AppState.loading)
+                                    //         ? CircularProgressIndicator()
+                                    //         : Text('Continue',
+                                    //             style: FastaTextStyle.hardLabel
+                                    //                 .copyWith(
+                                    //                     color: FastaColors
+                                    //                         .primary2)),
+                                    //   ),
+                                    // ),
+                                    );
                               },
                             );
                           },

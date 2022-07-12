@@ -1,9 +1,12 @@
+import 'dart:developer';
+
 import 'package:dartz/dartz.dart';
 import 'package:fasta/shipping/domain/entity/coordinate.dart';
 import 'package:fasta/typedef.dart/typedefs.dart';
 import 'package:geocoding/geocoding.dart';
 import 'package:geolocator/geolocator.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
+import 'package:intl/intl.dart';
 
 extension GeoString on String {
   /// get current [Coordinate] from Start Address
@@ -65,5 +68,26 @@ extension GeoString on String {
     } catch (e) {
       rethrow;
     }
+  }
+}
+
+extension CurrencyX on String {
+  String get toAmount {
+    final format = NumberFormat("#,##0.00", "en_US");
+    // final newNumber = if (this.contains('.'))
+
+
+
+    
+    log(this);
+    if (this == '0.00' || this == '0.0') return 'NGN 0.00';
+    return 'NGN ' + format.format(int.parse(replaceAll('.00', '')));
+  }
+}
+
+extension DateTimeX on String {
+  String get toDateTime {
+    if (isEmpty|| length<19) return this;
+    return replaceRange(19, null, '').replaceAll('T', ' ');
   }
 }

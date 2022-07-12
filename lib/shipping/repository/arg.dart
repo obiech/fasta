@@ -71,26 +71,26 @@ class CreateShipmentArg {
   }
 
   Future<Map<String, dynamic>> toMap() async {
-    final Position position = await Geolocator.getCurrentPosition(
-        desiredAccuracy: LocationAccuracy.high);
+    // final Position position = await Geolocator.getCurrentPosition(
+    //     desiredAccuracy: LocationAccuracy.high);
     // TODO FIX
-    // final from = await deliveryPoint.getCoordinateFromAddress();
-    // final to = await deliveryPoint.getCoordinateFromAddress();
+    final from = await deliveryPoint.getCoordinateFromAddress();
+    final to = await deliveryPoint.getCoordinateFromAddress();
 
-    final from = Coordinate(
-        latitude: position.latitude,
-        longitude: position.longitude,
-        parentAddress: 'parentAddress');
-    final to =Coordinate(
-        latitude: position.latitude,
-        longitude: position.longitude,
-        parentAddress: 'parentAddress');
+    // final from = Coordinate(
+    //     latitude: position.latitude,
+    //     longitude: position.longitude,
+    //     parentAddress: 'parentAddress');
+    // final to =Coordinate(
+    //     latitude: position.latitude,
+    //     longitude: position.longitude,
+    //     parentAddress: 'parentAddress');
 
     return {
       // 'email': email,
       'senderName': senderName,
       // TODO FIX
-      'fromAddress': deliveryPoint,
+      'fromAddress': pickUpAddress,
       'senderPhoneNumber': phoneNumber,
       // 'pickup_time': pickUpTime,
       // 'delivery_priority': 1,
@@ -101,13 +101,13 @@ class CreateShipmentArg {
       'items': itemName,
       // 'qty': qty,
       // 'value': value,
-      'weight': weight,
+      'weight': weight + ' kg',
       // 'description_details': description,
       'imageUrl': image,
       // [fragile, non-fragile, broken, missing, damaged, unavailable, glassy, unspecified]","error":true}})
       'itemState': 'unspecified',
       // TODO VECHICLE TYPE [bike, car, van, bus, truck]
-      'vehicleType': 'bike',
+      'vehicleType': vechicleType,
       'priority': true,
       'fromLatitude': from.latitude,
       'fromLongitude': from.longitude,

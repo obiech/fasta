@@ -1,9 +1,17 @@
 import 'package:fasta/colors/colors.dart';
+import 'package:fasta/core/app_state.dart';
+import 'package:fasta/global_widgets/notifications/notify.dart';
 import 'package:fasta/global_widgets/rounded_loading_button/button_mixin.dart';
 import 'package:fasta/global_widgets/rounded_loading_button/custom_button.dart';
+import 'package:fasta/shipping/application/bloc/shipment_handler_bloc.dart';
+import 'package:fasta/shipping/domain/entity/delivery_model.dart';
 import 'package:fasta/theming/size_config.dart';
 import 'package:fasta/typography/text_styles.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:rounded_loading_button/rounded_loading_button.dart';
+
+enum TipAmount { tip100, tip500, tip1000, none }
 
 class TripCompleted extends StatefulWidget {
   static const route = '/TripCompleted';
@@ -15,6 +23,19 @@ class TripCompleted extends StatefulWidget {
 
 class _TripCompletedState extends State<TripCompleted>
     with RoundedLoadingButtonMixin {
+  late DeliverySummary? arg;
+  TipAmount tipAmount = TipAmount.none;
+  bool isTipTap = false;
+  bool isRatingTap = false;
+  final tipBtnController = RoundedLoadingButtonController();
+
+  
+  @override
+  void didChangeDependencies() {
+    super.didChangeDependencies();
+    arg = (ModalRoute.of(context)?.settings.arguments as DeliverySummary);
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -143,55 +164,162 @@ class _TripCompletedState extends State<TripCompleted>
             Row(
               mainAxisAlignment: MainAxisAlignment.spaceEvenly,
               children: [
-                Container(
-                  height: 32.h,
-                  width: 65.w,
-                  child: Center(
-                      child: Text('NGN 100.00',
-                          style: FastaTextStyle.hardLabel2
-                              .copyWith(fontSize: 13.f))),
-                  decoration: BoxDecoration(
-                      borderRadius: BorderRadius.circular(8.h),
-                      border: Border.all(color: FastaColors.grey7)),
+                GestureDetector(
+                  onTap: () {
+                    tipAmount = TipAmount.tip100;
+                    setState(() {});
+                  },
+                  child: Container(
+                    height: 32.h,
+                    padding: EdgeInsets.symmetric(horizontal: 10.w),
+                    child: Center(
+                        child: Text('NGN 100.00',
+                            style: FastaTextStyle.hardLabel2.copyWith(
+                                fontSize: 13.f,
+                                color: (tipAmount == TipAmount.tip100)
+                                    ? FastaColors.primary2
+                                    : FastaColors.primary))),
+                    decoration: BoxDecoration(
+                        color: (tipAmount == TipAmount.tip100)
+                            ? FastaColors.primary
+                            : FastaColors.primary2,
+                        borderRadius: BorderRadius.circular(8.h),
+                        border: Border.all(
+                            color: (tipAmount == TipAmount.tip100)
+                                ? FastaColors.primary2
+                                : FastaColors.grey7)),
+                  ),
                 ),
-                Container(
-                  height: 32.h,
-                  width: 65.w,
-                  child: Center(
-                      child: Text('NGN 500.00',
-                          style: FastaTextStyle.hardLabel2
-                              .copyWith(fontSize: 13.f))),
-                  decoration: BoxDecoration(
-                      borderRadius: BorderRadius.circular(8.h),
-                      border: Border.all(color: FastaColors.grey7)),
+                GestureDetector(
+                  onTap: () {
+                    tipAmount = TipAmount.tip500;
+                    setState(() {});
+                  },
+                  child: Container(
+                    height: 32.h,
+                    padding: EdgeInsets.symmetric(horizontal: 10.w),
+                    child: Center(
+                        child: Text('NGN 500.00',
+                            style: FastaTextStyle.hardLabel2.copyWith(
+                                fontSize: 13.f,
+                                color: (tipAmount == TipAmount.tip500)
+                                    ? FastaColors.primary2
+                                    : FastaColors.primary))),
+                    decoration: BoxDecoration(
+                        color: (tipAmount == TipAmount.tip500)
+                            ? FastaColors.primary
+                            : FastaColors.primary2,
+                        borderRadius: BorderRadius.circular(8.h),
+                        border: Border.all(
+                            color: (tipAmount == TipAmount.tip500)
+                                ? FastaColors.primary2
+                                : FastaColors.grey7)),
+                  ),
                 ),
-                Container(
-                  height: 32.h,
-                  width: 65.w,
-                  child: Center(
-                      child: Text('NGN 1000.00',
-                          style: FastaTextStyle.hardLabel2
-                              .copyWith(fontSize: 13.f))),
-                  decoration: BoxDecoration(
-                      borderRadius: BorderRadius.circular(8.h),
-                      border: Border.all(color: FastaColors.grey7)),
+                GestureDetector(
+                  onTap: () {
+                    tipAmount = TipAmount.tip1000;
+                    setState(() {});
+                  },
+                  child: Container(
+                    height: 32.h,
+                    padding: EdgeInsets.symmetric(horizontal: 10.w),
+                    child: Center(
+                        child: Text('NGN 1000.00',
+                            style: FastaTextStyle.hardLabel2.copyWith(
+                                fontSize: 13.f,
+                                color: (tipAmount == TipAmount.tip1000)
+                                    ? FastaColors.primary2
+                                    : FastaColors.primary))),
+                    decoration: BoxDecoration(
+                        color: (tipAmount == TipAmount.tip1000)
+                            ? FastaColors.primary
+                            : FastaColors.primary2,
+                        borderRadius: BorderRadius.circular(8.h),
+                        border: Border.all(
+                            color: (tipAmount == TipAmount.tip1000)
+                                ? FastaColors.primary2
+                                : FastaColors.grey7)),
+                  ),
                 ),
               ],
             ),
             SizedBox(
               height: 28.h,
             ),
-            Container(
-              height: 39.h,
-              width: 132.w,
-              child: Center(
-                child: Text('Tip',
-                    style: FastaTextStyle.hardLabel2
-                        .copyWith(fontSize: 13.f, color: FastaColors.primary2)),
-              ),
-              decoration: BoxDecoration(
-                  color: FastaColors.primary,
-                  borderRadius: BorderRadius.circular(9.h)),
+            // GestureDetector(
+            //   onTap: () {
+            //     final tip;
+            //     if (tipAmount == TipAmount.tip100) {
+            //       context.read<ShipmentHandlerBloc>().add(ShipmentHandlerEvent.tipDelivery(arg!.id, '100'));
+            //     }if (tipAmount == TipAmount.tip500) {
+            //       context.read<ShipmentHandlerBloc>().add(ShipmentHandlerEvent.tipDelivery(arg!.id, '500'));
+            //     }if (tipAmount == TipAmount.tip1000) {
+            //       context.read<ShipmentHandlerBloc>().add(ShipmentHandlerEvent.tipDelivery(arg!.id, '1000'));
+            //     }
+            //   },
+            // child: Container(
+            //   height: 39.h,
+            //   width: 132.w,
+            //   child: Center(
+            //     child: Text('Tip',
+            //         style: FastaTextStyle.hardLabel2.copyWith(
+            //             fontSize: 13.f, color: FastaColors.primary2)),
+            //   ),
+            //   decoration: BoxDecoration(
+            //       color: FastaColors.primary,
+            //       borderRadius: BorderRadius.circular(9.h)),
+            // ),
+            // ),
+            MultiBlocListener(
+              listeners: [
+                BlocListener<ShipmentHandlerBloc, ShipmentHandlerState>(
+                  listenWhen: ((previous, current) => isTipTap),
+                  listener: (context, state) {
+                    if (state.status == AppState.failed) {
+                      tipBtnController.error();
+                      tipBtnController.reset();
+                      Notify.error(context, state.errorMessage);
+                    } else if (state.status == AppState.loading) {
+                      tipBtnController.start();
+                    } else if (state.status == AppState.success) {
+                      tipBtnController.success();
+                    }
+                  },
+                ),
+                BlocListener<ShipmentHandlerBloc, ShipmentHandlerState>(
+                  listenWhen: (previous, current) => isRatingTap,
+                  listener: (context, state) {
+                    if (state.status == AppState.failed) {
+                      buttonerror();
+                      Notify.error(context, state.errorMessage);
+                    } else if (state.status == AppState.loading) {
+                      tipBtnController.start();
+                    } else if (state.status == AppState.success) {
+                      buttonsucces();
+                    }
+                  },
+                ),
+              ],
+              child: CustomButton.named(
+                  controller: tipBtnController,
+                  width: 132.w,
+                  name: 'Tip',
+                  onPressed: () {
+                    final tip;
+                    if (tipAmount == TipAmount.tip100) {
+                      context.read<ShipmentHandlerBloc>().add(
+                          ShipmentHandlerEvent.tipDelivery(arg!.id, '100'));
+                    }
+                    if (tipAmount == TipAmount.tip500) {
+                      context.read<ShipmentHandlerBloc>().add(
+                          ShipmentHandlerEvent.tipDelivery(arg!.id, '500'));
+                    }
+                    if (tipAmount == TipAmount.tip1000) {
+                      context.read<ShipmentHandlerBloc>().add(
+                          ShipmentHandlerEvent.tipDelivery(arg!.id, '1000'));
+                    }
+                  }),
             ),
             SizedBox(
               height: 70.h,

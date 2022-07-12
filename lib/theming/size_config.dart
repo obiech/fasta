@@ -73,3 +73,31 @@ class Responsive extends StatelessWidget {
     return child;
   }
 }
+
+
+/// Draw line btween location
+/// chat
+/// call
+/// profile
+/// contiune should take back tor profile
+/// remove payment from prfile
+/// remove country in profile
+/// remove card in tra histry
+/// from and to in trancation histryis not working
+/// change email and pin and phone number
+/// error message.
+/// pop up redirectly to veryfy email on failed fund wallet
+/// Notifications should be working
+/// movieng withingout clicking something in shipping
+/// pick up time
+/// image in shipping not 
+/// address in map shoudl be only delivery addess 
+/// refresh with draw down
+/// make pop up for notification show only once
+/// add card 
+/// log out
+/// 
+/// 
+/// cant't click profile from orders rider
+/// add time to trnasaction histroy 
+/// add purpose to transaction histroy

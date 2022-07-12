@@ -1,8 +1,9 @@
+
 import 'package:fasta/colors/colors.dart';
 import 'package:fasta/core/app_state.dart';
+import 'package:fasta/extension/string.dart';
 import 'package:fasta/global_widgets/app_bars/app_bar_back_button.dart';
 import 'package:fasta/shipping/application/bloc/shipment_handler_bloc.dart';
-import 'package:fasta/shipping/domain/entity/delivery.dart';
 import 'package:fasta/shipping/domain/entity/delivery_model.dart';
 import 'package:fasta/theming/size_config.dart';
 import 'package:fasta/typography/text_styles.dart';
@@ -25,9 +26,6 @@ class _OrderReceiptState extends State<OrderReceipt> {
     super.didChangeDependencies();
     // arg = (ModalRoute.of(context)?.settings.arguments as Trip);
     arg = (ModalRoute.of(context)?.settings.arguments as DeliverySummary?);
-    context
-        .read<ShipmentHandlerBloc>()
-        .add(ShipmentHandlerEvent.getADelivery(arg!.id, Owner.user));
   }
 
   @override
@@ -65,6 +63,7 @@ class _OrderReceiptState extends State<OrderReceipt> {
                     listener: (context, state) {
                   // TODO: implement listener
                 }, builder: (context, state) {
+                  // log(state.delivery?.rating.rating);
                   if (state.status == AppState.success) {
                     return Column(
                         mainAxisAlignment: MainAxisAlignment.spaceEvenly,
@@ -91,8 +90,8 @@ class _OrderReceiptState extends State<OrderReceipt> {
                                 style: FastaTextStyle.subtitleHard),
                           ),
                           OrderInfo(
-                            name: 'Items',
-                            value: Text(state.delivery!.sender.items,
+                            name: 'Tip',
+                            value: Text(state.delivery!.tip.amount,
                                 style: FastaTextStyle.subtitleHard),
                           ),
                           OrderInfo(
@@ -102,27 +101,34 @@ class _OrderReceiptState extends State<OrderReceipt> {
                                 style: FastaTextStyle.subtitleHard),
                           ),
                           OrderInfo(
-                            name: 'Items',
-                            value: Text(state.delivery!.sender.items,
+                            name: 'Items state',
+                            value: Text(state.delivery!.sender.itemState,
                                 style: FastaTextStyle.subtitleHard),
                           ),
                           OrderInfo(
                             name: 'Rating',
-                            value: Row(
-                              children: List.generate(
-                                  int.parse(
-                                      (state.delivery!.rating.rating.isEmpty)
-                                          ? '0'
-                                          : state.delivery!.rating.rating),
-                                  (index) {
-                                return const Icon(Icons.star,
-                                    color: FastaColors.green);
-                              }),
-                            ),
+                            value: Row(children: [
+                              ...List.generate(
+                                int.parse(state.delivery!.rating.rating.isEmpty
+                                    ? '0'
+                                    : state.delivery!.rating.rating),
+                                (index) => const Icon(Icons.star,
+                                    color: FastaColors.green),
+                              ).map((e) => e).toList(),
+                              ...List.generate(
+                                5 -
+                                    int.parse(
+                                        state.delivery!.rating.rating.isEmpty
+                                            ? '0'
+                                            : state.delivery!.rating.rating),
+                                (index) => const Icon(Icons.star_border_outlined,
+                                    color: FastaColors.green),
+                              ).map((e) => e).toList()
+                            ]),
                           ),
                           OrderInfo(
                             name: 'Depature time',
-                            value: Text(state.delivery!.deliverySummary.endTime,
+                            value: Text(state.delivery!.deliverySummary.endTime.toDateTime,
                                 style: FastaTextStyle.subtitleHard),
                           ),
                           OrderInfo(
@@ -131,8 +137,8 @@ class _OrderReceiptState extends State<OrderReceipt> {
                                 style: FastaTextStyle.subtitleHard),
                           ),
                           OrderInfo(
-                            name: 'Arrival time',
-                            value: Text(state.delivery!.deliverySummary.endTime,
+                            name: 'Distance',
+                            value: Text(state.delivery!.deliverySummary.distance+ ' km',
                                 style: FastaTextStyle.subtitleHard),
                           ),
                           OrderInfo(

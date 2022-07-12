@@ -109,8 +109,9 @@ class _RideOptions {
 }
 
 List<_RideOptions> _data = [
-  _RideOptions('Bike', 'bike_small'),
-  _RideOptions('Car', 'car'),
-  _RideOptions('Mini Van', 'delivery-van'),
-  _RideOptions('Truck', 'container'),
+  _RideOptions('bike', 'bike_small'),
+  _RideOptions('car', 'car'),
+  _RideOptions('van', 'delivery-van'),
+  _RideOptions('truck', 'container'),
 ];
+// bike, car, van, bus, truck

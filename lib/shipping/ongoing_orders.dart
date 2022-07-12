@@ -4,7 +4,9 @@ import 'package:fasta/core/app_state.dart';
 import 'package:fasta/global_widgets/app_bars/app_bar_back_button.dart';
 import 'package:fasta/inter_app_widgets/order_preview.dart';
 import 'package:fasta/shipping/application/bloc/shipment_handler_bloc.dart';
+import 'package:fasta/shipping/arrival_time.dart';
 import 'package:fasta/shipping/order_receipt.dart';
+import 'package:fasta/shipping/rider_scan.dart';
 import 'package:fasta/theming/size_config.dart';
 import 'package:fasta/typography/text_styles.dart';
 import 'package:flutter/material.dart';
@@ -68,12 +70,20 @@ class _OngoingOrdersState extends State<OngoingOrders> {
                                 .trim()
                                 .toUpperCase() ==
                             'pending'.toUpperCase()) {
-                              
+                          Navigator.pushNamed(context, RiderScan.route);
                         } else if (state.deliverySummary![index].status
                                 .trim()
                                 .toUpperCase() ==
                             'accepted'.toUpperCase()) {
-                        } else {
+                               context
+        .read<ShipmentHandlerBloc>()
+        .add(ShipmentHandlerEvent.getADelivery(state.deliverySummary![index].id, Owner.user));
+                          Navigator.pushNamed(context, ArrivalTime.route);
+
+                        }else {
+                          context
+        .read<ShipmentHandlerBloc>()
+        .add(ShipmentHandlerEvent.getADelivery(state.deliverySummary![index].id, Owner.user));
                           Navigator.pushNamed(context, OrderReceipt.route,
                               arguments: state.deliverySummary![index]);
                         }

@@ -43,7 +43,7 @@ class TrackerWidget extends StatelessWidget {
             width: 11.w,
           ),
           Text(
-            distance,
+            distance +' km',
             style: FastaTextStyle.subtitle3.copyWith(fontSize: 10.f),
           )
         ],
