@@ -92,6 +92,7 @@ class ShipmentBloc extends Bloc<ShipmentEvent, ShipmentState> {
       _CalculateDistances event, Emitter<ShipmentState> emit) {
     final String res = event.latLng.calculateDistance();
     emit(ShipmentState.calculatedDistance(distance: res));
+    
     add(ShipmentEvent.drawPolyLines(latLng: event.latLng));
   }
 

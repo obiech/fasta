@@ -91,3 +91,10 @@ extension DateTimeX on String {
     return replaceRange(19, null, '').replaceAll('T', ' ');
   }
 }
+
+extension TrimX on String {
+  String get toShortText {
+    if (isEmpty|| length<31) return this;
+    return replaceRange(31, null, ' ...');
+  }
+}

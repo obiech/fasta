@@ -138,13 +138,15 @@ class _ProfileViewState extends State<ProfileView> {
                                 context, TransactionHistory.route);
                             break;
                           case 1:
-                            Navigator.pushNamed(context, SupportView.route);
+                          Navigator.pushNamed(context, VerifyEmail.route);
+                            
                             break;
                           case 2:
-                            Navigator.pushNamed(context, SecurityView.route);
+                          Navigator.pushNamed(context, SupportView.route);
                             break;
                           case 3:
-                            Navigator.pushNamed(context, VerifyEmail.route);
+                            Navigator.pushNamed(context, SecurityView.route);
+                            
                             break;
                           default:
                         }
@@ -190,9 +192,9 @@ class _Features {
 const List<_Features> _data = [
   // _Features('Payment', Icons.payment_outlined),
   _Features('Transaction History', Icons.history_rounded),
-  _Features('Help & Support', Icons.person),
-  _Features('Security', Icons.lock_clock_rounded),
   _Features('Verifications', Icons.personal_injury),
-  _Features('Report an Issue', Icons.report_problem),
+  
+  _Features('Security', Icons.lock_clock_rounded),
+ _Features('Help & Support', Icons.person),
   _Features('About', Icons.person),
 ];

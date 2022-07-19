@@ -1,3 +1,4 @@
+import 'package:fasta/card/home.dart';
 import 'package:fasta/core/app_state.dart';
 import 'package:fasta/dashboard/dashboard.dart';
 import 'package:fasta/nav/cards_screen.dart';
@@ -25,7 +26,7 @@ class _BottomNavBarState extends State<BottomNavBar> {
     DashBoardView(),
     ShippingView(),
     WalletView(),
-    CardsScreen(),
+    CardView(),
   ];
 
   @override

@@ -9,6 +9,7 @@ class ElevatedCardResponsive extends StatelessWidget {
   final double? height, width;
   final MainAxisAlignment? mainAxisAlignment;
   final List<Widget>? children;
+  final bool? responsiveHeight;
   const ElevatedCardResponsive(
       {Key? key,
       this.type,
@@ -16,6 +17,7 @@ class ElevatedCardResponsive extends StatelessWidget {
       required this.isSelected,
       this.mainAxisAlignment,
       this.children,
+      this.responsiveHeight,
       this.height,
       this.width})
       : super(key: key);
@@ -28,9 +30,9 @@ class ElevatedCardResponsive extends StatelessWidget {
       ),
       elevation: 7,
       child: Container(
-        height: height ?? 48.h,
+        height:(responsiveHeight??false)?null: height ?? 48.h,
         width: width ?? 112.w,
-        padding: EdgeInsets.symmetric(horizontal: 13.w),
+        padding:(responsiveHeight??false)?EdgeInsets.symmetric(horizontal: 13.w,vertical: 13.h): EdgeInsets.symmetric(horizontal: 13.w),
         decoration: BoxDecoration(
             border: Border.all(
                 color:

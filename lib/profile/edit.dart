@@ -25,11 +25,13 @@ class EditProfileView extends StatefulWidget {
 
 class _EditProfileViewState extends State<EditProfileView>
     with RoundedLoadingButtonMixin {
-  final TextEditingController fullName = TextEditingController();
-  final TextEditingController password = TextEditingController();
-  final TextEditingController country = TextEditingController();
-  final TextEditingController city = TextEditingController();
-  final TextEditingController stateController = TextEditingController();
+  // final TextEditingController fullName = TextEditingController();
+  final TextEditingController firstName = TextEditingController();
+  final TextEditingController lastName = TextEditingController();
+  // final TextEditingController password = TextEditingController();
+  // final TextEditingController country = TextEditingController();
+  // final TextEditingController city = TextEditingController();
+  // final TextEditingController stateController = TextEditingController();
   Uint8List? bytes;
   ImageProvider? itemImage;
 
@@ -130,7 +132,7 @@ class _EditProfileViewState extends State<EditProfileView>
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
                         Text(
-                          "Full Name",
+                          "Last Name",
                           style: FastaTextStyle.hardLabel2,
                         ),
                         SizedBox(
@@ -149,8 +151,8 @@ class _EditProfileViewState extends State<EditProfileView>
                                   padding: const EdgeInsets.only(
                                       left: 15, right: 15),
                                   child: TextFormField(
-                                      controller: fullName
-                                        ..text = state.user?.fullName ?? '',
+                                      controller: lastName
+                                        ..text = state.user?.fullName.split(' ')[0] ?? '',
                                       decoration: const InputDecoration(
                                         border: InputBorder.none,
                                       )))),
@@ -159,7 +161,7 @@ class _EditProfileViewState extends State<EditProfileView>
                           height: 15.h,
                         ),
                         Text(
-                          "City",
+                          "Last Name",
                           style: FastaTextStyle.hardLabel2,
                         ),
                         SizedBox(
@@ -178,8 +180,8 @@ class _EditProfileViewState extends State<EditProfileView>
                                   padding: const EdgeInsets.only(
                                       left: 15, right: 15),
                                   child: TextFormField(
-                                      controller: city
-                                        ..text = state.user?.city ?? '',
+                                      controller: firstName
+                                        ..text =state.user?.fullName.split(' ')[1] ?? '',
                                       decoration: const InputDecoration(
                                         border: InputBorder.none,
                                       )))),
@@ -187,35 +189,65 @@ class _EditProfileViewState extends State<EditProfileView>
                         SizedBox(
                           height: 15.h,
                         ),
-                        Text(
-                          "State",
-                          style: FastaTextStyle.hardLabel2,
-                        ),
-                        SizedBox(
-                          height: 9.h,
-                        ),
-                        Padding(
-                          padding: const EdgeInsets.only(top: 5),
-                          child: Container(
-                              width: 330.w,
-                              height: 45.h,
-                              decoration: BoxDecoration(
-                                color: ColorPalette.grey2,
-                                borderRadius: BorderRadius.circular(13.0),
-                              ),
-                              child: Padding(
-                                  padding: const EdgeInsets.only(
-                                      left: 15, right: 15),
-                                  child: TextFormField(
-                                      controller: stateController
-                                        ..text = state.user?.state ?? '',
-                                      decoration: const InputDecoration(
-                                        border: InputBorder.none,
-                                      )))),
-                        ),
-                        SizedBox(
-                          height: 15.h,
-                        ),
+                        // Text(
+                        //   "City",
+                        //   style: FastaTextStyle.hardLabel2,
+                        // ),
+                        // SizedBox(
+                        //   height: 9.h,
+                        // ),
+                        // Padding(
+                        //   padding: const EdgeInsets.only(top: 5),
+                        //   child: Container(
+                        //       width: 330.w,
+                        //       height: 45.h,
+                        //       decoration: BoxDecoration(
+                        //         color: ColorPalette.grey2,
+                        //         borderRadius: BorderRadius.circular(13.0),
+                        //       ),
+                        //       child: Padding(
+                        //           padding: const EdgeInsets.only(
+                        //               left: 15, right: 15),
+                        //           child: TextFormField(
+                        //               controller: city
+                        //                 ..text = state.user?.city ?? '',
+                        //               decoration: const InputDecoration(
+                        //                 border: InputBorder.none,
+                        //               )))),
+                        // ),
+                        // SizedBox(
+                        //   height: 15.h,
+                        // ),
+                        // Text(
+                        //   "State",
+                        //   style: FastaTextStyle.hardLabel2,
+                        // ),
+                        // SizedBox(
+                        //   height: 9.h,
+                        // ),
+                        // Padding(
+                        //   padding: const EdgeInsets.only(top: 5),
+                        //   child: Container(
+                        //       width: 330.w,
+                        //       height: 45.h,
+                        //       decoration: BoxDecoration(
+                        //         color: ColorPalette.grey2,
+                        //         borderRadius: BorderRadius.circular(13.0),
+                        //       ),
+                        //       child: Padding(
+                        //           padding: const EdgeInsets.only(
+                        //               left: 15, right: 15),
+                        //           child: TextFormField(
+                        //               controller: stateController
+                        //                 ..text = state.user?.state ?? '',
+                        //               decoration: const InputDecoration(
+                        //                 border: InputBorder.none,
+                        //               )))),
+                        // ),
+                        // SizedBox(
+                        //   height: 15.h,
+                        // ),
+                      
                       ]),
                   SizedBox(
                     height: 78.h,
@@ -227,10 +259,10 @@ class _EditProfileViewState extends State<EditProfileView>
                             .read<ProfileBloc>()
                             .add(ProfileEvent.updateProfile(
                                 arg: ProfileArg(
-                              fullName: fullName.text,
-                              city: city.text,
-                              state: stateController.text,
-                              country: country.text,
+                              fullName: lastName.text + ' ' + firstName.text,
+                              // city: city.text,
+                              // state: stateController.text,
+                              // country: country.text,
                             )));
                         // if (bytes != null) {
                         //   context

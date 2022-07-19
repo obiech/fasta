@@ -1,4 +1,5 @@
 import 'package:fasta/colors/colors.dart';
+import 'package:fasta/extension/string.dart';
 import 'package:fasta/theming/size_config.dart';
 import 'package:fasta/typography/text_styles.dart';
 import 'package:flutter/material.dart';
@@ -24,7 +25,7 @@ class TrackerWidget extends StatelessWidget {
               style: FastaTextStyle.subtitle3.copyWith(fontSize: 10.f),
               children: [
             TextSpan(
-              text: from,
+              text: from.toShortText,
               style:
                   FastaTextStyle.subtitleHard.copyWith(fontSize: 12.f),
             ),
@@ -57,7 +58,7 @@ class TrackerWidget extends StatelessWidget {
               style: FastaTextStyle.subtitle3.copyWith(fontSize: 10.f),
               children: [
             TextSpan(
-              text: to,
+              text: to.toShortText,
               style:
                   FastaTextStyle.subtitleHard.copyWith(fontSize: 12.f),
             )

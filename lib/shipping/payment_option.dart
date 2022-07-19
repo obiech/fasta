@@ -1,5 +1,6 @@
 import 'package:fasta/colors/colors.dart';
 import 'package:fasta/shipping/application/bloc/shipment_handler_bloc.dart';
+import 'package:fasta/shipping/application/map/shipment_bloc.dart';
 // import 'package:fasta/shipping/application/bloc/shipment_handler_bloc.dart';
 import 'package:fasta/shipping/map_view.dart';
 import 'package:fasta/shipping/rider_scan.dart';
@@ -22,6 +23,7 @@ class _PaymentOptionsState extends State<PaymentOptions> {
   bool isWalletSelected = false;
 
   bool isCardSelected = false;
+  String dis = '0';
   @override
   Widget build(BuildContext context) {
     return RefreshIndicator(
@@ -43,8 +45,8 @@ class _PaymentOptionsState extends State<PaymentOptions> {
                   minChildSize: 0.12,
                   // expand: false,
                   initialChildSize: 0.85,
-                  builder:
-                      (BuildContext context, ScrollController scrollController) {
+                  builder: (BuildContext context,
+                      ScrollController scrollController) {
                     return Container(
                         decoration: BoxDecoration(
                             color: FastaColors.primary2,
@@ -54,7 +56,8 @@ class _PaymentOptionsState extends State<PaymentOptions> {
                         child: ListView(
                           controller: scrollController,
                           children: [
-                            BlocConsumer<ShipmentHandlerBloc, ShipmentHandlerState>(
+                            BlocConsumer<ShipmentHandlerBloc,
+                                ShipmentHandlerState>(
                               listener: (context, state) {
                                 // TODO: implement listener
                               },
@@ -93,16 +96,33 @@ class _PaymentOptionsState extends State<PaymentOptions> {
                                         );
                                       },
                                     ),
-                                    Text(
-                                      '35 Mins to arrival, 1.5km.',
-                                      style: FastaTextStyle.subtitle1
-                                          .copyWith(color: FastaColors.grey7),
+                                    BlocListener<ShipmentBloc, ShipmentState>(
+                                      listener: (context, state) {
+                                        state.whenOrNull(
+                                          calculatedDistance: (distance) {
+                                            dis = distance;
+                                            setState(() {});
+                                          },
+                                        );
+                                      },
+                                      child: BlocBuilder<ShipmentBloc,
+                                          ShipmentState>(
+                                        builder: (context, stateShipment) {
+                                          return Text(
+                                            '35 Mins to arrival, ${dis ?? 0.00} km.',
+                                            style: FastaTextStyle.subtitle1
+                                                .copyWith(
+                                                    color: FastaColors.grey7),
+                                          );
+                                        },
+                                      ),
                                     ),
                                     SizedBox(
                                       height: 54.h,
                                     ),
                                     Row(
-                                      mainAxisAlignment: MainAxisAlignment.center,
+                                      mainAxisAlignment:
+                                          MainAxisAlignment.center,
                                       children: [
                                         GestureDetector(
                                             onTap: () {

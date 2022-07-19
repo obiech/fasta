@@ -83,6 +83,7 @@ class ShippingSocketImpl {
     socket.on('unauthorized', (dynamic data) {
       log('Unauthorized');
     });
+    // socket.send(args)
 
     socket.onError(
         (data) => log(data.toString(), name: const ServerAddress().token));

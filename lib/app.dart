@@ -1,5 +1,7 @@
 import 'package:fasta/api_client/infrastruture/dio_helper.dart';
 import 'package:fasta/auth/bloc/auth_bloc.dart';
+import 'package:fasta/card/add_card.dart';
+import 'package:fasta/card/home.dart';
 import 'package:fasta/chat/infrastructure/repo.dart';
 import 'package:fasta/onboarding/fasta_started_screen.dart';
 import 'package:fasta/auth/forgot_password_screen.dart';
@@ -220,6 +222,8 @@ final ChatImpl impl = ChatImpl(_plugin);
               NewOrder.route: (_) => const NewOrder(),
               CompleteOrder.route: (_) => const CompleteOrder(),
               SecurityView.route: (_) => const SecurityView(),
+              CardView.route:(_)=> const CardView(),
+              AddCardView.route:(_)=> const AddCardView(),
             },
             home: const Responsive(
                 designHeight: 812, designWidth: 375, child: Splash())),

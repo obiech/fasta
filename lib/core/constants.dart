@@ -5,5 +5,5 @@ class Constants {
       "https://hello.pstk.xyz/callback";
   static const String uploadPresent = 'dvozp7zq';
   static const String cloudName = 'dw1h1luat';
-  static const String googleMapApi = 'AIzaSyBU2vwu9Y9nJJQwg0DMaC5ngb0KnFA4VX8';
+  static const String googleMapApi = 'AIzaSyA-lqYHLBnNE3-I2CaCjgTgQE0BqEzSEWM';
 }

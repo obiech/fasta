@@ -169,12 +169,22 @@ class _WalletViewState extends State<WalletView> {
                           state.allTransaction[index].amount.toAmount,
                           style: FastaTextStyle.subtitle3,
                         ),
-                        timeRecieved: GestureDetector(
+                        timeRecieved: Column(
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          crossAxisAlignment: CrossAxisAlignment.end,
+                          children: [
+                           GestureDetector(
                             onTap: () {},
                             child: Text(
                                 state.allTransaction[index].createdAt.toDateTime,
                                 style: FastaTextStyle.subtitle3)),
-                      );
+                            Text(
+                              state.allTransaction[index].type!,
+                              style: FastaTextStyle.subtitle3,
+                            ),
+                          ],
+                        ),
+  );
                     }),
                   );
                 },
@@ -185,5 +195,4 @@ class _WalletViewState extends State<WalletView> {
             ]),
           )),
     );
-  }
-}
+  }}

@@ -21,17 +21,22 @@ class TransactionHistory extends StatefulWidget {
 
 class _TransactionHistoryState extends State<TransactionHistory> {
   int _selectedIndex = 0;
-  String startDate = '';
-  String endDate =
-      '';
+  // String startDate = '';
+  TextEditingController startDate = TextEditingController(text: '2022-05-25');
+  // String endDate = '';
+  TextEditingController endDate = TextEditingController(
+      text:
+          '${DateTime.now().year}-0${DateTime.now().month}-0${DateTime.now().day + 1}');
 
   void reload(String date) {
-    startDate = date;
+    startDate.text = date;
     setState(() {});
+    log('called');
   }
 
   void reloadEndDate(String date) {
-    endDate = date;
+    endDate.text = date;
+    log('called');
     setState(() {});
   }
 
@@ -61,123 +66,145 @@ class _TransactionHistoryState extends State<TransactionHistory> {
           body: SingleChildScrollView(
               padding: EdgeInsets.symmetric(horizontal: 27.w),
               physics: const BouncingScrollPhysics(),
-              child:
-                  Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
-                Text(
-                  'Transaction History',
-                  style: FastaTextStyle.headline6,
-                ),
-                SizedBox(height: 28.h),
-                Row(
-                    children: List.generate(3, (index) {
-                  return GestureDetector(
-                    onTap: () {
-                      _selectedIndex = index;
-                      setState(() {});
-                    },
-                    child: Container(
-                        margin: EdgeInsets.only(right: 24.w),
-                        padding:
-                            EdgeInsets.symmetric(horizontal: 12.w, vertical: 6.h),
-                        decoration: BoxDecoration(
-                            borderRadius: BorderRadius.circular(7.h),
-                            border: Border.all(),
-                            color: (_selectedIndex == index)
-                                ? FastaColors.primary
-                                : FastaColors.primary2),
-                        child: Center(
-                            child: Text(
-                          _type[index],
-                          style: FastaTextStyle.hardLabel2.copyWith(
-                              color: (_selectedIndex == index)
-                                  ? FastaColors.primary2
-                                  : FastaColors.primary),
-                        ))),
-                  );
-                })),
-                SizedBox(height: 28.h),
-                Row(
-                  crossAxisAlignment: CrossAxisAlignment.center,
+              child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-                    CustomDropDownButton(time: 'From', reload: reload,controller: TextEditingController(text: '2022-05-25'),),
-                    SizedBox(
-                      width: 12.w,
+                    Text(
+                      'Transaction History',
+                      style: FastaTextStyle.headline6,
                     ),
-                    CustomDropDownButton(time: 'To', reload: reloadEndDate,controller: TextEditingController(text: '${DateTime.now().year}-0${DateTime.now().month}-0${DateTime.now().day + 1}'),),
-                    const Expanded(
-                      child: SizedBox(),
-                    ),
-                    GestureDetector(
-                      onTap: () {
-                        context.read<PaystackBloc>().add(
-                            PaystackEvent.allTransactions(TransactionArg(
-                                endDate: endDate,
-                                page: '1',
-                                limit: '10',
-                                order: 'desc',
-                                status: '',
-                                type: '',
-                                startDate: startDate)));
-                        // reload(date)
-                      },
-                      child: Container(
-                        margin: EdgeInsets.only(top: 12.h),
-                        padding: EdgeInsets.symmetric(
-                            vertical: 10.h, horizontal: 10.w),
-                        decoration: BoxDecoration(
-                            color: FastaColors.primary,
-                            borderRadius: BorderRadius.circular(10.h)),
-                        child: Center(
-                            child: Text(
-                          'Search',
-                          style: FastaTextStyle.subtitleHard
-                              .copyWith(color: FastaColors.primary2),
-                        )),
-                      ),
-                    )
-                  ],
-                ),
-                SizedBox(height: 38.h),
-                BlocBuilder<PaystackBloc, PaystackState>(
-                  builder: (context, state) {
-                    if (state.allTransaction.isEmpty) {
-                      return const Center(child: Text('No Result'));
-                    }
-                    return Column(
-                        children:
-                            List.generate(state.allTransaction.length, (index) {
-                      return NotificationMessage(
-                        radius: 15.h,
-                        padding: EdgeInsets.symmetric(
-                          horizontal: 15.w,
-                        ),
-                        icon: Container(
-                          height: 25.h,
-                          width: 27.w,
-                          decoration: BoxDecoration(
-                            borderRadius: BorderRadius.circular(6.h),
-                            color: FastaColors.lightBlue,
-                          ),
-                          child: Center(
-                              child: Image.asset(
-                            'assets/2.0x/credit-card.png',
-                            height: 16.h,
-                            width: 16.h,
-                          )),
-                        ),
-                        content: Text(
-                          'Paid ''${state.allTransaction[index].amount.toAmount}',
-                          style:
-                              FastaTextStyle.hardLabel2.copyWith(fontSize: 12.f),
-                        ),
-                        timeRecieved: Text(state.allTransaction[index].createdAt.toDateTime,
-                            style: FastaTextStyle.subtitle3
-                                .copyWith(color: FastaColors.grey8)),
+                    SizedBox(height: 28.h),
+                    Row(
+                        children: List.generate(3, (index) {
+                      return GestureDetector(
+                        onTap: () {
+                          _selectedIndex = index;
+                          setState(() {});
+                        },
+                        child: Container(
+                            margin: EdgeInsets.only(right: 24.w),
+                            padding: EdgeInsets.symmetric(
+                                horizontal: 12.w, vertical: 6.h),
+                            decoration: BoxDecoration(
+                                borderRadius: BorderRadius.circular(7.h),
+                                border: Border.all(),
+                                color: (_selectedIndex == index)
+                                    ? FastaColors.primary
+                                    : FastaColors.primary2),
+                            child: Center(
+                                child: Text(
+                              _type[index],
+                              style: FastaTextStyle.hardLabel2.copyWith(
+                                  color: (_selectedIndex == index)
+                                      ? FastaColors.primary2
+                                      : FastaColors.primary),
+                            ))),
                       );
-                    }));
-                  },
-                )
-              ]))),
+                    })),
+                    SizedBox(height: 28.h),
+                    Row(
+                      crossAxisAlignment: CrossAxisAlignment.center,
+                      children: [
+                        CustomDropDownButton(
+                          time: 'From',
+                          reload: reload,
+                          controller: startDate,
+                        ),
+                        SizedBox(
+                          width: 12.w,
+                        ),
+                        CustomDropDownButton(
+                          time: 'To',
+                          reload: reloadEndDate,
+                          controller: endDate,
+                        ),
+                        const Expanded(
+                          child: SizedBox(),
+                        ),
+                        GestureDetector(
+                          onTap: () {
+                            context.read<PaystackBloc>().add(
+                                PaystackEvent.allTransactions(TransactionArg(
+                                    endDate: endDate.text,
+                                    page: '1',
+                                    limit: '10',
+                                    order: 'desc',
+                                    status: '',
+                                    type: '',
+                                    startDate: startDate.text)));
+                            // reload(date)
+                          },
+                          child: Container(
+                            margin: EdgeInsets.only(top: 12.h),
+                            padding: EdgeInsets.symmetric(
+                                vertical: 10.h, horizontal: 10.w),
+                            decoration: BoxDecoration(
+                                color: FastaColors.primary,
+                                borderRadius: BorderRadius.circular(10.h)),
+                            child: Center(
+                                child: Text(
+                              'Search',
+                              style: FastaTextStyle.subtitleHard
+                                  .copyWith(color: FastaColors.primary2),
+                            )),
+                          ),
+                        )
+                      ],
+                    ),
+                    SizedBox(height: 38.h),
+                    BlocBuilder<PaystackBloc, PaystackState>(
+                      builder: (context, state) {
+                        if (state.allTransaction.isEmpty) {
+                          return const Center(child: Text('No Result'));
+                        }
+                        return Column(
+                            children: List.generate(state.allTransaction.length,
+                                (index) {
+                          return NotificationMessage(
+                              radius: 15.h,
+                              padding: EdgeInsets.symmetric(
+                                horizontal: 15.w,
+                              ),
+                              icon: Container(
+                                height: 25.h,
+                                width: 27.w,
+                                decoration: BoxDecoration(
+                                  borderRadius: BorderRadius.circular(6.h),
+                                  color: FastaColors.lightBlue,
+                                ),
+                                child: Center(
+                                    child: Image.asset(
+                                  'assets/2.0x/credit-card.png',
+                                  height: 16.h,
+                                  width: 16.h,
+                                )),
+                              ),
+                              content: Text(
+                                'Paid '
+                                '${state.allTransaction[index].amount.toAmount}',
+                                style: FastaTextStyle.hardLabel2
+                                    .copyWith(fontSize: 12.f),
+                              ),
+                              timeRecieved: Column(
+                                mainAxisAlignment: MainAxisAlignment.center,
+                                crossAxisAlignment: CrossAxisAlignment.end,
+                                children: [
+                                  GestureDetector(
+                                      onTap: () {},
+                                      child: Text(
+                                          state.allTransaction[index].createdAt
+                                              .toDateTime,
+                                          style: FastaTextStyle.subtitle3)),
+                                  Text(
+                                    state.allTransaction[index].type!,
+                                    style: FastaTextStyle.subtitle3,
+                                  ),
+                                ],
+                              ));
+                        }));
+                      },
+                    )
+                  ]))),
     );
   }
 }
@@ -188,7 +215,10 @@ class CustomDropDownButton extends StatefulWidget {
   final TextEditingController controller;
 
   const CustomDropDownButton(
-      {Key? key, required this.time, required this.reload, required this.controller})
+      {Key? key,
+      required this.time,
+      required this.reload,
+      required this.controller})
       : super(key: key);
 
   @override
@@ -197,7 +227,6 @@ class CustomDropDownButton extends StatefulWidget {
 
 class _CustomDropDownButtonState extends State<CustomDropDownButton> {
   // final TextEditingController controller =
-      
 
   @override
   Widget build(BuildContext context) {

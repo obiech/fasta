@@ -80,7 +80,10 @@ class _OngoingOrdersState extends State<OngoingOrders> {
         .add(ShipmentHandlerEvent.getADelivery(state.deliverySummary![index].id, Owner.user));
                           Navigator.pushNamed(context, ArrivalTime.route);
 
-                        }else {
+                        } else if ((state.deliverySummary![index].status.trim().toUpperCase() == 'initiated'.toUpperCase())){
+                          Navigator.pushNamed(context, RiderScan.route);
+                        }
+                        else {
                           context
         .read<ShipmentHandlerBloc>()
         .add(ShipmentHandlerEvent.getADelivery(state.deliverySummary![index].id, Owner.user));

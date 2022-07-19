@@ -5,6 +5,7 @@ import 'package:fasta/api_client/infrastruture/dio_helper.dart';
 import 'package:fasta/auth/bloc/auth_bloc.dart';
 import 'package:fasta/colors/colors.dart';
 import 'package:fasta/core/constants.dart';
+import 'package:fasta/global_widgets/cards/elevated_card_responsive.dart';
 import 'package:fasta/global_widgets/notifications/notify.dart';
 import 'package:fasta/global_widgets/rounded_loading_button/button_mixin.dart';
 import 'package:fasta/global_widgets/app_bars/app_bar_back_button.dart';
@@ -49,6 +50,7 @@ class _SenderInfoState extends State<SenderInfo>
   bool switchvaule = true;
   late Map<String, dynamic> arg;
   String? pickUpAddressMap;
+  String? deliveryAddressMap;
 
   @override
   void didChangeDependencies() {
@@ -93,7 +95,7 @@ class _SenderInfoState extends State<SenderInfo>
     // then get the Prediction selected
     Prediction? p = await PlacesAutocomplete.show(
       context: context,
-      apiKey: 'AIzaSyBU2vwu9Y9nJJQwg0DMaC5ngb0KnFA4VX8',
+      apiKey: 'AIzaSyA-lqYHLBnNE3-I2CaCjgTgQE0BqEzSEWM',
       onError: onError,
       mode: Mode.overlay,
       language: "fr",
@@ -116,7 +118,7 @@ class _SenderInfoState extends State<SenderInfo>
     if (p != null) {
       // get detail (lat/lng)
       GoogleMapsPlaces _places = GoogleMapsPlaces(
-        apiKey: 'AIzaSyBU2vwu9Y9nJJQwg0DMaC5ngb0KnFA4VX8',
+        apiKey: 'AIzaSyA-lqYHLBnNE3-I2CaCjgTgQE0BqEzSEWM',
         apiHeaders: await const GoogleApiHeaders().getHeaders(),
       );
       PlacesDetailsResponse detail =
@@ -200,32 +202,42 @@ class _SenderInfoState extends State<SenderInfo>
                         SizedBox(
                           height: 3.h,
                         ),
-                        // Padding(
-                        //   padding: EdgeInsets.symmetric(horizontal: 23.w),
-                        //   child: MapsPlacesAutocomplete(
-                        //       inputDecoration: InputDecoration(
-                        //         border: OutlineInputBorder(
-                        //             borderRadius: BorderRadius.circular(9.h)),
-                        //       ),
-                        //       onSuggestionClick: (place) {
-                        //         pickUpAddressMap =
-                        //             '${place.streetNumber} ${place.street}, ${place.city} ${place.state}';
-                        //       },
-                        //       mapsApiKey: Constants.googleMapApi,
-                        //       buildItem: (Suggestion suggestion, int index) {
-                        //         return SizedBox(
-                        //             child: Text(suggestion.description));
-                        //       }),
-                        // ),
                         Padding(
                           padding: EdgeInsets.symmetric(horizontal: 23.w),
-                          child: TextFormField(
-                              controller: pickupAddress..text = '${state.user?.city??''}, ${state.user?.state??''}',
-                              decoration: InputDecoration(
+                          child: MapsPlacesAutocomplete(
+                              inputDecoration: InputDecoration(
                                 border: OutlineInputBorder(
                                     borderRadius: BorderRadius.circular(9.h)),
-                              )),
+                              ),
+                              onSuggestionClick: (place) {
+                                pickUpAddressMap =
+                                    '${place.city} ${place.state}';
+                              },
+                              mapsApiKey: 'AIzaSyA-lqYHLBnNE3-I2CaCjgTgQE0BqEzSEWM',
+                              buildItem: (Suggestion suggestion, int index) {
+                                // if (index ==0 ){
+                                //   return ElevatedCardResponsive(
+                                //   width: 1.screenWidth,
+                                //   responsiveHeight: true,
+                                //   isSelected: false,
+                                //     children: [Expanded(child: Text('suggestion.description'))]);
+                                // }
+                                return ElevatedCardResponsive(
+                                  width: 1.screenWidth,
+                                  responsiveHeight: true,
+                                  isSelected: false,
+                                    children: [Expanded(child: Text(suggestion.description))]);
+                              }),
                         ),
+                        // Padding(
+                        //   padding: EdgeInsets.symmetric(horizontal: 23.w),
+                        //   child: TextFormField(
+                        //       controller: pickupAddress..text = '${state.user?.city??''}, ${state.user?.state??''}',
+                        //       decoration: InputDecoration(
+                        //         border: OutlineInputBorder(
+                        //             borderRadius: BorderRadius.circular(9.h)),
+                        //       )),
+                        // ),
                         SizedBox(
                           height: 16.h,
                         ),
@@ -402,12 +414,23 @@ class _SenderInfoState extends State<SenderInfo>
                         ),
                         Padding(
                           padding: EdgeInsets.symmetric(horizontal: 23.w),
-                          child: TextFormField(
-                              controller: deliveryPoint,
-                              decoration: InputDecoration(
+                          child: MapsPlacesAutocomplete(
+                              inputDecoration: InputDecoration(
                                 border: OutlineInputBorder(
                                     borderRadius: BorderRadius.circular(9.h)),
-                              )),
+                              ),
+                              onSuggestionClick: (place) {
+                                deliveryAddressMap =
+                                    '${place.city} ${place.state}';
+                              },
+                              mapsApiKey: 'AIzaSyA-lqYHLBnNE3-I2CaCjgTgQE0BqEzSEWM',
+                              buildItem: (Suggestion suggestion, int index) {
+                                return ElevatedCardResponsive(
+                                  width: 1.screenWidth,
+                                  responsiveHeight: true,
+                                  isSelected: false,
+                                    children: [Expanded(child: Text(suggestion.description))]);
+                              }),
                         ),
                         SizedBox(
                           height: 16.h,
@@ -505,18 +528,18 @@ class _SenderInfoState extends State<SenderInfo>
                   onPressed: () async {
                     if (sendersName.text.isNotEmpty &&
                         sendersPhoneNumber.text.isNotEmpty &&
-                        deliveryPoint.text.isNotEmpty &&
+                        (deliveryAddressMap?.isNotEmpty??false )&&
                         receiversName.text.isNotEmpty &&
                         recieversPhoneNumber.text.isNotEmpty) {
                       arg.putIfAbsent(
                           'SendersInfoArg',
                           () => SendersInfoArg(
-                              pickupAddress: pickupAddress.text,
+                              pickupAddress: pickUpAddressMap??"",
                               sendersName: sendersName.text,
                               sendersPhonNumber: sendersPhoneNumber.text,
                               pickUpTime: 'now',
                               priority: '1',
-                              deliveryPoint: deliveryPoint.text,
+                              deliveryPoint: deliveryAddressMap!,
                               receiversName: receiversName.text,
                               receiversPhoneNumber: recieversPhoneNumber.text));
                       if (switchvaule) {
