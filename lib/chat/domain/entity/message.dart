@@ -4,4 +4,3 @@ class Message {
 
   Message({required this.message, required this.time, required this.sendByMe});
 }
-

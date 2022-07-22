@@ -211,7 +211,7 @@ class _SenderInfoState extends State<SenderInfo>
                               ),
                               onSuggestionClick: (place) {
                                 pickUpAddressMap =
-                                    '${place.streetNumber??""} ${place.street??''} ${place.vicinity??''} ${place.city??''} ${place.state??''} ${place.country??''} ';
+                                    ' ${place.streetNumber??''} ${place.street??''} ${place.city} ${place.state} ${place.country??''}';
                               },
                               mapsApiKey: 'AIzaSyA-lqYHLBnNE3-I2CaCjgTgQE0BqEzSEWM',
                               buildItem: (Suggestion suggestion, int index) {
@@ -421,7 +421,7 @@ class _SenderInfoState extends State<SenderInfo>
                               ),
                               onSuggestionClick: (place) {
                                 deliveryAddressMap =
-                                    '${place.streetNumber??""} ${place.street??''} ${place.vicinity??''} ${place.city??''} ${place.state??''} ${place.country??''} ';
+                                    ' ${place.streetNumber??''} ${place.street??''} ${place.city} ${place.state} ${place.country??''}';
                               },
                               mapsApiKey: 'AIzaSyA-lqYHLBnNE3-I2CaCjgTgQE0BqEzSEWM',
                               buildItem: (Suggestion suggestion, int index) {

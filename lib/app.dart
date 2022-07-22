@@ -256,3 +256,12 @@ class Fasta extends StatelessWidget {
     );
   }
 }
+
+// if email has already been verified it showed say email verified.
+//  move faq in help and support to different page.
+// security
+// make transaction histroy to shoq difference between deduction and adding
+// make card number visible 
+//  make cvv2 visible
+// add card not working
+// add camera icon besides card number
