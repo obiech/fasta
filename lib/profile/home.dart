@@ -193,8 +193,8 @@ const List<_Features> _data = [
   // _Features('Payment', Icons.payment_outlined),
   _Features('Transaction History', Icons.history_rounded),
   _Features('Verifications', Icons.personal_injury),
+  _Features('Help & Support', Icons.person),
   
-  _Features('Security', Icons.lock_clock_rounded),
- _Features('Help & Support', Icons.person),
+ _Features('Security', Icons.lock_clock_rounded),
   _Features('About', Icons.person),
 ];

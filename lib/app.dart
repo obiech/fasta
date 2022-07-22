@@ -1,3 +1,4 @@
+import 'package:fasta/Accounts/home.dart';
 import 'package:fasta/api_client/infrastruture/dio_helper.dart';
 import 'package:fasta/auth/bloc/auth_bloc.dart';
 import 'package:fasta/card/add_card.dart';
@@ -224,6 +225,7 @@ final ChatImpl impl = ChatImpl(_plugin);
               SecurityView.route: (_) => const SecurityView(),
               CardView.route:(_)=> const CardView(),
               AddCardView.route:(_)=> const AddCardView(),
+              account_home.route:(_)=> const account_home()
             },
             home: const Responsive(
                 designHeight: 812, designWidth: 375, child: Splash())),

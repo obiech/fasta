@@ -543,10 +543,11 @@ class _SenderInfoState extends State<SenderInfo>
                               receiversName: receiversName.text,
                               receiversPhoneNumber: recieversPhoneNumber.text));
                       if (switchvaule) {
-                        _showMyDialog(context, arg);
-                      } else {
                         Navigator.pushNamed(context, ItemInfo.route,
                             arguments: arg);
+                        
+                      } else {
+                        _showMyDialog(context, arg);
                       }
                     } else {
                       Notify.error(context, 'Missing Reqired Field');

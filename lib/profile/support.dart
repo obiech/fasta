@@ -1,3 +1,4 @@
+import 'package:fasta/Accounts/home.dart';
 import 'package:fasta/colors/colors.dart';
 import 'package:fasta/profile/widgets/easy_nav_options.dart';
 import 'package:fasta/profile/widgets/faq_options.dart';
@@ -83,13 +84,16 @@ class _SupportViewState extends State<SupportView> {
             ),
             Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              children: const [
+              children: [
                 CardForEasyNavigation(
                     icon: Icons.rocket_launch_rounded,
+                    callback: (){},
                     color: FastaColors.lightOrange,
                     name: 'Get Started'),
                 CardForEasyNavigation(
                     icon: Icons.person_pin,
+                    callback: (){Navigator.pushNamed(context, account_home.route,
+                            );},
                     color: FastaColors.lightOrange,
                     name: 'Accounts')
               ],
@@ -99,47 +103,19 @@ class _SupportViewState extends State<SupportView> {
             ),
             Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              children: const [
+              children:  [
                 CardForEasyNavigation(
                     icon: Icons.warning,
+                    callback: (){},
                     color: FastaColors.lightOrange,
                     name: 'Report\nan Issue'),
                 CardForEasyNavigation(
                     icon: Icons.help,
+                    callback: (){},
                     color: FastaColors.lightOrange,
                     name: 'Help')
               ],
             ),
-            SizedBox(
-              height: 64.h,
-            ),
-            Text(
-              'FAQ',
-              style: FastaTextStyle.headline6,
-            ),
-            SizedBox(
-              height: 13.h,
-            ),
-            const FAQOptions(),
-            SizedBox(
-              height: 11.h,
-            ),
-            const FAQOptions(),
-            SizedBox(
-              height: 11.h,
-            ),
-            const FAQOptions(),
-            SizedBox(
-              height: 11.h,
-            ),
-            const FAQOptions(),
-            SizedBox(
-              height: 11.h,
-            ),
-            const FAQOptions(),
-            SizedBox(
-              height: 70.h,
-            )
           ],
         ),
       ),

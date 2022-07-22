@@ -7,11 +7,13 @@ class CardForEasyNavigation extends StatelessWidget {
   final String name;
   final IconData icon;
   final Color color;
+  final VoidCallback callback;
   const CardForEasyNavigation({
     Key? key,
     required this.name,
     required this.icon,
     required this.color,
+    required this.callback
   }) : super(key: key);
 
   @override
@@ -22,26 +24,29 @@ class CardForEasyNavigation extends StatelessWidget {
       shape: RoundedRectangleBorder(
           borderRadius: BorderRadius.circular(13.h),
           side: BorderSide(color: FastaColors.primary2, width: 3.h)),
-      child: SizedBox(
-        height: 137.h,
-        width: 150.w,
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: [
-            Container(
-                width: 39.w,
-                height: 39.h,
-                decoration: const BoxDecoration(
-                    shape: BoxShape.circle, color: FastaColors.primary2),
-                child: Icon(icon)),
-            SizedBox(
-              height: 18.h,
-            ),
-            Text(
-              name,
-              style: FastaTextStyle.hardLabel2,
-            )
-          ],
+      child: GestureDetector(
+        onTap: callback,
+        child: SizedBox(
+          height: 137.h,
+          width: 150.w,
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              Container(
+                  width: 39.w,
+                  height: 39.h,
+                  decoration: const BoxDecoration(
+                      shape: BoxShape.circle, color: FastaColors.primary2),
+                  child: Icon(icon)),
+              SizedBox(
+                height: 18.h,
+              ),
+              Text(
+                name,
+                style: FastaTextStyle.hardLabel2,
+              )
+            ],
+          ),
         ),
       ),
     );
