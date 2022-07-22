@@ -5,15 +5,15 @@ import '../profile/widgets/faq_options.dart';
 import '../typography/text_styles.dart';
 
 
-class account_home extends StatefulWidget {
-  static const String route = '/account_home';
-  const account_home({Key? key}) : super(key: key);
+class Faq extends StatefulWidget {
+  static const String route = '/Faq';
+  const Faq({Key? key}) : super(key: key);
 
   @override
-  State<account_home> createState() => _account_homeState();
+  State<Faq> createState() => _FaqState();
 }
 
-class _account_homeState extends State<account_home> {
+class _FaqState extends State<Faq> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(

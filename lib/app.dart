@@ -7,7 +7,6 @@ import 'package:fasta/card/domain/repo.dart';
 import 'package:fasta/card/home.dart';
 import 'package:fasta/card/infrastructure/repoimpl.dart';
 import 'package:fasta/chat/infrastructure/repo.dart';
-import 'package:fasta/injection.dart';
 import 'package:fasta/onboarding/fasta_started_screen.dart';
 import 'package:fasta/auth/forgot_password_screen.dart';
 import 'package:fasta/auth/infrastucture/repo.dart';
@@ -247,7 +246,7 @@ class Fasta extends StatelessWidget {
               SecurityView.route: (_) => const SecurityView(),
               CardView.route:(_)=> const CardView(),
               AddCardView.route:(_)=> const AddCardView(),
-              account_home.route:(_) => const account_home(),
+              Faq.route:(_) => const Faq(),
               ChangeEmailView.route:(_)=> const ChangeEmailView(),
               ChangePhoneNumberView.route:(_)=> const ChangePhoneNumberView(),
             },

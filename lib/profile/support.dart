@@ -92,7 +92,7 @@ class _SupportViewState extends State<SupportView> {
                     name: 'Get Started'),
                 CardForEasyNavigation(
                     icon: Icons.person_pin,
-                    callback: (){Navigator.pushNamed(context, account_home.route,
+                    callback: (){Navigator.pushNamed(context, Faq.route,
                             );},
                     color: FastaColors.lightOrange,
                     name: 'Accounts')
