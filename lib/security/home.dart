@@ -1,6 +1,8 @@
 import 'package:fasta/colors/colors.dart';
 import 'package:fasta/global_widgets/scaffolds/custom_scaffold.dart';
+import 'package:fasta/security/change_email.dart';
 import 'package:fasta/security/change_password.dart';
+import 'package:fasta/security/change_phoneNumber_view.dart';
 import 'package:fasta/security/widgets/security_options.dart';
 import 'package:fasta/theming/size_config.dart';
 import 'package:fasta/typography/text_styles.dart';
@@ -42,11 +44,22 @@ class _SecurityViewState extends State<SecurityView> {
           SizedBox(
             height: 49.h,
           ),
-          const SecurityOptions(name: 'Change Email'),
-          const SecurityOptions(name: 'Change PhoneNumber'),
+
+           GestureDetector(
+            onTap: () {
+             Navigator.pushNamed(context, ChangeEmailView.route); 
+            },
+            child: SecurityOptions(name: 'Change Email')),
+
+            GestureDetector(
+              onTap: () {
+             Navigator.pushNamed(context, ChangePhoneNumberView.route); 
+            },
+              child: SecurityOptions(name: 'Change PhoneNumber')),
+
           GestureDetector(
               onTap: () {
-                Navigator.pushNamed(context, ChangePassword.route);
+                
               },
               child: const SecurityOptions(name: 'Change Pin')),
           const SizedBox(

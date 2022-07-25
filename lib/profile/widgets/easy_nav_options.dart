@@ -18,36 +18,37 @@ class CardForEasyNavigation extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Card(
-      elevation: 6,
-      color: color,
-      shape: RoundedRectangleBorder(
-          borderRadius: BorderRadius.circular(13.h),
-          side: BorderSide(color: FastaColors.primary2, width: 3.h)),
-      child: GestureDetector(
-        onTap: callback,
-        child: SizedBox(
-          height: 137.h,
-          width: 150.w,
-          child: Column(
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: [
-              Container(
-                  width: 39.w,
-                  height: 39.h,
-                  decoration: const BoxDecoration(
-                      shape: BoxShape.circle, color: FastaColors.primary2),
-                  child: Icon(icon)),
-              SizedBox(
-                height: 18.h,
-              ),
-              Text(
-                name,
-                style: FastaTextStyle.hardLabel2,
-              )
-            ],
+    return GestureDetector(
+      onTap: callback,
+      child: Card(
+        elevation: 6,
+        color: color,
+        shape: RoundedRectangleBorder(
+            borderRadius: BorderRadius.circular(13.h),
+            side: BorderSide(color: FastaColors.primary2, width: 3.h)),
+          child: SizedBox(
+            height: 137.h,
+            width: 150.w,
+            child: Column(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                Container(
+                    width: 39.w,
+                    height: 39.h,
+                    decoration: const BoxDecoration(
+                        shape: BoxShape.circle, color: FastaColors.primary2),
+                    child: Icon(icon)),
+                SizedBox(
+                  height: 18.h,
+                ),
+                Text(
+                  name,
+                  style: FastaTextStyle.hardLabel2,
+                )
+              ],
+            ),
           ),
-        ),
+        
       ),
     );
   }

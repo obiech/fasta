@@ -102,9 +102,11 @@ class _SigninScreenState extends State<SigninScreen>
                           ),
                         ],
                       )),
+                      
                       const SizedBox(
                         height: 10,
                       ),
+
                       GestureDetector(
                         onTap: () {
                           Navigator.pushNamed(
@@ -117,9 +119,11 @@ class _SigninScreenState extends State<SigninScreen>
                           ),
                         ),
                       ),
+                     
                       const SizedBox(
                         height: 10,
                       ),
+
                       Center(
                         child: GestureDetector(
                           onTap: () {
@@ -137,9 +141,11 @@ class _SigninScreenState extends State<SigninScreen>
                           ),
                         ),
                       ),
+                      
                       SizedBox(
                         height: 60.h,
                       ),
+
                       ElevatedButton(
                         onPressed: () {},
                         child: Row(
@@ -166,9 +172,11 @@ class _SigninScreenState extends State<SigninScreen>
                                 horizontal: 30.w, vertical: 15),
                             textStyle: TextStyles.subtitle001),
                       ),
+                      
                       const SizedBox(
                         height: 10,
                       ),
+                      
                       ElevatedButton(
                         onPressed: () {},
                         child: Row(

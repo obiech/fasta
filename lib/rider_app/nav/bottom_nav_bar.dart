@@ -29,7 +29,7 @@ class _BottomNavBarRiderState extends State<BottomNavBarRider> {
     DashBoardViewRider(),
     OrdersViewRider(),
     WalletView(),
-    CardsScreen(),
+    CardScreen(),
   ];
 
   @override

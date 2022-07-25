@@ -2,8 +2,12 @@ import 'package:fasta/Accounts/home.dart';
 import 'package:fasta/api_client/infrastruture/dio_helper.dart';
 import 'package:fasta/auth/bloc/auth_bloc.dart';
 import 'package:fasta/card/add_card.dart';
+import 'package:fasta/card/bloc/CardBloc.dart';
+import 'package:fasta/card/domain/repo.dart';
 import 'package:fasta/card/home.dart';
+import 'package:fasta/card/infrastructure/repoimpl.dart';
 import 'package:fasta/chat/infrastructure/repo.dart';
+import 'package:fasta/injection.dart';
 import 'package:fasta/onboarding/fasta_started_screen.dart';
 import 'package:fasta/auth/forgot_password_screen.dart';
 import 'package:fasta/auth/infrastucture/repo.dart';
@@ -37,8 +41,13 @@ import 'package:fasta/rider_app/nav/bottom_nav_bar.dart';
 import 'package:fasta/rider_app/orders/complete_order.dart';
 import 'package:fasta/rider_app/orders/new_order.dart';
 import 'package:fasta/rider_app/orders/orders.dart';
+import 'package:fasta/security/bloc/security_bloc.dart';
+import 'package:fasta/security/change_email.dart';
 import 'package:fasta/security/change_password.dart';
+import 'package:fasta/security/change_phoneNumber_view.dart';
 import 'package:fasta/security/home.dart';
+import 'package:fasta/security/infrastruture/repo.dart';
+import 'package:fasta/security/repository/repo.dart';
 import 'package:fasta/shipping/application/bloc/shipment_handler_bloc.dart';
 import 'package:fasta/shipping/application/map/shipment_bloc.dart';
 // import 'package:fasta/shipping/application/bloc/shipment_handler_bloc.dart';
@@ -94,6 +103,7 @@ final ChatImpl impl = ChatImpl(_plugin);
   @override
   Widget build(BuildContext context) {
     final DioClient _plugin = DioClient();
+
     precacheImage(Image.asset('assets/young.png').image, context);
 
     precacheImage(Image.asset('assets/2.0x/nav_bar_send.png').image, context);
@@ -130,6 +140,12 @@ final ChatImpl impl = ChatImpl(_plugin);
         ),
         RepositoryProvider(
           create: (context) => ShippingSocketImpl(),
+        ),
+        RepositoryProvider(
+          create: (context) => Cardrepoimpl(_plugin),
+        ),
+        RepositoryProvider(
+          create: (context) => SecurityRepository(SecurityDataImpl(_plugin)),
         ),
       ],
       child: MultiBlocProvider(
@@ -175,6 +191,12 @@ final ChatImpl impl = ChatImpl(_plugin);
           BlocProvider(
             create: (context) => WalletCubit(),
           ),
+
+          BlocProvider(
+            create: (context)=> CardBloc(context.read<Cardrepoimpl>())),
+
+          BlocProvider(
+            create: (context)=> SecurityBloc(context.read<SecurityRepository>())),
         ],
         child: MaterialApp(
             title: 'Itekku',
@@ -225,7 +247,9 @@ final ChatImpl impl = ChatImpl(_plugin);
               SecurityView.route: (_) => const SecurityView(),
               CardView.route:(_)=> const CardView(),
               AddCardView.route:(_)=> const AddCardView(),
-              account_home.route:(_)=> const account_home()
+              account_home.route:(_) => const account_home(),
+              ChangeEmailView.route:(_)=> const ChangeEmailView(),
+              ChangePhoneNumberView.route:(_)=> const ChangePhoneNumberView(),
             },
             home: const Responsive(
                 designHeight: 812, designWidth: 375, child: Splash())),

@@ -1,5 +1,6 @@
 import 'package:bloc/bloc.dart';
 import 'package:fasta/core/app_state.dart';
+import 'package:fasta/errrors/app_error.dart';
 import 'package:fasta/security/repository/repo.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 
