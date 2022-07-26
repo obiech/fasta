@@ -10,15 +10,15 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 part 'blocevents.dart';
 part 'blocstate.dart';
 
-class CardBloc extends Bloc<cardevent, CardState> {
+class CardBloc extends Bloc<CardEvent, CardState> {
 final Cardrepo _repo ;
 
   CardBloc(this._repo) :super(CardState(AppError.empty(),AppState.waiting, [])){
-    on <addcardevent>(addcard);
+    on <AddCardEvent>(addcard);
   }
 
 
-  Future<void> addcard(addcardevent event, Emitter<CardState> emit) async {
+  Future<void> addcard(AddCardEvent event, Emitter<CardState> emit) async {
     // call to repo abstract
     final res = await _repo.addcard(event.cardNumber, event.cardname, event.cvv, event.expiryMonth, event.expiryYear);
     res.fold((l) => emit (state.copyWith(
