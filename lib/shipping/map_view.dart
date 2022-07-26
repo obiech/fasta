@@ -70,38 +70,39 @@ class _MapViewState extends State<MapView> {
               BlocListener<ShipmentHandlerBloc, ShipmentHandlerState>(
                 
                 listener: (context, state) {
-                   startAddressController.text = state.address?.from ?? '';
-                  destinationAddressController.text = state.address?.to ?? '';
-
-                  if (markers.isNotEmpty) markers.clear();
-                  if (polylines.isNotEmpty) {
-                    polylines.clear();
-                  }
-                  _placeDistance = null;
-                  context.read<ShipmentBloc>().add(ShipmentEvent.setMarkers(
-                      startAddress: state.address?.to ?? "",
-                      destinationAddress: state.address?.from ?? '',
-                      currentPosition: _currentPosition,
-                      currentAddress: _currentAddress));
-                },
-                child: BlocBuilder<ShipmentHandlerBloc, ShipmentHandlerState>(
-                                    buildWhen: ((previous, current) => polylines.isEmpty || markers.isEmpty),
-
-                    builder: (context, state) {
-                      
-                  // startAddressController.text = state.address?.from ?? '';
+                  //  startAddressController.text = state.address?.from ?? '';
                   // destinationAddressController.text = state.address?.to ?? '';
 
                   // if (markers.isNotEmpty) markers.clear();
                   // if (polylines.isNotEmpty) {
                   //   polylines.clear();
-                  // }  
+                  // }
                   // _placeDistance = null;
                   // context.read<ShipmentBloc>().add(ShipmentEvent.setMarkers(
                   //     startAddress: state.address?.to ?? "",
                   //     destinationAddress: state.address?.from ?? '',
                   //     currentPosition: _currentPosition,
                   //     currentAddress: _currentAddress));
+                },
+                child: BlocBuilder<ShipmentHandlerBloc, ShipmentHandlerState>(
+                                    // buildWhen: ((previous, current) => polylines.isEmpty || markers.isEmpty),
+
+                    builder: (context, state) {
+                      
+                  startAddressController.text = state.address?.from ?? '';
+                  destinationAddressController.text = state.address?.to ?? '';
+
+                  // if (markers.isNotEmpty) markers.clear();
+                  // if (polylines.isNotEmpty) {
+                  //   polylines.clear();
+                  // }  
+                  if(polylines.isEmpty || markers.isEmpty){
+                  _placeDistance = null;
+                  context.read<ShipmentBloc>().add(ShipmentEvent.setMarkers(
+                      startAddress: state.address?.to ?? "",
+                      destinationAddress: state.address?.from ?? '',
+                      currentPosition: _currentPosition,
+                      currentAddress: _currentAddress));}
 
                   return BlocConsumer<ShipmentBloc, ShipmentState>(
 

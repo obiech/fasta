@@ -27,7 +27,7 @@ class _RiderScanState extends State<RiderScan> {
       if (mounted && timer.isActive) {
         setState(() {
           
-          if(value<= 9){value += 0.000001;}
+          if(value<= 9){value += 0.00001;}
         });
       }
 
