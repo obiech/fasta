@@ -99,7 +99,12 @@ extension DateTimeX on String {
 
 extension TrimX on String {
   String get toShortText {
-    if (isEmpty|| length<31) return this;
-    return replaceRange(31, null, ' ...');
+    if (isEmpty|| length<27) return this;
+    return replaceRange(27, null, ' ...');
+  }
+
+  String  toShortTextAdaptive(int length){
+  if (isEmpty|| this.length<length) return this;
+    return replaceRange(length, null, ' ...');
   }
 }

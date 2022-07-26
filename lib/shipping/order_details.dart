@@ -542,7 +542,7 @@ class _SenderInfoState extends State<SenderInfo>
                               deliveryPoint: deliveryAddressMap!,
                               receiversName: receiversName.text,
                               receiversPhoneNumber: recieversPhoneNumber.text));
-                      if (switchvaule) {
+                      if (!switchvaule) {
                         Navigator.pushNamed(context, ItemInfo.route,
                             arguments: arg);
                         

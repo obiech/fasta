@@ -35,7 +35,7 @@ class _ItemInfoState extends State<ItemInfo> with RoundedLoadingButtonMixin {
   final TextEditingController itemNameController = TextEditingController();
   final TextEditingController quatityController = TextEditingController();
   final TextEditingController valueController = TextEditingController();
-  final TextEditingController weightController = TextEditingController(text: '1km');
+  final TextEditingController weightController = TextEditingController(text: '0.5kg');
   final TextEditingController stateController = TextEditingController();
   final TextEditingController descriptionController = TextEditingController();
   ImageProvider? itemImage;
@@ -251,17 +251,20 @@ class _ItemInfoState extends State<ItemInfo> with RoundedLoadingButtonMixin {
                                     isExpanded: true,
                                     items: const [
                                       DropdownMenuItem(
-                                          child: Text('0.5km - 1km'),
-                                          value: '1km'),
+                                          child: Text('0.0kg - 0.5kg'),
+                                          value: '0.5kg'),
                                       DropdownMenuItem(
-                                          child: Text('1km-2km'),
-                                          value: '2km'),
+                                          child: Text('0.5kg - 1kg'),
+                                          value: '1kg'),
+                                      DropdownMenuItem(
+                                          child: Text('1kg-2kg'),
+                                          value: '2kg'),
                                        DropdownMenuItem(
-                                          child: Text('2km-3km'),
-                                          value: '3km'),
+                                          child: Text('2kg-3kg'),
+                                          value: '3kg'),
                                       DropdownMenuItem(
-                                          child: Text('3km-4km'),
-                                          value: '4km')
+                                          child: Text('3kg-4kg'),
+                                          value: '4kg')
                                     ],
                                     onChanged: (value) {
                                       weightController.text = value!;

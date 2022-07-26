@@ -209,6 +209,7 @@ class _EditProfileViewState extends State<EditProfileView>
                                   padding: const EdgeInsets.only(
                                       left: 15, right: 15),
                                   child: TextFormField(
+                                    readOnly: true,
                                       controller: TextEditingController(text: state.user!.phoneNumber),
                                       decoration: const InputDecoration(
                                         border: InputBorder.none,
@@ -218,7 +219,7 @@ class _EditProfileViewState extends State<EditProfileView>
                           height: 15.h,
                         ),
                         Text(
-                          "State",
+                          "Email",
                           style: FastaTextStyle.hardLabel2,
                         ),
                         SizedBox(
@@ -237,6 +238,7 @@ class _EditProfileViewState extends State<EditProfileView>
                                   padding: const EdgeInsets.only(
                                       left: 15, right: 15),
                                   child: TextFormField(
+                                    readOnly: true,
                                       controller: TextEditingController(text: state.user!.email),
                                       decoration: const InputDecoration(
                                         border: InputBorder.none,
