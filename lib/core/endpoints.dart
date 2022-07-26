@@ -23,6 +23,11 @@ class Endpoints {
   static _Delivery get delivery => _Delivery();
   static _DriverDelivery get driverDelivery => _DriverDelivery();
   static _ChatAndCall get chatAndCall => _ChatAndCall();
+  static _card get card => _card();
+}
+
+class _card{
+  String get addcard => relevant + 'wallet/payment-card';
 }
 
 class _PayStack {
