@@ -95,7 +95,7 @@ class _SupportViewState extends State<SupportView> {
                     callback: (){Navigator.pushNamed(context, Faq.route,
                             );},
                     color: FastaColors.lightOrange,
-                    name: 'Accounts')
+                    name: 'FAQ')
               ],
             ),
             SizedBox(

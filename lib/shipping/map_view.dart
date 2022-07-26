@@ -67,43 +67,66 @@ class _MapViewState extends State<MapView> {
           body: Stack(
             children: <Widget>[
               // Map View
-              BlocBuilder<ShipmentHandlerBloc, ShipmentHandlerState>(
-                  builder: (context, state) {
-                startAddressController.text = state.address?.from ?? '';
-                destinationAddressController.text = state.address?.to ?? '';
+              BlocListener<ShipmentHandlerBloc, ShipmentHandlerState>(
+                
+                listener: (context, state) {
+                   startAddressController.text = state.address?.from ?? '';
+                  destinationAddressController.text = state.address?.to ?? '';
 
-                if (markers.isNotEmpty) markers.clear();
-                if (polylines.isNotEmpty) {
-                  polylines.clear();
-                }
-                _placeDistance = null;
-                context.read<ShipmentBloc>().add(ShipmentEvent.setMarkers(
-                    startAddress: state.address?.to ?? "",
-                    destinationAddress: state.address?.from ?? '',
-                    currentPosition: _currentPosition,
-                    currentAddress: _currentAddress));
+                  // if (markers.isNotEmpty) markers.clear();
+                  // if (polylines.isNotEmpty) {
+                  //   polylines.clear();
+                  // }
+                  // _placeDistance = null;
+                  // context.read<ShipmentBloc>().add(ShipmentEvent.setMarkers(
+                  //     startAddress: state.address?.to ?? "",
+                  //     destinationAddress: state.address?.from ?? '',
+                  //     currentPosition: _currentPosition,
+                  //     currentAddress: _currentAddress));
+                },
+                child: BlocBuilder<ShipmentHandlerBloc, ShipmentHandlerState>(
+                                    buildWhen: ((previous, current) => polylines.isEmpty || markers.isEmpty),
 
-                return BlocConsumer<ShipmentBloc, ShipmentState>(
-                    listener: ((context, state) {
-                  state.whenOrNull(
-                    currentAddress: (currentAddress, errorMessage) {},
-                  );
-                }), builder: (context, state) {
-                  // if(state is currentAddress){},
-                  return GoogleMap(
-                      markers: Set<Marker>.from(markers),
-                      initialCameraPosition: _initialLocation,
-                      // myLocationEnabled: true,
-                      // myLocationButtonEnabled: true,
-                      mapType: MapType.normal,
-                      zoomGesturesEnabled: true,
-                      zoomControlsEnabled: false,
-                      polylines: Set<Polyline>.of(polylines.values),
-                      onMapCreated: (GoogleMapController controller) {
-                        mapController = controller;
-                      });
-                });
-              }),
+                    builder: (context, state) {
+                      
+                  startAddressController.text = state.address?.from ?? '';
+                  destinationAddressController.text = state.address?.to ?? '';
+
+                  if (markers.isNotEmpty) markers.clear();
+                  if (polylines.isNotEmpty) {
+                    polylines.clear();
+                  }
+                  _placeDistance = null;
+                  context.read<ShipmentBloc>().add(ShipmentEvent.setMarkers(
+                      startAddress: state.address?.to ?? "",
+                      destinationAddress: state.address?.from ?? '',
+                      currentPosition: _currentPosition,
+                      currentAddress: _currentAddress));
+
+                  return BlocConsumer<ShipmentBloc, ShipmentState>(
+
+                      listener: ((context, state) {
+                    state.whenOrNull(
+                      currentAddress: (currentAddress, errorMessage) {},
+                    );
+                  }), builder: (context, state) {
+                    // if(state is currentAddress){},
+                    
+                    return GoogleMap(
+                        markers: Set<Marker>.from(markers),
+                        initialCameraPosition: _initialLocation,
+                        // myLocationEnabled: true,
+                        // myLocationButtonEnabled: true,
+                        mapType: MapType.normal,
+                        zoomGesturesEnabled: true,
+                        zoomControlsEnabled: false,
+                        polylines: Set<Polyline>.of(polylines.values),
+                        onMapCreated: (GoogleMapController controller) {
+                          mapController = controller;
+                        });
+                  });
+                }),
+              ),
 
               // Show zoom buttons
               SafeArea(

@@ -211,7 +211,7 @@ class _SenderInfoState extends State<SenderInfo>
                               ),
                               onSuggestionClick: (place) {
                                 pickUpAddressMap =
-                                    '${place.city} ${place.state}';
+                                    '${place.streetNumber??""} ${place.street??''} ${place.vicinity??''} ${place.city??''} ${place.state??''} ${place.country??''} ';
                               },
                               mapsApiKey: 'AIzaSyA-lqYHLBnNE3-I2CaCjgTgQE0BqEzSEWM',
                               buildItem: (Suggestion suggestion, int index) {
@@ -421,7 +421,7 @@ class _SenderInfoState extends State<SenderInfo>
                               ),
                               onSuggestionClick: (place) {
                                 deliveryAddressMap =
-                                    '${place.city} ${place.state}';
+                                    '${place.streetNumber??""} ${place.street??''} ${place.vicinity??''} ${place.city??''} ${place.state??''} ${place.country??''} ';
                               },
                               mapsApiKey: 'AIzaSyA-lqYHLBnNE3-I2CaCjgTgQE0BqEzSEWM',
                               buildItem: (Suggestion suggestion, int index) {
@@ -534,7 +534,7 @@ class _SenderInfoState extends State<SenderInfo>
                       arg.putIfAbsent(
                           'SendersInfoArg',
                           () => SendersInfoArg(
-                              pickupAddress: pickUpAddressMap??"",
+                              pickupAddress: pickUpAddressMap!,
                               sendersName: sendersName.text,
                               sendersPhonNumber: sendersPhoneNumber.text,
                               pickUpTime: 'now',

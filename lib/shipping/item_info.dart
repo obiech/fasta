@@ -35,7 +35,7 @@ class _ItemInfoState extends State<ItemInfo> with RoundedLoadingButtonMixin {
   final TextEditingController itemNameController = TextEditingController();
   final TextEditingController quatityController = TextEditingController();
   final TextEditingController valueController = TextEditingController();
-  final TextEditingController weightController = TextEditingController();
+  final TextEditingController weightController = TextEditingController(text: '1km');
   final TextEditingController stateController = TextEditingController();
   final TextEditingController descriptionController = TextEditingController();
   ImageProvider? itemImage;
@@ -231,18 +231,44 @@ class _ItemInfoState extends State<ItemInfo> with RoundedLoadingButtonMixin {
                               SizedBox(
                                 height: 4.h,
                               ),
+                              // SizedBox(
+                              //   width: 131.w,
+                              //   child: TextFormField(
+                              //       controller: weightController,
+                              //       decoration: InputDecoration(
+                              //         hintText: 'Weight(KG)',
+                              //         border: OutlineInputBorder(
+                              //             borderRadius:
+                              //                 BorderRadius.circular(9.h)),
+                              //       )),
+                              // ),
+                              // ),
                               SizedBox(
                                 width: 131.w,
-                                child: TextFormField(
-                                    controller: weightController,
-                                    decoration: InputDecoration(
-                                      hintText: 'Weight(KG)',
-                                      border: OutlineInputBorder(
-                                          borderRadius:
-                                              BorderRadius.circular(9.h)),
-                                    )),
+                                child: DropdownButton<String>(
+                                    value:  weightController.text,
+                                    isDense: true,
+                                    isExpanded: true,
+                                    items: const [
+                                      DropdownMenuItem(
+                                          child: Text('0.5km - 1km'),
+                                          value: '1km'),
+                                      DropdownMenuItem(
+                                          child: Text('1km-2km'),
+                                          value: '2km'),
+                                       DropdownMenuItem(
+                                          child: Text('2km-3km'),
+                                          value: '3km'),
+                                      DropdownMenuItem(
+                                          child: Text('3km-4km'),
+                                          value: '4km')
+                                    ],
+                                    onChanged: (value) {
+                                      weightController.text = value!;
+                                      setState(() {});
+                                    }),
                               ),
-                              // ),
+                           
                             ],
                           ),
                           Column(

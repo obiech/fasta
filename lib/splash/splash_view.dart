@@ -25,7 +25,7 @@ class _SplashState extends State<Splash> {
       width: 1.screenWidth,
       child: Center(
         child: Image.asset(
-          'assets/splash_white.png',
+          'assets/Logoblack.png',
           fit: BoxFit.cover,
         ),
       ),

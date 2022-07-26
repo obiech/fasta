@@ -83,6 +83,11 @@ extension CurrencyX on String {
     if (this == '0.00' || this == '0.0') return 'NGN 0.00';
     return 'NGN ' + format.format(int.parse(replaceAll('.00', '')));
   }
+
+  bool get isNegative{
+    if (contains('-')) return true;
+    return false;
+  }
 }
 
 extension DateTimeX on String {

@@ -46,7 +46,8 @@ dependencies:
   maps_places_autocomplete: ^0.0.2
   flutter_otp_text_field: ^1.0.1
   intl: ^0.17.0
-    
+  google_sign_in: ^5.4.0
+  
   # image_picker_widget: ^2.0.3
 
 
@@ -72,7 +73,7 @@ flutter:
 # run: flutter clean && flutter pub get && flutter pub run flutter_native_splash:create
 flutter_native_splash:
   color: "#ffffff"
-  image: assets/splash_white.png
+  image: assets/Logoblack.png
   android: true
   ios: true
   fullscreen: true

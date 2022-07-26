@@ -189,64 +189,62 @@ class _EditProfileViewState extends State<EditProfileView>
                         SizedBox(
                           height: 15.h,
                         ),
-                        // Text(
-                        //   "City",
-                        //   style: FastaTextStyle.hardLabel2,
-                        // ),
-                        // SizedBox(
-                        //   height: 9.h,
-                        // ),
-                        // Padding(
-                        //   padding: const EdgeInsets.only(top: 5),
-                        //   child: Container(
-                        //       width: 330.w,
-                        //       height: 45.h,
-                        //       decoration: BoxDecoration(
-                        //         color: ColorPalette.grey2,
-                        //         borderRadius: BorderRadius.circular(13.0),
-                        //       ),
-                        //       child: Padding(
-                        //           padding: const EdgeInsets.only(
-                        //               left: 15, right: 15),
-                        //           child: TextFormField(
-                        //               controller: city
-                        //                 ..text = state.user?.city ?? '',
-                        //               decoration: const InputDecoration(
-                        //                 border: InputBorder.none,
-                        //               )))),
-                        // ),
-                        // SizedBox(
-                        //   height: 15.h,
-                        // ),
-                        // Text(
-                        //   "State",
-                        //   style: FastaTextStyle.hardLabel2,
-                        // ),
-                        // SizedBox(
-                        //   height: 9.h,
-                        // ),
-                        // Padding(
-                        //   padding: const EdgeInsets.only(top: 5),
-                        //   child: Container(
-                        //       width: 330.w,
-                        //       height: 45.h,
-                        //       decoration: BoxDecoration(
-                        //         color: ColorPalette.grey2,
-                        //         borderRadius: BorderRadius.circular(13.0),
-                        //       ),
-                        //       child: Padding(
-                        //           padding: const EdgeInsets.only(
-                        //               left: 15, right: 15),
-                        //           child: TextFormField(
-                        //               controller: stateController
-                        //                 ..text = state.user?.state ?? '',
-                        //               decoration: const InputDecoration(
-                        //                 border: InputBorder.none,
-                        //               )))),
-                        // ),
-                        // SizedBox(
-                        //   height: 15.h,
-                        // ),
+                        Text(
+                          "Phone Number",
+                          style: FastaTextStyle.hardLabel2,
+                        ),
+                        SizedBox(
+                          height: 9.h,
+                        ),
+                        Padding(
+                          padding: const EdgeInsets.only(top: 5),
+                          child: Container(
+                              width: 330.w,
+                              height: 45.h,
+                              decoration: BoxDecoration(
+                                color: ColorPalette.grey2,
+                                borderRadius: BorderRadius.circular(13.0),
+                              ),
+                              child: Padding(
+                                  padding: const EdgeInsets.only(
+                                      left: 15, right: 15),
+                                  child: TextFormField(
+                                      controller: TextEditingController(text: state.user!.phoneNumber),
+                                      decoration: const InputDecoration(
+                                        border: InputBorder.none,
+                                      )))),
+                        ),
+                        SizedBox(
+                          height: 15.h,
+                        ),
+                        Text(
+                          "State",
+                          style: FastaTextStyle.hardLabel2,
+                        ),
+                        SizedBox(
+                          height: 9.h,
+                        ),
+                        Padding(
+                          padding: const EdgeInsets.only(top: 5),
+                          child: Container(
+                              width: 330.w,
+                              height: 45.h,
+                              decoration: BoxDecoration(
+                                color: ColorPalette.grey2,
+                                borderRadius: BorderRadius.circular(13.0),
+                              ),
+                              child: Padding(
+                                  padding: const EdgeInsets.only(
+                                      left: 15, right: 15),
+                                  child: TextFormField(
+                                      controller: TextEditingController(text: state.user!.email),
+                                      decoration: const InputDecoration(
+                                        border: InputBorder.none,
+                                      )))),
+                        ),
+                        SizedBox(
+                          height: 15.h,
+                        ),
                       
                       ]),
                   SizedBox(
