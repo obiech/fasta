@@ -180,10 +180,12 @@ class _TransactionHistoryState extends State<TransactionHistory> {
                                 )),
                               ),
                               content: Text(
-                                'Paid '
+                                (state.allTransaction[index].amount.toAmount.isNegative)?
+                                'Debited ' '${state.allTransaction[index].amount.toAmount}'
+                                :'Credited '
                                 '${state.allTransaction[index].amount.toAmount}',
                                 style: FastaTextStyle.hardLabel2
-                                    .copyWith(fontSize: 12.f),
+                                    .copyWith(fontSize: 12.f, color: (state.allTransaction[index].amount.toAmount.isNegative)?FastaColors.alert:FastaColors.green),
                               ),
                               timeRecieved: Column(
                                 mainAxisAlignment: MainAxisAlignment.center,

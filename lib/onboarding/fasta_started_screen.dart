@@ -40,7 +40,7 @@ class _FastaStartedScreenState extends State<FastaStartedScreen> {
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
                       Image.asset(
-                        'assets/splash_black copy.png',
+                        'assets/Logofull.png',
                       ),
                       SizedBox(
                         height: 80.h,

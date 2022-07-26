@@ -45,6 +45,7 @@ class _Auth {
   String get forgotPasswordOTP => relevant + 'auth/login/forgot-password/otp';
   String getUserOTP(int userID, int otpID) =>
       relevant + 'auth/otp?userId=$userID&otpId=$otpID';
+ String get googleSignIn => '';
 }
 
 class _Shipment {

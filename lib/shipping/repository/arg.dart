@@ -74,7 +74,7 @@ class CreateShipmentArg {
     // final Position position = await Geolocator.getCurrentPosition(
     //     desiredAccuracy: LocationAccuracy.high);
     // TODO FIX
-    final from = await deliveryPoint.getCoordinateFromAddress();
+    final from = await pickUpAddress.getCoordinateFromAddress();
     final to = await deliveryPoint.getCoordinateFromAddress();
 
     // final from = Coordinate(

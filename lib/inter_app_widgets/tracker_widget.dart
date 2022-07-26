@@ -9,12 +9,13 @@ class TrackerWidget extends StatelessWidget {
     Key? key,
     required this.from,
     required this.distance,
-    required this.to,
+    required this.to,this.isAcceptOrDecline = false,
   }) : super(key: key);
 
   final String from;
   final String distance;
   final String to;
+  final  bool  isAcceptOrDecline;
 
   @override
   Widget build(BuildContext context) {
@@ -25,7 +26,7 @@ class TrackerWidget extends StatelessWidget {
               style: FastaTextStyle.subtitle3.copyWith(fontSize: 10.f),
               children: [
             TextSpan(
-              text: from.toShortText,
+              text:isAcceptOrDecline?from.toShortTextAdaptive(19): from.toShortText,
               style:
                   FastaTextStyle.subtitleHard.copyWith(fontSize: 12.f),
             ),
@@ -58,7 +59,7 @@ class TrackerWidget extends StatelessWidget {
               style: FastaTextStyle.subtitle3.copyWith(fontSize: 10.f),
               children: [
             TextSpan(
-              text: to.toShortText,
+              text: isAcceptOrDecline?from.toShortTextAdaptive(19): from.toShortText,
               style:
                   FastaTextStyle.subtitleHard.copyWith(fontSize: 12.f),
             )

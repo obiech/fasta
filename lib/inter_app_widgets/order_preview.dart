@@ -36,7 +36,7 @@ class OrderPreview extends StatelessWidget {
             SizedBox(
               width: 12.w,
             ),
-            TrackerWidget(from: from, distance: distance, to: to),
+            TrackerWidget(from: from, distance: distance, to: to, isAcceptOrDecline: (name == 'initiated' && owner == Owner.rider)),
             const Spacer(),
             Align(
               alignment: Alignment.bottomRight,
