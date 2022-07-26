@@ -7,7 +7,6 @@ import 'package:fasta/card/domain/repo.dart';
 import 'package:fasta/card/home.dart';
 import 'package:fasta/card/infrastructure/repoimpl.dart';
 import 'package:fasta/chat/infrastructure/repo.dart';
-import 'package:fasta/injection.dart';
 import 'package:fasta/onboarding/fasta_started_screen.dart';
 import 'package:fasta/auth/forgot_password_screen.dart';
 import 'package:fasta/auth/infrastucture/repo.dart';
@@ -82,19 +81,19 @@ import 'package:fasta/wallet/wallet.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:permission_handler/permission_handler.dart';
-import 'package:sendbird_sdk/sendbird_sdk.dart';
-
+// import 'package:sendbird_sdk/sendbird_sdk.dart';
+    
 import 'secrets.dart';
 
 class Fasta extends StatelessWidget {
   const Fasta({Key? key}) : super(key: key);
 
-  Future getLocation(DioClient _plugin) async {
+  Future getLocation() async {
     await [Permission.location].request();
     bool isEnabled = await Permission.location.serviceStatus.isEnabled;
-final ChatImpl impl = ChatImpl(_plugin);
-    await impl.initialize();
-   await impl.sendMessage('fd');
+// final ChatImpl impl = ChatImpl(_plugin);
+//     await impl.initialize();
+//    await impl.sendMessage('fd');
     if (!isEnabled) {
       await [Permission.location].request();
     }
@@ -115,7 +114,7 @@ final ChatImpl impl = ChatImpl(_plugin);
     precacheImage(Image.asset('assets/rider_dashboard.png').image, context);
     precacheImage(Image.asset('assets/rider_wallet.png').image, context);
     precacheImage(Image.asset('assets/rider_order.png').image, context);
-    getLocation(_plugin);
+    getLocation();
     // ShippingSocketImpl.test().initialize('eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJkYXRhIjoxMTI1ODk5OTA2ODQyNzY3LCJpYXQiOjE2NTY1MjI3NjgsImV4cCI6MTY1NjYwOTE2OH0.uAGpHkI9Ed8wru7J84WegDL9LTbqTFp5T7RFFcNRuRc');
     // Initialize SendbirdSdk instance to use APIs in your app.
 
@@ -199,7 +198,7 @@ final ChatImpl impl = ChatImpl(_plugin);
             create: (context)=> SecurityBloc(context.read<SecurityRepository>())),
         ],
         child: MaterialApp(
-            title: 'Itekku',
+            title: 'fasta',
             debugShowCheckedModeBanner: false,
             routes: {
               Splash.route: (_) => const Splash(),
@@ -247,10 +246,10 @@ final ChatImpl impl = ChatImpl(_plugin);
               SecurityView.route: (_) => const SecurityView(),
               CardView.route:(_)=> const CardView(),
               AddCardView.route:(_)=> const AddCardView(),
-              account_home.route:(_) => const account_home(),
+              Faq.route:(_) => const Faq(),
               ChangeEmailView.route:(_)=> const ChangeEmailView(),
               ChangePhoneNumberView.route:(_)=> const ChangePhoneNumberView(),
-            },
+            },   
             home: const Responsive(
                 designHeight: 812, designWidth: 375, child: Splash())),
       ),

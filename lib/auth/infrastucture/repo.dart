@@ -9,6 +9,7 @@ import 'package:fasta/errrors/app_error.dart';
 import 'package:fasta/models/otp_models.dart';
 import 'package:fasta/typedef.dart/typedefs.dart';
 import 'package:fasta/models/otp.dart';
+import 'package:google_sign_in/google_sign_in.dart';
 
 class AuthImpl implements Auth {
   final ApiClient _client;
@@ -65,7 +66,7 @@ class AuthImpl implements Auth {
       };
       final res = await _client.post(Endpoints.auth.confirmOTP, body: body);
       const ServerAddress().token = res.data['meta']['token'];
-      
+
       return const Right(unit);
     } catch (e) {
       return Left(AppError(e.toString()));
@@ -126,6 +127,32 @@ class AuthImpl implements Auth {
       return Right(OTPModel.fromJson(res.data));
     } catch (e) {
       return Left(AppError(e.toString()));
+    }
+  }
+
+  @override
+  ErrorOr<Unit> googleSignIn() async {
+    try {
+      final GoogleSignIn googleSignIn = GoogleSignIn();
+
+      final GoogleSignInAccount? googleSignInAccount =
+          await googleSignIn.signIn();
+
+      if (googleSignInAccount != null) {
+        final GoogleSignInAuthentication googleSignInAuthentication =
+            await googleSignInAccount.authentication;
+
+        await _client.post(Endpoints.auth.googleSignIn, body: {
+          'idToken': googleSignInAuthentication.idToken,
+          'code': googleSignInAuthentication.accessToken
+        });
+        return const Right(unit);
+      }
+        return const Right(unit);
+
+    } catch (e) {
+        return const Right(unit);
+
     }
   }
 }

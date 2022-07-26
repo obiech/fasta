@@ -49,17 +49,17 @@ class _SecurityViewState extends State<SecurityView> {
             onTap: () {
              Navigator.pushNamed(context, ChangeEmailView.route); 
             },
-            child: SecurityOptions(name: 'Change Email')),
+            child: const SecurityOptions(name: 'Change Email')),
 
             GestureDetector(
               onTap: () {
              Navigator.pushNamed(context, ChangePhoneNumberView.route); 
             },
-              child: SecurityOptions(name: 'Change PhoneNumber')),
+              child: const SecurityOptions(name: 'Change PhoneNumber')),
 
           GestureDetector(
               onTap: () {
-                
+                 Navigator.pushNamed(context, ChangePassword.route); 
               },
               child: const SecurityOptions(name: 'Change Pin')),
           const SizedBox(

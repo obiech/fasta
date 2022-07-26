@@ -4,7 +4,6 @@ import 'package:flutter/material.dart';
 // project imports
 import 'package:fasta/colors/colors.dart';
 import 'package:fasta/theming/size_config.dart';
-import 'package:fasta/typography/text_styles.dart';
 
 class SendScreen extends StatelessWidget {
   const SendScreen({Key? key}) : super(key: key);
