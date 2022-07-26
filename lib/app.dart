@@ -249,7 +249,7 @@ class Fasta extends StatelessWidget {
               Faq.route:(_) => const Faq(),
               ChangeEmailView.route:(_)=> const ChangeEmailView(),
               ChangePhoneNumberView.route:(_)=> const ChangePhoneNumberView(),
-            },
+            },   
             home: const Responsive(
                 designHeight: 812, designWidth: 375, child: Splash())),
       ),
