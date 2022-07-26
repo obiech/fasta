@@ -109,7 +109,7 @@ class _PaymentOptionsState extends State<PaymentOptions> {
                                           ShipmentState>(
                                         builder: (context, stateShipment) {
                                           return Text(
-                                            '35 Mins to arrival, ${dis ?? 0.00} km.',
+                                            '35 Mins to arrival, $dis km.',
                                             style: FastaTextStyle.subtitle1
                                                 .copyWith(
                                                     color: FastaColors.grey7),
