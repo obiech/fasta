@@ -60,20 +60,20 @@ class _AddCardViewState extends State<AddCardView>
             onCreditCardWidgetChange: (CreditCardBrand creditCardBrand) {},
             cardType: CardType.mastercard,
           ),
-            CreditCardForm(
-                formKey: formKey,
-                obscureCvv: false,
-                obscureNumber: false,
-                cardNumber: cardNumber,
-                cvvCode: cvvCode,
-                isHolderNameVisible: true,
-                isCardNumberVisible: true,
-                isExpiryDateVisible: true,
-                cardHolderName: cardHolderName,
-                expiryDate: expiryDate,
-                themeColor: FastaColors.primary,
-                textColor: FastaColors.primary,
-                cardNumberDecoration: InputDecoration(
+          CreditCardForm(
+            formKey: formKey,
+            obscureCvv: false,
+            obscureNumber: false,
+            cardNumber: cardNumber,
+            cvvCode: cvvCode,
+            isHolderNameVisible: true,
+            isCardNumberVisible: true,
+            isExpiryDateVisible: true,
+            cardHolderName: cardHolderName,
+            expiryDate: expiryDate,
+            themeColor: FastaColors.primary,
+            textColor: FastaColors.primary,
+            cardNumberDecoration: InputDecoration(
               fillColor: FastaColors.grey5,
               filled: true,
               labelText: 'Card Number',
@@ -132,20 +132,19 @@ class _AddCardViewState extends State<AddCardView>
           const SizedBox(
             height: 20,
           ),
-          BlocListener<CardBloc , CardState>(
-          listener: (context, state) async {
-                          if (state.appState == AppState.waiting) {
-                          } else if (state.appState == AppState.loading) {
-                            btnController.start();
-                          } else if (state.appState == AppState.success) {
-                          
-                            await buttonsucces();
-                            Navigator.pop(context);
-                          } else if (state.appState == AppState.failed) {
-                            await buttonerror();
-                            Notify.error(context, state.error.errorMessage);
-                          }
-                        },
+          BlocListener<CardBloc, CardState>(
+            listener: (context, state) async {
+              if (state.appState == AppState.waiting) {
+              } else if (state.appState == AppState.loading) {
+                btnController.start();
+              } else if (state.appState == AppState.success) {
+                await buttonsucces();
+                Navigator.pop(context);
+              } else if (state.appState == AppState.failed) {
+                await buttonerror();
+                Notify.error(context, state.error.errorMessage);
+              }
+            },
             child: CustomButton.named(
                 controller: btnController,
                 name: 'Validate',

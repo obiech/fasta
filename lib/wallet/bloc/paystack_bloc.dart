@@ -51,7 +51,7 @@ class PaystackBloc extends Bloc<PaystackEvent, PaystackState> {
     res.fold(
         (l) => emit(state.copyWith(appState: AppState.failed, error: l)),
         (r) => emit(
-            state.copyWith(appState: AppState.success, allTransaction: r)));
+            state.copyWith(appState: AppState.success, allTransaction: r, )));
   }
 
   void _onTransactionDetail(

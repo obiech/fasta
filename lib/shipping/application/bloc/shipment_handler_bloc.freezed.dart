@@ -4143,7 +4143,7 @@ mixin _$ShipmentHandlerState {
   AppState get status => throw _privateConstructorUsedError;
   LocationPointArg? get address => throw _privateConstructorUsedError;
   DeliveryInvitation? get pendingInvitations =>
-      throw _privateConstructorUsedError;
+      throw _privateConstructorUsedError; // bool is
   String? get deliveryEstimate => throw _privateConstructorUsedError;
   DeliveryModel? get delivery => throw _privateConstructorUsedError;
   @Deprecated('replace with deliverySummary')
@@ -4358,7 +4358,7 @@ class _$_ShipmentHandlerState implements _ShipmentHandlerState {
   final LocationPointArg? address;
   @override
   final DeliveryInvitation? pendingInvitations;
-  @override
+  @override // bool is
   final String? deliveryEstimate;
   @override
   final DeliveryModel? delivery;
@@ -4444,7 +4444,7 @@ abstract class _ShipmentHandlerState implements ShipmentHandlerState {
   LocationPointArg? get address;
   @override
   DeliveryInvitation? get pendingInvitations;
-  @override
+  @override // bool is
   String? get deliveryEstimate;
   @override
   DeliveryModel? get delivery;

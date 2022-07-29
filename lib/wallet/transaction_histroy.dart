@@ -1,15 +1,21 @@
 import 'dart:developer';
 
 import 'package:fasta/colors/colors.dart';
+import 'package:fasta/core/app_state.dart';
 import 'package:fasta/extension/string.dart';
 import 'package:fasta/global_widgets/app_bars/app_bar_back_button.dart';
 import 'package:fasta/theming/size_config.dart';
 import 'package:fasta/typography/text_styles.dart';
 import 'package:fasta/wallet/bloc/paystack_bloc.dart';
+import 'package:fasta/wallet/domain/entity/transcation.dart';
 import 'package:fasta/wallet/repository/args.dart';
+import 'package:fasta/wallet/widgets/custom_drop_down_button.dart';
+import 'package:fasta/wallet/widgets/first_page_error_indicator.dart';
+import 'package:fasta/wallet/widgets/new_page_error_widget.dart';
 import 'package:fasta/wallet/widgets/notification.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:infinite_scroll_pagination/infinite_scroll_pagination.dart';
 
 class TransactionHistory extends StatefulWidget {
   static const String route = '/TransactionHistory';
@@ -21,6 +27,10 @@ class TransactionHistory extends StatefulWidget {
 
 class _TransactionHistoryState extends State<TransactionHistory> {
   int _selectedIndex = 0;
+  int nextPageKey = 0;
+  final PagingController<int, Transaction> _pageController = PagingController(
+    firstPageKey: 1,
+  );
   // String startDate = '';
   TextEditingController startDate = TextEditingController(text: '2022-05-25');
   // String endDate = '';
@@ -38,6 +48,35 @@ class _TransactionHistoryState extends State<TransactionHistory> {
     endDate.text = date;
     log('called');
     setState(() {});
+  }
+
+  @override
+  void initState() {
+    super.initState();
+
+    _pageController.addPageRequestListener((pageKey) {
+      pageListener();
+    });
+  }
+
+  void pageListener() {
+    nextPageKey = nextPageKey + 1;
+    context.read<PaystackBloc>().add(PaystackEvent.allTransactions(
+          TransactionArg(
+              endDate: endDate.text.isEmpty ? "" : endDate.text,
+              page: nextPageKey.toString(),
+              limit: '10',
+              order: 'desc',
+              status: '',
+              type: '',
+              startDate: startDate.text.isEmpty ? '' : startDate.text),
+        ));
+  }
+
+  @override
+  void dispose() {
+    super.dispose();
+    _pageController.dispose();
   }
 
   @override
@@ -152,156 +191,188 @@ class _TransactionHistoryState extends State<TransactionHistory> {
                       ],
                     ),
                     SizedBox(height: 38.h),
-                    BlocBuilder<PaystackBloc, PaystackState>(
-                      builder: (context, state) {
-                        if (state.allTransaction.isEmpty) {
-                          return const Center(child: Text('No Result'));
-                        }
-                        return Column(
-                            children: List.generate(state.allTransaction.length,
-                                (index) {
-                          return NotificationMessage(
-                              radius: 15.h,
-                              padding: EdgeInsets.symmetric(
-                                horizontal: 15.w,
-                              ),
-                              icon: Container(
-                                height: 25.h,
-                                width: 27.w,
-                                decoration: BoxDecoration(
-                                  borderRadius: BorderRadius.circular(6.h),
-                                  color: FastaColors.lightBlue,
-                                ),
-                                child: Center(
-                                    child: Image.asset(
-                                  'assets/2.0x/credit-card.png',
-                                  height: 16.h,
-                                  width: 16.h,
-                                )),
-                              ),
-                              content: Text(
-                                (state.allTransaction[index].amount.toAmount.isNegative)?
-                                'Debited ' '${state.allTransaction[index].amount.toAmount}'
-                                :'Credited '
-                                '${state.allTransaction[index].amount.toAmount}',
-                                style: FastaTextStyle.hardLabel2
-                                    .copyWith(fontSize: 12.f, color: (state.allTransaction[index].amount.toAmount.isNegative)?FastaColors.alert:FastaColors.green),
-                              ),
-                              timeRecieved: Column(
-                                mainAxisAlignment: MainAxisAlignment.center,
-                                crossAxisAlignment: CrossAxisAlignment.end,
-                                children: [
-                                  GestureDetector(
-                                      onTap: () {},
-                                      child: Text(
-                                          state.allTransaction[index].createdAt
-                                              .toDateTime,
-                                          style: FastaTextStyle.subtitle3)),
-                                  Text(
-                                    state.allTransaction[index].type!,
-                                    style: FastaTextStyle.subtitle3,
-                                  ),
-                                ],
-                              ));
-                        }));
+                    BlocListener<PaystackBloc, PaystackState>(
+                      listener: (context, state) {
+                        if (state.appState == AppState.success) {
+                          determineAppend(state);
+                        } else if (state.appState == AppState.failed) {
+                          _pageController.error = state.error!.errorMessage;
+                        } else if (state.appState == AppState.loading) {}
                       },
+                      child: BlocBuilder<PaystackBloc, PaystackState>(
+                          builder: (context, state) {
+                        if (state.allTransaction?.transactions.isEmpty ??
+                            true) {
+                          return const Center(child: Text('No Result'));
+                        } else if (state.appState == AppState.loading) {
+                          return const Center(
+                            child: CircularProgressIndicator.adaptive(),
+                          );
+                        }
+                        // return Column(
+                        //     children: List.generate(state.allTransaction.length,
+                        //         (index) {
+                        //   return NotificationMessage(
+                        //       radius: 15.h,
+                        //       padding: EdgeInsets.symmetric(
+                        //         horizontal: 15.w,
+                        //       ),
+                        //       icon: Container(
+                        //         height: 25.h,
+                        //         width: 27.w,
+                        //         decoration: BoxDecoration(
+                        //           borderRadius: BorderRadius.circular(6.h),
+                        //           color: FastaColors.lightBlue,
+                        //         ),
+                        //         child: Center(
+                        //             child: Image.asset(
+                        //           'assets/2.0x/credit-card.png',
+                        //           height: 16.h,
+                        //           width: 16.h,
+                        //         )),
+                        //       ),
+                        //       content: Text(
+                        //         (state.allTransaction[index].amount.toAmount.isNegative)?
+                        //         'Debited ' '${state.allTransaction[index].amount.toAmount}'
+                        //         :'Credited '
+                        //         '${state.allTransaction[index].amount.toAmount}',
+                        //         style: FastaTextStyle.hardLabel2
+                        //             .copyWith(fontSize: 12.f, color: (state.allTransaction[index].amount.toAmount.isNegative)?FastaColors.alert:FastaColors.green),
+                        //       ),
+                        //       timeRecieved: Column(
+                        //         mainAxisAlignment: MainAxisAlignment.center,
+                        //         crossAxisAlignment: CrossAxisAlignment.end,
+                        //         children: [
+                        //           GestureDetector(
+                        //               onTap: () {},
+                        //               child: Text(
+                        //                   state.allTransaction[index].createdAt
+                        //                       .toDateTime,
+                        //                   style: FastaTextStyle.subtitle3)),
+                        //           Text(
+                        //             state.allTransaction[index].type!,
+                        //             style: FastaTextStyle.subtitle3,
+                        //           ),
+                        //         ],
+                        //       ));
+                        // }));
+                        return PagedListView.separated(
+                            shrinkWrap: true,
+                            physics: const BouncingScrollPhysics(),
+                            pagingController: _pageController,
+                            separatorBuilder: (context, index) {
+                              return SizedBox(
+                                height: 16.h,
+                              );
+                            },
+                            padding: const EdgeInsets.all(16),
+                            builderDelegate:
+                                PagedChildBuilderDelegate<Transaction>(
+                              itemBuilder: (context, item, index) {
+                                return NotificationMessage(
+                                    radius: 15.h,
+                                    padding: EdgeInsets.symmetric(
+                                      horizontal: 15.w,
+                                    ),
+                                    icon: Container(
+                                      height: 25.h,
+                                      width: 27.w,
+                                      decoration: BoxDecoration(
+                                        borderRadius:
+                                            BorderRadius.circular(6.h),
+                                        color: FastaColors.lightBlue,
+                                      ),
+                                      child: Center(
+                                          child: Image.asset(
+                                        'assets/2.0x/credit-card.png',
+                                        height: 16.h,
+                                        width: 16.h,
+                                      )),
+                                    ),
+                                    content: Text(
+                                      (state.allTransaction!.transactions[index]
+                                              .amount.toAmount.isNegative)
+                                          ? 'Debited '
+                                              '${state.allTransaction!.transactions[index].amount.toAmount}'
+                                          : 'Credited '
+                                              '${state.allTransaction!.transactions[index].amount.toAmount}',
+                                      style: FastaTextStyle.hardLabel2.copyWith(
+                                          fontSize: 12.f,
+                                          color: (state
+                                                  .allTransaction!
+                                                  .transactions[index]
+                                                  .amount
+                                                  .toAmount
+                                                  .isNegative)
+                                              ? FastaColors.alert
+                                              : FastaColors.green),
+                                    ),
+                                    timeRecieved: Column(
+                                      mainAxisAlignment:
+                                          MainAxisAlignment.center,
+                                      crossAxisAlignment:
+                                          CrossAxisAlignment.end,
+                                      children: [
+                                        GestureDetector(
+                                            onTap: () {},
+                                            child: Text(
+                                                state
+                                                    .allTransaction!
+                                                    .transactions[index]
+                                                    .createdAt
+                                                    .toDateTime,
+                                                style:
+                                                    FastaTextStyle.subtitle3)),
+                                        Text(
+                                          state.allTransaction!
+                                              .transactions[index].type!,
+                                          style: FastaTextStyle.subtitle3,
+                                        ),
+                                      ],
+                                    ));
+                              },
+                              newPageErrorIndicatorBuilder: (context) {
+                                return NewPageErrorIndicator(
+                                  onTap: () {
+                                    _pageController.retryLastFailedRequest();
+                                  },
+                                  message: state.error!.errorMessage,
+                                );
+                              },
+                              firstPageErrorIndicatorBuilder: (context) {
+                                return FirstPageErrorIndicator(
+                                  message: state.error!.errorMessage,
+                                  onTryAgain: () {
+                                    _pageController.itemList = null;
+                                    // context
+                                    //     .read<SearchBloc>()
+                                    //     .add(SearchEvent.search(searchController.text));
+                                  },
+                                );
+                              },
+                            ));
+                      }),
                     )
                   ]))),
     );
   }
-}
 
-class CustomDropDownButton extends StatefulWidget {
-  final String time;
-  final void Function(String date) reload;
-  final TextEditingController controller;
-
-  const CustomDropDownButton(
-      {Key? key,
-      required this.time,
-      required this.reload,
-      required this.controller})
-      : super(key: key);
-
-  @override
-  State<CustomDropDownButton> createState() => _CustomDropDownButtonState();
-}
-
-class _CustomDropDownButtonState extends State<CustomDropDownButton> {
-  // final TextEditingController controller =
-
-  @override
-  Widget build(BuildContext context) {
-    return Column(
-      crossAxisAlignment: CrossAxisAlignment.start,
-      mainAxisAlignment: MainAxisAlignment.center,
-      children: [
-        Text(widget.time, style: FastaTextStyle.subtitle3),
-        GestureDetector(
-          onTap: () async {
-            String? date = await expiryDateDialog(
-                context: context, controller: widget.controller);
-            widget.reload(date ?? '');
-          },
-          child: Container(
-            color: FastaColors.grey10,
-            width: 102.w,
-            child: SizedBox(
-              width: 80.w,
-              height: 32.h,
-              child: Row(
-                mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                children: [
-                  Icon(
-                    Icons.calendar_month,
-                    size: 10.h,
-                  ),
-                  Text(
-                    widget.controller.text,
-                    style: FastaTextStyle.subtitleHard,
-                  ),
-                ],
-              ),
-            ),
-          ),
-        )
-      ],
-    );
+  void determineAppend(PaystackState state) {
+    if ((state.allTransaction?.lastPage ?? 0) >
+        (_pageController.nextPageKey ?? 1)) {
+      _pageController.appendPage(
+          state.allTransaction!.transactions, _pageController.nextPageKey);
+    } else {
+      _pageController.appendLastPage(state.allTransaction!.transactions);
+    }
   }
 }
 
-const List<String> _type = ['All', 'Wallet', 'Card'];
-Future<String?> expiryDateDialog(
-    {required BuildContext context,
-    required TextEditingController controller}) async {
-  return showDialog<String>(
-    context: context,
-    barrierDismissible: false,
-    builder: (BuildContext context) {
-      return AlertDialog(
-        shape:
-            RoundedRectangleBorder(borderRadius: BorderRadius.circular(31.h)),
-        content: StatefulBuilder(builder: (context, setState) {
-          return SingleChildScrollView(
-              child: SizedBox(
-            height: 243.h,
-            width: 1.screenWidth,
-            child: CalendarDatePicker(
-              initialDate: DateTime.now(),
-              firstDate: DateTime(DateTime.now().year - 10),
-              lastDate: DateTime(DateTime.now().year + 10),
-              onDateChanged: (dateTime) {
-                var month =
-                    dateTime.month <= 9 ? '0${dateTime.month}' : dateTime.month;
-                var day = dateTime.day <= 9 ? '0${dateTime.day}' : dateTime.day;
-                controller.text = '${dateTime.year}-$month-$day';
 
-                Navigator.pop(context, controller.text);
-              },
-            ),
-          ));
-        }),
-      );
-    },
-  );
-}
+const List<String> _type = ['All', 'Wallet', 'Card'];
+
+
+
+/// Basic layout for indicating that an exception occurred.
+
+

@@ -14,16 +14,16 @@ class cardmodel {
               this.id, this.last4digits, this.updatedAt, this.userid, this.expiryMonth, this.expiryYear);
 
    cardmodel.fromJson(Map<String, dynamic> json):
-   this.id = json['data']['id'],
-   this.userid =json['data']['userId'],
-   this.cardname =json['data']['cardHolderName'],
-   this.cardtype =json['data']['cardType'],
-   this.cvv =json['data']['encryptedCvv'],
-   this.cardnumber =json['data']['encryptedCardNumber'],
-   this.last4digits =json['data']['lastFourCardNumberDigits'],
-   this.expiryMonth =json['data']['expiryMonth'],
-   this.expiryYear =json['data']['expiryYear'],
-   this.createdAt =json['data']['createdAt'],
-   this.updatedAt =json['data']['updatedAt'];
+   id = json['data']['id'],
+   userid =json['data']['userId'],
+   cardname =json['data']['cardHolderName'],
+   cardtype =json['data']['cardType'],
+   cvv =json['data']['encryptedCvv'],
+   cardnumber =json['data']['encryptedCardNumber'],
+   last4digits =json['data']['lastFourCardNumberDigits'],
+   expiryMonth =json['data']['expiryMonth'],
+   expiryYear =json['data']['expiryYear'],
+   createdAt =json['data']['createdAt'],
+   updatedAt =json['data']['updatedAt'];
 
 }

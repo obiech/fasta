@@ -16,15 +16,15 @@ class WalletRepository {
   ErrorOr<Transaction> balance() => _repo.balance();
   ErrorOr<PayStack> getDepositLink(String amount) =>
       _repo.getDepositLink(amount);
-  ErrorOr<List<Transaction>> allTransactions(TransactionArg arg) =>
+  ErrorOr<AllTrasaction> allTransactions(TransactionArg arg) =>
       _repo.allTransactions(arg);
   ErrorOr<Transaction> transactionDetail(String transactionId) =>
       _repo.transactionDetail(transactionId);
-  ErrorOr<List<Transaction>> getDepositTransaction(TransactionArg arg) =>
+  ErrorOr<AllTrasaction> getDepositTransaction(TransactionArg arg) =>
       _repo.getDepositTransaction(arg);
-  ErrorOr<List<Transaction>> getWithdrawTransaction(TransactionArg arg) =>
+  ErrorOr<AllTrasaction> getWithdrawTransaction(TransactionArg arg) =>
       _repo.getWithdrawTransaction(arg);
-  ErrorOr<List<Transaction>> getAllEarnings(TransactionArg arg) =>
+  ErrorOr<AllTrasaction> getAllEarnings(TransactionArg arg) =>
       _repo.getAllEarnings(arg);
   ErrorOr<String> getTotalEarnings(String period) =>
       _repo.getTotalEarnings(period);

@@ -152,29 +152,29 @@ class _WalletViewState extends State<WalletView> {
               ),
               BlocBuilder<PaystackBloc, PaystackState>(
                 builder: (context, state) {
-                  if (state.allTransaction.isEmpty) {
+                  if (state.allTransaction?.transactions.isEmpty?? false) {
                     return const Center(
                       child: Text('No Histroy Yet'),
                     );
                   }
                   return Column(
                     children:
-                        List.generate(state.allTransaction.length, (index) {
+                        List.generate(state.allTransaction?.transactions.length??0, (index) {
                       return NotificationMessage(
                         icon: CircleAvatar(
                             radius: 6.h,
                             backgroundImage:
                                 Image.asset('assets/Ellipse.png').image),
                         content: Text(
-                          (state.allTransaction[index].amount.toAmount
+                          (state.allTransaction!.transactions[index].amount.toAmount
                                   .isNegative)
                               ? 'Debited '
-                                  '${state.allTransaction[index].amount.toAmount}'
+                                  '${state.allTransaction!.transactions[index].amount.toAmount}'
                               : 'Paid '
-                                  '${state.allTransaction[index].amount.toAmount}',
+                                  '${state.allTransaction!.transactions[index].amount.toAmount}',
                           style: FastaTextStyle.hardLabel2.copyWith(
                               fontSize: 12.f,
-                              color: (state.allTransaction[index].amount
+                              color: (state.allTransaction!.transactions[index].amount
                                       .toAmount.isNegative)
                                   ? FastaColors.alert
                                   : FastaColors.green),
@@ -186,11 +186,11 @@ class _WalletViewState extends State<WalletView> {
                             GestureDetector(
                                 onTap: () {},
                                 child: Text(
-                                    state.allTransaction[index].createdAt
+                                    state.allTransaction!.transactions[index].createdAt
                                         .toDateTime,
                                     style: FastaTextStyle.subtitle3)),
                             Text(
-                              state.allTransaction[index].type!,
+                              state.allTransaction!.transactions[index].type!,
                               style: FastaTextStyle.subtitle3,
                             ),
                           ],
