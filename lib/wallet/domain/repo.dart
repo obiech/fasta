@@ -9,11 +9,11 @@ abstract class WalletData {
 
   ErrorOr<Transaction> balance();
   ErrorOr<PayStack> getDepositLink(String amount);
-  ErrorOr<List<Transaction>> allTransactions(TransactionArg arg);
+  ErrorOr<AllTrasaction> allTransactions(TransactionArg arg);
   ErrorOr<Transaction> transactionDetail(String transactionId);
-  ErrorOr<List<Transaction>> getDepositTransaction(TransactionArg arg);
-  ErrorOr<List<Transaction>> getWithdrawTransaction(TransactionArg arg);
-  ErrorOr<List<Transaction>> getAllEarnings(TransactionArg arg);
+  ErrorOr<AllTrasaction> getDepositTransaction(TransactionArg arg);
+  ErrorOr<AllTrasaction> getWithdrawTransaction(TransactionArg arg);
+  ErrorOr<AllTrasaction> getAllEarnings(TransactionArg arg);
   ErrorOr<String> getTotalEarnings(String period);
 
   ErrorOr<List<BankInfo>> getBankList();
