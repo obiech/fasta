@@ -150,7 +150,7 @@ class _AddCardViewState extends State<AddCardView>
                 controller: btnController,
                 name: 'Validate',
                 onPressed: () async {
-                  context.read<CardBloc>().add(addcardevent(
+                  context.read<CardBloc>().add(AddCardEvent(
                       cardNumber: cardNumber,
                       cardname: cardHolderName,
                       cvv: cvvCode,
