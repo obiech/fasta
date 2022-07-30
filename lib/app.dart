@@ -25,6 +25,11 @@ import 'package:fasta/profile/infrastruture/repo.dart';
 import 'package:fasta/profile/repository/repo.dart';
 import 'package:fasta/profile/support.dart';
 import 'package:fasta/profile/verify_email.dart';
+import 'package:fasta/push_notification/Bloc/NotificationBloc.dart';
+import 'package:fasta/push_notification/Infrastructure/Repo.dart';
+import 'package:fasta/push_notification/NotificationMessageView.dart';
+import 'package:fasta/push_notification/NotificationsView.dart';
+import 'package:fasta/push_notification/domain/Repo.dart';
 import 'package:fasta/rider_app/auth/bloc/auth_rider_bloc.dart';
 import 'package:fasta/rider_app/auth/infrastruture/repo.dart';
 import 'package:fasta/rider_app/auth/repository/repo.dart';
@@ -81,19 +86,19 @@ import 'package:fasta/wallet/wallet.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:permission_handler/permission_handler.dart';
-// import 'package:sendbird_sdk/sendbird_sdk.dart';
-    
+//import 'package:sendbird_sdk/sendbird_sdk.dart';
+
 import 'secrets.dart';
 
 class Fasta extends StatelessWidget {
   const Fasta({Key? key}) : super(key: key);
 
-  Future getLocation() async {
+  Future getLocation(DioClient _plugin) async {
     await [Permission.location].request();
     bool isEnabled = await Permission.location.serviceStatus.isEnabled;
-// final ChatImpl impl = ChatImpl(_plugin);
-//     await impl.initialize();
-//    await impl.sendMessage('fd');
+//final ChatImpl impl = ChatImpl(_plugin);
+  //  await impl.initialize();
+   //await impl.sendMessage('fd');
     if (!isEnabled) {
       await [Permission.location].request();
     }
@@ -114,7 +119,7 @@ class Fasta extends StatelessWidget {
     precacheImage(Image.asset('assets/rider_dashboard.png').image, context);
     precacheImage(Image.asset('assets/rider_wallet.png').image, context);
     precacheImage(Image.asset('assets/rider_order.png').image, context);
-    getLocation();
+    getLocation(_plugin);
     // ShippingSocketImpl.test().initialize('eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJkYXRhIjoxMTI1ODk5OTA2ODQyNzY3LCJpYXQiOjE2NTY1MjI3NjgsImV4cCI6MTY1NjYwOTE2OH0.uAGpHkI9Ed8wru7J84WegDL9LTbqTFp5T7RFFcNRuRc');
     // Initialize SendbirdSdk instance to use APIs in your app.
 
@@ -145,6 +150,9 @@ class Fasta extends StatelessWidget {
         ),
         RepositoryProvider(
           create: (context) => SecurityRepository(SecurityDataImpl(_plugin)),
+        ),
+        RepositoryProvider(
+          create: (context) => NotificationRepoimpl(_plugin),
         ),
       ],
       child: MultiBlocProvider(
@@ -192,13 +200,19 @@ class Fasta extends StatelessWidget {
           ),
 
           BlocProvider(
-            create: (context)=> CardBloc(context.read<Cardrepoimpl>())),
+            create: (context)=> CardBloc(context.read<Cardrepo>())),
 
           BlocProvider(
             create: (context)=> SecurityBloc(context.read<SecurityRepository>())),
+
+          BlocProvider(
+            create: (context)=> NotificationBloc(context.read<NotificationRepoimpl>())
+           ..add(GetAllNotificationsEvent())
+           ..add(GetUnreadCountEvent())            
+            ),
         ],
         child: MaterialApp(
-            title: 'fasta',
+            title: 'Itekku',
             debugShowCheckedModeBanner: false,
             routes: {
               Splash.route: (_) => const Splash(),
@@ -249,7 +263,9 @@ class Fasta extends StatelessWidget {
               Faq.route:(_) => const Faq(),
               ChangeEmailView.route:(_)=> const ChangeEmailView(),
               ChangePhoneNumberView.route:(_)=> const ChangePhoneNumberView(),
-            },   
+              NotificationsView.route:(_)=> const NotificationsView(),
+              NotificationMessageView.route:(_)=>  const NotificationMessageView(),
+            },
             home: const Responsive(
                 designHeight: 812, designWidth: 375, child: Splash())),
       ),

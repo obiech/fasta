@@ -74,6 +74,7 @@ class _TransactionHistoryState extends State<TransactionHistory> {
                       style: FastaTextStyle.headline6,
                     ),
                     SizedBox(height: 28.h),
+
                     Row(
                         children: List.generate(3, (index) {
                       return GestureDetector(
@@ -102,6 +103,7 @@ class _TransactionHistoryState extends State<TransactionHistory> {
                       );
                     })),
                     SizedBox(height: 28.h),
+
                     Row(
                       crossAxisAlignment: CrossAxisAlignment.center,
                       children: [
@@ -152,6 +154,7 @@ class _TransactionHistoryState extends State<TransactionHistory> {
                       ],
                     ),
                     SizedBox(height: 38.h),
+                    
                     BlocBuilder<PaystackBloc, PaystackState>(
                       builder: (context, state) {
                         if (state.allTransaction.isEmpty) {

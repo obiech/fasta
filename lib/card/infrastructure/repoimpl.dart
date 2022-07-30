@@ -21,7 +21,7 @@ Cardrepoimpl(this._client);
    'cvv': cvv, 'expiryMonth': expiryMonth,
     'expiryYear': expiryYear, 'cardHolderName': cardname};
   final res = await _client.post(Endpoints.card.addcard, body: body);
-  print('${res.data}');
+  log('${res.data}');
   return Right(cardmodel.fromJson(res));
 } catch (e) {
       log('${e.toString()}');

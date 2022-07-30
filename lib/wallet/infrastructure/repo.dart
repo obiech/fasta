@@ -54,6 +54,7 @@ class WalletDataImpl implements WalletData {
       log(rs);
 
       final res = await _client.get(Endpoints.wallet.allTransactions(arg));
+      log((res['data'] as List).length as String);
       return Right((res.data['data'] as List)
           .map((e) => TransactionModel.fromMap(e))
           .toList());

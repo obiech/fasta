@@ -24,6 +24,13 @@ class Endpoints {
   static _DriverDelivery get driverDelivery => _DriverDelivery();
   static _ChatAndCall get chatAndCall => _ChatAndCall();
   static _card get card => _card();
+  static _Notifications get notification => _Notifications();
+}
+
+class _Notifications{
+  String get getAllNotifications => relevant + 'user/notifications?page=1&limit=20'; 
+  String markUserRead(int id) => relevant + 'user/notifications/$id/read';
+  String get unreadCount => relevant + 'user/notifications/count/unread';
 }
 
 class _card{
