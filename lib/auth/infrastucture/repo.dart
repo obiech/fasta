@@ -1,5 +1,6 @@
 import 'dart:developer';
 
+import 'package:dio/dio.dart';
 import 'package:fasta/api_client/domain.dart';
 import 'package:dartz/dartz.dart';
 import 'package:fasta/auth/domain/repo.dart';
@@ -22,6 +23,8 @@ class AuthImpl implements Auth {
       final res = await _client.post(Endpoints.auth.login, body: body);
       const ServerAddress().token = res.data['meta']['token'];
       return const Right(unit);
+    } on DioError catch (e) {
+      return Left(e.fromDioError);
     } catch (e) {
       return Left(AppError(e.toString()));
     }
@@ -50,6 +53,8 @@ class AuthImpl implements Auth {
       log(otpRes.toString());
       // confirmOtp(otpID: otpID, otpCode: otpCode, userID: userID)
       return Right(OTPModel.fromJson(res.data));
+    } on DioError catch (e) {
+      return Left(e.fromDioError);
     } catch (e) {
       return Left(AppError(e.toString()));
     }
@@ -68,6 +73,8 @@ class AuthImpl implements Auth {
       const ServerAddress().token = res.data['meta']['token'];
 
       return const Right(unit);
+    } on DioError catch (e) {
+      return Left(e.fromDioError);
     } catch (e) {
       return Left(AppError(e.toString()));
     }
@@ -78,6 +85,8 @@ class AuthImpl implements Auth {
     try {
       final res = await _client.post(Endpoints.auth.resendOTP);
       return Right(OTPModel.fromJson(res.data));
+    } on DioError catch (e) {
+      return Left(e.fromDioError);
     } catch (e) {
       return Left(AppError(e.toString()));
     }
@@ -93,6 +102,8 @@ class AuthImpl implements Auth {
     try {
       await _client.post(Endpoints.auth.resendOTP);
       return const Right(unit);
+    } on DioError catch (e) {
+      return Left(e.fromDioError);
     } catch (e) {
       return Left(AppError(e.toString()));
     }
@@ -115,6 +126,8 @@ class AuthImpl implements Auth {
           otpCode: int.parse(e.data['data']['code'] as String),
           userID: e.data['data']['userId']);
       return const Right(unit);
+    } on DioError catch (e) {
+      return Left(e.fromDioError);
     } catch (e) {
       return Left(AppError(e.toString()));
     }
@@ -125,6 +138,8 @@ class AuthImpl implements Auth {
     try {
       final res = await _client.post(Endpoints.auth.resendOTP);
       return Right(OTPModel.fromJson(res.data));
+    } on DioError catch (e) {
+      return Left(e.fromDioError);
     } catch (e) {
       return Left(AppError(e.toString()));
     }
