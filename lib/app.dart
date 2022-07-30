@@ -2,11 +2,10 @@ import 'package:fasta/Accounts/home.dart';
 import 'package:fasta/api_client/infrastruture/dio_helper.dart';
 import 'package:fasta/auth/bloc/auth_bloc.dart';
 import 'package:fasta/card/add_card.dart';
-import 'package:fasta/card/bloc/CardBloc.dart';
-import 'package:fasta/card/domain/repo.dart';
+import 'package:fasta/card/bloc/card_bloc.dart';
 import 'package:fasta/card/home.dart';
-import 'package:fasta/card/infrastructure/repoimpl.dart';
-import 'package:fasta/chat/infrastructure/repo.dart';
+import 'package:fasta/card/infrastructure/repo_impl.dart';
+import 'package:fasta/card/repository/repo.dart';
 import 'package:fasta/onboarding/fasta_started_screen.dart';
 import 'package:fasta/auth/forgot_password_screen.dart';
 import 'package:fasta/auth/infrastucture/repo.dart';
@@ -82,8 +81,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:permission_handler/permission_handler.dart';
 // import 'package:sendbird_sdk/sendbird_sdk.dart';
-    
-import 'secrets.dart';
 
 class Fasta extends StatelessWidget {
   const Fasta({Key? key}) : super(key: key);
@@ -118,8 +115,6 @@ class Fasta extends StatelessWidget {
     // ShippingSocketImpl.test().initialize('eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJkYXRhIjoxMTI1ODk5OTA2ODQyNzY3LCJpYXQiOjE2NTY1MjI3NjgsImV4cCI6MTY1NjYwOTE2OH0.uAGpHkI9Ed8wru7J84WegDL9LTbqTFp5T7RFFcNRuRc');
     // Initialize SendbirdSdk instance to use APIs in your app.
 
-    
-   
     return MultiRepositoryProvider(
       providers: [
         RepositoryProvider(
@@ -141,7 +136,7 @@ class Fasta extends StatelessWidget {
           create: (context) => ShippingSocketImpl(),
         ),
         RepositoryProvider(
-          create: (context) => Cardrepoimpl(_plugin),
+          create: (context) => CardRepository(CardRepoimpl(_plugin)),
         ),
         RepositoryProvider(
           create: (context) => SecurityRepository(SecurityDataImpl(_plugin)),
@@ -190,12 +185,11 @@ class Fasta extends StatelessWidget {
           BlocProvider(
             create: (context) => WalletCubit(),
           ),
-
           BlocProvider(
-            create: (context)=> CardBloc(context.read<Cardrepoimpl>())),
-
+              create: (context) => CardBloc(context.read<CardRepository>())),
           BlocProvider(
-            create: (context)=> SecurityBloc(context.read<SecurityRepository>())),
+              create: (context) =>
+                  SecurityBloc(context.read<SecurityRepository>())),
         ],
         child: MaterialApp(
             title: 'fasta',
@@ -244,15 +238,24 @@ class Fasta extends StatelessWidget {
               NewOrder.route: (_) => const NewOrder(),
               CompleteOrder.route: (_) => const CompleteOrder(),
               SecurityView.route: (_) => const SecurityView(),
-              CardView.route:(_)=> const CardView(),
-              AddCardView.route:(_)=> const AddCardView(),
-              Faq.route:(_) => const Faq(),
-              ChangeEmailView.route:(_)=> const ChangeEmailView(),
-              ChangePhoneNumberView.route:(_)=> const ChangePhoneNumberView(),
-            },   
+              CardView.route: (_) => const CardView(),
+              AddCardView.route: (_) => const AddCardView(),
+              Faq.route: (_) => const Faq(),
+              ChangeEmailView.route: (_) => const ChangeEmailView(),
+              ChangePhoneNumberView.route: (_) => const ChangePhoneNumberView(),
+            },
             home: const Responsive(
                 designHeight: 812, designWidth: 375, child: Splash())),
       ),
     );
   }
 }
+
+// if email has already been verified it showed say email verified.
+//  move faq in help and support to different page.
+// security
+// make transaction histroy to shoq difference between deduction and adding
+// make card number visible 
+//  make cvv2 visible
+// add card not working
+// add camera icon besides card number

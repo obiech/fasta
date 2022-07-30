@@ -15,6 +15,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:fasta/profile/application/bloc/profile_bloc.dart';
 import 'package:images_picker/images_picker.dart';
 
+// add email and phonnumer
 class EditProfileView extends StatefulWidget {
   static const String route = '/EditProfileView';
   const EditProfileView({Key? key}) : super(key: key);
@@ -161,11 +162,11 @@ class _EditProfileViewState extends State<EditProfileView>
                           height: 15.h,
                         ),
                         Text(
-                          "Last Name",
+                          "First Name",
                           style: FastaTextStyle.hardLabel2,
                         ),
-                        SizedBox(
-                          height: 9.h,
+                        SizedBox(    
+                          height: 9.h,      
                         ),
                         Padding(
                           padding: const EdgeInsets.only(top: 5),
@@ -184,7 +185,7 @@ class _EditProfileViewState extends State<EditProfileView>
                                         ..text =state.user?.fullName.split(' ')[1] ?? '',
                                       decoration: const InputDecoration(
                                         border: InputBorder.none,
-                                      )))),
+                                      )))), 
                         ),
                         SizedBox(
                           height: 15.h,
