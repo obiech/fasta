@@ -51,11 +51,11 @@ class WalletDataImpl implements WalletData {
     try {
       log(Endpoints.wallet.allTransactions(arg));
       final res = await _client.get(Endpoints.wallet.allTransactions(arg));
-      final double lastPage = res.data['pagination']['totalPages'];
+      final int lastPage = res.data['pagination']['totalPages'];
       final allTransactions = (res.data['data'] as List)
           .map((e) => TransactionModel.fromMap(e))
           .toList();
-      return Right(AllTrasaction(allTransactions, lastPage));
+      return Right(AllTrasaction(allTransactions, lastPage.toDouble()));
     } on DioError catch (e) {
       return Left(e.fromDioError);
     }catch (e) {

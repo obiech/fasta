@@ -12,6 +12,6 @@ class AppError {
 
 extension ExceptionToErrorX on DioError {
   AppError get fromDioError {
-    return AppError(response?.data['meta']['message']);
+    return AppError(response?.data['meta']['message']??'UnKnown Error Occured.');
   }
 }

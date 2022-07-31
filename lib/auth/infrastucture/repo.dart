@@ -163,11 +163,9 @@ class AuthImpl implements Auth {
         });
         return const Right(unit);
       }
-        return const Right(unit);
-
+      return const Right(unit);
     } catch (e) {
-        return const Right(unit);
-
+      return const Right(unit);
     }
   }
 }
