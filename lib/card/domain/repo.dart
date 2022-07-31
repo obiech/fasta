@@ -1,8 +1,8 @@
-import 'package:dartz/dartz.dart';
-import 'package:fasta/card/infrastructure/cardmodel.dart';
+import 'package:fasta/card/domain/models/card_model.dart';
 
 import '../../typedef.dart/typedefs.dart';
 
-abstract class Cardrepo{
-  ErrorOr<cardmodel> addcard(String cardNumber, String cardname, String cvv, String expiryMonth, String expiryYear);
+abstract class CardData{
+  ErrorOr<CardModel> addcard({required String cardNumber, required String cardname,required  String cvv, required String expiryMonth,required  String expiryYear});
+  ErrorOr<List<CardModel>> getAllCards();
 }

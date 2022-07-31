@@ -1,13 +1,14 @@
-part of 'CardBloc.dart';
+part of 'card_bloc.dart';
 
- class CardState {
+class CardState {
   final AppError error;
   final AppState appState;
-  final List<cardmodel> cards;
+  final List<CardModel> cards;
 
   CardState(this.error, this.appState, this.cards);
-  CardState copyWith({AppError? error, AppState? appState, List<cardmodel>? cards}){
-    return CardState(error?? this.error, appState?? this.appState, cards?? this.cards);
+  CardState copyWith(
+      {AppError? error, AppState? appState, List<CardModel>? cards}) {
+    return CardState(
+        error ?? this.error, appState ?? this.appState, cards ?? this.cards);
   }
-  
-  }
+}

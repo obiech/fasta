@@ -1,5 +1,4 @@
-import 'package:fasta/card/bloc/CardBloc.dart';
-import 'package:fasta/card/domain/repo.dart';
+import 'package:fasta/card/bloc/card_bloc.dart';
 import 'package:fasta/colors/colors.dart';
 import 'package:fasta/core/app_state.dart';
 import 'package:fasta/global_widgets/notifications/notify.dart';
@@ -27,16 +26,16 @@ class _AddCardViewState extends State<AddCardView>
   String cardNumber = '';
   String expiryDate = '';
   String cardHolderName = '';
-  String cvvCode = '';
+  String cvvCode = ''; 
   bool isCvvFocused = false;
   final GlobalKey<FormState> formKey = GlobalKey<FormState>();
-
+ 
   @override
   Widget build(BuildContext context) {
     return CustomScaffold(
-      type: AppBarType.profile,
+      type: AppBarType.backButton,
       onPressed: () {
-        Navigator.pushNamed(context, ProfileView.route);
+        Navigator.pop(context);
       },
       child: Column(
         children: <Widget>[
