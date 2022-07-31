@@ -3,6 +3,7 @@ import 'package:fasta/api_client/infrastruture/dio_helper.dart';
 import 'package:fasta/auth/bloc/auth_bloc.dart';
 import 'package:fasta/card/add_card.dart';
 import 'package:fasta/card/bloc/card_bloc.dart';
+import 'package:fasta/card/domain/repo.dart';
 import 'package:fasta/card/home.dart';
 import 'package:fasta/card/infrastructure/repo_impl.dart';
 import 'package:fasta/card/repository/repo.dart';
@@ -196,7 +197,7 @@ class Fasta extends StatelessWidget {
             create: (context) => WalletCubit(),
           ),
           BlocProvider(
-            create: (context)=> CardBloc(context.read<Cardrepo>())),
+            create: (context)=> CardBloc(context.read<CardRepository>())),
 
           BlocProvider(
             create: (context)=> SecurityBloc(context.read<SecurityRepository>())),

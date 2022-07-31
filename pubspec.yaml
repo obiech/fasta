@@ -33,7 +33,7 @@ dependencies:
   flutter_polyline_points: ^1.0.0
   flutter_contacts: ^1.1.4
   webview_flutter: ^3.0.4
-  # image_picker: ^0.8.5+3
+  image_picker: ^0.8.5+3
   images_picker: ^1.2.11
   cloudinary_public: ^0.11.0
   permission_handler: ^9.2.0
@@ -47,7 +47,7 @@ dependencies:
   flutter_otp_text_field: ^1.0.1
   intl: ^0.17.0
   google_sign_in: ^5.4.0
-  infinite_scroll_pagination: 3.1.0
+  infinite_scroll_pagination: ^3.2.0
   
   # image_picker_widget: ^2.0.3
 
