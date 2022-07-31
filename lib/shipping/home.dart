@@ -6,6 +6,7 @@ import 'package:fasta/global_widgets/rounded_loading_button/custom_button.dart';
 import 'package:fasta/global_widgets/text_fields/text_field_with_hint_text.dart';
 import 'package:fasta/profile/application/bloc/profile_bloc.dart';
 import 'package:fasta/profile/home.dart';
+import 'package:fasta/push_notification/NotificationsView.dart';
 import 'package:fasta/shipping/repository/arg.dart';
 import 'package:fasta/shipping/select_ride.dart';
 import 'package:fasta/shipping/widgets/elevated_container_tickbok.dart';
@@ -34,6 +35,7 @@ class _ShippingViewState extends State<ShippingView>
       extendBody: true,
       backgroundColor: FastaColors.primary2,
       appBar: AppBarWithAvater(
+        IconPressed: () => Navigator.pushNamed(context, NotificationsView.route),
         onPressed: () => Navigator.pushNamed(context, ProfileView.route),
       ),
       body: SingleChildScrollView(
