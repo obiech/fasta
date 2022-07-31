@@ -3,7 +3,7 @@ import 'package:fasta/theming/size_config.dart';
 import 'package:flutter/material.dart';
 
 class AppBarWithAvater extends AppBar {
-  AppBarWithAvater({Key? key, String? image, required VoidCallback onPressed})
+  AppBarWithAvater({Key? key, String? image, required VoidCallback onPressed,required VoidCallback IconPressed})
       : super(
           key: key,
           bottomOpacity: 0,
@@ -33,10 +33,10 @@ class AppBarWithAvater extends AppBar {
           ),
           leadingWidth: 100.w,
           actions: [
-            Icon(
-              Icons.notifications,
-              size: 28.h,
+            IconButton(
+              icon :const Icon(Icons.notifications),
               color: FastaColors.primary,
+              onPressed: IconPressed, 
             ),
             SizedBox(
               width: 23.w,

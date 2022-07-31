@@ -6,6 +6,7 @@ import 'package:fasta/extension/string.dart';
 import 'package:fasta/global_widgets/app_bars/app_bar_with_Avater.dart';
 import 'package:fasta/nav/bottom_nav_bar.dart';
 import 'package:fasta/profile/home.dart';
+import 'package:fasta/push_notification/NotificationsView.dart';
 import 'package:fasta/rider_app/dashboard/widgets/dashboard_overview.dart';
 import 'package:fasta/rider_app/nav/bottom_nav_bar.dart';
 import 'package:fasta/rider_app/orders/orders.dart';
@@ -47,6 +48,7 @@ class _DashBoardViewRiderState extends State<DashBoardViewRider> {
         extendBody: true,
         backgroundColor: FastaColors.primary2,
         appBar: AppBarWithAvater(
+          IconPressed: ()=> Navigator.pushNamed(context, NotificationsView.route),
           onPressed: () => Navigator.pushNamed(context, ProfileView.route),
         ),
         body: SingleChildScrollView(

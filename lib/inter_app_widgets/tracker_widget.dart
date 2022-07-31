@@ -59,7 +59,7 @@ class TrackerWidget extends StatelessWidget {
               style: FastaTextStyle.subtitle3.copyWith(fontSize: 10.f),
               children: [
             TextSpan(
-              text: isAcceptOrDecline?from.toShortTextAdaptive(19): from.toShortText,
+              text: isAcceptOrDecline?from.toShortTextAdaptive(19): to.toShortText,
               style:
                   FastaTextStyle.subtitleHard.copyWith(fontSize: 12.f),
             )

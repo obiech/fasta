@@ -8,6 +8,7 @@ import 'package:fasta/extension/string.dart';
 import 'package:fasta/global_widgets/app_bars/app_bar_with_Avater.dart';
 import 'package:fasta/nav/bottom_nav_bar.dart';
 import 'package:fasta/profile/home.dart';
+import 'package:fasta/push_notification/NotificationsView.dart';
 import 'package:fasta/shipping/application/bloc/shipment_handler_bloc.dart';
 import 'package:fasta/shipping/infrastructure/scoket_io.dart';
 import 'package:fasta/shipping/ongoing_orders.dart';
@@ -51,6 +52,7 @@ class _DashBoardViewState extends State<DashBoardView> {
           backgroundColor: FastaColors.primary2,
           appBar: AppBarWithAvater(
             onPressed: () => Navigator.pushNamed(context, ProfileView.route),
+            IconPressed: () => Navigator.pushNamed(context, NotificationsView.route),
           ),
           body: SingleChildScrollView(
             physics: const BouncingScrollPhysics(),

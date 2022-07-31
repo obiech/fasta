@@ -113,6 +113,7 @@ class _TransactionHistoryState extends State<TransactionHistory> {
                       style: FastaTextStyle.headline6,
                     ),
                     SizedBox(height: 28.h),
+
                     Row(
                         children: List.generate(3, (index) {
                       return GestureDetector(
@@ -141,6 +142,7 @@ class _TransactionHistoryState extends State<TransactionHistory> {
                       );
                     })),
                     SizedBox(height: 28.h),
+
                     Row(
                       crossAxisAlignment: CrossAxisAlignment.center,
                       children: [

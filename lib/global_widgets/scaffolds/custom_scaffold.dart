@@ -29,7 +29,7 @@ class CustomScaffold extends Scaffold {
             appBar: (type == AppBarType.backButton)
                 ? AppBarWithBackButton(onPressed: onPressed!)
                 : (type == AppBarType.profile)
-                    ? AppBarWithAvater(onPressed: onPressed!)
+                    ? AppBarWithAvater(onPressed: onPressed!, IconPressed: (){},)
                     : customAppBar,
             body: SingleChildScrollView(
                 physics: const BouncingScrollPhysics(),
