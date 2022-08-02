@@ -4,6 +4,8 @@ import 'package:fasta/colors/colors.dart';
 import 'package:fasta/core/app_state.dart';
 import 'package:fasta/extension/string.dart';
 import 'package:fasta/global_widgets/app_bars/app_bar_back_button.dart';
+import 'package:fasta/global_widgets/infinite_scroll_view.dart';
+import 'package:fasta/push_notification/NotificationsView.dart';
 import 'package:fasta/theming/size_config.dart';
 import 'package:fasta/typography/text_styles.dart';
 import 'package:fasta/wallet/bloc/paystack_bloc.dart';
@@ -17,6 +19,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:infinite_scroll_pagination/infinite_scroll_pagination.dart';
 
+enum TransactionStatus {pending, success, failed, cancelled, reverted,}
 class TransactionHistory extends StatefulWidget {
   static const String route = '/TransactionHistory';
   const TransactionHistory({Key? key}) : super(key: key);
@@ -24,19 +27,21 @@ class TransactionHistory extends StatefulWidget {
   @override
   State<TransactionHistory> createState() => _TransactionHistoryState();
 }
+final DateTime today  = DateTime(DateTime.now().year,DateTime.now().month,DateTime.now().day+1);
 
 class _TransactionHistoryState extends State<TransactionHistory> {
   int _selectedIndex = 0;
-  int nextPageKey = 0;
+  int nextPageKey = 1;
+  String status = '';
   final PagingController<int, Transaction> _pageController = PagingController(
     firstPageKey: 1,
   );
-  // String startDate = '';
   TextEditingController startDate = TextEditingController(text: '2022-05-25');
-  // String endDate = '';
+
+
   TextEditingController endDate = TextEditingController(
       text:
-          '${DateTime.now().year}-0${DateTime.now().month}-0${DateTime.now().day + 1}');
+          '${today.year}-0${today.month}-0${today.day}');
 
   void reload(String date) {
     startDate.text = date;
@@ -60,14 +65,13 @@ class _TransactionHistoryState extends State<TransactionHistory> {
   }
 
   void pageListener() {
-    nextPageKey = nextPageKey + 1;
     context.read<PaystackBloc>().add(PaystackEvent.allTransactions(
           TransactionArg(
-              endDate: endDate.text.isEmpty ? "" : endDate.text,
+              endDate: endDate.text.isEmpty ? '' : endDate.text,
               page: nextPageKey.toString(),
               limit: '10',
               order: 'desc',
-              status: '',
+              status: status,
               type: '',
               startDate: startDate.text.isEmpty ? '' : startDate.text),
         ));
@@ -83,16 +87,22 @@ class _TransactionHistoryState extends State<TransactionHistory> {
   Widget build(BuildContext context) {
     return RefreshIndicator(
       onRefresh: () async {
-        context.read<PaystackBloc>().add(PaystackEvent.allTransactions(
-              TransactionArg(
-                  endDate: '',
-                  page: '1',
-                  limit: '10',
-                  order: 'desc',
-                  status: '',
-                  type: '',
-                  startDate: ''),
-            ));
+         nextPageKey = 1;
+        _pageController.itemList = null;
+       
+        // setState(() {
+          
+        // });
+        // context.read<PaystackBloc>().add(PaystackEvent.allTransactions(
+        //       TransactionArg(
+        //           endDate: '',
+        //           page: '1',
+        //           limit: '10',
+        //           order: 'desc',
+        //           status: '',
+        //           type: '',
+        //           startDate: ''),
+        //     ));
         await Future.delayed(const Duration(seconds: 3));
       },
       child: Scaffold(
@@ -100,6 +110,7 @@ class _TransactionHistoryState extends State<TransactionHistory> {
             onPressed: () {
               Navigator.pop(context);
             },
+            iconPressed: () => Navigator.pushNamed(context, NotificationsView.route),
           ),
           backgroundColor: FastaColors.primary2,
           body: SingleChildScrollView(
@@ -113,36 +124,42 @@ class _TransactionHistoryState extends State<TransactionHistory> {
                       style: FastaTextStyle.headline6,
                     ),
                     SizedBox(height: 28.h),
-
                     Row(
-                        children: List.generate(3, (index) {
-                      return GestureDetector(
-                        onTap: () {
-                          _selectedIndex = index;
-                          setState(() {});
-                        },
-                        child: Container(
-                            margin: EdgeInsets.only(right: 24.w),
-                            padding: EdgeInsets.symmetric(
-                                horizontal: 12.w, vertical: 6.h),
-                            decoration: BoxDecoration(
-                                borderRadius: BorderRadius.circular(7.h),
-                                border: Border.all(),
-                                color: (_selectedIndex == index)
-                                    ? FastaColors.primary
-                                    : FastaColors.primary2),
-                            child: Center(
-                                child: Text(
-                              _type[index],
-                              style: FastaTextStyle.hardLabel2.copyWith(
+                        children: List.generate(_type.length, (index) {
+                      return Expanded(
+                        child: GestureDetector(
+                          onTap: () {
+                            _selectedIndex = index;
+                            
+                            nextPageKey = 1;
+                            status= _type[index].toLowerCase() == 'all'?'':_type[index].toLowerCase();  
+                            setState(() {});
+                              _pageController.itemList = null;
+                            
+                            
+                          },
+                          child: Container(
+                              margin: EdgeInsets.only(right: 8.w),
+                              padding: EdgeInsets.symmetric(
+                                  horizontal: 6.w, vertical: 6.h),
+                              decoration: BoxDecoration(
+                                  borderRadius: BorderRadius.circular(7.h),
+                                  border: Border.all(),
                                   color: (_selectedIndex == index)
-                                      ? FastaColors.primary2
-                                      : FastaColors.primary),
-                            ))),
+                                      ? FastaColors.primary
+                                      : FastaColors.primary2),
+                              child: Center(
+                                  child: Text(
+                                _type[index],
+                                style: FastaTextStyle.hardLabel2.copyWith(
+                                    color: (_selectedIndex == index)
+                                        ? FastaColors.primary2
+                                        : FastaColors.primary),
+                              ))),
+                        ),
                       );
                     })),
                     SizedBox(height: 28.h),
-
                     Row(
                       crossAxisAlignment: CrossAxisAlignment.center,
                       children: [
@@ -164,16 +181,10 @@ class _TransactionHistoryState extends State<TransactionHistory> {
                         ),
                         GestureDetector(
                           onTap: () {
-                            context.read<PaystackBloc>().add(
-                                PaystackEvent.allTransactions(TransactionArg(
-                                    endDate: endDate.text,
-                                    page: '1',
-                                    limit: '10',
-                                    order: 'desc',
-                                    status: '',
-                                    type: '',
-                                    startDate: startDate.text)));
-                            // reload(date)
+                             nextPageKey = 1;
+                             _selectedIndex = 0;
+                             status='';
+        _pageController.itemList = null;
                           },
                           child: Container(
                             margin: EdgeInsets.only(top: 12.h),
@@ -206,153 +217,13 @@ class _TransactionHistoryState extends State<TransactionHistory> {
                         if (state.allTransaction?.transactions.isEmpty ??
                             true) {
                           return const Center(child: Text('No Result'));
-                        } else if (state.appState == AppState.loading) {
+                        } else if (state.appState == AppState.loading &&
+                            nextPageKey == 1) {
                           return const Center(
                             child: CircularProgressIndicator.adaptive(),
                           );
                         }
-                        // return Column(
-                        //     children: List.generate(state.allTransaction.length,
-                        //         (index) {
-                        //   return NotificationMessage(
-                        //       radius: 15.h,
-                        //       padding: EdgeInsets.symmetric(
-                        //         horizontal: 15.w,
-                        //       ),
-                        //       icon: Container(
-                        //         height: 25.h,
-                        //         width: 27.w,
-                        //         decoration: BoxDecoration(
-                        //           borderRadius: BorderRadius.circular(6.h),
-                        //           color: FastaColors.lightBlue,
-                        //         ),
-                        //         child: Center(
-                        //             child: Image.asset(
-                        //           'assets/2.0x/credit-card.png',
-                        //           height: 16.h,
-                        //           width: 16.h,
-                        //         )),
-                        //       ),
-                        //       content: Text(
-                        //         (state.allTransaction[index].amount.toAmount.isNegative)?
-                        //         'Debited ' '${state.allTransaction[index].amount.toAmount}'
-                        //         :'Credited '
-                        //         '${state.allTransaction[index].amount.toAmount}',
-                        //         style: FastaTextStyle.hardLabel2
-                        //             .copyWith(fontSize: 12.f, color: (state.allTransaction[index].amount.toAmount.isNegative)?FastaColors.alert:FastaColors.green),
-                        //       ),
-                        //       timeRecieved: Column(
-                        //         mainAxisAlignment: MainAxisAlignment.center,
-                        //         crossAxisAlignment: CrossAxisAlignment.end,
-                        //         children: [
-                        //           GestureDetector(
-                        //               onTap: () {},
-                        //               child: Text(
-                        //                   state.allTransaction[index].createdAt
-                        //                       .toDateTime,
-                        //                   style: FastaTextStyle.subtitle3)),
-                        //           Text(
-                        //             state.allTransaction[index].type!,
-                        //             style: FastaTextStyle.subtitle3,
-                        //           ),
-                        //         ],
-                        //       ));
-                        // }));
-                        return PagedListView.separated(
-                            shrinkWrap: true,
-                            physics: const BouncingScrollPhysics(),
-                            pagingController: _pageController,
-                            separatorBuilder: (context, index) {
-                              return SizedBox(
-                                height: 16.h,
-                              );
-                            },
-                            padding: const EdgeInsets.all(16),
-                            builderDelegate:
-                                PagedChildBuilderDelegate<Transaction>(
-                              itemBuilder: (context, item, index) {
-                                return NotificationMessage(
-                                    radius: 15.h,
-                                    padding: EdgeInsets.symmetric(
-                                      horizontal: 15.w,
-                                    ),
-                                    icon: Container(
-                                      height: 25.h,
-                                      width: 27.w,
-                                      decoration: BoxDecoration(
-                                        borderRadius:
-                                            BorderRadius.circular(6.h),
-                                        color: FastaColors.lightBlue,
-                                      ),
-                                      child: Center(
-                                          child: Image.asset(
-                                        'assets/2.0x/credit-card.png',
-                                        height: 16.h,
-                                        width: 16.h,
-                                      )),
-                                    ),
-                                    content: Text(
-                                      (state.allTransaction!.transactions[index]
-                                              .amount.toAmount.isNegative)
-                                          ? 'Debited '
-                                              '${state.allTransaction!.transactions[index].amount.toAmount}'
-                                          : 'Credited '
-                                              '${state.allTransaction!.transactions[index].amount.toAmount}',
-                                      style: FastaTextStyle.hardLabel2.copyWith(
-                                          fontSize: 12.f,
-                                          color: (state
-                                                  .allTransaction!
-                                                  .transactions[index]
-                                                  .amount
-                                                  .toAmount
-                                                  .isNegative)
-                                              ? FastaColors.alert
-                                              : FastaColors.green),
-                                    ),
-                                    timeRecieved: Column(
-                                      mainAxisAlignment:
-                                          MainAxisAlignment.center,
-                                      crossAxisAlignment:
-                                          CrossAxisAlignment.end,
-                                      children: [
-                                        GestureDetector(
-                                            onTap: () {},
-                                            child: Text(
-                                                state
-                                                    .allTransaction!
-                                                    .transactions[index]
-                                                    .createdAt
-                                                    .toDateTime,
-                                                style:
-                                                    FastaTextStyle.subtitle3)),
-                                        Text(
-                                          state.allTransaction!
-                                              .transactions[index].type!,
-                                          style: FastaTextStyle.subtitle3,
-                                        ),
-                                      ],
-                                    ));
-                              },
-                              newPageErrorIndicatorBuilder: (context) {
-                                return NewPageErrorIndicator(
-                                  onTap: () {
-                                    _pageController.retryLastFailedRequest();
-                                  },
-                                  message: state.error!.errorMessage,
-                                );
-                              },
-                              firstPageErrorIndicatorBuilder: (context) {
-                                return FirstPageErrorIndicator(
-                                  message: state.error!.errorMessage,
-                                  onTryAgain: () {
-                                    _pageController.itemList = null;
-                                    // context
-                                    //     .read<SearchBloc>()
-                                    //     .add(SearchEvent.search(searchController.text));
-                                  },
-                                );
-                              },
-                            ));
+                        return InfinityScrollWidget(pageController: _pageController, errorMessage: state.error?.errorMessage??'Something Went Wrong.',);
                       }),
                     )
                   ]))),
@@ -360,21 +231,19 @@ class _TransactionHistoryState extends State<TransactionHistory> {
   }
 
   void determineAppend(PaystackState state) {
-    if ((state.allTransaction?.lastPage ?? 0) >
-        (_pageController.nextPageKey ?? 1)) {
+    if ((state.allTransaction?.lastPage ?? 0) > nextPageKey) {
+      log('this');
+      nextPageKey = nextPageKey + 1;
+      // _pageController.nextPageKey = _pageController.nextPageKey??0+ 1;
       _pageController.appendPage(
-          state.allTransaction!.transactions, _pageController.nextPageKey);
+          state.allTransaction!.transactions, nextPageKey);
     } else {
+      log('that');
       _pageController.appendLastPage(state.allTransaction!.transactions);
     }
   }
 }
 
-
-const List<String> _type = ['All', 'Wallet', 'Card'];
-
-
+const List<String> _type = ['All', 'Success', 'Pending'];
 
 /// Basic layout for indicating that an exception occurred.
-
-

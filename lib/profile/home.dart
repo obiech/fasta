@@ -1,5 +1,6 @@
 import 'package:fasta/auth/bloc/auth_bloc.dart';
 import 'package:fasta/colors/colors.dart';
+import 'package:fasta/global_widgets/notifications/notify.dart';
 import 'package:fasta/nav/bottom_nav_bar.dart';
 import 'package:fasta/onboarding/fasta_type.dart';
 import 'package:fasta/profile/application/bloc/profile_bloc.dart';
@@ -138,15 +139,19 @@ class _ProfileViewState extends State<ProfileView> {
                                 context, TransactionHistory.route);
                             break;
                           case 1:
-                          Navigator.pushNamed(context, VerifyEmail.route);
-                            
+                            if (!state.user!.emailVerified) {
+                              Navigator.pushNamed(context, VerifyEmail.route);
+                            } else {
+                              Notify.error(context, 'Email Already Verified');
+                            }
+
                             break;
                           case 2:
-                          Navigator.pushNamed(context, SupportView.route);
+                            Navigator.pushNamed(context, SupportView.route);
                             break;
                           case 3:
                             Navigator.pushNamed(context, SecurityView.route);
-                            
+
                             break;
                           default:
                         }
@@ -161,7 +166,7 @@ class _ProfileViewState extends State<ProfileView> {
                   GestureDetector(
                     onTap: () {
                       Navigator.pushNamedAndRemoveUntil(
-                          context,FastaTypeSelection.route, (route) => false);
+                          context, FastaTypeSelection.route, (route) => false);
                     },
                     child: Center(
                         child: Text(
@@ -195,6 +200,6 @@ const List<_Features> _data = [
   _Features('Verifications', Icons.personal_injury),
   _Features('Help & Support', Icons.person),
   _Features('Security', Icons.lock_clock_rounded),
- 
+
   _Features('About', Icons.person),
 ];

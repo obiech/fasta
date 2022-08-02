@@ -2,6 +2,7 @@ import 'package:fasta/card/add_card.dart';
 import 'package:fasta/colors/colors.dart';
 import 'package:fasta/global_widgets/scaffolds/custom_scaffold.dart';
 import 'package:fasta/profile/home.dart';
+import 'package:fasta/push_notification/NotificationsView.dart';
 import 'package:fasta/theming/size_config.dart';
 import 'package:fasta/typography/text_styles.dart';
 import 'package:flutter/material.dart';
@@ -19,6 +20,7 @@ class _CardScrenState extends State<CardScreen> {
   Widget build(BuildContext context) {
     return CustomScaffold(
       type: AppBarType.profile,
+      iconPressed: () => Navigator.pushNamed(context, NotificationsView.route),
       onPressed: () {
         Navigator.pushNamed(context, ProfileView.route);
       },

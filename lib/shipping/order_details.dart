@@ -10,6 +10,7 @@ import 'package:fasta/global_widgets/notifications/notify.dart';
 import 'package:fasta/global_widgets/rounded_loading_button/button_mixin.dart';
 import 'package:fasta/global_widgets/app_bars/app_bar_back_button.dart';
 import 'package:fasta/global_widgets/rounded_loading_button/custom_button.dart';
+import 'package:fasta/push_notification/NotificationsView.dart';
 import 'package:fasta/shipping/application/map/shipment_bloc.dart';
 import 'package:fasta/shipping/item_info.dart';
 import 'package:fasta/shipping/repository/arg.dart';
@@ -139,6 +140,7 @@ class _SenderInfoState extends State<SenderInfo>
       backgroundColor: FastaColors.primary2,
       appBar: AppBarWithBackButton(
         onPressed: () => Navigator.pop(context),
+        iconPressed: () => Navigator.pushNamed(context, NotificationsView.route),
       ),
       body: SingleChildScrollView(
         physics: const BouncingScrollPhysics(),
@@ -213,6 +215,7 @@ class _SenderInfoState extends State<SenderInfo>
                                 pickUpAddressMap =
                                     ' ${place.streetNumber??''} ${place.street??''} ${place.city} ${place.state} ${place.country??''}';
                               },
+                              componentCountry:'NG',
                               mapsApiKey: 'AIzaSyA-lqYHLBnNE3-I2CaCjgTgQE0BqEzSEWM',
                               buildItem: (Suggestion suggestion, int index) {
                                 // if (index ==0 ){
@@ -423,6 +426,7 @@ class _SenderInfoState extends State<SenderInfo>
                                 deliveryAddressMap =
                                     ' ${place.streetNumber??''} ${place.street??''} ${place.city} ${place.state} ${place.country??''}';
                               },
+                              componentCountry: 'NG',
                               mapsApiKey: 'AIzaSyA-lqYHLBnNE3-I2CaCjgTgQE0BqEzSEWM',
                               buildItem: (Suggestion suggestion, int index) {
                                 return ElevatedCardResponsive(

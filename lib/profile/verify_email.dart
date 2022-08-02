@@ -6,6 +6,7 @@ import 'package:fasta/global_widgets/rounded_loading_button/custom_button.dart';
 import 'package:fasta/global_widgets/scaffolds/custom_scaffold.dart';
 import 'package:fasta/profile/application/bloc/profile_bloc.dart';
 import 'package:fasta/profile/repository/args.dart';
+import 'package:fasta/push_notification/NotificationsView.dart';
 import 'package:fasta/theming/size_config.dart';
 import 'package:fasta/typography/text_styles.dart';
 import 'package:flutter/material.dart';
@@ -36,6 +37,7 @@ class _VerifyEmailState extends State<VerifyEmail>
           },
           child: CustomScaffold(
             type: AppBarType.backButton,
+            iconPressed: () => Navigator.pushNamed(context, NotificationsView.route),
             onPressed: () => Navigator.pop(context),
             child: BlocBuilder<ProfileBloc, ProfileState>(
               builder: (context, state) {

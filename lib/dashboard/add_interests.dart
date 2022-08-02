@@ -1,6 +1,7 @@
 import 'package:fasta/colors/colors.dart';
 import 'package:fasta/dashboard/widgets/elevated_container_small.dart';
 import 'package:fasta/global_widgets/app_bars/app_bar_back_button.dart';
+import 'package:fasta/push_notification/NotificationsView.dart';
 import 'package:fasta/theming/size_config.dart';
 import 'package:fasta/typography/text_styles.dart';
 import 'package:flutter/material.dart';
@@ -18,7 +19,7 @@ class _AddInterestsState extends State<AddInterests> {
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: FastaColors.primary2,
-      appBar: AppBarWithBackButton(onPressed: () => Navigator.pop(context)),
+      appBar: AppBarWithBackButton(onPressed: () => Navigator.pop(context),iconPressed: () => Navigator.pushNamed(context, NotificationsView.route),),
       body: SingleChildScrollView(
         padding: EdgeInsets.symmetric(horizontal: 27.w, vertical: 31.h),
         child: Column(

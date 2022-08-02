@@ -3,7 +3,7 @@ import 'package:fasta/theming/size_config.dart';
 import 'package:flutter/material.dart';
 
 class AppBarWithBackButton extends AppBar {
-  AppBarWithBackButton({Key? key, required VoidCallback onPressed})
+  AppBarWithBackButton({Key? key, required VoidCallback onPressed,required VoidCallback iconPressed})
       : super(
           key: key,
           bottomOpacity: 0,
@@ -25,10 +25,10 @@ class AppBarWithBackButton extends AppBar {
             ],
           ),
           actions: [
-            Icon(
-              Icons.notifications,
-              size: 28.h,
+            IconButton(
+              icon :const Icon(Icons.notifications),
               color: FastaColors.primary,
+              onPressed: iconPressed, 
             ),
             SizedBox(
               width: 23.w,

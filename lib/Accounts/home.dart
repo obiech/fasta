@@ -1,4 +1,5 @@
 import 'package:fasta/global_widgets/scaffolds/custom_scaffold.dart';
+import 'package:fasta/push_notification/NotificationsView.dart';
 import 'package:fasta/theming/size_config.dart';
 import 'package:flutter/material.dart';
 
@@ -20,6 +21,7 @@ class _FaqState extends State<Faq> {
     return CustomScaffold(
       type: AppBarType.backButton,
       onPressed: (){Navigator.pop(context);},
+      iconPressed: () => Navigator.pushNamed(context, NotificationsView.route),
       child:
          Column(
           children: [

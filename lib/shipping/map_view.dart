@@ -1,6 +1,7 @@
 import 'package:fasta/colors/colors.dart';
 import 'package:fasta/shipping/application/bloc/shipment_handler_bloc.dart';
 import 'package:fasta/shipping/application/map/shipment_bloc.dart';
+import 'package:fasta/shipping/infrastructure/repo.dart';
 import 'package:fasta/theming/size_config.dart';
 import 'package:fasta/typography/text_styles.dart';
 import 'package:flutter/material.dart';
@@ -13,7 +14,8 @@ class MapView extends StatefulWidget {
   static const String route = '/MapView';
   final List<Widget> children;
 
-  const MapView({Key? key, required this.children}) : super(key: key);
+  const MapView({Key? key, required this.children,})
+      : super(key: key);
   @override
   _MapViewState createState() => _MapViewState();
 }
@@ -68,7 +70,6 @@ class _MapViewState extends State<MapView> {
             children: <Widget>[
               // Map View
               BlocListener<ShipmentHandlerBloc, ShipmentHandlerState>(
-                
                 listener: (context, state) {
                   //  startAddressController.text = state.address?.from ?? '';
                   // destinationAddressController.text = state.address?.to ?? '';
@@ -85,39 +86,31 @@ class _MapViewState extends State<MapView> {
                   //     currentAddress: _currentAddress));
                 },
                 child: BlocBuilder<ShipmentHandlerBloc, ShipmentHandlerState>(
-                                    // buildWhen: ((previous, current) => polylines.isEmpty || markers.isEmpty),
+                    // buildWhen: ((previous, current) => polylines.isEmpty || markers.isEmpty),
 
                     builder: (context, state) {
-                      
-                  startAddressController.text = state.address?.from ?? '';
-                  destinationAddressController.text = state.address?.to ?? '';
-
-                  // if (markers.isNotEmpty) markers.clear();
-                  // if (polylines.isNotEmpty) {
-                  //   polylines.clear();
-                  // }  
-                  if(polylines.isEmpty || markers.isEmpty){
-                  _placeDistance = null;
-                  context.read<ShipmentBloc>().add(ShipmentEvent.setMarkers(
-                      startAddress: state.address?.to ?? "",
-                      destinationAddress: state.address?.from ?? '',
-                      currentPosition: _currentPosition,
-                      currentAddress: _currentAddress));}
+                  if (polylines.isEmpty || markers.isEmpty) {
+                    _placeDistance = null;
+                    context.read<ShipmentBloc>().add(ShipmentEvent.setMarkers(
+                        startAddress: state.address?.from ??
+                            state.delivery?.deliverySummary.fromAddress ??
+                            "",
+                        destinationAddress: state.address?.to ??
+                            state.delivery?.deliverySummary.toAddress ??
+                            "",
+                        currentPosition: _currentPosition,
+                        currentAddress: _currentAddress));
+                  }
 
                   return BlocConsumer<ShipmentBloc, ShipmentState>(
-
                       listener: ((context, state) {
                     state.whenOrNull(
                       currentAddress: (currentAddress, errorMessage) {},
                     );
                   }), builder: (context, state) {
-                    // if(state is currentAddress){},
-                    
                     return GoogleMap(
                         markers: Set<Marker>.from(markers),
                         initialCameraPosition: _initialLocation,
-                        // myLocationEnabled: true,
-                        // myLocationButtonEnabled: true,
                         mapType: MapType.normal,
                         zoomGesturesEnabled: true,
                         zoomControlsEnabled: false,
@@ -197,49 +190,25 @@ class _MapViewState extends State<MapView> {
                         mainAxisSize: MainAxisSize.min,
                         children: <Widget>[
                           SizedBox(height: 20.h),
-                          // SearchMapTextField(
-                          //     label: 'Start',
-                          //     hint: 'Choose starting point',
-                          //     // prefixIcon: const Icon(Icons.looks_one),
-                          //     suffixIcon: IconButton(
-                          //       icon: const Icon(Icons.my_location),
-                          //       onPressed: () {
-                          //         if (_currentAddress == '') {
-                          //           startAddressController.text = _currentAddress;
-                          //           _startAddress = _currentAddress;
-                          //           setState(() {});
-                          //         }
-                          //       },
-                          //     ),
-                          //     controller: startAddressController,
-                          //     focusNode: startAddressFocusNode,
-                          //     width: width,
-                          //     locationCallback: (String value) {
-                          //       setState(() {
-                          //         _startAddress = value;
-                          //       });
-                          //     }),
-                          // const SizedBox(height: 10),
-                          SearchMapTextField(
-                              label: 'Destination',
-                              hint: 'Choose destination',
-                              // prefixIcon: const Icon(Icons.looks_two),
-                              controller: destinationAddressController,
-                              focusNode: desrinationAddressFocusNode,
-                              width: width,
-                              locationCallback: (String value) {
-                                setState(() {
-                                  _destinationAddress = value;
-                                });
-                              }),
-                          // const SizedBox(height: 10),
-                          // Visibility(
-                          //   visible: _placeDistance == null ? false : true,
-                          //   child: Text(
-                          //     'DISTANCE: ${_placeDistance ?? 0.00} km',
-                          //     style: FastaTextStyle.hardLabel2,
-                          //   ),
-                          // ),
+                          BlocBuilder<ShipmentHandlerBloc,
+                              ShipmentHandlerState>(
+                            builder: (context, state) {
+                              return SearchMapTextField(
+                                  label: 'Destination',
+                                  hint: 'Choose destination',
+                                  controller: TextEditingController(
+                                      text: state.address?.to ??
+                                          state.delivery?.deliverySummary.toAddress ??
+                                          ""),
+                                  focusNode: desrinationAddressFocusNode,
+                                  width: width,
+                                  locationCallback: (String value) {
+                                    setState(() {
+                                      _destinationAddress = value;
+                                    });
+                                  });
+                            },
+                          ),
                           const SizedBox(height: 5),
                           BlocListener<ShipmentBloc, ShipmentState>(
                             listener: (context, state) {
@@ -282,8 +251,9 @@ class _MapViewState extends State<MapView> {
                                         startAddressFocusNode.unfocus();
                                         desrinationAddressFocusNode.unfocus();
                                         setState(() {
-                                          if (markers.isNotEmpty)
+                                          if (markers.isNotEmpty) {
                                             markers.clear();
+                                          }
                                           if (polylines.isNotEmpty) {
                                             polylines.clear();
                                           }
@@ -302,20 +272,7 @@ class _MapViewState extends State<MapView> {
                                     : null,
                                 child: const Padding(
                                   padding: EdgeInsets.all(8.0),
-                                  // child: Text(
-                                  //   'Show Route'.toUpperCase(),
-                                  //   style: const TextStyle(
-                                  //     color: Colors.white,
-                                  //     fontSize: 20.0,
-                                  //   ),
-                                  // ),
                                 ),
-                                // style: ElevatedButton.styleFrom(
-                                //   primary: Colors.red,
-                                //   shape: RoundedRectangleBorder(
-                                //     borderRadius: BorderRadius.circular(20.0),
-                                //   ),
-                                // ),
                               ),
                             ),
                           ),

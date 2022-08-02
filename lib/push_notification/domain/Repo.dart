@@ -6,7 +6,7 @@ import 'package:fasta/typedef.dart/typedefs.dart';
 
 abstract class NotificationRepo{
  
-  ErrorOr<List<dynamic>> getAllNotifications();
-  ErrorOr<void> markUserRead(int id);
+  ErrorOr<List<NotificationEntity>> getAllNotifications();
+  ErrorOr<Unit> markUserRead(int id);
   ErrorOr<int> getUnreadCount();
 }

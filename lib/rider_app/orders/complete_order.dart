@@ -123,7 +123,7 @@ class _CompleteOrderState extends State<CompleteOrder>
                                       to: state.delivery!.deliverySummary.fromAddress,
                                       from: state.delivery!.deliverySummary.toAddress,
                                       distance:
-                                          '${state.delivery!.deliverySummary.distance} km from where you are',
+                                          '${state.delivery!.deliverySummary.distance} Meters from where you are',
                                     ),
                                   ],
                                 ),

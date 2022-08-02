@@ -44,7 +44,7 @@ class WalletDataImpl implements WalletData {
     } catch (e) {
       return Left(AppError(e.toString()));
     }
-  }
+  }  
 
   @override
   ErrorOr<AllTrasaction> allTransactions(TransactionArg arg) async {

@@ -1,4 +1,5 @@
 import 'package:fasta/colors/colors.dart';
+import 'package:fasta/global_widgets/notifications/notify.dart';
 import 'package:fasta/shipping/application/bloc/shipment_handler_bloc.dart';
 import 'package:fasta/shipping/application/map/shipment_bloc.dart';
 // import 'package:fasta/shipping/application/bloc/shipment_handler_bloc.dart';
@@ -129,6 +130,7 @@ class _PaymentOptionsState extends State<PaymentOptions> {
                                               isCardSelected = true;
                                               isWalletSelected = false;
                                               setState(() {});
+                                              Notify.error(context, 'Payment with Card is Not Available Now');
                                             },
                                             child: ElevatedCardSmall(
                                               type: 'Card',

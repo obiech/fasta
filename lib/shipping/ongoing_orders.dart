@@ -3,6 +3,7 @@ import 'package:fasta/colors/colors.dart';
 import 'package:fasta/core/app_state.dart';
 import 'package:fasta/global_widgets/app_bars/app_bar_back_button.dart';
 import 'package:fasta/inter_app_widgets/order_preview.dart';
+import 'package:fasta/push_notification/NotificationsView.dart';
 import 'package:fasta/shipping/application/bloc/shipment_handler_bloc.dart';
 import 'package:fasta/shipping/arrival_time.dart';
 import 'package:fasta/shipping/order_receipt.dart';
@@ -39,6 +40,7 @@ class _OngoingOrdersState extends State<OngoingOrders> {
         backgroundColor: FastaColors.primary2,
         appBar: AppBarWithBackButton(
           onPressed: (() => Navigator.pop(context)),
+          iconPressed: () => Navigator.pushNamed(context, NotificationsView.route),
         ),
         body: BlocBuilder<AuthBloc, AuthState>(
           builder: (context, state) {

@@ -4,6 +4,7 @@ import 'package:fasta/global_widgets/rounded_loading_button/button_mixin.dart';
 import 'package:fasta/global_widgets/rounded_loading_button/custom_button.dart';
 import 'package:fasta/global_widgets/scaffolds/custom_scaffold.dart';
 import 'package:fasta/global_widgets/text_fields/with_title.dart';
+import 'package:fasta/push_notification/NotificationsView.dart';
 import 'package:fasta/security/bloc/security_bloc.dart';
 import 'package:fasta/theming/size_config.dart';
 import 'package:fasta/typography/text_styles.dart';
@@ -27,6 +28,7 @@ class _ChangePasswordState extends State<ChangePassword>
   Widget build(BuildContext context) {
     return CustomScaffold(
       type: AppBarType.backButton,
+      iconPressed: () => Navigator.pushNamed(context, NotificationsView.route),
       onPressed: () {
         Navigator.pop(context);
       },

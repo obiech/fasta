@@ -1,3 +1,5 @@
+import 'package:fasta/card/home.dart';
+import 'package:fasta/core/app_state.dart';
 import 'package:fasta/dashboard/dashboard.dart';
 import 'package:fasta/inter_app_widgets/order_preview.dart';
 import 'package:fasta/nav/cards_screen.dart';
@@ -29,7 +31,7 @@ class _BottomNavBarRiderState extends State<BottomNavBarRider> {
     DashBoardViewRider(),
     OrdersViewRider(),
     WalletView(),
-    CardScreen(),
+    CardView(),
   ];
 
   @override
@@ -54,9 +56,10 @@ class _BottomNavBarRiderState extends State<BottomNavBarRider> {
         bottomNavigationBar: SizedBox(
           height: 98.h,
           child: BlocListener<ShipmentHandlerBloc, ShipmentHandlerState>(
+            listenWhen: (previous, current) => current.status ==AppState.success,
             listener: (context, state) {
                if (state.pendingInvitations !=  null){
-               showMyDialog(context,state.pendingInvitations!);
+              //  showMyDialog(context,state.pendingInvitations!);
             }
             },
             child: Stack(
@@ -162,7 +165,7 @@ Future<void> showMyDialog(
                                 style: FastaTextStyle.subtitleHard),
                           ),
                           SizedBox(height: 20.h,),
-                          AcceptOrDecline(deliveryId:delivery.id.toString())
+                          AcceptOrDecline(deliveryId:delivery.deliveryId.toString())
             ],
           ),
        

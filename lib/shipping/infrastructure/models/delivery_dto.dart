@@ -1,3 +1,5 @@
+import 'dart:developer';
+
 import 'package:fasta/profile/domain/entity/user.dart';
 import 'package:fasta/profile/infrastruture/model/users_model.dart';
 import 'package:fasta/shipping/domain/entity/delivery_model.dart';
@@ -91,6 +93,8 @@ class DeliverySummaryDTO extends DeliverySummary {
   }
 
   factory DeliverySummaryDTO.fromMapRider(Map<String, dynamic> map) {
+    log(map['delivery']['fromAddress']);
+    log(map['delivery']['toAddress']);
     return DeliverySummaryDTO(
       id: map['id'].toString(),
       userId: map['deliveryId'].toString(),
@@ -98,7 +102,7 @@ class DeliverySummaryDTO extends DeliverySummary {
       vehicleType: map['delivery']['vehicleType'],
       status: map['delivery'] ['status']??'',
       cost: map['delivery']['cost'].toString()+' NGN',
-      distance: map['delivery']['distance'].toString()+' Km',
+      distance: map['delivery']['distance'].toString(),
       fromAddress: map['delivery']['fromAddress'],
       toAddress: map['delivery']['toAddress'],
       endTime: map['createdAt'].toString(),

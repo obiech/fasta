@@ -127,6 +127,9 @@ class AcceptOrDecline extends StatelessWidget {
             context
                 .read<ShipmentHandlerBloc>()
                 .add(ShipmentHandlerEvent.acceptDelivery(deliveryId));
+            context
+        .read<ShipmentHandlerBloc>()
+        .add(const ShipmentHandlerEvent.getAllDeliveriesPendingInvitations());
           },
           child: Container(
               padding: EdgeInsets.symmetric(horizontal: 15.w),

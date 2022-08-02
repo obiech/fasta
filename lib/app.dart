@@ -3,7 +3,6 @@ import 'package:fasta/api_client/infrastruture/dio_helper.dart';
 import 'package:fasta/auth/bloc/auth_bloc.dart';
 import 'package:fasta/card/add_card.dart';
 import 'package:fasta/card/bloc/card_bloc.dart';
-import 'package:fasta/card/domain/repo.dart';
 import 'package:fasta/card/home.dart';
 import 'package:fasta/card/infrastructure/repo_impl.dart';
 import 'package:fasta/card/repository/repo.dart';
@@ -29,7 +28,6 @@ import 'package:fasta/push_notification/Bloc/NotificationBloc.dart';
 import 'package:fasta/push_notification/Infrastructure/Repo.dart';
 import 'package:fasta/push_notification/NotificationMessageView.dart';
 import 'package:fasta/push_notification/NotificationsView.dart';
-import 'package:fasta/push_notification/domain/Repo.dart';
 import 'package:fasta/rider_app/auth/bloc/auth_rider_bloc.dart';
 import 'package:fasta/rider_app/auth/infrastruture/repo.dart';
 import 'package:fasta/rider_app/auth/repository/repo.dart';
@@ -88,7 +86,6 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:permission_handler/permission_handler.dart';
 //import 'package:sendbird_sdk/sendbird_sdk.dart';
 
-import 'secrets.dart';
 
 class Fasta extends StatelessWidget {
   const Fasta({Key? key}) : super(key: key);
@@ -271,10 +268,3 @@ class Fasta extends StatelessWidget {
 }
 
 // if email has already been verified it showed say email verified.
-//  move faq in help and support to different page.
-// security
-// make transaction histroy to shoq difference between deduction and adding
-// make card number visible 
-//  make cvv2 visible
-// add card not working
-// add camera icon besides card number

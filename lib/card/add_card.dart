@@ -6,6 +6,7 @@ import 'package:fasta/global_widgets/rounded_loading_button/button_mixin.dart';
 import 'package:fasta/global_widgets/rounded_loading_button/custom_button.dart';
 import 'package:fasta/global_widgets/scaffolds/custom_scaffold.dart';
 import 'package:fasta/profile/home.dart';
+import 'package:fasta/push_notification/NotificationsView.dart';
 import 'package:fasta/theming/size_config.dart';
 import 'package:fasta/typography/text_styles.dart';
 import 'package:flutter/material.dart';
@@ -37,6 +38,7 @@ class _AddCardViewState extends State<AddCardView>
       onPressed: () {
         Navigator.pop(context);
       },
+      iconPressed: () => Navigator.pushNamed(context, NotificationsView.route),
       child: Column(
         children: <Widget>[
           const SizedBox(

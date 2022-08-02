@@ -84,13 +84,14 @@ class _RiderProfileState extends State<RiderProfile> {
                             ),
                             SizedBox(
                               height: 10.h,
-                            ),
+                            ), 
                             Center(
                               child: CircleAvatar(
                                 radius: 62.h,
+                                backgroundColor: FastaColors.lightOrange,
                                 backgroundImage:
-                                    (arg!.avatarUrl ==null)?
-                                            Image.asset('assets/young.png')
+                                    (arg!.avatarUrl?.isEmpty??false)?
+                                            Image.asset('assets/2.png')
                                                 .image: Image.network(arg!.avatarUrl!).image,
                               ),
                             ),

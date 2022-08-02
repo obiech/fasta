@@ -19,8 +19,7 @@ class NotificationRepoimpl implements NotificationRepo{
     try{
       final res = await client.get(Endpoints.notification.getAllNotifications);
       // log(res['meta']);
-      // List data = res['data'];
-      // for (final x in data){myList.add(NotificationEntity.fromJson(x));}
+   log(res.data['data'].toString());
       return Right((res.data['data'] as List).map((e) => NotificationEntity.fromJson(e)).toList());
     }   catch (e) {
       log(e.toString());
@@ -29,11 +28,11 @@ class NotificationRepoimpl implements NotificationRepo{
   }
   
   @override
-  ErrorOr<void> markUserRead(int id) async{
+  ErrorOr<Unit> markUserRead(int id) async{
     try{
       final res = await client.put(Endpoints.notification.markUserRead(id));
-      log('markread ${res['meta']}');
-      return const Right(null);
+      log('markread ${res.data['meta']}');
+      return const Right(unit);
 
     } catch(e){
           return Left(AppError(e.toString()));
@@ -44,7 +43,7 @@ class NotificationRepoimpl implements NotificationRepo{
   ErrorOr<int> getUnreadCount() async{
     try{
       final res = await client.get(Endpoints.notification.unreadCount);
-      int count = res['data']['count'] as int;
+      int count = res.data['data']['count'] as int;
       return Right(count);
 
     } catch(e){

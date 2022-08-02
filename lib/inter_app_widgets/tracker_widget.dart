@@ -26,7 +26,7 @@ class TrackerWidget extends StatelessWidget {
               style: FastaTextStyle.subtitle3.copyWith(fontSize: 10.f),
               children: [
             TextSpan(
-              text:isAcceptOrDecline?from.toShortTextAdaptive(19): from.toShortText,
+              text:isAcceptOrDecline?from.toShortTextAdaptive(15): from.toShortText,
               style:
                   FastaTextStyle.subtitleHard.copyWith(fontSize: 12.f),
             ),
@@ -45,7 +45,7 @@ class TrackerWidget extends StatelessWidget {
             width: 11.w,
           ),
           Text(
-            distance +' km',
+            distance.toKm,
             style: FastaTextStyle.subtitle3.copyWith(fontSize: 10.f),
           )
         ],
@@ -59,7 +59,7 @@ class TrackerWidget extends StatelessWidget {
               style: FastaTextStyle.subtitle3.copyWith(fontSize: 10.f),
               children: [
             TextSpan(
-              text: isAcceptOrDecline?from.toShortTextAdaptive(19): to.toShortText,
+              text: isAcceptOrDecline?to.toShortTextAdaptive(15): to.toShortText,
               style:
                   FastaTextStyle.subtitleHard.copyWith(fontSize: 12.f),
             )

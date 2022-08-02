@@ -27,6 +27,7 @@ class _TripCompletedState extends State<TripCompleted>
   TipAmount tipAmount = TipAmount.none;
   bool isTipTap = false;
   bool isRatingTap = false;
+  final rating= 0;
   final tipBtnController = RoundedLoadingButtonController();
 
   
@@ -77,7 +78,8 @@ class _TripCompletedState extends State<TripCompleted>
             SizedBox(height: 27.h),
             CircleAvatar(
               radius: 50.h,
-              backgroundImage: Image.asset('assets/young.png').image,
+              backgroundColor: FastaColors.lightOrange,
+              backgroundImage: Image.asset('assets/2.png').image,
             ),
             SizedBox(height: 21.h),
             Text(
@@ -90,10 +92,13 @@ class _TripCompletedState extends State<TripCompleted>
             Row(
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
-                Icon(
-                  Icons.star,
+                IconButton(
+                  icon: Icon(Icons.star, size: 31.h,),
+                  onPressed: (){
+
+                  },
                   color: FastaColors.green,
-                  size: 31.h,
+                 
                 ),
                 SizedBox(
                   width: 9.w,
@@ -247,30 +252,6 @@ class _TripCompletedState extends State<TripCompleted>
             SizedBox(
               height: 28.h,
             ),
-            // GestureDetector(
-            //   onTap: () {
-            //     final tip;
-            //     if (tipAmount == TipAmount.tip100) {
-            //       context.read<ShipmentHandlerBloc>().add(ShipmentHandlerEvent.tipDelivery(arg!.id, '100'));
-            //     }if (tipAmount == TipAmount.tip500) {
-            //       context.read<ShipmentHandlerBloc>().add(ShipmentHandlerEvent.tipDelivery(arg!.id, '500'));
-            //     }if (tipAmount == TipAmount.tip1000) {
-            //       context.read<ShipmentHandlerBloc>().add(ShipmentHandlerEvent.tipDelivery(arg!.id, '1000'));
-            //     }
-            //   },
-            // child: Container(
-            //   height: 39.h,
-            //   width: 132.w,
-            //   child: Center(
-            //     child: Text('Tip',
-            //         style: FastaTextStyle.hardLabel2.copyWith(
-            //             fontSize: 13.f, color: FastaColors.primary2)),
-            //   ),
-            //   decoration: BoxDecoration(
-            //       color: FastaColors.primary,
-            //       borderRadius: BorderRadius.circular(9.h)),
-            // ),
-            // ),
             MultiBlocListener(
               listeners: [
                 BlocListener<ShipmentHandlerBloc, ShipmentHandlerState>(

@@ -29,13 +29,15 @@ const  NotificationMessageView({Key? key}) : super(key: key);
               IconButton(
                   icon: Icon(Icons.arrow_back_rounded,
                       size: 16.w, color: FastaColors.primary),
-                  onPressed: ()=> Navigator.pushNamed(context, NotificationsView.route)),
+                  onPressed: ()=> Navigator.pop(context)),
             ],
           ),),
       
       backgroundColor: FastaColors.primary2, 
       body: Row(
-        mainAxisAlignment: MainAxisAlignment.start,
+        mainAxisAlignment: MainAxisAlignment.center,
+
+        crossAxisAlignment: CrossAxisAlignment.center,
         children: [
           Expanded(
             child: Container(

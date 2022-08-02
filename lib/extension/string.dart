@@ -69,26 +69,26 @@ extension GeoString on String {
       rethrow;
     }
   }
+
+  String get toKm{
+    if (length <3) return this +'km';
+    return (replaceRange(2, null, ' Km'));
+  } 
 }
 
 extension CurrencyX on String {
   String get toAmount {
     final format = NumberFormat("#,##0.00", "en_US");
-    // final newNumber = if (this.contains('.'))
-
-
-
-    
-    log(this);
-    if (this == '0.00' || this == '0.0') return 'NGN 0.00';
-    return 'NGN ' + format.format(int.parse(replaceAll('.00', '')));
+    log(this);  
+    return 'NGN ' + format.format(double.parse(this));
   }
 
-  bool get isNegative{
+  bool get isNegative{ 
     if (contains('-')) return true;
     return false;
-  }
+  } 
 }
+
 
 extension DateTimeX on String {
   String get toDateTime {
@@ -99,8 +99,8 @@ extension DateTimeX on String {
 
 extension TrimX on String {
   String get toShortText {
-    if (isEmpty|| length<27) return this;
-    return replaceRange(27, null, ' ...');
+    if (isEmpty|| length<24) return this;
+    return replaceRange(24, null, ' ...');
   }
 
   String  toShortTextAdaptive(int length){

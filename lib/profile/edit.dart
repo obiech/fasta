@@ -93,7 +93,7 @@ class _EditProfileViewState extends State<EditProfileView>
                 children: [
                   GestureDetector(
                     onTap: () async {
-                      await pickImage();
+                      // await pickImage();
                     },
                     child: CircleAvatar(
                       radius: 62.h,
