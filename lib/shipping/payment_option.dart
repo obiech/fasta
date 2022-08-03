@@ -1,4 +1,5 @@
 import 'package:fasta/colors/colors.dart';
+import 'package:fasta/extension/string.dart';
 import 'package:fasta/global_widgets/notifications/notify.dart';
 import 'package:fasta/shipping/application/bloc/shipment_handler_bloc.dart';
 import 'package:fasta/shipping/application/map/shipment_bloc.dart';
@@ -7,6 +8,7 @@ import 'package:fasta/shipping/map_view.dart';
 import 'package:fasta/shipping/rider_scan.dart';
 import 'package:fasta/shipping/widgets/elevated_card_small.dart';
 import 'package:fasta/theming/size_config.dart';
+import 'package:fasta/typography/font_weights.dart';
 import 'package:fasta/typography/text_styles.dart';
 import 'package:fasta/wallet/cubit/wallet_cubit.dart';
 import 'package:flutter/material.dart';
@@ -90,10 +92,10 @@ class _PaymentOptionsState extends State<PaymentOptions> {
                                     ),
                                     BlocBuilder<ShipmentHandlerBloc,
                                         ShipmentHandlerState>(
-                                      builder: (context, state) {
+                                      builder: (context, state) { 
                                         return Text(
-                                          'NGN ${state.deliveryEstimate}',
-                                          style: FastaTextStyle.headline1,
+                                          state.deliveryEstimate!.amountRange,
+                                          style: FastaTextStyle.headline6.copyWith(fontWeight: FastaFontWeight.extraBold),
                                         );
                                       },
                                     ),

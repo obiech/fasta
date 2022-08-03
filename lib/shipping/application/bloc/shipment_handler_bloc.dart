@@ -5,12 +5,14 @@ import 'package:fasta/core/app_state.dart';
 import 'package:fasta/shipping/domain/entity/delivery.dart';
 import 'package:fasta/shipping/domain/entity/delivery_invitations.dart';
 import 'package:fasta/shipping/domain/entity/delivery_model.dart';
+import 'package:fasta/shipping/domain/entity/nearby_rider.dart';
 import 'package:fasta/shipping/infrastructure/models/delivery_dto.dart';
 import 'package:fasta/shipping/infrastructure/repo.dart';
 import 'package:fasta/shipping/infrastructure/scoket_io.dart';
 import 'package:fasta/shipping/repository/arg.dart';
 import 'package:fasta/shipping/repository/repo.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
+import 'package:google_maps_flutter/google_maps_flutter.dart';
 
 part 'shipment_handler_event.dart';
 part 'shipment_handler_state.dart';
@@ -51,6 +53,7 @@ class ShipmentHandlerBloc
     on<_DeliveryInvitations>(_onDeliveryInvitations);
     on<_GetAllDeliveriesPendingInvitations>(
         _onGetAllDeliveriesPendingInvitations);
+    on<_GetNearbyRiders>(_onGetNearbyRiders);
   }
 
   _onAcceptDelivery(
@@ -64,8 +67,7 @@ class ShipmentHandlerBloc
         (r) => emit(state.copyWith(
               status: AppState.success,
             )));
-      add(const ShipmentHandlerEvent.getAllDeliveriesPendingInvitations());
-
+    add(const ShipmentHandlerEvent.getAllDeliveriesPendingInvitations());
   }
 
   _onRejectDelivery(
@@ -173,6 +175,7 @@ class ShipmentHandlerBloc
           vehicleType: map['vehicleType'],
           priority: map['priority']);
       add(ShipmentHandlerEvent.deliveryCost(delivery));
+      // add(ShipmentHandlerEvent.getNearbyRiders(NearbyRider(delivery.l)))
       // add(ShipmentHandlerEvent.getADelivery(r., owner))
       emit(state.copyWith(status: AppState.success, address: r));
     });
@@ -189,7 +192,7 @@ class ShipmentHandlerBloc
         (r) => emit(state.copyWith(
               status: AppState.success,
             )));
-            add(const ShipmentHandlerEvent.getAllDeliveries());
+    add(const ShipmentHandlerEvent.getAllDeliveries());
   }
 
   _onRateDelivery(
@@ -237,7 +240,7 @@ class ShipmentHandlerBloc
             state.copyWith(status: AppState.success, pendingInvitations: r)));
   }
 
-    _onDeliveryInvitations(
+  _onDeliveryInvitations(
       _DeliveryInvitations event, Emitter<ShipmentHandlerState> emit) async {
     emit(state.copyWith(pendingInvitations: event.invitation));
   }
@@ -251,6 +254,29 @@ class ShipmentHandlerBloc
         (l) => emit(state.copyWith(
             status: AppState.failed, errorMessage: l.errorMessage)),
         (r) => emit(state.copyWith(status: AppState.success, delivery: r)));
+  }
+
+  _onGetNearbyRiders(
+      _GetNearbyRiders event, Emitter<ShipmentHandlerState> emit) async {
+    emit(state.copyWith(status: AppState.loading));
+
+    final res = await repo.nearbyRiders(event.location);
+    res.fold(
+        (l) => emit(state.copyWith(
+            status: AppState.failed, errorMessage: l.errorMessage)), (r) {
+      List<Marker> markers = [];
+      r.map((element) async {
+        final marker = await element.toMarker;
+        log(r.toString());
+        markers.add(marker);
+      });
+      // for (NearbyRider a in r){
+      //   log(a.toMarker.toString(),name:'a.toString()');
+      //   markers.add(a.toMarker);
+      // }
+      log(markers.toString());
+      emit(state.copyWith(status: AppState.success, riders: markers.toSet()));
+    });
   }
 
   void _onSubscription(_Started event, Emitter<ShipmentHandlerState> emit) {
@@ -274,7 +300,7 @@ class ShipmentHandlerBloc
     });
     listener3 = socketIO.getuserAcceptCompletedDelivery.listen((event) {
       // emit(state.copyWith(newDeliveryEvent: event));
-       add(const ShipmentHandlerEvent.getAllDeliveries());
+      add(const ShipmentHandlerEvent.getAllDeliveries());
       add(const ShipmentHandlerEvent.getAllDeliveriesPendingInvitations());
       log(event.toString(), name: 'getuserAcceptCompletedDeliveryBloc');
     });

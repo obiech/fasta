@@ -87,13 +87,25 @@ extension CurrencyX on String {
     if (contains('-')) return true;
     return false;
   } 
+  String get amountRange {
+    try {
+      final amount = double.parse(this);
+    final lowerRange = (amount -(amount * 0.2)).toString().toAmount;
+    final higherRange = (amount + (amount * 0.2)).toString().toAmount;
+    return lowerRange +' - ' + higherRange;
+    } catch (e) {
+      return toAmount;
+    }
+    
+  }
 }
 
 
 extension DateTimeX on String {
   String get toDateTime {
+    final dateTime = DateTime.parse(this).toLocal();
     if (isEmpty|| length<19) return this;
-    return replaceRange(19, null, '').replaceAll('T', ' ');
+    return dateTime.toString().replaceRange(19, null, '');
   }
 }
 

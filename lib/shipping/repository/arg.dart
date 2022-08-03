@@ -254,7 +254,7 @@ class DeliveryCostArg {
       'fromLongitude': fromLng,
       'toLatitude': toLnt,
       'toLongitude': toLng,
-      'vehicleType': 'bus',
+      'vehicleType': vehicleType,
       'priority': true,
     };
   }
@@ -264,4 +264,9 @@ class DeliveryCostArg {
   //   final fromAddress = await from.getCoordinateFromAddress();
   //       return DeliveryCostArg(fromLat: fromAddress.to, fromLng: fromLng, toLnt: toLnt, toLng: toLng, vehicleType: vehicleType, priority: priority)
   // }
+}
+class LocationPointArg {
+  final String to, from;
+
+  LocationPointArg(this.to, this.from);
 }

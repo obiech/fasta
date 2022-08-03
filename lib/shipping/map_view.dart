@@ -1,6 +1,7 @@
 import 'package:fasta/colors/colors.dart';
 import 'package:fasta/shipping/application/bloc/shipment_handler_bloc.dart';
 import 'package:fasta/shipping/application/map/shipment_bloc.dart';
+import 'package:fasta/shipping/domain/entity/nearby_rider.dart';
 import 'package:fasta/shipping/infrastructure/repo.dart';
 import 'package:fasta/theming/size_config.dart';
 import 'package:fasta/typography/text_styles.dart';
@@ -14,8 +15,10 @@ class MapView extends StatefulWidget {
   static const String route = '/MapView';
   final List<Widget> children;
 
-  const MapView({Key? key, required this.children,})
-      : super(key: key);
+  const MapView({
+    Key? key,
+    required this.children,
+  }) : super(key: key);
   @override
   _MapViewState createState() => _MapViewState();
 }
@@ -71,19 +74,9 @@ class _MapViewState extends State<MapView> {
               // Map View
               BlocListener<ShipmentHandlerBloc, ShipmentHandlerState>(
                 listener: (context, state) {
-                  //  startAddressController.text = state.address?.from ?? '';
-                  // destinationAddressController.text = state.address?.to ?? '';
-
-                  // if (markers.isNotEmpty) markers.clear();
-                  // if (polylines.isNotEmpty) {
-                  //   polylines.clear();
-                  // }
-                  // _placeDistance = null;
-                  // context.read<ShipmentBloc>().add(ShipmentEvent.setMarkers(
-                  //     startAddress: state.address?.to ?? "",
-                  //     destinationAddress: state.address?.from ?? '',
-                  //     currentPosition: _currentPosition,
-                  //     currentAddress: _currentAddress));
+                  if (state.riders?.isNotEmpty ?? false) {
+                    markers.addAll(state.riders!);
+                  }
                 },
                 child: BlocBuilder<ShipmentHandlerBloc, ShipmentHandlerState>(
                     // buildWhen: ((previous, current) => polylines.isEmpty || markers.isEmpty),
@@ -198,7 +191,8 @@ class _MapViewState extends State<MapView> {
                                   hint: 'Choose destination',
                                   controller: TextEditingController(
                                       text: state.address?.to ??
-                                          state.delivery?.deliverySummary.toAddress ??
+                                          state.delivery?.deliverySummary
+                                              .toAddress ??
                                           ""),
                                   focusNode: desrinationAddressFocusNode,
                                   width: width,
@@ -212,36 +206,48 @@ class _MapViewState extends State<MapView> {
                           const SizedBox(height: 5),
                           BlocListener<ShipmentBloc, ShipmentState>(
                             listener: (context, state) {
-                              state.whenOrNull(currentLocation:
-                                  (currentPosition, errorMessage) {
-                                _currentPosition = currentPosition;
-                              }, currentAddress:
-                                  (currentAddress, errorMessage) {
-                                _currentAddress = currentAddress;
-                                _startAddress = currentAddress;
-                              }, getMarkers: (marker, errorMessage) {
-                                markers = marker;
-                              }, geographicLocation: (geographicLocation) {
-                                mapController
-                                    .animateCamera(CameraUpdate.newLatLngBounds(
-                                        LatLngBounds(
-                                          northeast: LatLng(
-                                              geographicLocation
-                                                  .northEastLatitude,
-                                              geographicLocation
-                                                  .northEastLongitude),
-                                          southwest: LatLng(
-                                              geographicLocation
-                                                  .southWestLatitude,
-                                              geographicLocation
-                                                  .southWestLongitude),
-                                        ),
-                                        100.0));
-                              }, calculatedDistance: (distance) {
-                                _placeDistance = distance;
-                              }, polyLineMapForDrawing: (polyies) {
-                                polylines = polyies;
-                              });
+                              state.whenOrNull(
+                                currentLocation:
+                                    (currentPosition, errorMessage) {
+                                  _currentPosition = currentPosition;
+                                  context.read<ShipmentHandlerBloc>().add(
+                                      ShipmentHandlerEvent.getNearbyRiders(
+                                          NearbyRider(
+                                              currentPosition!.latitude,
+                                              currentPosition.longitude,
+                                              null)));
+                                },
+                                currentAddress: (currentAddress, errorMessage) {
+                                  _currentAddress = currentAddress;
+                                  _startAddress = currentAddress;
+                                },
+                                getMarkers: (marker, errorMessage) {
+                                  markers.addAll(marker);
+                                },
+                                geographicLocation: (geographicLocation) {
+                                  mapController.animateCamera(
+                                      CameraUpdate.newLatLngBounds(
+                                          LatLngBounds(
+                                            northeast: LatLng(
+                                                geographicLocation
+                                                    .northEastLatitude,
+                                                geographicLocation
+                                                    .northEastLongitude),
+                                            southwest: LatLng(
+                                                geographicLocation
+                                                    .southWestLatitude,
+                                                geographicLocation
+                                                    .southWestLongitude),
+                                          ),
+                                          100.0));
+                                },
+                                calculatedDistance: (distance) {
+                                  _placeDistance = distance;
+                                },
+                                polyLineMapForDrawing: (polyies) {
+                                  polylines = polyies;
+                                },
+                              );
                             },
                             child: SizedBox.shrink(
                               child: ElevatedButton(

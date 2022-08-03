@@ -11,6 +11,7 @@ import 'package:fasta/errrors/app_exceptions.dart';
 import 'package:fasta/shipping/domain/entity/delivery.dart';
 import 'package:fasta/shipping/domain/entity/delivery_invitations.dart';
 import 'package:fasta/shipping/domain/entity/delivery_model.dart';
+import 'package:fasta/shipping/domain/entity/nearby_rider.dart';
 import 'package:fasta/shipping/domain/repo.dart';
 import 'package:fasta/shipping/infrastructure/models/delivery_dto.dart';
 import 'package:fasta/shipping/infrastructure/models/delivery_invitation_dto.dart';
@@ -18,11 +19,7 @@ import 'package:fasta/shipping/infrastructure/models/trip_dto.dart';
 import 'package:fasta/shipping/repository/arg.dart';
 import 'package:fasta/typedef.dart/typedefs.dart';
 
-class LocationPointArg {
-  final String to, from;
 
-  LocationPointArg(this.to, this.from);
-}
 
 class ShipmentDataImpl implements ShipmentData {
   final ApiClient _client;
@@ -269,5 +266,20 @@ class ShipmentDataImpl implements ShipmentData {
     } catch (e) {
       return Left(AppError(e.toString()));
     }
+  }
+
+  @override
+  ErrorOr<List<NearbyRider>> nearbyRiders(NearbyRider location) async{
+   try {
+    final map = {'latitude':location.latitude,'longitude':location.longitude};
+     final res = await _client.post(Endpoints.delivery.nearbyRiders,body: map);
+     return Right((res.data['data'] as List)
+          .map((e) => NearbyRider.fromMap(e))
+          .toList());
+   } on DioError catch (e) {
+      return Left(e.fromDioError);
+    } catch (e) {
+    return Left(AppError(e.toString()));
+   }
   }
 }

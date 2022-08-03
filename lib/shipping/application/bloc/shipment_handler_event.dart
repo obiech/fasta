@@ -37,4 +37,6 @@ class ShipmentHandlerEvent with _$ShipmentHandlerEvent {
       _GetADelivery;
   const factory ShipmentHandlerEvent.deliveryInvitations(DeliveryInvitation invitation) =
       _DeliveryInvitations;
+  const factory ShipmentHandlerEvent.getNearbyRiders(NearbyRider location) =
+      _GetNearbyRiders;
 }

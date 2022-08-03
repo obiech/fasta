@@ -146,6 +146,7 @@ class _Delivery {
   String tipDriver(String deliveryId) => relevant + 'delivery/$deliveryId/tip';
   String getADelivery(String deliveryId) => relevant + 'delivery/$deliveryId';
   String get getAllDeliveries => relevant + 'delivery';
+  String get nearbyRiders => relevant + 'delivery/nearby-vehicles';
 }
 
 class _DriverDelivery {

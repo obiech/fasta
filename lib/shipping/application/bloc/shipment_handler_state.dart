@@ -10,6 +10,7 @@ class ShipmentHandlerState with _$ShipmentHandlerState {
       DeliveryInvitation? pendingInvitations,
       // bool is
       String? deliveryEstimate,
+      Set<Marker>? riders,
       DeliveryModel? delivery,
       @Deprecated('replace with deliverySummary')
       List<DeliverySummary>? deliverySummary,

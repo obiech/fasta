@@ -1,5 +1,6 @@
 import 'package:fasta/colors/colors.dart';
 import 'package:fasta/core/app_state.dart';
+import 'package:fasta/extension/string.dart';
 import 'package:fasta/global_widgets/rounded_loading_button/button_mixin.dart';
 import 'package:fasta/global_widgets/rounded_loading_button/custom_button.dart';
 import 'package:fasta/inter_app_widgets/order_preview.dart';
@@ -25,6 +26,7 @@ class CompleteOrder extends StatefulWidget {
 
 class _CompleteOrderState extends State<CompleteOrder>
     with RoundedLoadingButtonMixin {
+      bool isButtonTap = false;
   @override
   Widget build(BuildContext context) {
     return MapView(
@@ -47,7 +49,9 @@ class _CompleteOrderState extends State<CompleteOrder>
                               topRight: Radius.circular(30.h))),
                       child: ListView(controller: scrollController, children: [
                         BlocConsumer<ShipmentHandlerBloc, ShipmentHandlerState>(
+                          listenWhen:(_,__)=> isButtonTap,
                           listener: (context, state) async {
+                            
                             if (state.status == AppState.loading) {
                               btnController.start();
                             } else if (state.status == AppState.failed) {
@@ -123,7 +127,7 @@ class _CompleteOrderState extends State<CompleteOrder>
                                       to: state.delivery!.deliverySummary.fromAddress,
                                       from: state.delivery!.deliverySummary.toAddress,
                                       distance:
-                                          '${state.delivery!.deliverySummary.distance} Meters from where you are',
+                                          'About ${state.delivery!.deliverySummary.distance.toKm} from where you are',
                                     ),
                                   ],
                                 ),
@@ -134,6 +138,7 @@ class _CompleteOrderState extends State<CompleteOrder>
                                     controller: btnController,
                                     name: 'Order Fulfilled',
                                     onPressed: () {
+                                      isButtonTap = true;
                                       context.read<ShipmentHandlerBloc>().add(
                                           ShipmentHandlerEvent.finishDelivery(
                                               state.delivery!.deliverySummary.id));

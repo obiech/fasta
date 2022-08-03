@@ -115,6 +115,12 @@ class _$ShipmentHandlerEventTearOff {
       invitation,
     );
   }
+
+  _GetNearbyRiders getNearbyRiders(NearbyRider location) {
+    return _GetNearbyRiders(
+      location,
+    );
+  }
 }
 
 /// @nodoc
@@ -142,6 +148,7 @@ mixin _$ShipmentHandlerEvent {
     required TResult Function(String deliveryId, Owner owner) getADelivery,
     required TResult Function(DeliveryInvitation invitation)
         deliveryInvitations,
+    required TResult Function(NearbyRider location) getNearbyRiders,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
@@ -163,6 +170,7 @@ mixin _$ShipmentHandlerEvent {
     TResult Function(String deliveryId)? finishDelivery,
     TResult Function(String deliveryId, Owner owner)? getADelivery,
     TResult Function(DeliveryInvitation invitation)? deliveryInvitations,
+    TResult Function(NearbyRider location)? getNearbyRiders,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
@@ -184,6 +192,7 @@ mixin _$ShipmentHandlerEvent {
     TResult Function(String deliveryId)? finishDelivery,
     TResult Function(String deliveryId, Owner owner)? getADelivery,
     TResult Function(DeliveryInvitation invitation)? deliveryInvitations,
+    TResult Function(NearbyRider location)? getNearbyRiders,
     required TResult orElse(),
   }) =>
       throw _privateConstructorUsedError;
@@ -208,6 +217,7 @@ mixin _$ShipmentHandlerEvent {
     required TResult Function(_FinishDelivery value) finishDelivery,
     required TResult Function(_GetADelivery value) getADelivery,
     required TResult Function(_DeliveryInvitations value) deliveryInvitations,
+    required TResult Function(_GetNearbyRiders value) getNearbyRiders,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
@@ -230,6 +240,7 @@ mixin _$ShipmentHandlerEvent {
     TResult Function(_FinishDelivery value)? finishDelivery,
     TResult Function(_GetADelivery value)? getADelivery,
     TResult Function(_DeliveryInvitations value)? deliveryInvitations,
+    TResult Function(_GetNearbyRiders value)? getNearbyRiders,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
@@ -252,6 +263,7 @@ mixin _$ShipmentHandlerEvent {
     TResult Function(_FinishDelivery value)? finishDelivery,
     TResult Function(_GetADelivery value)? getADelivery,
     TResult Function(_DeliveryInvitations value)? deliveryInvitations,
+    TResult Function(_GetNearbyRiders value)? getNearbyRiders,
     required TResult orElse(),
   }) =>
       throw _privateConstructorUsedError;
@@ -331,6 +343,7 @@ class _$_Started implements _Started {
     required TResult Function(String deliveryId, Owner owner) getADelivery,
     required TResult Function(DeliveryInvitation invitation)
         deliveryInvitations,
+    required TResult Function(NearbyRider location) getNearbyRiders,
   }) {
     return started();
   }
@@ -355,6 +368,7 @@ class _$_Started implements _Started {
     TResult Function(String deliveryId)? finishDelivery,
     TResult Function(String deliveryId, Owner owner)? getADelivery,
     TResult Function(DeliveryInvitation invitation)? deliveryInvitations,
+    TResult Function(NearbyRider location)? getNearbyRiders,
   }) {
     return started?.call();
   }
@@ -379,6 +393,7 @@ class _$_Started implements _Started {
     TResult Function(String deliveryId)? finishDelivery,
     TResult Function(String deliveryId, Owner owner)? getADelivery,
     TResult Function(DeliveryInvitation invitation)? deliveryInvitations,
+    TResult Function(NearbyRider location)? getNearbyRiders,
     required TResult orElse(),
   }) {
     if (started != null) {
@@ -409,6 +424,7 @@ class _$_Started implements _Started {
     required TResult Function(_FinishDelivery value) finishDelivery,
     required TResult Function(_GetADelivery value) getADelivery,
     required TResult Function(_DeliveryInvitations value) deliveryInvitations,
+    required TResult Function(_GetNearbyRiders value) getNearbyRiders,
   }) {
     return started(this);
   }
@@ -434,6 +450,7 @@ class _$_Started implements _Started {
     TResult Function(_FinishDelivery value)? finishDelivery,
     TResult Function(_GetADelivery value)? getADelivery,
     TResult Function(_DeliveryInvitations value)? deliveryInvitations,
+    TResult Function(_GetNearbyRiders value)? getNearbyRiders,
   }) {
     return started?.call(this);
   }
@@ -459,6 +476,7 @@ class _$_Started implements _Started {
     TResult Function(_FinishDelivery value)? finishDelivery,
     TResult Function(_GetADelivery value)? getADelivery,
     TResult Function(_DeliveryInvitations value)? deliveryInvitations,
+    TResult Function(_GetNearbyRiders value)? getNearbyRiders,
     required TResult orElse(),
   }) {
     if (started != null) {
@@ -555,6 +573,7 @@ class _$_CreateShipment implements _CreateShipment {
     required TResult Function(String deliveryId, Owner owner) getADelivery,
     required TResult Function(DeliveryInvitation invitation)
         deliveryInvitations,
+    required TResult Function(NearbyRider location) getNearbyRiders,
   }) {
     return createShipment(arg);
   }
@@ -579,6 +598,7 @@ class _$_CreateShipment implements _CreateShipment {
     TResult Function(String deliveryId)? finishDelivery,
     TResult Function(String deliveryId, Owner owner)? getADelivery,
     TResult Function(DeliveryInvitation invitation)? deliveryInvitations,
+    TResult Function(NearbyRider location)? getNearbyRiders,
   }) {
     return createShipment?.call(arg);
   }
@@ -603,6 +623,7 @@ class _$_CreateShipment implements _CreateShipment {
     TResult Function(String deliveryId)? finishDelivery,
     TResult Function(String deliveryId, Owner owner)? getADelivery,
     TResult Function(DeliveryInvitation invitation)? deliveryInvitations,
+    TResult Function(NearbyRider location)? getNearbyRiders,
     required TResult orElse(),
   }) {
     if (createShipment != null) {
@@ -633,6 +654,7 @@ class _$_CreateShipment implements _CreateShipment {
     required TResult Function(_FinishDelivery value) finishDelivery,
     required TResult Function(_GetADelivery value) getADelivery,
     required TResult Function(_DeliveryInvitations value) deliveryInvitations,
+    required TResult Function(_GetNearbyRiders value) getNearbyRiders,
   }) {
     return createShipment(this);
   }
@@ -658,6 +680,7 @@ class _$_CreateShipment implements _CreateShipment {
     TResult Function(_FinishDelivery value)? finishDelivery,
     TResult Function(_GetADelivery value)? getADelivery,
     TResult Function(_DeliveryInvitations value)? deliveryInvitations,
+    TResult Function(_GetNearbyRiders value)? getNearbyRiders,
   }) {
     return createShipment?.call(this);
   }
@@ -683,6 +706,7 @@ class _$_CreateShipment implements _CreateShipment {
     TResult Function(_FinishDelivery value)? finishDelivery,
     TResult Function(_GetADelivery value)? getADelivery,
     TResult Function(_DeliveryInvitations value)? deliveryInvitations,
+    TResult Function(_GetNearbyRiders value)? getNearbyRiders,
     required TResult orElse(),
   }) {
     if (createShipment != null) {
@@ -785,6 +809,7 @@ class _$_CreateTrip implements _CreateTrip {
     required TResult Function(String deliveryId, Owner owner) getADelivery,
     required TResult Function(DeliveryInvitation invitation)
         deliveryInvitations,
+    required TResult Function(NearbyRider location) getNearbyRiders,
   }) {
     return createTrip(arg);
   }
@@ -809,6 +834,7 @@ class _$_CreateTrip implements _CreateTrip {
     TResult Function(String deliveryId)? finishDelivery,
     TResult Function(String deliveryId, Owner owner)? getADelivery,
     TResult Function(DeliveryInvitation invitation)? deliveryInvitations,
+    TResult Function(NearbyRider location)? getNearbyRiders,
   }) {
     return createTrip?.call(arg);
   }
@@ -833,6 +859,7 @@ class _$_CreateTrip implements _CreateTrip {
     TResult Function(String deliveryId)? finishDelivery,
     TResult Function(String deliveryId, Owner owner)? getADelivery,
     TResult Function(DeliveryInvitation invitation)? deliveryInvitations,
+    TResult Function(NearbyRider location)? getNearbyRiders,
     required TResult orElse(),
   }) {
     if (createTrip != null) {
@@ -863,6 +890,7 @@ class _$_CreateTrip implements _CreateTrip {
     required TResult Function(_FinishDelivery value) finishDelivery,
     required TResult Function(_GetADelivery value) getADelivery,
     required TResult Function(_DeliveryInvitations value) deliveryInvitations,
+    required TResult Function(_GetNearbyRiders value) getNearbyRiders,
   }) {
     return createTrip(this);
   }
@@ -888,6 +916,7 @@ class _$_CreateTrip implements _CreateTrip {
     TResult Function(_FinishDelivery value)? finishDelivery,
     TResult Function(_GetADelivery value)? getADelivery,
     TResult Function(_DeliveryInvitations value)? deliveryInvitations,
+    TResult Function(_GetNearbyRiders value)? getNearbyRiders,
   }) {
     return createTrip?.call(this);
   }
@@ -913,6 +942,7 @@ class _$_CreateTrip implements _CreateTrip {
     TResult Function(_FinishDelivery value)? finishDelivery,
     TResult Function(_GetADelivery value)? getADelivery,
     TResult Function(_DeliveryInvitations value)? deliveryInvitations,
+    TResult Function(_GetNearbyRiders value)? getNearbyRiders,
     required TResult orElse(),
   }) {
     if (createTrip != null) {
@@ -990,6 +1020,7 @@ class _$_GetAllDeliveries implements _GetAllDeliveries {
     required TResult Function(String deliveryId, Owner owner) getADelivery,
     required TResult Function(DeliveryInvitation invitation)
         deliveryInvitations,
+    required TResult Function(NearbyRider location) getNearbyRiders,
   }) {
     return getAllDeliveries();
   }
@@ -1014,6 +1045,7 @@ class _$_GetAllDeliveries implements _GetAllDeliveries {
     TResult Function(String deliveryId)? finishDelivery,
     TResult Function(String deliveryId, Owner owner)? getADelivery,
     TResult Function(DeliveryInvitation invitation)? deliveryInvitations,
+    TResult Function(NearbyRider location)? getNearbyRiders,
   }) {
     return getAllDeliveries?.call();
   }
@@ -1038,6 +1070,7 @@ class _$_GetAllDeliveries implements _GetAllDeliveries {
     TResult Function(String deliveryId)? finishDelivery,
     TResult Function(String deliveryId, Owner owner)? getADelivery,
     TResult Function(DeliveryInvitation invitation)? deliveryInvitations,
+    TResult Function(NearbyRider location)? getNearbyRiders,
     required TResult orElse(),
   }) {
     if (getAllDeliveries != null) {
@@ -1068,6 +1101,7 @@ class _$_GetAllDeliveries implements _GetAllDeliveries {
     required TResult Function(_FinishDelivery value) finishDelivery,
     required TResult Function(_GetADelivery value) getADelivery,
     required TResult Function(_DeliveryInvitations value) deliveryInvitations,
+    required TResult Function(_GetNearbyRiders value) getNearbyRiders,
   }) {
     return getAllDeliveries(this);
   }
@@ -1093,6 +1127,7 @@ class _$_GetAllDeliveries implements _GetAllDeliveries {
     TResult Function(_FinishDelivery value)? finishDelivery,
     TResult Function(_GetADelivery value)? getADelivery,
     TResult Function(_DeliveryInvitations value)? deliveryInvitations,
+    TResult Function(_GetNearbyRiders value)? getNearbyRiders,
   }) {
     return getAllDeliveries?.call(this);
   }
@@ -1118,6 +1153,7 @@ class _$_GetAllDeliveries implements _GetAllDeliveries {
     TResult Function(_FinishDelivery value)? finishDelivery,
     TResult Function(_GetADelivery value)? getADelivery,
     TResult Function(_DeliveryInvitations value)? deliveryInvitations,
+    TResult Function(_GetNearbyRiders value)? getNearbyRiders,
     required TResult orElse(),
   }) {
     if (getAllDeliveries != null) {
@@ -1195,6 +1231,7 @@ class _$_GetAllDeliveriesPendingInvitations
     required TResult Function(String deliveryId, Owner owner) getADelivery,
     required TResult Function(DeliveryInvitation invitation)
         deliveryInvitations,
+    required TResult Function(NearbyRider location) getNearbyRiders,
   }) {
     return getAllDeliveriesPendingInvitations();
   }
@@ -1219,6 +1256,7 @@ class _$_GetAllDeliveriesPendingInvitations
     TResult Function(String deliveryId)? finishDelivery,
     TResult Function(String deliveryId, Owner owner)? getADelivery,
     TResult Function(DeliveryInvitation invitation)? deliveryInvitations,
+    TResult Function(NearbyRider location)? getNearbyRiders,
   }) {
     return getAllDeliveriesPendingInvitations?.call();
   }
@@ -1243,6 +1281,7 @@ class _$_GetAllDeliveriesPendingInvitations
     TResult Function(String deliveryId)? finishDelivery,
     TResult Function(String deliveryId, Owner owner)? getADelivery,
     TResult Function(DeliveryInvitation invitation)? deliveryInvitations,
+    TResult Function(NearbyRider location)? getNearbyRiders,
     required TResult orElse(),
   }) {
     if (getAllDeliveriesPendingInvitations != null) {
@@ -1273,6 +1312,7 @@ class _$_GetAllDeliveriesPendingInvitations
     required TResult Function(_FinishDelivery value) finishDelivery,
     required TResult Function(_GetADelivery value) getADelivery,
     required TResult Function(_DeliveryInvitations value) deliveryInvitations,
+    required TResult Function(_GetNearbyRiders value) getNearbyRiders,
   }) {
     return getAllDeliveriesPendingInvitations(this);
   }
@@ -1298,6 +1338,7 @@ class _$_GetAllDeliveriesPendingInvitations
     TResult Function(_FinishDelivery value)? finishDelivery,
     TResult Function(_GetADelivery value)? getADelivery,
     TResult Function(_DeliveryInvitations value)? deliveryInvitations,
+    TResult Function(_GetNearbyRiders value)? getNearbyRiders,
   }) {
     return getAllDeliveriesPendingInvitations?.call(this);
   }
@@ -1323,6 +1364,7 @@ class _$_GetAllDeliveriesPendingInvitations
     TResult Function(_FinishDelivery value)? finishDelivery,
     TResult Function(_GetADelivery value)? getADelivery,
     TResult Function(_DeliveryInvitations value)? deliveryInvitations,
+    TResult Function(_GetNearbyRiders value)? getNearbyRiders,
     required TResult orElse(),
   }) {
     if (getAllDeliveriesPendingInvitations != null) {
@@ -1421,6 +1463,7 @@ class _$_GetAllShipment implements _GetAllShipment {
     required TResult Function(String deliveryId, Owner owner) getADelivery,
     required TResult Function(DeliveryInvitation invitation)
         deliveryInvitations,
+    required TResult Function(NearbyRider location) getNearbyRiders,
   }) {
     return getAllShipment(email);
   }
@@ -1445,6 +1488,7 @@ class _$_GetAllShipment implements _GetAllShipment {
     TResult Function(String deliveryId)? finishDelivery,
     TResult Function(String deliveryId, Owner owner)? getADelivery,
     TResult Function(DeliveryInvitation invitation)? deliveryInvitations,
+    TResult Function(NearbyRider location)? getNearbyRiders,
   }) {
     return getAllShipment?.call(email);
   }
@@ -1469,6 +1513,7 @@ class _$_GetAllShipment implements _GetAllShipment {
     TResult Function(String deliveryId)? finishDelivery,
     TResult Function(String deliveryId, Owner owner)? getADelivery,
     TResult Function(DeliveryInvitation invitation)? deliveryInvitations,
+    TResult Function(NearbyRider location)? getNearbyRiders,
     required TResult orElse(),
   }) {
     if (getAllShipment != null) {
@@ -1499,6 +1544,7 @@ class _$_GetAllShipment implements _GetAllShipment {
     required TResult Function(_FinishDelivery value) finishDelivery,
     required TResult Function(_GetADelivery value) getADelivery,
     required TResult Function(_DeliveryInvitations value) deliveryInvitations,
+    required TResult Function(_GetNearbyRiders value) getNearbyRiders,
   }) {
     return getAllShipment(this);
   }
@@ -1524,6 +1570,7 @@ class _$_GetAllShipment implements _GetAllShipment {
     TResult Function(_FinishDelivery value)? finishDelivery,
     TResult Function(_GetADelivery value)? getADelivery,
     TResult Function(_DeliveryInvitations value)? deliveryInvitations,
+    TResult Function(_GetNearbyRiders value)? getNearbyRiders,
   }) {
     return getAllShipment?.call(this);
   }
@@ -1549,6 +1596,7 @@ class _$_GetAllShipment implements _GetAllShipment {
     TResult Function(_FinishDelivery value)? finishDelivery,
     TResult Function(_GetADelivery value)? getADelivery,
     TResult Function(_DeliveryInvitations value)? deliveryInvitations,
+    TResult Function(_GetNearbyRiders value)? getNearbyRiders,
     required TResult orElse(),
   }) {
     if (getAllShipment != null) {
@@ -1660,6 +1708,7 @@ class _$_UpdateTripStatus implements _UpdateTripStatus {
     required TResult Function(String deliveryId, Owner owner) getADelivery,
     required TResult Function(DeliveryInvitation invitation)
         deliveryInvitations,
+    required TResult Function(NearbyRider location) getNearbyRiders,
   }) {
     return updateTripStatus(id, status);
   }
@@ -1684,6 +1733,7 @@ class _$_UpdateTripStatus implements _UpdateTripStatus {
     TResult Function(String deliveryId)? finishDelivery,
     TResult Function(String deliveryId, Owner owner)? getADelivery,
     TResult Function(DeliveryInvitation invitation)? deliveryInvitations,
+    TResult Function(NearbyRider location)? getNearbyRiders,
   }) {
     return updateTripStatus?.call(id, status);
   }
@@ -1708,6 +1758,7 @@ class _$_UpdateTripStatus implements _UpdateTripStatus {
     TResult Function(String deliveryId)? finishDelivery,
     TResult Function(String deliveryId, Owner owner)? getADelivery,
     TResult Function(DeliveryInvitation invitation)? deliveryInvitations,
+    TResult Function(NearbyRider location)? getNearbyRiders,
     required TResult orElse(),
   }) {
     if (updateTripStatus != null) {
@@ -1738,6 +1789,7 @@ class _$_UpdateTripStatus implements _UpdateTripStatus {
     required TResult Function(_FinishDelivery value) finishDelivery,
     required TResult Function(_GetADelivery value) getADelivery,
     required TResult Function(_DeliveryInvitations value) deliveryInvitations,
+    required TResult Function(_GetNearbyRiders value) getNearbyRiders,
   }) {
     return updateTripStatus(this);
   }
@@ -1763,6 +1815,7 @@ class _$_UpdateTripStatus implements _UpdateTripStatus {
     TResult Function(_FinishDelivery value)? finishDelivery,
     TResult Function(_GetADelivery value)? getADelivery,
     TResult Function(_DeliveryInvitations value)? deliveryInvitations,
+    TResult Function(_GetNearbyRiders value)? getNearbyRiders,
   }) {
     return updateTripStatus?.call(this);
   }
@@ -1788,6 +1841,7 @@ class _$_UpdateTripStatus implements _UpdateTripStatus {
     TResult Function(_FinishDelivery value)? finishDelivery,
     TResult Function(_GetADelivery value)? getADelivery,
     TResult Function(_DeliveryInvitations value)? deliveryInvitations,
+    TResult Function(_GetNearbyRiders value)? getNearbyRiders,
     required TResult orElse(),
   }) {
     if (updateTripStatus != null) {
@@ -1894,6 +1948,7 @@ class _$_AcceptCompletedDelivery implements _AcceptCompletedDelivery {
     required TResult Function(String deliveryId, Owner owner) getADelivery,
     required TResult Function(DeliveryInvitation invitation)
         deliveryInvitations,
+    required TResult Function(NearbyRider location) getNearbyRiders,
   }) {
     return acceptCompletedDelivery(deliveryId);
   }
@@ -1918,6 +1973,7 @@ class _$_AcceptCompletedDelivery implements _AcceptCompletedDelivery {
     TResult Function(String deliveryId)? finishDelivery,
     TResult Function(String deliveryId, Owner owner)? getADelivery,
     TResult Function(DeliveryInvitation invitation)? deliveryInvitations,
+    TResult Function(NearbyRider location)? getNearbyRiders,
   }) {
     return acceptCompletedDelivery?.call(deliveryId);
   }
@@ -1942,6 +1998,7 @@ class _$_AcceptCompletedDelivery implements _AcceptCompletedDelivery {
     TResult Function(String deliveryId)? finishDelivery,
     TResult Function(String deliveryId, Owner owner)? getADelivery,
     TResult Function(DeliveryInvitation invitation)? deliveryInvitations,
+    TResult Function(NearbyRider location)? getNearbyRiders,
     required TResult orElse(),
   }) {
     if (acceptCompletedDelivery != null) {
@@ -1972,6 +2029,7 @@ class _$_AcceptCompletedDelivery implements _AcceptCompletedDelivery {
     required TResult Function(_FinishDelivery value) finishDelivery,
     required TResult Function(_GetADelivery value) getADelivery,
     required TResult Function(_DeliveryInvitations value) deliveryInvitations,
+    required TResult Function(_GetNearbyRiders value) getNearbyRiders,
   }) {
     return acceptCompletedDelivery(this);
   }
@@ -1997,6 +2055,7 @@ class _$_AcceptCompletedDelivery implements _AcceptCompletedDelivery {
     TResult Function(_FinishDelivery value)? finishDelivery,
     TResult Function(_GetADelivery value)? getADelivery,
     TResult Function(_DeliveryInvitations value)? deliveryInvitations,
+    TResult Function(_GetNearbyRiders value)? getNearbyRiders,
   }) {
     return acceptCompletedDelivery?.call(this);
   }
@@ -2022,6 +2081,7 @@ class _$_AcceptCompletedDelivery implements _AcceptCompletedDelivery {
     TResult Function(_FinishDelivery value)? finishDelivery,
     TResult Function(_GetADelivery value)? getADelivery,
     TResult Function(_DeliveryInvitations value)? deliveryInvitations,
+    TResult Function(_GetNearbyRiders value)? getNearbyRiders,
     required TResult orElse(),
   }) {
     if (acceptCompletedDelivery != null) {
@@ -2124,6 +2184,7 @@ class _$_RateDelivery implements _RateDelivery {
     required TResult Function(String deliveryId, Owner owner) getADelivery,
     required TResult Function(DeliveryInvitation invitation)
         deliveryInvitations,
+    required TResult Function(NearbyRider location) getNearbyRiders,
   }) {
     return rateDelivery(arg);
   }
@@ -2148,6 +2209,7 @@ class _$_RateDelivery implements _RateDelivery {
     TResult Function(String deliveryId)? finishDelivery,
     TResult Function(String deliveryId, Owner owner)? getADelivery,
     TResult Function(DeliveryInvitation invitation)? deliveryInvitations,
+    TResult Function(NearbyRider location)? getNearbyRiders,
   }) {
     return rateDelivery?.call(arg);
   }
@@ -2172,6 +2234,7 @@ class _$_RateDelivery implements _RateDelivery {
     TResult Function(String deliveryId)? finishDelivery,
     TResult Function(String deliveryId, Owner owner)? getADelivery,
     TResult Function(DeliveryInvitation invitation)? deliveryInvitations,
+    TResult Function(NearbyRider location)? getNearbyRiders,
     required TResult orElse(),
   }) {
     if (rateDelivery != null) {
@@ -2202,6 +2265,7 @@ class _$_RateDelivery implements _RateDelivery {
     required TResult Function(_FinishDelivery value) finishDelivery,
     required TResult Function(_GetADelivery value) getADelivery,
     required TResult Function(_DeliveryInvitations value) deliveryInvitations,
+    required TResult Function(_GetNearbyRiders value) getNearbyRiders,
   }) {
     return rateDelivery(this);
   }
@@ -2227,6 +2291,7 @@ class _$_RateDelivery implements _RateDelivery {
     TResult Function(_FinishDelivery value)? finishDelivery,
     TResult Function(_GetADelivery value)? getADelivery,
     TResult Function(_DeliveryInvitations value)? deliveryInvitations,
+    TResult Function(_GetNearbyRiders value)? getNearbyRiders,
   }) {
     return rateDelivery?.call(this);
   }
@@ -2252,6 +2317,7 @@ class _$_RateDelivery implements _RateDelivery {
     TResult Function(_FinishDelivery value)? finishDelivery,
     TResult Function(_GetADelivery value)? getADelivery,
     TResult Function(_DeliveryInvitations value)? deliveryInvitations,
+    TResult Function(_GetNearbyRiders value)? getNearbyRiders,
     required TResult orElse(),
   }) {
     if (rateDelivery != null) {
@@ -2364,6 +2430,7 @@ class _$_TipDelivery implements _TipDelivery {
     required TResult Function(String deliveryId, Owner owner) getADelivery,
     required TResult Function(DeliveryInvitation invitation)
         deliveryInvitations,
+    required TResult Function(NearbyRider location) getNearbyRiders,
   }) {
     return tipDelivery(deliveryId, amount);
   }
@@ -2388,6 +2455,7 @@ class _$_TipDelivery implements _TipDelivery {
     TResult Function(String deliveryId)? finishDelivery,
     TResult Function(String deliveryId, Owner owner)? getADelivery,
     TResult Function(DeliveryInvitation invitation)? deliveryInvitations,
+    TResult Function(NearbyRider location)? getNearbyRiders,
   }) {
     return tipDelivery?.call(deliveryId, amount);
   }
@@ -2412,6 +2480,7 @@ class _$_TipDelivery implements _TipDelivery {
     TResult Function(String deliveryId)? finishDelivery,
     TResult Function(String deliveryId, Owner owner)? getADelivery,
     TResult Function(DeliveryInvitation invitation)? deliveryInvitations,
+    TResult Function(NearbyRider location)? getNearbyRiders,
     required TResult orElse(),
   }) {
     if (tipDelivery != null) {
@@ -2442,6 +2511,7 @@ class _$_TipDelivery implements _TipDelivery {
     required TResult Function(_FinishDelivery value) finishDelivery,
     required TResult Function(_GetADelivery value) getADelivery,
     required TResult Function(_DeliveryInvitations value) deliveryInvitations,
+    required TResult Function(_GetNearbyRiders value) getNearbyRiders,
   }) {
     return tipDelivery(this);
   }
@@ -2467,6 +2537,7 @@ class _$_TipDelivery implements _TipDelivery {
     TResult Function(_FinishDelivery value)? finishDelivery,
     TResult Function(_GetADelivery value)? getADelivery,
     TResult Function(_DeliveryInvitations value)? deliveryInvitations,
+    TResult Function(_GetNearbyRiders value)? getNearbyRiders,
   }) {
     return tipDelivery?.call(this);
   }
@@ -2492,6 +2563,7 @@ class _$_TipDelivery implements _TipDelivery {
     TResult Function(_FinishDelivery value)? finishDelivery,
     TResult Function(_GetADelivery value)? getADelivery,
     TResult Function(_DeliveryInvitations value)? deliveryInvitations,
+    TResult Function(_GetNearbyRiders value)? getNearbyRiders,
     required TResult orElse(),
   }) {
     if (tipDelivery != null) {
@@ -2594,6 +2666,7 @@ class _$_DeliveryCost implements _DeliveryCost {
     required TResult Function(String deliveryId, Owner owner) getADelivery,
     required TResult Function(DeliveryInvitation invitation)
         deliveryInvitations,
+    required TResult Function(NearbyRider location) getNearbyRiders,
   }) {
     return deliveryCost(arg);
   }
@@ -2618,6 +2691,7 @@ class _$_DeliveryCost implements _DeliveryCost {
     TResult Function(String deliveryId)? finishDelivery,
     TResult Function(String deliveryId, Owner owner)? getADelivery,
     TResult Function(DeliveryInvitation invitation)? deliveryInvitations,
+    TResult Function(NearbyRider location)? getNearbyRiders,
   }) {
     return deliveryCost?.call(arg);
   }
@@ -2642,6 +2716,7 @@ class _$_DeliveryCost implements _DeliveryCost {
     TResult Function(String deliveryId)? finishDelivery,
     TResult Function(String deliveryId, Owner owner)? getADelivery,
     TResult Function(DeliveryInvitation invitation)? deliveryInvitations,
+    TResult Function(NearbyRider location)? getNearbyRiders,
     required TResult orElse(),
   }) {
     if (deliveryCost != null) {
@@ -2672,6 +2747,7 @@ class _$_DeliveryCost implements _DeliveryCost {
     required TResult Function(_FinishDelivery value) finishDelivery,
     required TResult Function(_GetADelivery value) getADelivery,
     required TResult Function(_DeliveryInvitations value) deliveryInvitations,
+    required TResult Function(_GetNearbyRiders value) getNearbyRiders,
   }) {
     return deliveryCost(this);
   }
@@ -2697,6 +2773,7 @@ class _$_DeliveryCost implements _DeliveryCost {
     TResult Function(_FinishDelivery value)? finishDelivery,
     TResult Function(_GetADelivery value)? getADelivery,
     TResult Function(_DeliveryInvitations value)? deliveryInvitations,
+    TResult Function(_GetNearbyRiders value)? getNearbyRiders,
   }) {
     return deliveryCost?.call(this);
   }
@@ -2722,6 +2799,7 @@ class _$_DeliveryCost implements _DeliveryCost {
     TResult Function(_FinishDelivery value)? finishDelivery,
     TResult Function(_GetADelivery value)? getADelivery,
     TResult Function(_DeliveryInvitations value)? deliveryInvitations,
+    TResult Function(_GetNearbyRiders value)? getNearbyRiders,
     required TResult orElse(),
   }) {
     if (deliveryCost != null) {
@@ -2799,6 +2877,7 @@ class _$_GetPendingDelivery implements _GetPendingDelivery {
     required TResult Function(String deliveryId, Owner owner) getADelivery,
     required TResult Function(DeliveryInvitation invitation)
         deliveryInvitations,
+    required TResult Function(NearbyRider location) getNearbyRiders,
   }) {
     return getPendingDelivery();
   }
@@ -2823,6 +2902,7 @@ class _$_GetPendingDelivery implements _GetPendingDelivery {
     TResult Function(String deliveryId)? finishDelivery,
     TResult Function(String deliveryId, Owner owner)? getADelivery,
     TResult Function(DeliveryInvitation invitation)? deliveryInvitations,
+    TResult Function(NearbyRider location)? getNearbyRiders,
   }) {
     return getPendingDelivery?.call();
   }
@@ -2847,6 +2927,7 @@ class _$_GetPendingDelivery implements _GetPendingDelivery {
     TResult Function(String deliveryId)? finishDelivery,
     TResult Function(String deliveryId, Owner owner)? getADelivery,
     TResult Function(DeliveryInvitation invitation)? deliveryInvitations,
+    TResult Function(NearbyRider location)? getNearbyRiders,
     required TResult orElse(),
   }) {
     if (getPendingDelivery != null) {
@@ -2877,6 +2958,7 @@ class _$_GetPendingDelivery implements _GetPendingDelivery {
     required TResult Function(_FinishDelivery value) finishDelivery,
     required TResult Function(_GetADelivery value) getADelivery,
     required TResult Function(_DeliveryInvitations value) deliveryInvitations,
+    required TResult Function(_GetNearbyRiders value) getNearbyRiders,
   }) {
     return getPendingDelivery(this);
   }
@@ -2902,6 +2984,7 @@ class _$_GetPendingDelivery implements _GetPendingDelivery {
     TResult Function(_FinishDelivery value)? finishDelivery,
     TResult Function(_GetADelivery value)? getADelivery,
     TResult Function(_DeliveryInvitations value)? deliveryInvitations,
+    TResult Function(_GetNearbyRiders value)? getNearbyRiders,
   }) {
     return getPendingDelivery?.call(this);
   }
@@ -2927,6 +3010,7 @@ class _$_GetPendingDelivery implements _GetPendingDelivery {
     TResult Function(_FinishDelivery value)? finishDelivery,
     TResult Function(_GetADelivery value)? getADelivery,
     TResult Function(_DeliveryInvitations value)? deliveryInvitations,
+    TResult Function(_GetNearbyRiders value)? getNearbyRiders,
     required TResult orElse(),
   }) {
     if (getPendingDelivery != null) {
@@ -3024,6 +3108,7 @@ class _$_AcceptDelivery implements _AcceptDelivery {
     required TResult Function(String deliveryId, Owner owner) getADelivery,
     required TResult Function(DeliveryInvitation invitation)
         deliveryInvitations,
+    required TResult Function(NearbyRider location) getNearbyRiders,
   }) {
     return acceptDelivery(deliveryId);
   }
@@ -3048,6 +3133,7 @@ class _$_AcceptDelivery implements _AcceptDelivery {
     TResult Function(String deliveryId)? finishDelivery,
     TResult Function(String deliveryId, Owner owner)? getADelivery,
     TResult Function(DeliveryInvitation invitation)? deliveryInvitations,
+    TResult Function(NearbyRider location)? getNearbyRiders,
   }) {
     return acceptDelivery?.call(deliveryId);
   }
@@ -3072,6 +3158,7 @@ class _$_AcceptDelivery implements _AcceptDelivery {
     TResult Function(String deliveryId)? finishDelivery,
     TResult Function(String deliveryId, Owner owner)? getADelivery,
     TResult Function(DeliveryInvitation invitation)? deliveryInvitations,
+    TResult Function(NearbyRider location)? getNearbyRiders,
     required TResult orElse(),
   }) {
     if (acceptDelivery != null) {
@@ -3102,6 +3189,7 @@ class _$_AcceptDelivery implements _AcceptDelivery {
     required TResult Function(_FinishDelivery value) finishDelivery,
     required TResult Function(_GetADelivery value) getADelivery,
     required TResult Function(_DeliveryInvitations value) deliveryInvitations,
+    required TResult Function(_GetNearbyRiders value) getNearbyRiders,
   }) {
     return acceptDelivery(this);
   }
@@ -3127,6 +3215,7 @@ class _$_AcceptDelivery implements _AcceptDelivery {
     TResult Function(_FinishDelivery value)? finishDelivery,
     TResult Function(_GetADelivery value)? getADelivery,
     TResult Function(_DeliveryInvitations value)? deliveryInvitations,
+    TResult Function(_GetNearbyRiders value)? getNearbyRiders,
   }) {
     return acceptDelivery?.call(this);
   }
@@ -3152,6 +3241,7 @@ class _$_AcceptDelivery implements _AcceptDelivery {
     TResult Function(_FinishDelivery value)? finishDelivery,
     TResult Function(_GetADelivery value)? getADelivery,
     TResult Function(_DeliveryInvitations value)? deliveryInvitations,
+    TResult Function(_GetNearbyRiders value)? getNearbyRiders,
     required TResult orElse(),
   }) {
     if (acceptDelivery != null) {
@@ -3254,6 +3344,7 @@ class _$_RejectDelivery implements _RejectDelivery {
     required TResult Function(String deliveryId, Owner owner) getADelivery,
     required TResult Function(DeliveryInvitation invitation)
         deliveryInvitations,
+    required TResult Function(NearbyRider location) getNearbyRiders,
   }) {
     return rejectDelivery(deliveryId);
   }
@@ -3278,6 +3369,7 @@ class _$_RejectDelivery implements _RejectDelivery {
     TResult Function(String deliveryId)? finishDelivery,
     TResult Function(String deliveryId, Owner owner)? getADelivery,
     TResult Function(DeliveryInvitation invitation)? deliveryInvitations,
+    TResult Function(NearbyRider location)? getNearbyRiders,
   }) {
     return rejectDelivery?.call(deliveryId);
   }
@@ -3302,6 +3394,7 @@ class _$_RejectDelivery implements _RejectDelivery {
     TResult Function(String deliveryId)? finishDelivery,
     TResult Function(String deliveryId, Owner owner)? getADelivery,
     TResult Function(DeliveryInvitation invitation)? deliveryInvitations,
+    TResult Function(NearbyRider location)? getNearbyRiders,
     required TResult orElse(),
   }) {
     if (rejectDelivery != null) {
@@ -3332,6 +3425,7 @@ class _$_RejectDelivery implements _RejectDelivery {
     required TResult Function(_FinishDelivery value) finishDelivery,
     required TResult Function(_GetADelivery value) getADelivery,
     required TResult Function(_DeliveryInvitations value) deliveryInvitations,
+    required TResult Function(_GetNearbyRiders value) getNearbyRiders,
   }) {
     return rejectDelivery(this);
   }
@@ -3357,6 +3451,7 @@ class _$_RejectDelivery implements _RejectDelivery {
     TResult Function(_FinishDelivery value)? finishDelivery,
     TResult Function(_GetADelivery value)? getADelivery,
     TResult Function(_DeliveryInvitations value)? deliveryInvitations,
+    TResult Function(_GetNearbyRiders value)? getNearbyRiders,
   }) {
     return rejectDelivery?.call(this);
   }
@@ -3382,6 +3477,7 @@ class _$_RejectDelivery implements _RejectDelivery {
     TResult Function(_FinishDelivery value)? finishDelivery,
     TResult Function(_GetADelivery value)? getADelivery,
     TResult Function(_DeliveryInvitations value)? deliveryInvitations,
+    TResult Function(_GetNearbyRiders value)? getNearbyRiders,
     required TResult orElse(),
   }) {
     if (rejectDelivery != null) {
@@ -3484,6 +3580,7 @@ class _$_FinishDelivery implements _FinishDelivery {
     required TResult Function(String deliveryId, Owner owner) getADelivery,
     required TResult Function(DeliveryInvitation invitation)
         deliveryInvitations,
+    required TResult Function(NearbyRider location) getNearbyRiders,
   }) {
     return finishDelivery(deliveryId);
   }
@@ -3508,6 +3605,7 @@ class _$_FinishDelivery implements _FinishDelivery {
     TResult Function(String deliveryId)? finishDelivery,
     TResult Function(String deliveryId, Owner owner)? getADelivery,
     TResult Function(DeliveryInvitation invitation)? deliveryInvitations,
+    TResult Function(NearbyRider location)? getNearbyRiders,
   }) {
     return finishDelivery?.call(deliveryId);
   }
@@ -3532,6 +3630,7 @@ class _$_FinishDelivery implements _FinishDelivery {
     TResult Function(String deliveryId)? finishDelivery,
     TResult Function(String deliveryId, Owner owner)? getADelivery,
     TResult Function(DeliveryInvitation invitation)? deliveryInvitations,
+    TResult Function(NearbyRider location)? getNearbyRiders,
     required TResult orElse(),
   }) {
     if (finishDelivery != null) {
@@ -3562,6 +3661,7 @@ class _$_FinishDelivery implements _FinishDelivery {
     required TResult Function(_FinishDelivery value) finishDelivery,
     required TResult Function(_GetADelivery value) getADelivery,
     required TResult Function(_DeliveryInvitations value) deliveryInvitations,
+    required TResult Function(_GetNearbyRiders value) getNearbyRiders,
   }) {
     return finishDelivery(this);
   }
@@ -3587,6 +3687,7 @@ class _$_FinishDelivery implements _FinishDelivery {
     TResult Function(_FinishDelivery value)? finishDelivery,
     TResult Function(_GetADelivery value)? getADelivery,
     TResult Function(_DeliveryInvitations value)? deliveryInvitations,
+    TResult Function(_GetNearbyRiders value)? getNearbyRiders,
   }) {
     return finishDelivery?.call(this);
   }
@@ -3612,6 +3713,7 @@ class _$_FinishDelivery implements _FinishDelivery {
     TResult Function(_FinishDelivery value)? finishDelivery,
     TResult Function(_GetADelivery value)? getADelivery,
     TResult Function(_DeliveryInvitations value)? deliveryInvitations,
+    TResult Function(_GetNearbyRiders value)? getNearbyRiders,
     required TResult orElse(),
   }) {
     if (finishDelivery != null) {
@@ -3724,6 +3826,7 @@ class _$_GetADelivery implements _GetADelivery {
     required TResult Function(String deliveryId, Owner owner) getADelivery,
     required TResult Function(DeliveryInvitation invitation)
         deliveryInvitations,
+    required TResult Function(NearbyRider location) getNearbyRiders,
   }) {
     return getADelivery(deliveryId, owner);
   }
@@ -3748,6 +3851,7 @@ class _$_GetADelivery implements _GetADelivery {
     TResult Function(String deliveryId)? finishDelivery,
     TResult Function(String deliveryId, Owner owner)? getADelivery,
     TResult Function(DeliveryInvitation invitation)? deliveryInvitations,
+    TResult Function(NearbyRider location)? getNearbyRiders,
   }) {
     return getADelivery?.call(deliveryId, owner);
   }
@@ -3772,6 +3876,7 @@ class _$_GetADelivery implements _GetADelivery {
     TResult Function(String deliveryId)? finishDelivery,
     TResult Function(String deliveryId, Owner owner)? getADelivery,
     TResult Function(DeliveryInvitation invitation)? deliveryInvitations,
+    TResult Function(NearbyRider location)? getNearbyRiders,
     required TResult orElse(),
   }) {
     if (getADelivery != null) {
@@ -3802,6 +3907,7 @@ class _$_GetADelivery implements _GetADelivery {
     required TResult Function(_FinishDelivery value) finishDelivery,
     required TResult Function(_GetADelivery value) getADelivery,
     required TResult Function(_DeliveryInvitations value) deliveryInvitations,
+    required TResult Function(_GetNearbyRiders value) getNearbyRiders,
   }) {
     return getADelivery(this);
   }
@@ -3827,6 +3933,7 @@ class _$_GetADelivery implements _GetADelivery {
     TResult Function(_FinishDelivery value)? finishDelivery,
     TResult Function(_GetADelivery value)? getADelivery,
     TResult Function(_DeliveryInvitations value)? deliveryInvitations,
+    TResult Function(_GetNearbyRiders value)? getNearbyRiders,
   }) {
     return getADelivery?.call(this);
   }
@@ -3852,6 +3959,7 @@ class _$_GetADelivery implements _GetADelivery {
     TResult Function(_FinishDelivery value)? finishDelivery,
     TResult Function(_GetADelivery value)? getADelivery,
     TResult Function(_DeliveryInvitations value)? deliveryInvitations,
+    TResult Function(_GetNearbyRiders value)? getNearbyRiders,
     required TResult orElse(),
   }) {
     if (getADelivery != null) {
@@ -3956,6 +4064,7 @@ class _$_DeliveryInvitations implements _DeliveryInvitations {
     required TResult Function(String deliveryId, Owner owner) getADelivery,
     required TResult Function(DeliveryInvitation invitation)
         deliveryInvitations,
+    required TResult Function(NearbyRider location) getNearbyRiders,
   }) {
     return deliveryInvitations(invitation);
   }
@@ -3980,6 +4089,7 @@ class _$_DeliveryInvitations implements _DeliveryInvitations {
     TResult Function(String deliveryId)? finishDelivery,
     TResult Function(String deliveryId, Owner owner)? getADelivery,
     TResult Function(DeliveryInvitation invitation)? deliveryInvitations,
+    TResult Function(NearbyRider location)? getNearbyRiders,
   }) {
     return deliveryInvitations?.call(invitation);
   }
@@ -4004,6 +4114,7 @@ class _$_DeliveryInvitations implements _DeliveryInvitations {
     TResult Function(String deliveryId)? finishDelivery,
     TResult Function(String deliveryId, Owner owner)? getADelivery,
     TResult Function(DeliveryInvitation invitation)? deliveryInvitations,
+    TResult Function(NearbyRider location)? getNearbyRiders,
     required TResult orElse(),
   }) {
     if (deliveryInvitations != null) {
@@ -4034,6 +4145,7 @@ class _$_DeliveryInvitations implements _DeliveryInvitations {
     required TResult Function(_FinishDelivery value) finishDelivery,
     required TResult Function(_GetADelivery value) getADelivery,
     required TResult Function(_DeliveryInvitations value) deliveryInvitations,
+    required TResult Function(_GetNearbyRiders value) getNearbyRiders,
   }) {
     return deliveryInvitations(this);
   }
@@ -4059,6 +4171,7 @@ class _$_DeliveryInvitations implements _DeliveryInvitations {
     TResult Function(_FinishDelivery value)? finishDelivery,
     TResult Function(_GetADelivery value)? getADelivery,
     TResult Function(_DeliveryInvitations value)? deliveryInvitations,
+    TResult Function(_GetNearbyRiders value)? getNearbyRiders,
   }) {
     return deliveryInvitations?.call(this);
   }
@@ -4084,6 +4197,7 @@ class _$_DeliveryInvitations implements _DeliveryInvitations {
     TResult Function(_FinishDelivery value)? finishDelivery,
     TResult Function(_GetADelivery value)? getADelivery,
     TResult Function(_DeliveryInvitations value)? deliveryInvitations,
+    TResult Function(_GetNearbyRiders value)? getNearbyRiders,
     required TResult orElse(),
   }) {
     if (deliveryInvitations != null) {
@@ -4104,6 +4218,241 @@ abstract class _DeliveryInvitations implements ShipmentHandlerEvent {
 }
 
 /// @nodoc
+abstract class _$GetNearbyRidersCopyWith<$Res> {
+  factory _$GetNearbyRidersCopyWith(
+          _GetNearbyRiders value, $Res Function(_GetNearbyRiders) then) =
+      __$GetNearbyRidersCopyWithImpl<$Res>;
+  $Res call({NearbyRider location});
+}
+
+/// @nodoc
+class __$GetNearbyRidersCopyWithImpl<$Res>
+    extends _$ShipmentHandlerEventCopyWithImpl<$Res>
+    implements _$GetNearbyRidersCopyWith<$Res> {
+  __$GetNearbyRidersCopyWithImpl(
+      _GetNearbyRiders _value, $Res Function(_GetNearbyRiders) _then)
+      : super(_value, (v) => _then(v as _GetNearbyRiders));
+
+  @override
+  _GetNearbyRiders get _value => super._value as _GetNearbyRiders;
+
+  @override
+  $Res call({
+    Object? location = freezed,
+  }) {
+    return _then(_GetNearbyRiders(
+      location == freezed
+          ? _value.location
+          : location // ignore: cast_nullable_to_non_nullable
+              as NearbyRider,
+    ));
+  }
+}
+
+/// @nodoc
+
+class _$_GetNearbyRiders implements _GetNearbyRiders {
+  const _$_GetNearbyRiders(this.location);
+
+  @override
+  final NearbyRider location;
+
+  @override
+  String toString() {
+    return 'ShipmentHandlerEvent.getNearbyRiders(location: $location)';
+  }
+
+  @override
+  bool operator ==(dynamic other) {
+    return identical(this, other) ||
+        (other.runtimeType == runtimeType &&
+            other is _GetNearbyRiders &&
+            const DeepCollectionEquality().equals(other.location, location));
+  }
+
+  @override
+  int get hashCode =>
+      Object.hash(runtimeType, const DeepCollectionEquality().hash(location));
+
+  @JsonKey(ignore: true)
+  @override
+  _$GetNearbyRidersCopyWith<_GetNearbyRiders> get copyWith =>
+      __$GetNearbyRidersCopyWithImpl<_GetNearbyRiders>(this, _$identity);
+
+  @override
+  @optionalTypeArgs
+  TResult when<TResult extends Object?>({
+    required TResult Function() started,
+    required TResult Function(CreateShipmentArg arg) createShipment,
+    required TResult Function(CreateTripArg arg) createTrip,
+    required TResult Function() getAllDeliveries,
+    required TResult Function() getAllDeliveriesPendingInvitations,
+    required TResult Function(String email) getAllShipment,
+    required TResult Function(String id, String status) updateTripStatus,
+    required TResult Function(String deliveryId) acceptCompletedDelivery,
+    required TResult Function(RateDeliveryArg arg) rateDelivery,
+    required TResult Function(String deliveryId, String amount) tipDelivery,
+    required TResult Function(DeliveryCostArg arg) deliveryCost,
+    required TResult Function() getPendingDelivery,
+    required TResult Function(String deliveryId) acceptDelivery,
+    required TResult Function(String deliveryId) rejectDelivery,
+    required TResult Function(String deliveryId) finishDelivery,
+    required TResult Function(String deliveryId, Owner owner) getADelivery,
+    required TResult Function(DeliveryInvitation invitation)
+        deliveryInvitations,
+    required TResult Function(NearbyRider location) getNearbyRiders,
+  }) {
+    return getNearbyRiders(location);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? whenOrNull<TResult extends Object?>({
+    TResult Function()? started,
+    TResult Function(CreateShipmentArg arg)? createShipment,
+    TResult Function(CreateTripArg arg)? createTrip,
+    TResult Function()? getAllDeliveries,
+    TResult Function()? getAllDeliveriesPendingInvitations,
+    TResult Function(String email)? getAllShipment,
+    TResult Function(String id, String status)? updateTripStatus,
+    TResult Function(String deliveryId)? acceptCompletedDelivery,
+    TResult Function(RateDeliveryArg arg)? rateDelivery,
+    TResult Function(String deliveryId, String amount)? tipDelivery,
+    TResult Function(DeliveryCostArg arg)? deliveryCost,
+    TResult Function()? getPendingDelivery,
+    TResult Function(String deliveryId)? acceptDelivery,
+    TResult Function(String deliveryId)? rejectDelivery,
+    TResult Function(String deliveryId)? finishDelivery,
+    TResult Function(String deliveryId, Owner owner)? getADelivery,
+    TResult Function(DeliveryInvitation invitation)? deliveryInvitations,
+    TResult Function(NearbyRider location)? getNearbyRiders,
+  }) {
+    return getNearbyRiders?.call(location);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeWhen<TResult extends Object?>({
+    TResult Function()? started,
+    TResult Function(CreateShipmentArg arg)? createShipment,
+    TResult Function(CreateTripArg arg)? createTrip,
+    TResult Function()? getAllDeliveries,
+    TResult Function()? getAllDeliveriesPendingInvitations,
+    TResult Function(String email)? getAllShipment,
+    TResult Function(String id, String status)? updateTripStatus,
+    TResult Function(String deliveryId)? acceptCompletedDelivery,
+    TResult Function(RateDeliveryArg arg)? rateDelivery,
+    TResult Function(String deliveryId, String amount)? tipDelivery,
+    TResult Function(DeliveryCostArg arg)? deliveryCost,
+    TResult Function()? getPendingDelivery,
+    TResult Function(String deliveryId)? acceptDelivery,
+    TResult Function(String deliveryId)? rejectDelivery,
+    TResult Function(String deliveryId)? finishDelivery,
+    TResult Function(String deliveryId, Owner owner)? getADelivery,
+    TResult Function(DeliveryInvitation invitation)? deliveryInvitations,
+    TResult Function(NearbyRider location)? getNearbyRiders,
+    required TResult orElse(),
+  }) {
+    if (getNearbyRiders != null) {
+      return getNearbyRiders(location);
+    }
+    return orElse();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult map<TResult extends Object?>({
+    required TResult Function(_Started value) started,
+    required TResult Function(_CreateShipment value) createShipment,
+    required TResult Function(_CreateTrip value) createTrip,
+    required TResult Function(_GetAllDeliveries value) getAllDeliveries,
+    required TResult Function(_GetAllDeliveriesPendingInvitations value)
+        getAllDeliveriesPendingInvitations,
+    required TResult Function(_GetAllShipment value) getAllShipment,
+    required TResult Function(_UpdateTripStatus value) updateTripStatus,
+    required TResult Function(_AcceptCompletedDelivery value)
+        acceptCompletedDelivery,
+    required TResult Function(_RateDelivery value) rateDelivery,
+    required TResult Function(_TipDelivery value) tipDelivery,
+    required TResult Function(_DeliveryCost value) deliveryCost,
+    required TResult Function(_GetPendingDelivery value) getPendingDelivery,
+    required TResult Function(_AcceptDelivery value) acceptDelivery,
+    required TResult Function(_RejectDelivery value) rejectDelivery,
+    required TResult Function(_FinishDelivery value) finishDelivery,
+    required TResult Function(_GetADelivery value) getADelivery,
+    required TResult Function(_DeliveryInvitations value) deliveryInvitations,
+    required TResult Function(_GetNearbyRiders value) getNearbyRiders,
+  }) {
+    return getNearbyRiders(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? mapOrNull<TResult extends Object?>({
+    TResult Function(_Started value)? started,
+    TResult Function(_CreateShipment value)? createShipment,
+    TResult Function(_CreateTrip value)? createTrip,
+    TResult Function(_GetAllDeliveries value)? getAllDeliveries,
+    TResult Function(_GetAllDeliveriesPendingInvitations value)?
+        getAllDeliveriesPendingInvitations,
+    TResult Function(_GetAllShipment value)? getAllShipment,
+    TResult Function(_UpdateTripStatus value)? updateTripStatus,
+    TResult Function(_AcceptCompletedDelivery value)? acceptCompletedDelivery,
+    TResult Function(_RateDelivery value)? rateDelivery,
+    TResult Function(_TipDelivery value)? tipDelivery,
+    TResult Function(_DeliveryCost value)? deliveryCost,
+    TResult Function(_GetPendingDelivery value)? getPendingDelivery,
+    TResult Function(_AcceptDelivery value)? acceptDelivery,
+    TResult Function(_RejectDelivery value)? rejectDelivery,
+    TResult Function(_FinishDelivery value)? finishDelivery,
+    TResult Function(_GetADelivery value)? getADelivery,
+    TResult Function(_DeliveryInvitations value)? deliveryInvitations,
+    TResult Function(_GetNearbyRiders value)? getNearbyRiders,
+  }) {
+    return getNearbyRiders?.call(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeMap<TResult extends Object?>({
+    TResult Function(_Started value)? started,
+    TResult Function(_CreateShipment value)? createShipment,
+    TResult Function(_CreateTrip value)? createTrip,
+    TResult Function(_GetAllDeliveries value)? getAllDeliveries,
+    TResult Function(_GetAllDeliveriesPendingInvitations value)?
+        getAllDeliveriesPendingInvitations,
+    TResult Function(_GetAllShipment value)? getAllShipment,
+    TResult Function(_UpdateTripStatus value)? updateTripStatus,
+    TResult Function(_AcceptCompletedDelivery value)? acceptCompletedDelivery,
+    TResult Function(_RateDelivery value)? rateDelivery,
+    TResult Function(_TipDelivery value)? tipDelivery,
+    TResult Function(_DeliveryCost value)? deliveryCost,
+    TResult Function(_GetPendingDelivery value)? getPendingDelivery,
+    TResult Function(_AcceptDelivery value)? acceptDelivery,
+    TResult Function(_RejectDelivery value)? rejectDelivery,
+    TResult Function(_FinishDelivery value)? finishDelivery,
+    TResult Function(_GetADelivery value)? getADelivery,
+    TResult Function(_DeliveryInvitations value)? deliveryInvitations,
+    TResult Function(_GetNearbyRiders value)? getNearbyRiders,
+    required TResult orElse(),
+  }) {
+    if (getNearbyRiders != null) {
+      return getNearbyRiders(this);
+    }
+    return orElse();
+  }
+}
+
+abstract class _GetNearbyRiders implements ShipmentHandlerEvent {
+  const factory _GetNearbyRiders(NearbyRider location) = _$_GetNearbyRiders;
+
+  NearbyRider get location;
+  @JsonKey(ignore: true)
+  _$GetNearbyRidersCopyWith<_GetNearbyRiders> get copyWith =>
+      throw _privateConstructorUsedError;
+}
+
+/// @nodoc
 class _$ShipmentHandlerStateTearOff {
   const _$ShipmentHandlerStateTearOff();
 
@@ -4113,6 +4462,7 @@ class _$ShipmentHandlerStateTearOff {
       LocationPointArg? address,
       DeliveryInvitation? pendingInvitations,
       String? deliveryEstimate,
+      Set<Marker>? riders,
       DeliveryModel? delivery,
       @Deprecated('replace with deliverySummary')
           List<DeliverySummary>? deliverySummary,
@@ -4125,6 +4475,7 @@ class _$ShipmentHandlerStateTearOff {
       address: address,
       pendingInvitations: pendingInvitations,
       deliveryEstimate: deliveryEstimate,
+      riders: riders,
       delivery: delivery,
       deliverySummary: deliverySummary,
       invitationEvent: invitationEvent,
@@ -4145,6 +4496,7 @@ mixin _$ShipmentHandlerState {
   DeliveryInvitation? get pendingInvitations =>
       throw _privateConstructorUsedError; // bool is
   String? get deliveryEstimate => throw _privateConstructorUsedError;
+  Set<Marker>? get riders => throw _privateConstructorUsedError;
   DeliveryModel? get delivery => throw _privateConstructorUsedError;
   @Deprecated('replace with deliverySummary')
   List<DeliverySummary>? get deliverySummary =>
@@ -4170,6 +4522,7 @@ abstract class $ShipmentHandlerStateCopyWith<$Res> {
       LocationPointArg? address,
       DeliveryInvitation? pendingInvitations,
       String? deliveryEstimate,
+      Set<Marker>? riders,
       DeliveryModel? delivery,
       @Deprecated('replace with deliverySummary')
           List<DeliverySummary>? deliverySummary,
@@ -4194,6 +4547,7 @@ class _$ShipmentHandlerStateCopyWithImpl<$Res>
     Object? address = freezed,
     Object? pendingInvitations = freezed,
     Object? deliveryEstimate = freezed,
+    Object? riders = freezed,
     Object? delivery = freezed,
     Object? deliverySummary = freezed,
     Object? invitationEvent = freezed,
@@ -4221,6 +4575,10 @@ class _$ShipmentHandlerStateCopyWithImpl<$Res>
           ? _value.deliveryEstimate
           : deliveryEstimate // ignore: cast_nullable_to_non_nullable
               as String?,
+      riders: riders == freezed
+          ? _value.riders
+          : riders // ignore: cast_nullable_to_non_nullable
+              as Set<Marker>?,
       delivery: delivery == freezed
           ? _value.delivery
           : delivery // ignore: cast_nullable_to_non_nullable
@@ -4258,6 +4616,7 @@ abstract class _$ShipmentHandlerStateCopyWith<$Res>
       LocationPointArg? address,
       DeliveryInvitation? pendingInvitations,
       String? deliveryEstimate,
+      Set<Marker>? riders,
       DeliveryModel? delivery,
       @Deprecated('replace with deliverySummary')
           List<DeliverySummary>? deliverySummary,
@@ -4284,6 +4643,7 @@ class __$ShipmentHandlerStateCopyWithImpl<$Res>
     Object? address = freezed,
     Object? pendingInvitations = freezed,
     Object? deliveryEstimate = freezed,
+    Object? riders = freezed,
     Object? delivery = freezed,
     Object? deliverySummary = freezed,
     Object? invitationEvent = freezed,
@@ -4311,6 +4671,10 @@ class __$ShipmentHandlerStateCopyWithImpl<$Res>
           ? _value.deliveryEstimate
           : deliveryEstimate // ignore: cast_nullable_to_non_nullable
               as String?,
+      riders: riders == freezed
+          ? _value.riders
+          : riders // ignore: cast_nullable_to_non_nullable
+              as Set<Marker>?,
       delivery: delivery == freezed
           ? _value.delivery
           : delivery // ignore: cast_nullable_to_non_nullable
@@ -4344,6 +4708,7 @@ class _$_ShipmentHandlerState implements _ShipmentHandlerState {
       this.address,
       this.pendingInvitations,
       this.deliveryEstimate,
+      this.riders,
       this.delivery,
       @Deprecated('replace with deliverySummary') this.deliverySummary,
       this.invitationEvent,
@@ -4361,6 +4726,8 @@ class _$_ShipmentHandlerState implements _ShipmentHandlerState {
   @override // bool is
   final String? deliveryEstimate;
   @override
+  final Set<Marker>? riders;
+  @override
   final DeliveryModel? delivery;
   @override
   @Deprecated('replace with deliverySummary')
@@ -4374,7 +4741,7 @@ class _$_ShipmentHandlerState implements _ShipmentHandlerState {
 
   @override
   String toString() {
-    return 'ShipmentHandlerState(errorMessage: $errorMessage, status: $status, address: $address, pendingInvitations: $pendingInvitations, deliveryEstimate: $deliveryEstimate, delivery: $delivery, deliverySummary: $deliverySummary, invitationEvent: $invitationEvent, newDeliveryEvent: $newDeliveryEvent, allDelivery: $allDelivery)';
+    return 'ShipmentHandlerState(errorMessage: $errorMessage, status: $status, address: $address, pendingInvitations: $pendingInvitations, deliveryEstimate: $deliveryEstimate, riders: $riders, delivery: $delivery, deliverySummary: $deliverySummary, invitationEvent: $invitationEvent, newDeliveryEvent: $newDeliveryEvent, allDelivery: $allDelivery)';
   }
 
   @override
@@ -4390,6 +4757,7 @@ class _$_ShipmentHandlerState implements _ShipmentHandlerState {
                 .equals(other.pendingInvitations, pendingInvitations) &&
             const DeepCollectionEquality()
                 .equals(other.deliveryEstimate, deliveryEstimate) &&
+            const DeepCollectionEquality().equals(other.riders, riders) &&
             const DeepCollectionEquality().equals(other.delivery, delivery) &&
             const DeepCollectionEquality()
                 .equals(other.deliverySummary, deliverySummary) &&
@@ -4409,6 +4777,7 @@ class _$_ShipmentHandlerState implements _ShipmentHandlerState {
       const DeepCollectionEquality().hash(address),
       const DeepCollectionEquality().hash(pendingInvitations),
       const DeepCollectionEquality().hash(deliveryEstimate),
+      const DeepCollectionEquality().hash(riders),
       const DeepCollectionEquality().hash(delivery),
       const DeepCollectionEquality().hash(deliverySummary),
       const DeepCollectionEquality().hash(invitationEvent),
@@ -4429,6 +4798,7 @@ abstract class _ShipmentHandlerState implements ShipmentHandlerState {
       LocationPointArg? address,
       DeliveryInvitation? pendingInvitations,
       String? deliveryEstimate,
+      Set<Marker>? riders,
       DeliveryModel? delivery,
       @Deprecated('replace with deliverySummary')
           List<DeliverySummary>? deliverySummary,
@@ -4446,6 +4816,8 @@ abstract class _ShipmentHandlerState implements ShipmentHandlerState {
   DeliveryInvitation? get pendingInvitations;
   @override // bool is
   String? get deliveryEstimate;
+  @override
+  Set<Marker>? get riders;
   @override
   DeliveryModel? get delivery;
   @override
